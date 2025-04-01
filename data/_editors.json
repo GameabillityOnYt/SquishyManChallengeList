@@ -1,16 +1,16 @@
 [
     {
-        "role": "Owner",
+        "role": "owner",
         "name": "Squishyman067",
         "link": "https://www.youtube.com/@Squishyman67"
     },
     {
-        "role": "Admin",
+        "role": "admin",
         "name": "Gameabillity",
         "link": "https://www.youtube.com/@GameabillityDev"
     },
     {
-        "role": "Helper",
+        "role": "helper",
         "name": "Jabohappy",
         "link": "https://www.youtube.com/@Prometheus_Alt"
     },
@@ -20,7 +20,7 @@
         "link": "https://www.youtube.com/@Prometheus_Alt"
     },
     {
-        "role": "Main List Developer/Site Owner",
+        "role": "dev",
         "name": "GameabillityDev",
         "link": "https://www.youtube.com/@GameabillityDev"
     }
