@@ -1,7 +1,7 @@
 [
     {
-        "role": "owner",
-        "name": "List Owner",
+        "role": "Owner",
+        "name": "Squishyman067",
         "link": "https://www.youtube.com/@Prometheus_Alt"
     },
     {
@@ -21,7 +21,7 @@
     },
     {
         "role": "Main List Developer/Site Owner",
-        "name": "List Coder",
+        "name": "GameabillityDev",
         "link": "https://www.youtube.com/@GameabillityDev"
     }
 ]
