@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/zyD4q_6lhfM?si=bli01aMaE5gK8FZL",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "Gameabillity",
+            "link": "https://youtu.be/pVjLUNwV1Ak",
+            "percent": 100,
+            "hz": 144
+        }
+    ]
 }
