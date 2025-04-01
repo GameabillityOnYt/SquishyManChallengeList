@@ -7,18 +7,5 @@
     "verification": "https://youtu.be/zyD4q_6lhfM?si=bli01aMaE5gK8FZL",
     "percentToQualify": "100",
     "password": "Open",
-    "records": [
-        {
-            "user": "Sample_Victor_1",
-            "link": "https://www.youtube.com/watch?v=MgJeijBGKHU",
-            "percent": 100,
-            "hz": 360
-        },
-        {
-            "user": "Sample_Victor_2",
-            "link": "https://www.youtube.com/watch?v=MgJeijBGKHU",
-            "percent": 100,
-            "hz": 120
-        }
-    ]
+    "records": []
 }
