@@ -33,12 +33,12 @@ body {
     flex-direction: column;
     margin: 0;
     background-color: var(--color-background);
-    background-image: url('your-image-url.jpg'); /* Replace with your image */
+    background-image: url('pattern-png-30769.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-blend-mode: overlay; /* Blends image with background color */
-    opacity: 0.9; /* Adjust transparency */
+    background-blend-mode: overlay; 
+    opacity: 0.9;
 }
 
 header,
