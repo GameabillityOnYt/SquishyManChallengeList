@@ -1,19 +1,18 @@
-{
-    "id": 116806021,
-    "name": "Squishyman Chalyo",
-    "author": "manoftheeggg",
-    "creators": [],
-    "verifier": "16billion",
-    "verification": "https://www.youtube.com/watch?v=1tpCU2ioQFI&ab_channel=16billion",
-    "percentToQualify": "100",
-    "password": "Free To Copy",
-    "records": [
-            {
+ {
+     "id": 116806021,
+     "name": "Squishyman Chalyo",
+     "author": "manoftheeggg",
+     "creators": [],
+     "verifier": "16billion",
+     "verification": "https://www.youtube.com/watch?v=1tpCU2ioQFI&ab_channel=16billion",
+     "percentToQualify": "100",
+     "password": "Free To Copy",
+     "records": [
+                 {
             "user": "DogEatHomework",
             "link": "https://youtu.be/HwKcgKUi5UA?si=6KdU6B-35e6DGCTp",
             "percent": 100,
-            "hz": 60,
-            "mobile": true
+            "hz": 60
         },
-    ]
-}
+     ]
+ }
