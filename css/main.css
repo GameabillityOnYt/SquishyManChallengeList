@@ -1,5 +1,5 @@
 :root {
-    --color-background: #808080;
+    --color-background: #999999;
     --color-on-background: black;
     --color-background-hover: #999999;
     --color-on-background-hover: black;
@@ -38,7 +38,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-blend-mode: overlay; 
-    opacity: 0.9;
+    opacity: 0.3;
 }
 
 header,
