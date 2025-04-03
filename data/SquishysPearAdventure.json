@@ -19,6 +19,14 @@
             "link": "https://www.youtube.com/watch?v=JXirOCKdG08",
             "percent": 100,
             "hz": 240
+        },
+        
+        {
+            "user": "Haak80",
+            "link": "https://www.youtube.com/watch?v=5PHBp7AzOLA",
+            "percent": 100,
+            "hz": 165
         }
+```
     ]
 }
