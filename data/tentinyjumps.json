@@ -21,6 +21,12 @@
             "link": "https://www.youtube.com/watch?v=B-ydrKying4",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "JaboHappy",
+            "link": "https://youtu.be/u3FEvvrJZAw?feature=shared",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
