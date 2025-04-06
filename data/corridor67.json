@@ -7,6 +7,13 @@
     "verifier": "16billion",
     "verification": "https://www.youtube.com/watch?v=dvVJ7ekc4WI",
     "percentToQualify": "100",
-    "password": "46290",
-    "records": [] 
+    "password": "Open",
+    "records": [
+        {
+            "user": "Ant_Gam3R",
+            "link": "https://medal.tv/games/geometry-dash/clips/k1SQqs3zRIVD6Y-5A?invite=cr-MSw1SDgsMjU0MDc1NjI3",
+            "percent": 100,
+            "hz": 120
+        },
+    ] 
 }
