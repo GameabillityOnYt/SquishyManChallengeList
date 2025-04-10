@@ -9,5 +9,11 @@
     "percentToQualify": "100",
     "password": "open",
     "records": [
+        {
+            "user": "ShulsMew",
+            "link": "https://www.youtube.com/watch?v=1dGo-hYoRP4",
+            "percent": 100,
+            "hz": 144
+        }
     ]
 }
