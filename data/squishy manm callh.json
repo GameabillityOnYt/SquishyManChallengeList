@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/oVmZJlpHHKA?si=ozhoD_n-fxKeCLfp",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "SplitAlloy97",
+            "link": "https://youtu.be/KXbp7CYLvEY",
+            "percent": 100,
+            "hz": 360
+        }
+    ]
 }
