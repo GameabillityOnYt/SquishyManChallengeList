@@ -15,6 +15,12 @@
             "percent": 100,
             "hz": 60,
             "mobile": true
+        },
+        {
+            "user": "RealOskarGD",
+            "link": "https://www.youtube.com/watch?v=gcD05G6vP4U",
+            "percent": 100,
+            "hz": 360
         }
     ]
 }
