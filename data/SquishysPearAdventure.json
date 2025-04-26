@@ -62,6 +62,13 @@
             "link": "https://www.youtube.com/watch?v=fU9PsY5M8EQ",
             "percent": 100,
             "hz": 120
+        },
+
+        {
+            "user": "totallyriver",
+            "link": "https://youtube.com/shorts/Y1hDMOeMk8M?si=ZjvpaKN5nDA-SVOk",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
