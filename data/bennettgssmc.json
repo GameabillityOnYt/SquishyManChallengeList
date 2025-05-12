@@ -7,5 +7,13 @@
     "verification": "https://www.youtube.com/watch?v=-VxSPFe9smo",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "eggnog1414",
+            "link": "https://youtu.be/k7SrXQOjK2A?si=07pGvQWjogf8euDJ",
+            "percent": 100,
+            "hz": 60,
+            "mobile": true
+        }
+    ]
 }
