@@ -38,6 +38,13 @@
             "link": "https://www.youtube.com/watch?v=zkgMyHrC2B8",
             "percent": 100,
             "hz": 144
+        },
+        {
+            "user": "16billion",
+            "link": "https://youtu.be/3t8tQuXzWRM?si=Q_fC41DjNoFW8TnE",
+            "percent": 100,
+            "hz": 240
         }
+
     ]
 }
