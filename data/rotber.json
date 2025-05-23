@@ -8,10 +8,11 @@
     "percentToQualify": "100",
     "password": "Open",
     "records": [
-}
-{
+       {
             "user": "16billion",
             "link": "https://www.youtube.com/watch?v=kpdTu8ueyfE",
             "percent": 100,
             "hz": 240
+       }
+    ]
 }
