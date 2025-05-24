@@ -7,5 +7,11 @@
     "verification": "https://www.youtube.com/watch?v=wBV1fQvli2M",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "16billion",
+            "link": "https://www.youtube.com/watch?v=a9d-SCMoPCM",
+            "percent": 100,
+            "hz": 240
+        }]
 }
