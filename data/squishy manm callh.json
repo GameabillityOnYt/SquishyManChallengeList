@@ -50,6 +50,12 @@
             "link": "https://www.youtube.com/watch?v=hgmrWy-LAGo&feature=youtu.be",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "Sdrawkab",
+            "link": "https://youtu.be/l4AfbcgEqtA",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
