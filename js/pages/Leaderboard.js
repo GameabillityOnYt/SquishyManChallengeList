@@ -43,11 +43,10 @@ export default {
                 </div>
                 <div class="player-container">
                     <div class="player">
-                        <h1>
-                            #{{ selected + 1 }} {{ entry.user }}
-                            <span v-if="entry.user === 'Ant_Gam3R'" class="special-text">Beat the full list!</span>
-                        </h1>
+                        <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
+                        <p v-if="entry.user === 'Ant_Gam3R'" class="special-text">🌟 Special Player!</p>
                         <h3>{{ entry.total }}</h3>
+
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
                         <table class="table">
                             <tr v-for="score in entry.verified">
@@ -62,6 +61,7 @@ export default {
                                 </td>
                             </tr>
                         </table>
+
                         <h2 v-if="entry.completed.length > 0">Completed ({{ entry.completed.length }})</h2>
                         <table class="table">
                             <tr v-for="score in entry.completed">
@@ -76,6 +76,7 @@ export default {
                                 </td>
                             </tr>
                         </table>
+
                         <h2 v-if="entry.progressed.length > 0">Progressed ({{ entry.progressed.length }})</h2>
                         <table class="table">
                             <tr v-for="score in entry.progressed">
