@@ -101,7 +101,7 @@
     display: inline-block; /* This is key to make it wrap the text */
     margin-top: 1rem;
     margin-bottom: 1rem;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    box-shadow: 0 0 10px rgba(0, 191, 255,0.6);
     width: fit-content;
     max-width: 100%;
     word-wrap: break-word;
@@ -109,13 +109,13 @@
 
 @keyframes pulse {
     0% {
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
     }
     50% {
-        box-shadow: 0 0 20px rgba(255, 215, 0, 1);
+        box-shadow: 0 0 20px rgba(0, 191, 255, 1);
     }
     100% {
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
     }
 }
 
