@@ -96,13 +96,17 @@
     color: black;
     font-weight: bold;
     font-size: 1.2rem;
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block;
-    margin-top: -1rem;
+    display: inline-block; /* This is key to make it wrap the text */
+    margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    width: fit-content;
+    max-width: 100%;
+    word-wrap: break-word;
 }
+
 @keyframes pulse {
     0% {
         box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
