@@ -8,5 +8,11 @@
     "percentToQualify": "100",
     "password": "Open",
     "records": [
+        {
+            "user": "ImFeelingGreen",
+            "link": "https://www.youtube.com/watch?v=IDK0lCurmXQ",
+            "percent": 100,
+            "hz": 360
+        }
     ]
 }
