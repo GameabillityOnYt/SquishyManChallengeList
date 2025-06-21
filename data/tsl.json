@@ -7,5 +7,12 @@
     "verification": "https://medal.tv/games/geometry-dash/clips/koRm2QUIvTyBzxcDr?invite=cr-MSxyTFUsMjU0MDc1NjI3",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "imfeelinggreen",
+            "link": "https://www.youtube.com/watch?v=EnaAZT0jKjo",
+            "percent": 100,
+            "hz": 165
+        }
+    ]
 }
