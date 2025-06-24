@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/B-Y71ly0Xkw",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "haak80",
+            "link": "https://www.youtube.com/watch?v=32N1ouuVoxU",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
 }
