@@ -1,19 +1,13 @@
 {
     "id": 117439530,
     "name": "SQUISHYBABLLR",
-    "author": "Gino",
-    "creators": ["Gino"],
-    "verifier": "Gino",
-    "verification": "https://youtu.be/uADBc2NZ9sk",
+    "author": "16billion",
+    "creators": ["16billion"],
+    "verifier": "16billion",
+    "verification": "https://www.youtube.com/watch?v=6XGixNHXRMI",
     "percentToQualify": "100",
     "password": "Open",
     "records": [
-        {
-            "user": "16billion",
-            "link": "https://www.youtube.com/watch?v=6XGixNHXRMI",
-            "percent": 100,
-            "hz": 240
-        },
         {
             "user": "SplitAlloy97",
             "link": "https://youtu.be/Bwv-Bp07Jks",
