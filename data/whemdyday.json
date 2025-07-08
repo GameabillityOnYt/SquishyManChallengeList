@@ -7,5 +7,12 @@
     "verification": "https://www.youtube.com/watch?v=og2n_ZTs5fQ",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "Wisetree2939",
+            "link": "https://www.twitch.tv/wisetree2939/clip/DaintySourPoultryAMPTropPunch-zSaHQpqfCbsvS36z",
+            "percent": 100,
+            "hz": 500
+        }
+    ]
 }
