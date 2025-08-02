@@ -55,6 +55,12 @@
             "link": "https://www.youtube.com/watch?v=rtJluYrVUS4",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "IkukGD",
+            "link": "https://youtu.be/R5WcnDKGDVA?si=XjuiTOjlROx0cMls",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
