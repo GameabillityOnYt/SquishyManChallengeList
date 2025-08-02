@@ -49,6 +49,12 @@
             "link": "https://youtu.be/mtvZCcvmb8w",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "mammi2",
+            "link": "https://www.youtube.com/watch?v=rtJluYrVUS4",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
