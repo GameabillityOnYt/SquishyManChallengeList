@@ -49,6 +49,12 @@
             "link": "https://youtu.be/FAnVmeYdwcw",
             "percent": 100,
             "hz": 160
+        },
+        {
+            "user": "BobPlaysGeoDash",
+            "link": "https://www.youtube.com/shorts/da9YSaeoc2c"
+            "percent": 100,
+            "hz": 360
         }
     ]
 }
