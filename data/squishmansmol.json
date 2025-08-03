@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/Ixc6Ycu2iQc?si=8MOsKAHfXlUQGxO2",
     "percentToQualify": "100",
     "password": "open",
-    "records": []
+    "records": [
+        {
+            "user": "16billion",
+            "link": "https://youtu.be/0yI18WuXBjo?si=GC9tdu1Xn6Uka2ZB",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
 }
