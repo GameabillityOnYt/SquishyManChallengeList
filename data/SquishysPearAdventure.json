@@ -142,6 +142,12 @@
             "link": "https://www.youtube.com/watch?v=xc3SSyVrtNo",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "Atheon",
+            "link": "https://www.youtube.com/watch?v=ScnBdn9zhb0",
+            "percent": 100,
+            "hz": 360
         }
     ]
 }
