@@ -86,6 +86,12 @@
             "link": "https://www.youtube.com/watch?v=QU-Y5EsQUAQ",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "gdspeedcuber",
+            "link": "https://youtu.be/KliKI3JHCqE?si=e7GEAQm1OzYBzYBU",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
