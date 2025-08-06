@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/97NJ3NrvB8A",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "1st3y1",
+            "link": "https://youtu.be/JiHDs2qchoQ",
+            "percent": 100,
+            "hz": 144
+        }
+    ]
 } 
