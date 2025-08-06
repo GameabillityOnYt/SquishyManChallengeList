@@ -7,5 +7,12 @@
     "verification": "https://www.youtube.com/watch?v=8wFULy9KO2A",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "liquidman6776",
+            "link": "https://medal.tv/games/geometry-dash/clips/kQm4jI2BiY-Pd5T9V?invite=cr-MSxRZUYsNDExNTgzNjMy&v=19",
+            "percent": 100,
+            "hz": 360
+        }
+    ]
 } 
