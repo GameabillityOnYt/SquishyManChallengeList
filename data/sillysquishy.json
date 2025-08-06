@@ -9,10 +9,18 @@
     "password": "Open",
     "records": [
         {
-            "user": "pijoen",
+            "user": "pijeon",
             "link": "https://youtu.be/SqL-BhXm93o",
             "percent": 100,
             "hz": 360
+        },
+        {
+            "user": "GamerAJG2012",
+            "link": "https://youtu.be/Q2dsCIc53U4",
+            "percent": 100,
+            "hz": 144
         }
     ]
 }
+
+
