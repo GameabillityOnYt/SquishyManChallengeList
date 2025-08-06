@@ -1,4 +1,3 @@
-
 {
     "id": 124112432,
     "name": "po wants to talk",
@@ -8,13 +7,13 @@
     "verification": "https://youtu.be/HVDLaSY4hpo",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
         {
             "user": "GamerAJG2012",
             "link": "https://youtu.be/8MsS_CZY3Mo",
             "percent": 100,
             "hz": 144
         }
-    [
+    ]
 }
 
