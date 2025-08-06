@@ -1,4 +1,3 @@
-
 {
     "id": 124196994,
     "name": "pinecone land",
@@ -9,11 +8,18 @@
     "percentToQualify": "100",
     "password": "Open",
     "records": []
+}    
         {
             "user": "pijeon",
             "link": "https://medal.tv/games/geometry-dash/clips/kQ6l9gaL6UQjvELpb?invite=cr-MSxWVlIsMzIzNTg1ODYw&v=12",
             "percent": 100,
             "hz": 360
+        },
+        {
+            "user": "16billion",
+            "link": "https://youtu.be/a6xv4L2SmlY?si=P3uwqTRKgXQMXvPS",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
