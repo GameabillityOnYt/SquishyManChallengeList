@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/fiaY7itGiEA?si=AjjLEhZZW_VB5bFL",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "pijoen",
+            "link": "https://youtu.be/SqL-BhXm93o",
+            "percent": 100,
+            "hz": 360
+        }
+    ]
 }
