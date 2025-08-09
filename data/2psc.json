@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/9G6y7vj1mHo?si=UbOajL-HaL4BRc8C",
     "percentToQualify": "100",
     "password": "open",
-    "records": []
+    "records": [
+        {
+            "user": "quantumrootbeer",
+            "link": "https://youtu.be/Zdk1bjBaVSo",
+            "percent": 100,
+            "hz": 75
+        }
+    ]
 }
