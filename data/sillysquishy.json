@@ -55,6 +55,12 @@
             "link": "https://youtu.be/sWAMmajkhTk",
             "percent": 100,
             "hz": 500
+        },
+        {
+            "user": "quantumrootbeer",
+            "link": "https://www.youtube.com/watch?v=2XzrHAaUMOk",
+            "percent": 100,
+            "hz": 75
         }
     ]
 }
