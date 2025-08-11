@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/OpKuMA_8-AA",
     "percentToQualify": "100",
     "password": "open",
-    "records": []
+    "records": [
+        {
+            "user": "GD Bean",
+            "link": "https://www.youtube.com/watch?v=Z_qF8kSsYho",
+            "percent": 100,
+            "hz": 144
+        }
+    ]
 }
