@@ -45,9 +45,6 @@ export default {
                     <div class="player">
                         <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
                         <p v-if="entry.user === 'Ant_Gam3R'" class="special-text">Beat the full list!</p>
-                        <p v-if="entry.user === 'GamerAJG2012'" class="special-text">Champion</p>
-                        <p v-if="entry.user === 'Migul el paso'" class="special-text">Champion</p>
-                        <p v-if="entry.user === 'BLuuTemp'" class="special-text">Champion</p>
                         <h3>{{ entry.total }}</h3>
 
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
