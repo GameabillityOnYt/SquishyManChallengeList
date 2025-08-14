@@ -108,7 +108,7 @@
 }
 /* I will update this soon - Sdrawkcab*/
 .very-special-text { 
-    background-color: DeepSkyBlue;
+    background-color: rgba(255, 0, 0, 1);
     color: black;
     font-weight: bold;
     font-size: 1.2rem;
