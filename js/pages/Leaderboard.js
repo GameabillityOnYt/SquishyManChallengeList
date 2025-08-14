@@ -43,7 +43,6 @@ export default {
                 </div>
                 <div class="player-container">
                     <div class="player">
-                        /* champion-text is for champion role and special-text is for Beat the full list! role. */
                         <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
                         <p v-if="entry.user === 'Ant_Gam3R'" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'GamerAJG2012'" class="champion-text">Champion</p>
