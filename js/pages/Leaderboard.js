@@ -49,6 +49,7 @@ export default {
                         <p v-if="entry.user === 'Migul el paso'" class="special-text">Champion</p>
                         <p v-if="entry.user === 'BLuuTemp'" class="special-text">Champion</p>
                         <p v-if="entry.user === 'GD Bean'" class="special-text">Champion</p>
+                        <p v-if="entry.user === 'ImFeelingGreen'" class="special-text">Champion</p>
                         <h3>{{ entry.total }}</h3>
 
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
