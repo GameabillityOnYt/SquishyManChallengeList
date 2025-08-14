@@ -134,11 +134,22 @@
         box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
     }
 }
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 10px rgba(130, 0, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(130, 0, 130, 1);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(130, 0, 0, 0.5);
+    }
+}
 
 .special-text {
     animation: pulse 2s infinite;
 }
 .very-special-text {
-    animation: pulse 1s infinite;
+    animation: pulse-red 1s infinite;
 }
 
