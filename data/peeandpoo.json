@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/4T3PvBxhr9s",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "Ant_Gam3R",
+            "link": "https://medal.tv/games/geometry-dash/clips/kWWhVEb82F1BwKPDK?invite=cr-MSx3VEIsMjU0MDc1NjI3&v=16",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
 }
