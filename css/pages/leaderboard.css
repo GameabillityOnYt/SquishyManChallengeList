@@ -122,6 +122,21 @@
     max-width: 100%;
     word-wrap: break-word;
 }
+.CCWinner1-text { 
+    background-color: rgba(255, 220, 0, 1);
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    display: inline-block; /* This is key to make it wrap the text */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(255, 220, 0, 0.6);
+    width: fit-content;
+    max-width: 100%;
+    word-wrap: break-word;
+}
 
 @keyframes pulse {
     0% {
@@ -145,11 +160,26 @@
         box-shadow: 0 0 10px rgba(130, 0, 0, 0.5);
     }
 }
+/* CC1 = Creator contest 1 winner */
+@keyframes pulse-CC1 { 
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 255, 130, 1);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+    }
+}
 
 .special-text {
     animation: pulse 2s infinite;
 }
 .very-special-text {
     animation: pulse-red 1s infinite;
+}
+.CCWinner1-text {
+    animation: pulse-CC1 2s infinite;
 }
 
