@@ -132,7 +132,7 @@
     display: inline-block; /* This is key to make it wrap the text */
     margin-top: 1rem;
     margin-bottom: 1rem;
-    box-shadow: 0 0 10px rgba(255, 220, 0, 0.6);
+    box-shadow: 10 0 10px rgba(255, 220, 0, 0.6);
     width: fit-content;
     max-width: 100%;
     word-wrap: break-word;
@@ -163,13 +163,13 @@
 /* CC1 = Creator contest 1 winner */
 @keyframes pulse-CC1 { 
     0% {
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        box-shadow: 10 0 10px rgba(255, 255, 0, 0.5);
     }
     50% {
-        box-shadow: 0 0 20px rgba(255, 255, 130, 1);
+        box-shadow: 10 0 20px rgba(255, 255, 130, 1);
     }
     100% {
-        box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+        box-shadow: 10 0 10px rgba(255, 255, 0, 0.5);
     }
 }
 
