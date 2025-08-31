@@ -7,4 +7,12 @@
     "verification": "https://youtu.be/wQGkY6T8QZs?si=EoKOokKqneei9R5e",
     "percentToQualify": "100",
     "password": "Open",
-    "records": []
+    "records": [
+        {
+            "user": "Arahenior",
+            "link": "https://youtu.be/K_Fbn6puvls?si=vpbEeduols8M2ENK",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
+}
