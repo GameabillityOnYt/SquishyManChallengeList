@@ -1,6 +1,11 @@
 {
-            "user": "Arahenior",
-            "link": " https://youtu.be/0wIbDmC2cYQ",
-            "percent": 100,
-            "hz": 240,
+    "id": 124850462,
+    "name": "Squishy Shp Easy",
+    "author": "Arahenior",
+    "creators": ["Arahenior"],
+    "verifier": "Arahenior",
+    "verification": "https://youtu.be/0wIbDmC2cYQ",
+    "percentToQualify": "100",
+    "password": "open",
+    "records": []
 }
