@@ -26,11 +26,17 @@
             "percent": 100,
             "hz": 360
         },
-      {
+        {
             "user": "Pijeon",
             "link": "https://medal.tv/games/geometry-dash/clips/l4Tb8GE5yCw5d1fmw?invite=cr-MSxNY2MsMzIzNTg1ODYw&v=15",
             "percent": 100,
             "hz": 360
+        },
+        {
+            "user": "gumballjdingus",
+            "link": "https://youtu.be/0XNQwxpSe5Q",
+            "percent": 100,
+            "hz": 120
         }
     ]
 }
