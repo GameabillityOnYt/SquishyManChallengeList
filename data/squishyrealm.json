@@ -7,6 +7,13 @@
     "verification": "https://youtu.be/NDKRpvMpjZw",
     "percentToQualify": 100,
     "password": "open",
-    "records": []
+    "records": [
+        {
+            "user": "GamerAJG2012",
+            "link": "https://youtu.be/6A7tEDpb8sM?si=Ch-VvYGTKXgIvaHm",
+            "percent": 100,
+            "hz": 144
+        }
+    ]
 }
 
