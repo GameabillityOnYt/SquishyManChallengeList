@@ -1,0 +1,11 @@
+{
+    "id": ID_HERE,
+    "name": "NAME",
+    "author": "AUTHOR",
+    "creators": ["CREATORS"],
+    "verifier": "VERIFIER",
+    "verification": "VIDEO_LINK",
+    "percentToQualify": "100",
+    "Length": "Time",
+    "records": []
+}
