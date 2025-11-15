@@ -6,5 +6,12 @@
     "verifier": "Pijeon",
     "verification": "https://youtu.be/qqjvkdT54rE",
     "percentToQualify": "100",
-    "records": []
+    "records": [
+         {
+            "user": "Liquidman6776",
+            "link": "https://medal.tv/games/geometry-dash/clips/lvWdA1Ke9uP6hHHSm?invite=cr-MSxOUlMsNDExNTgzNjMy&v=47",
+            "percent": 100,
+            "hz": 360
+        }
+    ]
 }
