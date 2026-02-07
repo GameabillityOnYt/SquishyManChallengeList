@@ -169,7 +169,12 @@
             "link": "https://youtu.be/Ho9nfoyeKxw",
             "percent": 100,
             "hz": 300
+        },
+        {
+            "user": "Marbelous Gaming",
+            "link": "https://www.youtube.com/watch?v=KbQBK-5Ry18",
+            "percent": 100,
+            "hz": 240
         }
-        
     ]
 }
