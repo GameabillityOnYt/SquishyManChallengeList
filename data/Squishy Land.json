@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/FpGjK5zztEw",
     "percentToQualify": "100",
     "Length": "17",
-    "records": []
+    "records": [
+         {
+            "user": "Marbelous Gaming",
+            "link": "https://www.youtube.com/watch?v=-85uhedabc4",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
 }
