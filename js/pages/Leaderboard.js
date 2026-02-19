@@ -45,7 +45,6 @@ export default {
                     <div class="player">
                         <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
                         <p v-if="entry.user === 'Ant_Gam3R'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'GamerAJG2012'" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'Migul el paso'" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'BLuuTemp'" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'GD Bean'" class="champion-text">Champion</p>
