@@ -35,15 +35,8 @@
     display: block;
     width: 100%;
 }
-
-/* Linea separatrice intelligente che si adatta al tema chiaro/scuro */
-.page-leaderboard .board tr {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
-}
-
-/* Stili base per Rank e Total */
 .page-leaderboard .board .rank {
-    padding-block: 1rem;
+     padding-block: 1rem;
     text-align: end;
     color: #FFA500; 
     font-weight: bold;
@@ -65,37 +58,7 @@
     text-align: start;
     word-break: normal;
     overflow-wrap: anywhere;
-    font-size: 1rem;
 }
-
-/* --- GESTIONE PODIO --- */
-
-/* Primo Posto (#1) */
-.page-leaderboard .board tr:nth-child(1) .rank,
-.page-leaderboard .board tr:nth-child(1) .total,
-.page-leaderboard .board tr:nth-child(1) .user button {
-    font-size: 1.25rem;
-    padding-block: 1.3rem;
-}
-
-/* Secondo e Terzo Posto (#2 e #3) */
-.page-leaderboard .board tr:nth-child(2) .rank,
-.page-leaderboard .board tr:nth-child(2) .total,
-.page-leaderboard .board tr:nth-child(2) .user button,
-.page-leaderboard .board tr:nth-child(3) .rank,
-.page-leaderboard .board tr:nth-child(3) .total,
-.page-leaderboard .board tr:nth-child(3) .user button {
-    font-size: 1.12rem;
-    padding-block: 1.15rem;
-}
-
-/* Dal quarto posto in poi (Normalizzazione spazi) */
-.page-leaderboard .board tr:nth-child(n+4) .rank,
-.page-leaderboard .board tr:nth-child(n+4) .total,
-.page-leaderboard .board tr:nth-child(n+4) .user button {
-    padding-block: 0.8rem;
-}
-
 .page-leaderboard .board .user button:hover {
     background-color: var(--color-background-hover);
     color: var(--color-on-background-hover);
@@ -138,7 +101,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block;
+    display: inline-block; /* This is key to make it wrap the text */
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 0 10px rgba(0, 191, 255,0.6);
@@ -146,6 +109,7 @@
     max-width: 100%;
     word-wrap: break-word;
 }
+/* I will update this soon - Sdrawkcab*/
 .champion-text { 
     background-color: rgba(255, 0, 0, 1);
     color: black;
@@ -153,7 +117,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block;
+    display: inline-block; /* This is key to make it wrap the text */
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
@@ -168,7 +132,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block;
+    display: inline-block; /* This is key to make it wrap the text */
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 10 0 10px rgba(255, 220, 0, 0.6);
@@ -178,22 +142,54 @@
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.6); }
-    50% { box-shadow: 0 0 20px rgba(0, 191, 255, 1); }
-    100% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.6); }
+    0% {
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 191, 255, 1);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+    }
 }
 @keyframes pulse-red {
-    0% { box-shadow: 0 0 10px rgba(130, 0, 0, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(130, 0, 130, 1); }
-    100% { box-shadow: 0 0 10px rgba(130, 0, 0, 0.5); }
+    0% {
+        box-shadow: 0 0 10px rgba(130, 0, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(130, 0, 130, 1);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(130, 0, 0, 0.5);
+    }
 }
+/* CC1 = Creator contest 1 winner */
 @keyframes pulse-CC1 { 
-    0% { box-shadow: 10 0 10px rgba(255, 255, 0, 0.5); }
-    50% { box-shadow: 10 0 20px rgba(255, 255, 130, 1); }
-    100% { box-shadow: 10 0 10px rgba(255, 255, 0, 0.5); }
+    0% {
+        box-shadow: 10 0 10px rgba(255, 255, 0, 0.5);
+    }
+    50% {
+        box-shadow: 10 0 20px rgba(255, 255, 130, 1);
+    }
+    100% {
+        box-shadow: 10 0 10px rgba(255, 255, 0, 0.5);
+    }
 }
 
-.special-text { animation: pulse 2s infinite; }
-.very-special-text { animation: pulse-red 1s infinite; }
-.CCWinner1-text { animation: pulse-CC1 2s infinite; }
+.special-text {
+    animation: pulse 2s infinite;
+}
+.very-special-text {
+    animation: pulse-red 1s infinite;
+}
+.CCWinner1-text {
+    animation: pulse-CC1 2s infinite;
+}
 
+.page-leaderboard .board tr {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.page-leaderboard .board tr:last-child {
+    border-bottom: none;
+}
