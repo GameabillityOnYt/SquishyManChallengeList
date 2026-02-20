@@ -7,15 +7,11 @@
     --color-on-primary: #ffffff;
 }
 
-.dark,
-main.dark,
-header.dark,
-body.dark,
 html.dark {
     color-scheme: dark;
-    --color-background: #1c1b1f !important;
-    --color-on-background: #ffffff !important;
-    --color-background-hover: #27262c !important;
+    --color-background: #1c1b1f;
+    --color-on-background: #ffffff;
+    --color-background-hover: #27262c;
 }
 
 html, body {
@@ -24,8 +20,8 @@ html, body {
     width: 100%;
     min-height: 100vh;
     font-family: 'Lexend Deca', sans-serif;
-    background-color: var(--color-background) !important;
-    color: var(--color-on-background) !important;
+    background-color: var(--color-background);
+    color: var(--color-on-background);
 }
 
 header {
@@ -49,7 +45,7 @@ header {
 }
 
 .level-card {
-    background-color: var(--color-background-hover) !important;
+    background-color: var(--color-background-hover);
     border: 2px solid var(--color-primary);
     border-radius: 15px;
     padding: 1rem 1.5rem;
@@ -112,14 +108,23 @@ header {
 }
 
 .stat-card {
-    background: rgba(128, 128, 128, 0.1);
+    background: var(--color-background-hover);
     padding: 6px;
     border-radius: 8px;
     text-align: center;
 }
 
-.stat-label { font-size: 0.7rem; font-weight: 700; opacity: 0.8; display: block; }
-.stat-value { font-size: 0.95rem; font-weight: 900; }
+.stat-label { 
+    font-size: 0.7rem; 
+    font-weight: 700; 
+    opacity: 0.8; 
+    display: block; 
+}
+
+.stat-value { 
+    font-size: 0.95rem; 
+    font-weight: 900; 
+}
 
 .show-records-btn {
     margin-top: 10px;
@@ -152,6 +157,10 @@ header {
     margin-bottom: 1.2rem;
 }
 
+.editors img {
+    width: 20px;
+    height: 20px;
+}
 .editors img {
     width: 20px;
     height: 20px;
