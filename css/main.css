@@ -41,7 +41,6 @@ header {
     padding: 2rem;
     margin-bottom: 2rem;
     border: 1px solid rgba(255, 165, 0, 0.2);
-    transition: transform 0.2s ease;
 }
 
 .level-name {
@@ -52,18 +51,10 @@ header {
     line-height: 1.2;
 }
 
-.rank-badge {
-    background: var(--color-primary);
-    color: black;
-    padding: 0.2rem 0.7rem;
-    border-radius: 8px;
-    font-weight: 900;
-    font-size: 1.2rem;
-}
-
 .level-info {
     font-family: 'Lexend Deca', sans-serif;
-    line-height: 1.6;
+    line-height: 1.8;
+    font-size: 1rem;
 }
 
 .stat-item {
@@ -76,15 +67,12 @@ header {
 .stat-label { 
     font-size: 0.75rem; 
     text-transform: uppercase; 
-    letter-spacing: 1px;
     opacity: 0.6; 
     display: block;
-    margin-bottom: 4px;
 }
 
 .stat-value { 
     font-weight: 700; 
-    font-size: 1rem; 
 }
 
 .victors-toggle {
@@ -98,10 +86,33 @@ header {
     font-weight: 900;
     text-transform: uppercase;
     width: 100%;
-    transition: 0.2s;
 }
 
-.victors-toggle:hover {
-    background: var(--color-primary);
-    color: black;
+/* Fix per List Editors (Icone Giganti) */
+.editors {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.editors li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.editors img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* Fix Meta Container laterale */
+.meta-container {
+    background: var(--color-background-hover);
+    padding: 1.5rem;
+    border-radius: 15px;
+    height: fit-content;
 }
