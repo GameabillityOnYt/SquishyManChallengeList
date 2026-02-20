@@ -261,3 +261,35 @@ transform:scale(1.15);
 width:18px;
 height:18px;
 }
+/* ================= LIST PAGE ================= */
+
+.page-list-custom{
+grid-column:2;
+display:grid;
+grid-template-columns:minmax(0,1fr) 300px;
+gap:2rem;
+padding:2rem;
+}
+
+.meta-container{
+overflow-y:auto;
+}
+
+.central-container{
+overflow-y:auto;
+}
+
+/* SHOW RECORDS BACK TO ORIGINAL */
+
+.show-records-btn{
+margin-top:10px;
+background:transparent;
+border:1.5px solid var(--color-primary);
+color:var(--color-on-background);
+padding:0.4rem;
+border-radius:6px;
+cursor:pointer;
+font-weight:700;
+text-transform:uppercase;
+font-size:0.75rem;
+}
