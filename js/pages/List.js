@@ -182,3 +182,4 @@ export default {
         score,
     },
 };
+// Fix caricamento forzato
