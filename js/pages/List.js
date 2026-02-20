@@ -62,7 +62,7 @@ export default {
                             </div>
                         </div>
 
-                        <button class="show-records-btn" @click="toggledRecords[i] = !toggledRecords[i]">
+                        <button class="show-records-btn" @click="toggleRecords(i)"
                             {{ toggledRecords[i] ? 'Hide Records' : 'Show Records' }}
                         </button>
 
@@ -113,8 +113,12 @@ export default {
         this.editors = await fetchEditors();
         this.loading = false;
     },
-    methods: {
-        embed,
-        score,
-    },
-};
+   methods: {
+    embed,
+    score,
+    toggleRecords(index) {
+        this.toggledRecords = {
+            [index]: !this.toggledRecords[index]
+        };
+    }
+},
