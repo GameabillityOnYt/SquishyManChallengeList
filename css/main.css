@@ -108,6 +108,19 @@ flex-direction:column;
 gap:4px;
 }
 
+/* Level rank box styling */
+.level-rank{
+background-color:var(--color-primary);
+color:var(--color-on-primary);
+padding:6px 12px;
+border-radius:6px;
+font-weight:900;
+font-size:1rem;
+display:inline-block;
+width:fit-content;
+box-shadow: 0 2px 8px rgba(255,165,0,0.3);
+}
+
 /* ================= CREATORS ================= */
 
 .authors-box{
@@ -144,25 +157,30 @@ margin-top:10px;
 
 .stat-card{
 background:var(--color-background-hover);
-padding:6px;
+padding:10px;
 border-radius:8px;
 text-align:center;
+border:2px solid var(--color-primary);
+box-shadow: 0 2px 8px rgba(255,165,0,0.15);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 }
 
 /* Layout for ID + copy button */
 .id-copy-box{
-	display:inline-flex;
+	display:flex;
 	align-items:center;
 	gap:6px;
-	margin:0 auto; /* center under the label */
+	justify-content:center;
 }
 .id-copy-box .stat-value{
 	flex:0 0 auto;
-	text-align:left;
 	font-variant-numeric: tabular-nums;
 }
 .copy-id{
-	margin-left:6px;
+	flex:0 0 auto;
 }
 
 .stat-label{
@@ -288,11 +306,12 @@ padding:2rem;
 }
 
 .meta-container{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:1rem;
+display:flex;
+flex-direction:column;
 min-width:0;
-align-items:start;
+align-self:start;
+overflow-y:auto;
+max-height:calc(100vh - 8rem);
 }
 
 /* Ensure editors list items align icons + names correctly */
@@ -309,15 +328,15 @@ align-items:start;
 	display:inline-block;
 }
 
-/* Independent scrollable panels for editors and requirements */
-.editors-panel,
+/* Combine editors and requirements under single scrollbar */
+.editors-panel{
+	padding-bottom:1rem;
+	border-bottom:1px solid var(--color-primary);
+	margin-bottom:1rem;
+}
+
 .requirements-panel{
-	overflow-y:auto;
-	max-height:calc(100vh - 10rem);
-	padding:1rem;
-	border-radius:8px;
-	background-color:var(--color-background-hover);
-	min-width:0;
+	padding-top:0;
 }
 
 .central-container{
