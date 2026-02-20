@@ -24,7 +24,9 @@
     grid-row:2;
     padding-block:2rem;
     overflow-y:auto;
+    overflow-x:auto; /* allow horizontal scroll if content is wider */
     max-height: calc(100vh - 12rem);
+    min-width:0; /* allow grid children to shrink instead of overflowing */
 }
 .page-leaderboard .error-container {
     grid-row: 1;
@@ -66,6 +68,7 @@
     text-align: start;
     word-break: normal;
     overflow-wrap: anywhere;
+    white-space: normal; /* prevent forced single-line clipping */
 }
 .page-leaderboard .board .user button:hover {
     background-color: var(--color-background-hover);
