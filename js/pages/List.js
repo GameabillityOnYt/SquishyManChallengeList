@@ -167,7 +167,7 @@ export default {
                 ...this.list
                     .filter(([_, err]) => err)
                     .map(([_, err]) => {
-                        return \`Failed to load level. (\${err}.json)\`;
+                        return `Failed to load level. (${err}.json)`;
                     })
             );
             if (!this.editors) {
