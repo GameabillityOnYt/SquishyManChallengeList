@@ -38,13 +38,18 @@
 .page-leaderboard .board .rank {
     padding-block: 1rem;
     text-align: end;
-    color: #ffcc00; 
+    color: #FFA500; 
     font-weight: bold;
     text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); 
 }
 .page-leaderboard .board .total {
     padding: 1rem;
     text-align: end;
+    filter: brightness(1.5);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    color: #e0e0e0;
+    font-weight: bold;
 }
 .page-leaderboard .board .user {
     width: 100%;
@@ -101,7 +106,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block; /* This is key to make it wrap the text */
+    display: inline-block;
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 0 10px rgba(0, 191, 255,0.6);
@@ -109,7 +114,6 @@
     max-width: 100%;
     word-wrap: break-word;
 }
-/* I will update this soon - Sdrawkcab*/
 .champion-text { 
     background-color: rgba(255, 0, 0, 1);
     color: black;
@@ -117,7 +121,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block; /* This is key to make it wrap the text */
+    display: inline-block;
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
@@ -132,7 +136,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block; /* This is key to make it wrap the text */
+    display: inline-block;
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 10 0 10px rgba(255, 220, 0, 0.6);
@@ -163,7 +167,6 @@
         box-shadow: 0 0 10px rgba(130, 0, 0, 0.5);
     }
 }
-/* CC1 = Creator contest 1 winner */
 @keyframes pulse-CC1 { 
     0% {
         box-shadow: 10 0 10px rgba(255, 255, 0, 0.5);
@@ -185,3 +188,4 @@
 .CCWinner1-text {
     animation: pulse-CC1 2s infinite;
 }
+
