@@ -14,136 +14,119 @@ const roleIconMap = {
 };
 
 export default {
-    components: { Spinner },
-    template: `
-        <main v-if="loading">
-            <Spinner></Spinner>
-        </main>
+components:{Spinner},
+template:`
 
-        <main v-else class="page-list-custom" :class="{ dark: store.dark }">
-            <div class="central-container">
+<main v-if="loading"><Spinner/></main>
 
-                <div v-for="([level, err], i) in list" class="level-card" :key="i">
+<main v-else class="page-list-custom">
 
-                    <div class="level-video-side">
-                        <iframe :src="embed(level.verification)" frameborder="0" allowfullscreen></iframe>
-                    </div>
+<div class="central-container">
 
-                    <div class="level-details-side">
+<div v-for="([level,err],i) in list" class="level-card">
 
-                        <div class="level-title-info">
-                            <span class="level-rank">#{{ i + 1 }}</span>
-                            <h2>{{ level?.name || 'Error' }}</h2>
-                        </div>
+<div class="level-video-side">
+<iframe :src="embed(level.verification)" allowfullscreen></iframe>
+</div>
 
-                        <div class="authors-box">
-                            <div class="author-item">
-                                <span class="stat-label">Creators</span>
-                                <span class="stat-value">{{ level.creators.join(', ') }}</span>
-                            </div>
-                            <div class="author-item">
-                                <span class="stat-label">Verifier</span>
-                                <span class="stat-value">{{ level.verifier }}</span>
-                            </div>
-                            <div class="author-item">
-                                <span class="stat-label">Publisher</span>
-                                <span class="stat-value">{{ level.publisher || level.author }}</span>
-                            </div>
-                        </div>
+<div class="level-details-side">
 
-                        <div class="stats-middle-grid">
+<!-- TITLE ROW -->
+<div class="title-row">
 
-                            <div class="stat-card">
-                                <span class="stat-label">ID</span>
-                                <div class="id-copy-box">
-                                    <span class="stat-value">{{ level.id }}</span>
-                                    <button class="copy-id" onclick="navigator.clipboard.writeText('{{id}}')">
-<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24" fill="currentColor">
-<path d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z"/>
+<div class="title-left">
+<span class="level-rank">#{{i+1}}</span>
+<h2 class="level-name">{{level.name}}</h2>
+</div>
+
+<div class="level-meta">
+<span>C: {{level.creators.join(', ')}}</span>
+<span>V: {{level.verifier}}</span>
+<span>P: {{level.publisher || level.author}}</span>
+</div>
+
+</div>
+
+<div class="stats-middle-grid">
+
+<div class="stat-card">
+<span class="stat-label">ID</span>
+<div class="id-copy-box">
+<span class="stat-value">{{level.id}}</span>
+
+<button class="copy-id" @click="copyID(level.id)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<path fill="currentColor"
+d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
+5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19
+C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
+5ZM19 21H8V7H19V21Z"/>
 </svg>
 </button>
-                                </div>
-                            </div>
 
-                            <div class="stat-card">
-                                <span class="stat-label">Points</span>
-                                <span class="stat-value">{{ score(i + 1, 100, level.percentToQualify) }}</span>
-                            </div>
+</div>
+</div>
 
-                            <div class="stat-card">
-                                <span class="stat-label">Password</span>
-                                <span class="stat-value">{{ level.password || 'Free' }}</span>
-                            </div>
+<div class="stat-card">
+<span class="stat-label">Points</span>
+<span class="stat-value">{{score(i+1,100,level.percentToQualify)}}</span>
+</div>
 
-                        </div>
+<div class="stat-card">
+<span class="stat-label">Password</span>
+<span class="stat-value">{{level.password||'Free'}}</span>
+</div>
 
-                        <button class="show-records-btn" @click="toggleRecords(i)">
-                            {{ isOpen(i) ? 'Hide Records' : 'Show Records' }}
-                        </button>
+</div>
 
-                        <transition name="slide">
-                            <div v-if="isOpen(i)" class="records-panel">
-                                <table class="records">
-                                    <tr v-for="record in level.records" class="record">
-                                        <td class="percent"><p>{{ record.percent }}%</p></td>
-                                        <td class="user">
-                                            <a :href="record.link" target="_blank">{{ record.user }}</a>
-                                        </td>
-                                        <td class="hz"><p>{{ record.hz }}Hz</p></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </transition>
+<button class="show-records-btn" @click="toggleRecords(i)">
+{{isOpen(i)?'Hide Records':'Show Records'}}
+</button>
 
-                    </div>
-                </div>
-            </div>
+<transition name="records">
+<div v-show="isOpen(i)" class="records-panel">
+<table class="records">
+<tr v-for="record in level.records">
+<td>{{record.percent}}%</td>
+<td><a :href="record.link" target="_blank">{{record.user}}</a></td>
+<td>{{record.hz}}Hz</td>
+</tr>
+</table>
+</div>
+</transition>
 
-            <div class="meta-container">
-                <div class="meta">
-                    <h3>List Editors.</h3>
-                    <ol class="editors">
-                        <li v-for="editor in editors">
-                            <img :src="'/assets/' + roleIconMap[editor.role] + (store.dark ? '-dark' : '') + '.svg'" :alt="editor.role">
-                            <a v-if="editor.link" class="type-label-lg link" target="_blank" :href="editor.link">{{ editor.name }}</a>
-                            <p v-else>{{ editor.name }}</p>
-                        </li>
-                    </ol>
+</div>
+</div>
+</div>
 
-                    <h3>Submission Requirements</h3>
-                    <p>Achieved the record without using hacks (however, FPS bypass is allowed, up to 360fps)</p>
-                    <p>Achieved the record on the level that is listed on the site.</p>
-                    <p>Have either source audio or clicks/taps in the video.</p>
-                </div>
-            </div>
-        </main>
-    `,
-    data: () => ({
-        list: [],
-        editors: [],
-        loading: true,
-        toggledRecords: {},
-        roleIconMap,
-        store
-    }),
-    async mounted() {
-        this.list = await fetchList();
-        this.editors = await fetchEditors();
-        this.loading = false;
-    },
-    methods: {
-        embed,
-        score,
-        isOpen(index) {
-            return this.toggledRecords[index] === true;
-        },
-        toggleRecords(index) {
-            this.toggledRecords = {
-                [index]: !this.toggledRecords[index]
-            };
-        },
-        copyID(id) {
-            navigator.clipboard.writeText(id);
-        }
-    }
+<div class="meta-container">
+<div class="meta">
+<h3>Submission Requirements</h3>
+<p>Achieved the record without hacks</p>
+<p>Correct listed level</p>
+<p>Clicks or audio required</p>
+</div>
+</div>
+
+</main>
+`,
+data:()=>({
+list:[],
+editors:[],
+loading:true,
+toggledRecords:{},
+store
+}),
+async mounted(){
+this.list=await fetchList();
+this.editors=await fetchEditors();
+this.loading=false;
+},
+methods:{
+embed,
+score,
+isOpen(i){return this.toggledRecords[i]===true},
+toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
+copyID(id){navigator.clipboard.writeText(id.toString())}
+}
 };
