@@ -161,10 +161,6 @@ header {
     width: 20px;
     height: 20px;
 }
-.editors img {
-    width: 20px;
-    height: 20px;
-}
 
 .editors {
     display: flex;
@@ -471,13 +467,9 @@ transform:translateY(0);
 max-height:500px;
 }
 
-/* =LIST VICTORS SPACING= */
-
 .records td{
 padding:.6rem 0!important;
 }
-
-/* =LEADERBOARD LEVEL SPACING = */
 
 .page-leaderboard .player{
 gap:1.4rem!important;
@@ -486,4 +478,11 @@ gap:1.4rem!important;
 .page-leaderboard .player .table p,
 .page-leaderboard .player .table a{
 padding-block:.8rem!important;
+}
+.central-container{
+min-width:0;
+}
+
+.level-details-side{
+min-width:0;
 }
