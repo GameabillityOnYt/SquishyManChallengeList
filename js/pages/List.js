@@ -10,7 +10,7 @@ template:`
 
 <main v-if="loading"><Spinner/></main>
 
-<main v-else class="page-list-custom">
+<div v-else class="page-list-custom">
 
 <div class="central-container">
 
@@ -96,6 +96,14 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 
 <div class="meta-container">
 <div class="meta">
+<h3>List Editors</h3>
+<ol class="editors">
+<li v-for="editor in editors">
+<img :src="\`/assets/\${editor.role}\${store.dark?'-dark':''}.svg\`">
+<span>{{editor.name}}</span>
+</li>
+</ol>
+
 <h3>Submission Requirements</h3>
 <p>Achieved the record without using hacks</p>
 <p>Achieved the record on the listed level</p>
@@ -103,14 +111,16 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 </div>
 
-</main>
+</div>
 `,
 data:()=>({
+
 list:[],
 editors:[],
 loading:true,
 toggledRecords:{},
 store
+
 }),
 async mounted(){
 this.list=await fetchList();
