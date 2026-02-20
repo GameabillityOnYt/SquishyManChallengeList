@@ -272,7 +272,21 @@ padding:2rem;
 }
 
 .meta-container{
-overflow-y:auto;
+overflow:visible;
+}
+
+/* Ensure editors list items align icons + names correctly */
+.editors li{
+	display:flex;
+	align-items:center;
+	gap:8px;
+}
+
+.editors img{
+	width:22px;
+	height:22px;
+	object-fit:contain;
+	display:inline-block;
 }
 
 .central-container{
