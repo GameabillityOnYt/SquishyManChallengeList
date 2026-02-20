@@ -178,3 +178,12 @@
 .page-leaderboard .board tr:last-child::after {
     display: none;
 }
+
+.page-leaderboard .player{
+gap:.5rem!important;
+}
+
+.page-leaderboard .player .table p,
+.page-leaderboard .player .table a{
+padding-block:.35rem!important;
+}
