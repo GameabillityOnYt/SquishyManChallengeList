@@ -103,6 +103,12 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 <span>{{editor.name}}</span>
 </li>
 </ol>
+<ol class="editors">
+<li v-for="editor in editors">
+<img :src="iconFor(editor.role)">
+<span>{{editor.name}}</span>
+</li>
+</ol>
 
 <h3>Submission Requirements</h3>
 <p>Achieved the record without using hacks</p>
@@ -132,6 +138,16 @@ embed,
 score,
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
-copyID(id){navigator.clipboard.writeText(id.toString())}
+copyID(id){navigator.clipboard.writeText(id.toString())},
+iconFor(role){
+	const map = {
+		owner: 'crown',
+		admin: 'user-shield',
+		helper: 'user-shield',
+		dev: 'code'
+	};
+	const name = map[role] || 'user-gear';
+	return `/assets/${name}${this.store.dark?'-dark':''}.svg`;
+}
 }
 };
