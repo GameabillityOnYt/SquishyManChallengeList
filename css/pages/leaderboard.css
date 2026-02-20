@@ -101,7 +101,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block; /* This is key to make it wrap the text */
+    display: inline-block; 
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 0 10px rgba(0, 191, 255,0.6);
@@ -109,7 +109,6 @@
     max-width: 100%;
     word-wrap: break-word;
 }
-/* I will update this soon - Sdrawkcab*/
 .champion-text { 
     background-color: rgba(255, 0, 0, 1);
     color: black;
@@ -117,7 +116,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block; /* This is key to make it wrap the text */
+    display: inline-block; 
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
@@ -132,7 +131,7 @@
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     border-radius: 0.5rem;
-    display: inline-block; /* This is key to make it wrap the text */
+    display: inline-block; 
     margin-top: 1rem;
     margin-bottom: 1rem;
     box-shadow: 10 0 10px rgba(255, 220, 0, 0.6);
@@ -142,54 +141,40 @@
 }
 
 @keyframes pulse {
-    0% {
-        box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(0, 191, 255, 1);
-    }
-    100% {
-        box-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
-    }
+    0% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.6); }
+    50% { box-shadow: 0 0 20px rgba(0, 191, 255, 1); }
+    100% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.6); }
 }
 @keyframes pulse-red {
-    0% {
-        box-shadow: 0 0 10px rgba(130, 0, 0, 0.5);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(130, 0, 130, 1);
-    }
-    100% {
-        box-shadow: 0 0 10px rgba(130, 0, 0, 0.5);
-    }
+    0% { box-shadow: 0 0 10px rgba(130, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(130, 0, 130, 1); }
+    100% { box-shadow: 0 0 10px rgba(130, 0, 0, 0.5); }
 }
-/* CC1 = Creator contest 1 winner */
 @keyframes pulse-CC1 { 
-    0% {
-        box-shadow: 10 0 10px rgba(255, 255, 0, 0.5);
-    }
-    50% {
-        box-shadow: 10 0 20px rgba(255, 255, 130, 1);
-    }
-    100% {
-        box-shadow: 10 0 10px rgba(255, 255, 0, 0.5);
-    }
+    0% { box-shadow: 10 0 10px rgba(255, 255, 0, 0.5); }
+    50% { box-shadow: 10 0 20px rgba(255, 255, 130, 1); }
+    100% { box-shadow: 10 0 10px rgba(255, 255, 0, 0.5); }
 }
 
-.special-text {
-    animation: pulse 2s infinite;
-}
-.very-special-text {
-    animation: pulse-red 1s infinite;
-}
-.CCWinner1-text {
-    animation: pulse-CC1 2s infinite;
-}
+.special-text { animation: pulse 2s infinite; }
+.very-special-text { animation: pulse-red 1s infinite; }
+.CCWinner1-text { animation: pulse-CC1 2s infinite; }
 
 .page-leaderboard .board tr {
-    border-bottom: 2px solid rgba(128, 128, 128, 0.2);
+    position: relative;
+    border: none;
 }
 
-.page-leaderboard .board tr:last-child {
-    border-bottom: none;
+.page-leaderboard .board tr::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(128, 128, 128, 0.3), transparent);
+}
+
+.page-leaderboard .board tr:last-child::after {
+    display: none;
 }
