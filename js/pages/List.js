@@ -95,7 +95,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 
 <div class="meta-container">
-<div class="meta">
+<div class="meta editors-panel">
 <h3>List Editors</h3>
 <ol class="editors">
 <li v-for="editor in editors">
@@ -103,7 +103,8 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 <span>{{editor.name}}</span>
 </li>
 </ol>
-
+</div>
+<div class="meta requirements-panel">
 <h3>Submission Requirements</h3>
 <p>Achieved the record without using hacks (however, FPS bypass is allowed, up to 360fps)</p>
 <p>Achieved the record on the level that is listed on the site - please check the level ID before you submit a record</p>
