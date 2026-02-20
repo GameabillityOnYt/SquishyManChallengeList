@@ -38,9 +38,9 @@
 .page-leaderboard .board .rank {
     padding-block: 1rem;
     text-align: end;
-    color: #ffcc00; /* Giallo Oro/Arancio più elegante */
+    color: #FFA500
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Glow tendente all'arancione */
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
 }
 .page-leaderboard .board .total {
     padding: 1rem;
