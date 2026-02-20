@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=1024" />
         <title>Squishyman Levels List</title>
 
-        <!-- Replace your server icon by uploading an image file named "list_icon.png"-->
         <link rel="icon" href="/list_icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,6 +33,7 @@
         <script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script>
         <script type="module" src="/js/main.js"></script>
     </head>
+    <!-- Rimosso l'ID app dal tag body per spostarlo dentro -->
     <body :class="{ dark: store.dark }">
         <div id="app">
             <header :class="{ dark: store.dark }">
@@ -60,11 +60,9 @@
                                 alt=""
                             />
                         </button>
-                        <!-- Replace the '#' with your discord server's invite-->
                         <a class="nav__icon" href="https://discord.gg/wvPVn3XFN4">
                             <img src="/assets/discord.svg" alt="Discord Logo" />
                         </a>
-                        <!-- List record submission form, add a link to replace the '#' when putting a link to your list submission form-->
                         <a
                             class="nav__cta type-label-lg"
                             href="https://discord.gg/wvPVn3XFN4"
