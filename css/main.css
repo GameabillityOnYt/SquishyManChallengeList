@@ -306,7 +306,6 @@ height:18px;
 /* ================= LIST PAGE ================= */
 
 .page-list-custom{
-grid-column:2;
 display:grid;
 grid-template-columns:minmax(0,1fr) 300px;
 gap:2rem;
@@ -364,10 +363,6 @@ max-height:calc(100vh - 5rem);
 
 .requirements-panel{
 	padding-top:0;
-}
-
-.central-container{
-overflow-y:auto;
 }
 
 /* SHOW RECORDS BACK TO ORIGINAL */
