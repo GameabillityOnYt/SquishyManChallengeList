@@ -43,13 +43,14 @@
     text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); 
 }
 .page-leaderboard .board .total {
-    padding: 1rem;
-    text-align: end;
-    filter: brightness(1.5);
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 0.5rem;
-    color: #e0e0e0;
+    padding: 0.2rem 0.5rem;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.3rem;
+    color: #ffffff;
     font-weight: bold;
+    width: fit-content;
+    margin: auto 0 auto auto;
 }
 .page-leaderboard .board .user {
     width: 100%;
