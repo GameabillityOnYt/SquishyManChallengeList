@@ -1,4 +1,4 @@
-import { store } from "../main.js";
+import { store } from "../store.js";
 import { embed } from "../util.js";
 import { score } from "../score.js";
 import { fetchEditors, fetchList } from "../content.js";
@@ -147,7 +147,7 @@ iconFor(role){
 		dev: 'code'
 	};
 	const name = map[role] || 'user-gear';
-	return `/assets/${name}${this.store.dark?'-dark':''}.svg`;
+		return `assets/${name}${this.store.dark?'-dark':''}.svg`;
 }
 }
 };
