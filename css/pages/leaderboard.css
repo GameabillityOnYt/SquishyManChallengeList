@@ -38,6 +38,8 @@
 .page-leaderboard .board .rank {
     padding-block: 1rem;
     text-align: end;
+    color: yellow; /* Modificato: ora il numero della posizione è giallo */
+    font-weight: bold; /* Opzionale: lo rende più visibile come nelle liste ufficiali */
 }
 .page-leaderboard .board .total {
     padding: 1rem;
