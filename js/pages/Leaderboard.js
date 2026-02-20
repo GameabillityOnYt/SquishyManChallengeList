@@ -1,120 +1,200 @@
-import { fetchLeaderboard } from '../content.js';
-import { localize } from '../util.js';
+.page-leaderboard-container {
+    display: block;
+    height: 100vh;
+    overflow: hidden;
+}
+.page-leaderboard {
+    display: grid;
+    grid-template-columns: minmax(24rem, 2fr) 3fr;
+    grid-template-rows: max-content 1fr;
+    column-gap: 2rem;
+    max-width: 80rem;
+    margin: 0 auto;
+    height: 100%;
+    align-items: start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
 
-import Spinner from '../components/Spinner.js';
+.page-leaderboard .board-container,
+.page-leaderboard .player-container{
+    grid-row:2;
+    overflow-y:auto;
+    overflow-x:auto;
+    max-height: calc(100vh - 8rem);
+    min-width:0;
+    background-color: var(--color-background);
+    z-index: 1;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+.page-leaderboard .error-container {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+}
+.page-leaderboard .error-container .error {
+    padding: 1rem;
+    background-color: var(--color-error);
+    color: var(--color-on-error);
+}
+.page-leaderboard .board-container {
+    padding-inline: 1rem;
+    padding-block: 2rem;
+}
+.page-leaderboard .board {
+    table-layout: auto;
+    display: block;
+    width: 100%;
+}
+.page-leaderboard .board .rank {
+     padding-block: 1rem;
+    text-align: end;
+    color: #FFA500; 
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); 
+}
+.page-leaderboard .board .total {
+    padding: 1rem;
+    text-align: end;
+}
+.page-leaderboard .board .user {
+    width: 100%;
+}
+.page-leaderboard .board .user button {
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: start;
+    word-break: normal;
+    overflow-wrap: anywhere;
+    white-space: normal; /* prevent forced single-line clipping */
+}
+.page-leaderboard .board .user button:hover {
+    background-color: var(--color-background-hover);
+    color: var(--color-on-background-hover);
+    cursor: pointer;
+}
+.page-leaderboard .board .user.active button {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+}
+.page-leaderboard .player {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-right: 2rem;
+}
+.page-leaderboard .player .table {
+    table-layout: fixed;
+}
+.page-leaderboard .player .table tr td:not(:last-child) {
+    padding-right: 2rem;
+}
+.page-leaderboard .player .table p,
+.page-leaderboard .player .table a {
+    padding-block: 1rem;
+}
+.page-leaderboard .player .table .rank p,
+.page-leaderboard .player .table .score p {
+    text-align: end;
+}
+.page-leaderboard .player .table .level {
+    width: 100%;
+}
+.page-leaderboard .player .table a:hover {
+    text-decoration: underline;
+}
+.special-text {
+    background-color: DeepSkyBlue;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    display: inline-block; 
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(0, 191, 255,0.6);
+    width: fit-content;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+.champion-text { 
+    background-color: rgba(255, 0, 0, 1);
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    display: inline-block; 
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+    width: fit-content;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+.CCWinner1-text { 
+    background-color: rgba(255, 220, 0, 1);
+    color: black;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    display: inline-block; 
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 10 0 10px rgba(255, 220, 0, 0.6);
+    width: fit-content;
+    max-width: 100%;
+    word-wrap: break-word;
+}
 
-export default {
-    components: {
-        Spinner,
-    },
-    data: () => ({
-        leaderboard: [],
-        loading: true,
-        selected: 0,
-        err: [],
-    }),
-    template: `
-        <main v-if="loading">
-            <Spinner></Spinner>
-        </main>
-        <main v-else class="page-leaderboard-container">
-            <div class="page-leaderboard">
-                <div class="error-container">
-                    <p class="error" v-if="err.length > 0">
-                        Leaderboard may be incorrect, as the following levels could not be loaded: {{ err.join(', ') }}
-                    </p>
-                </div>
-                <div class="board-container">
-                    <table class="board">
-                        <tr v-for="(ientry, i) in leaderboard">
-                            <td class="rank">
-                                <p class="type-label-lg">#{{ i + 1 }}</p>
-                            </td>
-                            <td class="total">
-                                <p class="type-label-lg">{{ localize(ientry.total) }}</p>
-                            </td>
-                            <td class="user" :class="{ 'active': selected == i }">
-                                <button @click="selected = i">
-                                    <span class="type-label-lg">{{ ientry.user }}</span>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="player-container">
-                    <div class="player">
-                        <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
-                        <p v-if="entry.user === 'Ant_Gam3R'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Migul el paso'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'BLuuTemp'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'GD Bean'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Liquidman6776'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Sdrawkcab'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Pijeon'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Panda'" class="champion-text">Champion</p>
-                        <h3>{{ entry.total }}</h3>
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.6); }
+    50% { box-shadow: 0 0 20px rgba(0, 191, 255, 1); }
+    100% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.6); }
+}
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 10px rgba(130, 0, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(130, 0, 130, 1); }
+    100% { box-shadow: 0 0 10px rgba(130, 0, 0, 0.5); }
+}
+@keyframes pulse-CC1 { 
+    0% { box-shadow: 10 0 10px rgba(255, 255, 0, 0.5); }
+    50% { box-shadow: 10 0 20px rgba(255, 255, 130, 1); }
+    100% { box-shadow: 10 0 10px rgba(255, 255, 0, 0.5); }
+}
 
-                        <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.verified">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
+.special-text { animation: pulse 2s infinite; }
+.very-special-text { animation: pulse-red 1s infinite; }
+.CCWinner1-text { animation: pulse-CC1 2s infinite; }
 
-                        <h2 v-if="entry.completed.length > 0">Completed ({{ entry.completed.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.completed">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
+.page-leaderboard .board tr {
+    position: relative;
+    border: none;
+}
 
-                        <h2 v-if="entry.progressed.length > 0">Progressed ({{ entry.progressed.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.progressed">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.percent }}% {{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </main>
-    `,
-    computed: {
-        entry() {
-            return this.leaderboard[this.selected];
-        },
-    },
-    async mounted() {
-        const [leaderboard, err] = await fetchLeaderboard();
-        this.leaderboard = leaderboard;
-        this.err = err;
-        this.loading = false;
-    },
-    methods: {
-        localize,
-    },
-};
+.page-leaderboard .board tr::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(128, 128, 128, 0.3), transparent);
+}
+
+.page-leaderboard .board tr:last-child::after {
+    display: none;
+}
+
+.page-leaderboard .player{
+gap:.5rem!important;
+}
+
+.page-leaderboard .player .table p,
+.page-leaderboard .player .table a{
+padding-block:.35rem!important;
+}
