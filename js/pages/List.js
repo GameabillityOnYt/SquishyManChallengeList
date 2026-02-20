@@ -53,7 +53,7 @@ export default {
                     </div>
 
                     <button class="victors-toggle" @click="toggledRecords[i] = !toggledRecords[i]">
-                        {{ toggledRecords[i] ? 'Nascondi Records' : 'Mostra Records' }}
+                        {{ toggledRecords[i] ? 'Nascondi Records' : 'Show Records' }}
                     </button>
 
                     <div v-if="toggledRecords[i]" class="records-expanded">
