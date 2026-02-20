@@ -8,7 +8,8 @@
 }
 
 main.dark,
-header.dark {
+header.dark,
+body.dark {
     color-scheme: dark;
     --color-background: #1c1b1f;
     --color-on-background: #ffffff;
@@ -22,11 +23,8 @@ html, body {
     font-family: 'Lexend Deca', sans-serif;
     background-color: var(--color-background);
     color: var(--color-on-background);
-}
-
-header, main {
-    background-color: var(--color-background);
-    color: var(--color-on-background);
+    height: auto;
+    min-height: 100vh;
 }
 
 header {
@@ -39,10 +37,11 @@ header {
     align-items: center;
 }
 
+/* Griglia principale: destra ridotta a 300px per non rubare spazio */
 .page-list-custom {
     display: grid;
-    grid-template-columns: 1fr minmax(16em, 1fr);
-    column-gap: 2rem;
+    grid-template-columns: 1fr 300px;
+    column-gap: 3rem;
     padding: 2rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -55,6 +54,7 @@ header {
     gap: 2rem;
 }
 
+/* Rettangolo Livello */
 .level-card {
     background-color: var(--color-background-hover);
     border: 2px solid var(--color-primary);
@@ -82,8 +82,13 @@ header {
     flex-direction: column;
 }
 
+/* Fix per scritte ammassate (Creators, etc) */
+.level-details-side div {
+    margin-bottom: 5px;
+}
+
 .level-title-info h2 {
-    margin: 0;
+    margin: 0 0 1rem 0;
     font-size: 1.6rem;
     text-transform: uppercase;
 }
@@ -105,30 +110,34 @@ header {
 .stat-label { font-size: 0.65rem; font-weight: 700; opacity: 0.7; display: block; }
 .stat-value { font-size: 0.9rem; font-weight: 700; }
 
-.show-records-btn {
-    margin-top: 1.5rem;
-    background: transparent;
-    border: 2px solid var(--color-primary);
-    color: var(--color-on-background);
-    padding: 0.6rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    width: 100%;
-}
-
+/* FIX COLONNA DESTRA (REGOLE E EDITORS) */
 .meta-container {
     padding: 0;
-    overflow-y: auto;
+    height: auto;
+    overflow: visible;
 }
 
 .meta h3 {
-    margin-top: 0;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255, 165, 0, 0.3);
+    padding-bottom: 5px;
+}
+
+.meta p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    white-space: normal;
+    display: block;
+    word-break: normal;
 }
 
 .editors {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .editors li {
@@ -142,4 +151,16 @@ header {
     width: 20px !important;
     height: 20px !important;
     object-fit: contain;
+}
+
+.show-records-btn {
+    margin-top: 1.5rem;
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-on-background);
+    padding: 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    width: 100%;
 }
