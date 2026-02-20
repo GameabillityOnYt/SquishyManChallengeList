@@ -200,3 +200,16 @@ header {
     align-self: start;
     height: fit-content !important;
 }
+
+.level-card {
+    align-items: flex-start !important;
+}
+
+.level-video-side {
+    flex: 0 0 260px;
+    height: 146px !important;
+}
+
+.level-video-side iframe {
+    height: 146px !important;
+}
