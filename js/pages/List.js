@@ -22,28 +22,26 @@ template:`
 
 <div class="level-details-side">
 
-<div class="title-row">
-
+<div class="level-title-info">
 <div class="title-left">
 <span class="level-rank">#{{i+1}}</span>
-<h2 class="level-name">{{level.name}}</h2>
+<h2>{{level.name}}</h2>
+</div>
 </div>
 
-<div class="authors-box-inline">
+<div class="authors-box centered-authors">
 <div>
 <span>CREATOR</span>
-<p>{{level.creators.join(', ')}}</p>
+<span>{{level.creators.join(', ')}}</span>
 </div>
 <div>
 <span>VERIFIER</span>
-<p>{{level.verifier}}</p>
+<span>{{level.verifier}}</span>
 </div>
 <div>
 <span>PUBLISHER</span>
-<p>{{level.publisher||level.author}}</p>
+<span>{{level.publisher||level.author}}</span>
 </div>
-</div>
-
 </div>
 
 <div class="stats-middle-grid">
@@ -99,9 +97,9 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 <div class="meta-container">
 <div class="meta">
 <h3>Submission Requirements</h3>
-<p>No hacks</p>
-<p>Correct listed level</p>
-<p>Clicks/audio required</p>
+<p>Achieved the record without using hacks</p>
+<p>Achieved the record on the listed level</p>
+<p>Clicks or audio required</p>
 </div>
 </div>
 
