@@ -19,16 +19,20 @@ export default {
         <main v-if="loading">
             <Spinner></Spinner>
         </main>
+
         <main v-else class="page-list-custom" :class="{ dark: store.dark }">
             <div class="central-container">
+
                 <div v-for="([level, err], i) in list" class="level-card" :key="i">
+
                     <div class="level-video-side">
                         <iframe :src="embed(level.verification)" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    
+
                     <div class="level-details-side">
+
                         <div class="level-title-info">
-                            <span class="type-label-lg">#{{ i + 1 }}</span>
+                            <span class="level-rank">#{{ i + 1 }}</span>
                             <h2>{{ level?.name || 'Error' }}</h2>
                         </div>
 
@@ -48,35 +52,45 @@ export default {
                         </div>
 
                         <div class="stats-middle-grid">
+
                             <div class="stat-card">
                                 <span class="stat-label">ID</span>
-                                <span class="stat-value">{{ level.id }}</span>
+                                <div class="id-copy-box">
+                                    <span class="stat-value">{{ level.id }}</span>
+                                    <button class="copy-btn" @click="copyID(level.id)">📋</button>
+                                </div>
                             </div>
+
                             <div class="stat-card">
                                 <span class="stat-label">Points</span>
                                 <span class="stat-value">{{ score(i + 1, 100, level.percentToQualify) }}</span>
                             </div>
+
                             <div class="stat-card">
                                 <span class="stat-label">Password</span>
                                 <span class="stat-value">{{ level.password || 'Free' }}</span>
                             </div>
+
                         </div>
 
                         <button class="show-records-btn" @click="toggleRecords(i)">
-    {{ isOpen(i) ? 'Hide Records' : 'Show Records' }}
-</button>
+                            {{ isOpen(i) ? 'Hide Records' : 'Show Records' }}
+                        </button>
 
-<div v-if="isOpen(i)" class="records-panel">
-                            <table class="records">
-                                <tr v-for="record in level.records" class="record">
-                                    <td class="percent"><p>{{ record.percent }}%</p></td>
-                                    <td class="user">
-                                        <a :href="record.link" target="_blank">{{ record.user }}</a>
-                                    </td>
-                                    <td class="hz"><p>{{ record.hz }}Hz</p></td>
-                                </tr>
-                            </table>
-                        </div>
+                        <transition name="slide">
+                            <div v-if="isOpen(i)" class="records-panel">
+                                <table class="records">
+                                    <tr v-for="record in level.records" class="record">
+                                        <td class="percent"><p>{{ record.percent }}%</p></td>
+                                        <td class="user">
+                                            <a :href="record.link" target="_blank">{{ record.user }}</a>
+                                        </td>
+                                        <td class="hz"><p>{{ record.hz }}Hz</p></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </transition>
+
                     </div>
                 </div>
             </div>
@@ -86,11 +100,12 @@ export default {
                     <h3>List Editors.</h3>
                     <ol class="editors">
                         <li v-for="editor in editors">
-                            <img :src="\`/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\`" :alt="editor.role">
+                            <img :src="'/assets/' + roleIconMap[editor.role] + (store.dark ? '-dark' : '') + '.svg'" :alt="editor.role">
                             <a v-if="editor.link" class="type-label-lg link" target="_blank" :href="editor.link">{{ editor.name }}</a>
                             <p v-else>{{ editor.name }}</p>
                         </li>
                     </ol>
+
                     <h3>Submission Requirements</h3>
                     <p>Achieved the record without using hacks (however, FPS bypass is allowed, up to 360fps)</p>
                     <p>Achieved the record on the level that is listed on the site.</p>
@@ -104,7 +119,6 @@ export default {
         editors: [],
         loading: true,
         toggledRecords: {},
-        errors: [],
         roleIconMap,
         store
     }),
@@ -113,15 +127,19 @@ export default {
         this.editors = await fetchEditors();
         this.loading = false;
     },
- methods: {
-    embed,
-    score,
-    isOpen(index) {
-        return this.toggledRecords[index] === true;
-    },
-    toggleRecords(index) {
-        this.toggledRecords = {
-            [index]: !this.toggledRecords[index]
-        };
+    methods: {
+        embed,
+        score,
+        isOpen(index) {
+            return this.toggledRecords[index] === true;
+        },
+        toggleRecords(index) {
+            this.toggledRecords = {
+                [index]: !this.toggledRecords[index]
+            };
+        },
+        copyID(id) {
+            navigator.clipboard.writeText(id);
+        }
     }
-},
+};
