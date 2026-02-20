@@ -25,8 +25,12 @@
     padding-block:2rem;
     overflow-y:auto;
     overflow-x:auto; /* allow horizontal scroll if content is wider */
-    max-height: calc(100vh - 12rem);
+    max-height: calc(100vh - 10rem); /* give a bit more room so lower rows remain visible */
     min-width:0; /* allow grid children to shrink instead of overflowing */
+    background-color: var(--color-background);
+    z-index: 1;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    padding-bottom: 1.5rem; /* ensure last row isn't flush against bottom */
 }
 .page-leaderboard .error-container {
     grid-row: 1;
