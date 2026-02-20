@@ -421,3 +421,69 @@ gap:1rem!important;
 .page-leaderboard .player .table a{
 padding-block:.6rem!important;
 }
+
+/* AUTHORS CENTERED */
+
+.centered-authors{
+justify-content:center;
+text-align:center;
+margin-top:6px;
+}
+
+.centered-authors div{
+align-items:center;
+}
+
+/* = FIX STAFF + RULES = */
+
+.page-list-custom{
+align-items:start!important;
+}
+
+.meta-container{
+overflow:visible!important;
+height:auto!important;
+}
+
+/* = REMOVE BROKEN ANIMATION= */
+
+.records-panel{
+overflow:hidden;
+animation:none!important;
+}
+
+.records-enter-active,
+.records-leave-active{
+transition:all .25s ease;
+}
+
+.records-enter-from,
+.records-leave-to{
+opacity:0;
+transform:translateY(-8px);
+max-height:0;
+}
+
+.records-enter-to,
+.records-leave-from{
+opacity:1;
+transform:translateY(0);
+max-height:500px;
+}
+
+/* =LIST VICTORS SPACING= */
+
+.records td{
+padding:.6rem 0!important;
+}
+
+/* =LEADERBOARD LEVEL SPACING = */
+
+.page-leaderboard .player{
+gap:1.4rem!important;
+}
+
+.page-leaderboard .player .table p,
+.page-leaderboard .player .table a{
+padding-block:.8rem!important;
+}
