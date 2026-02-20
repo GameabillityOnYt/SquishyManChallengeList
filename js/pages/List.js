@@ -100,7 +100,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 <ol class="editors">
 <li v-for="editor in editors">
 <img :src="iconFor(editor.role)">
-<span>{{editor.name}}</span>
+<a :href="editor.link" target="_blank">{{editor.name}}</a>
 </li>
 </ol>
 </div>
