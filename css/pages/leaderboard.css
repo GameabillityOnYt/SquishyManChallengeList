@@ -38,8 +38,9 @@
 .page-leaderboard .board .rank {
     padding-block: 1rem;
     text-align: end;
-    color: yellow; /* Modificato: ora il numero della posizione è giallo */
-    font-weight: bold; /* Opzionale: lo rende più visibile come nelle liste ufficiali */
+    color: #ffcc00; /* Giallo Oro/Arancio più elegante */
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); /* Glow tendente all'arancione */
 }
 .page-leaderboard .board .total {
     padding: 1rem;
