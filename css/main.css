@@ -4,32 +4,26 @@
     --color-background-hover: #f5f5f5;
     --color-on-background-hover: #000000;
     --color-primary: #FFA500;
-    --color-on-primary: #ffffff;
 }
 
+body.dark,
+#app.dark,
 .dark {
     color-scheme: dark;
     --color-background: #1c1b1f;
     --color-on-background: #ffffff;
     --color-background-hover: #27262c;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    --color-on-background-hover: #ffffff;
 }
 
 html, body {
+    margin: 0;
+    padding: 0;
     width: 100%;
     min-height: 100vh;
     font-family: 'Lexend Deca', sans-serif;
     background-color: var(--color-background);
     color: var(--color-on-background);
-}
-
-header, main {
-    background-color: var(--color-background);
 }
 
 header {
@@ -38,7 +32,7 @@ header {
     padding-inline: 2rem;
     height: 4rem;
     background-color: var(--color-primary);
-    color: var(--color-on-primary);
+    color: #ffffff;
     align-items: center;
 }
 
@@ -52,30 +46,26 @@ header {
     align-items: start;
 }
 
-.central-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
 .level-card {
     background-color: var(--color-background-hover);
     border: 2px solid var(--color-primary);
     border-radius: 15px;
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-on-background);
 }
 
 .level-video-side {
-    flex: 0 0 320px;
+    flex: 0 0 260px;
     aspect-ratio: 16/9;
 }
 
 .level-video-side iframe {
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 8px;
     border: none;
 }
 
@@ -83,95 +73,104 @@ header {
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-
-.level-details-side span, 
-.level-details-side p, 
-.level-details-side div {
-    line-height: 1.4;
-    margin-bottom: 2px;
+    justify-content: space-between;
 }
 
 .level-title-info h2 {
-    margin: 0 0 10px 0;
-    font-size: 1.8rem;
+    margin: 0;
+    font-size: 1.4rem;
     text-transform: uppercase;
+    color: var(--color-on-background);
+}
+
+.authors-box {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 5px;
+}
+
+.authors-box div {
+    display: flex;
+    flex-direction: column;
+}
+
+.authors-box span:first-child {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.authors-box span:last-child {
+    font-size: 0.85rem;
+    color: var(--color-on-background);
 }
 
 .stats-middle-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-top: 1rem;
+    margin-top: 10px;
 }
 
 .stat-card {
     background: rgba(128, 128, 128, 0.1);
-    padding: 10px;
+    padding: 6px;
     border-radius: 8px;
     text-align: center;
 }
 
-.stat-label { 
-    font-size: 0.85rem; 
-    font-weight: 700; 
-    opacity: 0.8; 
-    display: block; 
-    text-transform: uppercase;
+.stat-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    opacity: 0.8;
+    display: block;
+    color: var(--color-on-background);
 }
 
-.stat-value { 
-    font-size: 1.15rem; 
-    font-weight: 900; 
+.stat-value {
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: var(--color-on-background);
 }
 
 .show-records-btn {
-    margin-top: 1.5rem;
+    margin-top: 10px;
     background: transparent;
-    border: 2px solid var(--color-primary);
+    border: 1.5px solid var(--color-primary);
     color: var(--color-on-background);
-    padding: 0.6rem;
-    border-radius: 8px;
+    padding: 0.4rem;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: 700;
-    width: 100%;
     text-transform: uppercase;
+    font-size: 0.75rem;
+    transition: 0.2s;
+}
+
+.show-records-btn:hover {
+    background: var(--color-primary);
+    color: #000;
 }
 
 .meta-container {
-    padding: 0;
-    height: auto;
-    overflow: visible;
+    color: var(--color-on-background);
 }
 
 .meta h3 {
     margin-top: 0;
-    margin-bottom: 1.5rem;
+    color: var(--color-on-background);
 }
 
 .meta p {
-    white-space: normal;
-    word-wrap: break-word;
-    line-height: 1.6;
-    margin-bottom: 1.2rem;
-    display: block;
-}
-
-.editors {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    color: var(--color-on-background);
 }
 
 .editors li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    color: var(--color-on-background);
 }
 
 .editors img {
     width: 20px;
     height: 20px;
-    object-fit: contain;
 }
