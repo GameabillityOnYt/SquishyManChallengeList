@@ -7,29 +7,29 @@
     --color-on-primary: #ffffff;
 }
 
-main.dark,
-header.dark,
-body.dark,
-html.dark,
-#app.dark {
+.dark {
     color-scheme: dark;
-    --color-background: #1c1b1f !important;
-    --color-on-background: #ffffff !important;
-    --color-background-hover: #27262c !important;
+    --color-background: #1c1b1f;
+    --color-on-background: #ffffff;
+    --color-background-hover: #27262c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Lexend Deca', sans-serif;
-    background-color: var(--color-background) !important;
-    color: var(--color-on-background) !important;
-    min-height: 100vh;
     width: 100%;
+    min-height: 100vh;
+    font-family: 'Lexend Deca', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-on-background);
 }
 
 header, main {
-    background-color: var(--color-background) !important;
+    background-color: var(--color-background);
 }
 
 header {
@@ -37,7 +37,7 @@ header {
     justify-content: space-between;
     padding-inline: 2rem;
     height: 4rem;
-    background-color: var(--color-primary) !important;
+    background-color: var(--color-primary);
     color: var(--color-on-primary);
     align-items: center;
 }
@@ -59,7 +59,7 @@ header {
 }
 
 .level-card {
-    background-color: var(--color-background-hover) !important;
+    background-color: var(--color-background-hover);
     border: 2px solid var(--color-primary);
     border-radius: 15px;
     padding: 1.5rem;
@@ -150,8 +150,8 @@ header {
 }
 
 .meta p {
-    white-space: normal !important;
-    word-wrap: break-word !important;
+    white-space: normal;
+    word-wrap: break-word;
     line-height: 1.6;
     margin-bottom: 1.2rem;
     display: block;
@@ -171,7 +171,7 @@ header {
 }
 
 .editors img {
-    width: 20px !important;
-    height: 20px !important;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
 }
