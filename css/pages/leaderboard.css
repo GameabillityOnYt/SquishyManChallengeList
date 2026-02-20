@@ -36,20 +36,19 @@
     width: 100%;
 }
 .page-leaderboard .board .rank {
-    padding-block: 1rem;
+    padding-block: 0.5rem;
     text-align: end;
-    color: #FFA500; 
+    color: #FFA500;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); 
+    text-shadow: 0 0 5px rgba(255, 165, 0, 0.3);
 }
 .page-leaderboard .board .total {
-    padding: 1rem;
+    padding: 0.5rem;
     text-align: end;
-    filter: brightness(1.5);
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 0.5rem;
-    color: #e0e0e0;
+    color: #ffffff;
     font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    width: 5rem;
 }
 .page-leaderboard .board .user {
     width: 100%;
@@ -59,7 +58,7 @@
     color: var(--color-on-background);
     border: none;
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 0.6rem 1rem;
     text-align: start;
     word-break: normal;
     overflow-wrap: anywhere;
@@ -70,8 +69,9 @@
     cursor: pointer;
 }
 .page-leaderboard .board .user.active button {
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
+    background-color: #FFA500;
+    color: #ffffff;
+    font-weight: bold;
 }
 .page-leaderboard .player {
     display: flex;
@@ -188,4 +188,3 @@
 .CCWinner1-text {
     animation: pulse-CC1 2s infinite;
 }
-
