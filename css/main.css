@@ -1,27 +1,28 @@
 :root {
-    --color-background: #ffffff !important;
-    --color-on-background: #000000 !important;
-    --color-background-hover: #f5f5f5 !important;
-    --color-on-background-hover: #000000 !important;
+    --color-background: #ffffff;
+    --color-on-background: #000000;
+    --color-background-hover: #f5f5f5;
+    --color-on-background-hover: #000000;
     --color-primary: #FFA500;
+    --color-on-primary: #ffffff;
 }
 
 main.dark,
 header.dark,
-body.dark,
-#app.dark {
+body.dark {
     color-scheme: dark;
-    --color-background: #1c1b1f !important;
-    --color-on-background: #ffffff !important;
-    --color-background-hover: #27262c !important;
+    --color-background: #1c1b1f;
+    --color-on-background: #ffffff;
+    --color-background-hover: #27262c;
+    --color-on-background-hover: #ffffff;
 }
 
 html, body {
     margin: 0;
     padding: 0;
     font-family: 'Lexend Deca', sans-serif;
-    background-color: var(--color-background) !important;
-    color: var(--color-on-background) !important;
+    background-color: var(--color-background);
+    color: var(--color-on-background);
     height: auto;
     min-height: 100vh;
 }
@@ -32,28 +33,35 @@ header {
     padding-inline: 2rem;
     height: 4rem;
     background-color: var(--color-primary);
-    color: #ffffff;
+    color: var(--color-on-primary);
     align-items: center;
 }
 
+/* Griglia principale: destra ridotta a 300px per non rubare spazio */
 .page-list-custom {
     display: grid;
-    grid-template-columns: 1fr 350px;
-    column-gap: 4rem;
+    grid-template-columns: 1fr 300px;
+    column-gap: 3rem;
     padding: 2rem;
     max-width: 1400px;
     margin: 0 auto;
     align-items: start;
 }
 
+.central-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Rettangolo Livello */
 .level-card {
-    background-color: var(--color-background-hover) !important;
+    background-color: var(--color-background-hover);
     border: 2px solid var(--color-primary);
     border-radius: 15px;
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     gap: 2rem;
-    margin-bottom: 2rem;
 }
 
 .level-video-side {
@@ -74,71 +82,75 @@ header {
     flex-direction: column;
 }
 
-.level-title-info h2 {
-    margin: 0 0 1.5rem 0;
-    font-size: 2rem;
-    text-transform: uppercase;
+/* Fix per scritte ammassate (Creators, etc) */
+.level-details-side div {
+    margin-bottom: 5px;
 }
 
-/* FIX TESTO AMMASSATO (Creators, Verifier, etc) */
-.level-details-side span, 
-.level-details-side p, 
-.level-details-side div {
-    line-height: 1.8 !important;
-    margin-bottom: 5px;
+.level-title-info h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.6rem;
+    text-transform: uppercase;
 }
 
 .stats-middle-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 1.5rem;
+    gap: 10px;
+    margin-top: 1rem;
 }
 
 .stat-card {
-    background: rgba(128, 128, 128, 0.1);
-    padding: 12px;
-    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    border-radius: 8px;
     text-align: center;
 }
 
-/* FIX COLONNA REGOLE E STAFF */
+.stat-label { font-size: 0.65rem; font-weight: 700; opacity: 0.7; display: block; }
+.stat-value { font-size: 0.9rem; font-weight: 700; }
+
+/* FIX COLONNA DESTRA (REGOLE E EDITORS) */
 .meta-container {
-    background-color: transparent !important;
-    color: var(--color-on-background) !important;
-    width: 100%;
+    padding: 0;
     height: auto;
     overflow: visible;
 }
 
 .meta h3 {
     margin-top: 2rem;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 8px;
-    color: var(--color-on-background) !important;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(255, 165, 0, 0.3);
+    padding-bottom: 5px;
 }
 
-.meta p, .meta li {
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-    margin-bottom: 1.5rem;
-    color: var(--color-on-background) !important;
+.meta p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
     white-space: normal;
     display: block;
+    word-break: normal;
+}
+
+.editors {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .editors li {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .editors img {
-    width: 24px !important;
-    height: 24px !important;
+    width: 20px !important;
+    height: 20px !important;
+    object-fit: contain;
 }
 
 .show-records-btn {
@@ -146,10 +158,9 @@ header {
     background: transparent;
     border: 2px solid var(--color-primary);
     color: var(--color-on-background);
-    padding: 0.8rem;
-    border-radius: 10px;
+    padding: 0.6rem;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 900;
-    text-transform: uppercase;
+    font-weight: 700;
     width: 100%;
 }
