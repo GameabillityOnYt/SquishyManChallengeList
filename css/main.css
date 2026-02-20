@@ -28,67 +28,62 @@ header {
 
 .page-list-original {
     display: grid;
-    grid-template-columns: 1fr 300px;
+    grid-template-columns: 1fr 350px;
     column-gap: 2rem;
     padding: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    align-items: start;
 }
 
+/* Rettangoli livelli: più larghi e meno alti */
 .level-row {
     background-color: var(--color-background-hover);
     border-radius: 15px;
-    padding: 2rem;
-    margin-bottom: 2rem;
+    padding: 1.2rem 2rem;
+    margin-bottom: 1rem;
     border: 1px solid rgba(255, 165, 0, 0.2);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .level-name {
     margin: 0;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 900;
-    letter-spacing: -1px;
-    line-height: 1.2;
+    line-height: 1.1;
 }
 
 .level-info {
-    font-family: 'Lexend Deca', sans-serif;
-    line-height: 1.8;
-    font-size: 1rem;
+    line-height: 1.4;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
 }
 
-.stat-item {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 12px;
-    border-radius: 10px;
-    text-align: center;
+/* Box laterale: si allunga in base al contenuto */
+.meta-container {
+    background: var(--color-background-hover);
+    padding: 1.5rem;
+    border-radius: 15px;
+    height: auto;
+    min-height: min-content;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.stat-label { 
-    font-size: 0.75rem; 
-    text-transform: uppercase; 
-    opacity: 0.6; 
-    display: block;
+.meta-container h2, .meta-container h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
-.stat-value { 
-    font-weight: 700; 
+.meta-container p, .meta-container li {
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
 }
 
-.victors-toggle {
-    margin-top: 1.5rem;
-    background: transparent;
-    border: 2px solid var(--color-primary);
-    color: var(--color-primary);
-    padding: 0.8rem;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 900;
-    text-transform: uppercase;
-    width: 100%;
-}
-
-/* Fix per List Editors (Icone Giganti) */
+/* Fix Icone Editor */
 .editors {
     list-style: none;
     padding: 0;
@@ -98,21 +93,25 @@ header {
 .editors li {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 15px;
-    font-weight: 600;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .editors img {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
 }
 
-/* Fix Meta Container laterale */
-.meta-container {
-    background: var(--color-background-hover);
-    padding: 1.5rem;
-    border-radius: 15px;
-    height: fit-content;
+.victors-toggle {
+    margin-top: 1rem;
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 900;
+    text-transform: uppercase;
+    width: 100%;
 }
