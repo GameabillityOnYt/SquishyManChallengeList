@@ -30,7 +30,7 @@ export default {
                         </td>
                         <td class="level" :class="{ 'active': selected == i, 'error': !level }">
                             <button @click="selected = i">
-                                <span class="type-label-lg">{{ level?.name || \Error (\${err}.json)\ }}</span>
+                                <span class="type-label-lg">{{ level?.name || \`Error (\${err}.json)\` }}</span>
                             </button>
                         </td>
                     </tr>
@@ -57,7 +57,7 @@ export default {
                     </ul>
                     <h2>Records</h2>
                     <p v-if="selected + 1 <= 150"><strong>{{ level.percentToQualify }}%</strong> or better to qualify</p>
-                    <p v-else-if="selected +1 <= 150"><strong>100%</strong> or better to qualify</p>
+                    <p v-else-if="selected + 1 <= 150"><strong>100%</strong> or better to qualify</p>
                     <p v-else>This level does not accept new records.</p>
                     <table class="records">
                         <tr v-for="record in level.records" class="record">
@@ -68,7 +68,7 @@ export default {
                                 <a :href="record.link" target="_blank" class="type-label-lg">{{ record.user }}</a>
                             </td>
                             <td class="mobile">
-                                <img v-if="record.mobile" :src="\/assets/phone-landscape\${store.dark ? '-dark' : ''}.svg\" alt="Mobile">
+                                <img v-if="record.mobile" :src="\`/assets/phone-landscape\${store.dark ? '-dark' : ''}.svg\`" alt="Mobile">
                             </td>
                             <td class="hz">
                                 <p>{{ record.hz }}Hz</p>
@@ -92,7 +92,7 @@ export default {
                         <h3>List Editors.</h3>
                         <ol class="editors">
                             <li v-for="editor in editors">
-                                <img :src="\/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\" :alt="editor.role">
+                                <img :src="\`/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\`" :alt="editor.role">
                                 <a v-if="editor.link" class="type-label-lg link" target="_blank" :href="editor.link">{{ editor.name }}</a>
                                 <p v-else>{{ editor.name }}</p>
                             </li>
@@ -134,13 +134,15 @@ export default {
         selected: 0,
         errors: [],
         roleIconMap,
-        store
+        store,
+        toggledShowcase: false
     }),
     computed: {
         level() {
-            return this.list[this.selected][0];
+            return this.list[this.selected] ? this.list[this.selected][0] : null;
         },
         video() {
+            if (!this.level || !this.level.verification) return '';
             if (!this.level.showcase) {
                 return embed(this.level.verification);
             }
@@ -153,11 +155,9 @@ export default {
         },
     },
     async mounted() {
-        // Hide loading spinner
         this.list = await fetchList();
         this.editors = await fetchEditors();
 
-        // Error handling
         if (!this.list) {
             this.errors = [
                 "Failed to load list. Retry in a few minutes or notify list staff.",
@@ -167,7 +167,7 @@ export default {
                 ...this.list
                     .filter(([_, err]) => err)
                     .map(([_, err]) => {
-                        return Failed to load level. (${err}.json);
+                        return \`Failed to load level. (\${err}.json)\`;
                     })
             );
             if (!this.editors) {
