@@ -4,7 +4,6 @@ import { score } from "../score.js";
 import { fetchEditors, fetchList } from "../content.js";
 
 import Spinner from "../components/Spinner.js";
-import LevelAuthors from "../components/List/LevelAuthors.js";
 
 const roleIconMap = {
     owner: "crown",
@@ -15,12 +14,12 @@ const roleIconMap = {
 };
 
 export default {
-    components: { Spinner, LevelAuthors },
+    components: { Spinner },
     template: `
         <main v-if="loading">
             <Spinner></Spinner>
         </main>
-        <main v-else class="page-list-custom">
+        <main v-else class="page-list-custom" :class="{ dark: store.dark }">
             <div class="central-container">
                 <div v-for="([level, err], i) in list" class="level-card" :key="i">
                     <div class="level-video-side">
@@ -28,13 +27,23 @@ export default {
                     </div>
                     
                     <div class="level-details-side">
-                        <div class="details-top">
-                            <div class="level-title-info">
-                                <span class="type-label-lg">#{{ i + 1 }}</span>
-                                <h2>{{ level?.name || 'Error' }}</h2>
+                        <div class="level-title-info">
+                            <span class="type-label-lg">#{{ i + 1 }}</span>
+                            <h2>{{ level?.name || 'Error' }}</h2>
+                        </div>
+
+                        <div class="authors-box">
+                            <div class="author-item">
+                                <span class="stat-label">Creators</span>
+                                <span class="stat-value">{{ level.creators.join(', ') }}</span>
                             </div>
-                            <div class="authors-box">
-                                <LevelAuthors :author="level.author" :creators="level.creators" :verifier="level.verifier"></LevelAuthors>
+                            <div class="author-item">
+                                <span class="stat-label">Verifier</span>
+                                <span class="stat-value">{{ level.verifier }}</span>
+                            </div>
+                            <div class="author-item">
+                                <span class="stat-label">Publisher</span>
+                                <span class="stat-value">{{ level.publisher || level.author }}</span>
                             </div>
                         </div>
 
