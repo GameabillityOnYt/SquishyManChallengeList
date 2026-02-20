@@ -8,8 +8,7 @@
 }
 
 main.dark,
-header.dark,
-body.dark {
+header.dark {
     color-scheme: dark;
     --color-background: #1c1b1f;
     --color-on-background: #ffffff;
@@ -23,8 +22,11 @@ html, body {
     font-family: 'Lexend Deca', sans-serif;
     background-color: var(--color-background);
     color: var(--color-on-background);
-    height: auto;
-    min-height: 100%;
+}
+
+header, main {
+    background-color: var(--color-background);
+    color: var(--color-on-background);
 }
 
 header {
@@ -39,12 +41,18 @@ header {
 
 .page-list-custom {
     display: grid;
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: 1fr minmax(16em, 1fr);
     column-gap: 2rem;
     padding: 2rem;
     max-width: 1400px;
     margin: 0 auto;
     align-items: start;
+}
+
+.central-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .level-card {
@@ -54,7 +62,6 @@ header {
     padding: 1.5rem;
     display: flex;
     gap: 2rem;
-    margin-bottom: 2rem;
 }
 
 .level-video-side {
@@ -95,40 +102,28 @@ header {
     text-align: center;
 }
 
-.stat-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    opacity: 0.7;
-    display: block;
-}
+.stat-label { font-size: 0.65rem; font-weight: 700; opacity: 0.7; display: block; }
+.stat-value { font-size: 0.9rem; font-weight: 700; }
 
-.stat-value {
-    font-size: 0.9rem;
+.show-records-btn {
+    margin-top: 1.5rem;
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-on-background);
+    padding: 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
     font-weight: 700;
+    width: 100%;
 }
 
 .meta-container {
-    background-color: var(--color-background-hover);
-    border-radius: 15px;
-    padding: 1.5rem;
-    height: auto;
-    overflow: visible;
+    padding: 0;
+    overflow-y: auto;
 }
 
 .meta h3 {
-    margin-top: 2rem; 
-    margin-bottom: 1rem;
-    display: block;
-    line-height: 1.2;
-}
-
-.meta p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: 1.2rem;
-    white-space: normal;
-    word-wrap: break-word;
-    display: block;
+    margin-top: 0;
 }
 
 .editors {
@@ -147,16 +142,4 @@ header {
     width: 20px !important;
     height: 20px !important;
     object-fit: contain;
-}
-
-.show-records-btn {
-    margin-top: 1.5rem;
-    background: transparent;
-    border: 2px solid var(--color-primary);
-    color: var(--color-on-background);
-    padding: 0.6rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    width: 100%;
 }
