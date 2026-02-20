@@ -38,9 +38,9 @@
 .page-leaderboard .board .rank {
     padding-block: 1rem;
     text-align: end;
-    color: #FFA500
+    color: #ffcc00; 
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); 
 }
 .page-leaderboard .board .total {
     padding: 1rem;
@@ -185,4 +185,3 @@
 .CCWinner1-text {
     animation: pulse-CC1 2s infinite;
 }
-
