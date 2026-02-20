@@ -11,7 +11,20 @@
     margin: 0 auto;
 }
 .page-leaderboard > div {
-    overflow-y: auto;
+    /* keep default but we'll explicitly set scrollable panes below */
+}
+
+/* make the leaderboard act like a viewport so inner columns can scroll independently */
+.page-leaderboard{
+    max-height: calc(100vh - 6rem);
+}
+
+.page-leaderboard .board-container,
+.page-leaderboard .player-container{
+    grid-row:2;
+    padding-block:2rem;
+    overflow-y:auto;
+    max-height: calc(100vh - 12rem);
 }
 .page-leaderboard .error-container {
     grid-row: 1;
@@ -21,11 +34,6 @@
     padding: 1rem;
     background-color: var(--color-error);
     color: var(--color-on-error);
-}
-.page-leaderboard .board-container,
-.page-leaderboard .player-container {
-    grid-row: 2;
-    padding-block: 2rem;
 }
 .page-leaderboard .board-container {
     padding-inline: 1rem;
