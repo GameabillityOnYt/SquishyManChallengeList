@@ -62,11 +62,11 @@ export default {
                             </div>
                         </div>
 
-                        <button class="show-records-btn" @click="toggleRecords(i)"
-                            {{ toggledRecords[i] ? 'Hide Records' : 'Show Records' }}
-                        </button>
+                        <button class="show-records-btn" @click="toggleRecords(i)">
+    {{ isOpen(i) ? 'Hide Records' : 'Show Records' }}
+</button>
 
-                        <div v-if="toggledRecords[i]" class="records-panel">
+<div v-if="isOpen(i)" class="records-panel">
                             <table class="records">
                                 <tr v-for="record in level.records" class="record">
                                     <td class="percent"><p>{{ record.percent }}%</p></td>
@@ -113,9 +113,12 @@ export default {
         this.editors = await fetchEditors();
         this.loading = false;
     },
-   methods: {
+ methods: {
     embed,
     score,
+    isOpen(index) {
+        return this.toggledRecords[index] === true;
+    },
     toggleRecords(index) {
         this.toggledRecords = {
             [index]: !this.toggledRecords[index]
