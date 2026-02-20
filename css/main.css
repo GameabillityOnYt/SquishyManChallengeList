@@ -166,10 +166,6 @@ header {
     height: 20px;
 }
 
-/* ============================= */
-/* FIX ICONS SAME LINE EDITORS   */
-/* ============================= */
-
 .editors {
     display: flex;
     flex-direction: column;
@@ -192,24 +188,15 @@ header {
     vertical-align: middle;
 }
 
-/* ============================= */
-/* FIX RIGHT RULES BEING CUT     */
-/* ============================= */
+.page-list-custom {
+    align-items: flex-start !important;
+}
 
-.page-list-custom > div:last-child {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
+.central-container {
+    align-self: start;
 }
 
 .meta-container {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-}
-
-.meta {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
+    align-self: start;
+    height: fit-content !important;
 }
