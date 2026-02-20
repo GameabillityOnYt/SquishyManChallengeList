@@ -187,7 +187,7 @@
 }
 
 .page-leaderboard .board tr {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    border-bottom: 2px solid rgba(128, 128, 128, 0.2);
 }
 
 .page-leaderboard .board tr:last-child {
