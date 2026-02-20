@@ -213,3 +213,23 @@ header {
 .level-video-side iframe {
     height: 146px !important;
 }
+
+/* ============================= */
+/* RECORDS ANIMATION             */
+/* ============================= */
+
+.records-panel {
+    overflow: hidden;
+    animation: expandRecords 0.25s ease;
+}
+
+@keyframes expandRecords {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
