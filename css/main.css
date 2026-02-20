@@ -165,3 +165,51 @@ header {
     width: 20px;
     height: 20px;
 }
+
+/* ============================= */
+/* FIX ICONS SAME LINE EDITORS   */
+/* ============================= */
+
+.editors {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.editors div,
+.editor,
+.editor-entry {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.editors img {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* ============================= */
+/* FIX RIGHT RULES BEING CUT     */
+/* ============================= */
+
+.page-list-custom > div:last-child {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.meta-container {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+.meta {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
