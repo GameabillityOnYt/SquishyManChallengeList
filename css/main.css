@@ -322,3 +322,32 @@ header {
     width: 16px;
     height: 16px;
 }
+
+.title-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:8px;
+}
+
+.title-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.level-meta{
+display:flex;
+gap:12px;
+font-size:.8rem;
+opacity:.8;
+}
+
+.page-list-custom,
+.meta-container,
+.meta{
+overflow:visible!important;
+max-height:none!important;
+height:auto!important;
+}
