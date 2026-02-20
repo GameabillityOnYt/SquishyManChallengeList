@@ -1,25 +1,27 @@
 .page-leaderboard-container {
     display: block;
+    height: 100vh;
+    overflow: hidden;
 }
 .page-leaderboard {
     display: grid;
     grid-template-columns: minmax(24rem, 2fr) 3fr;
-    grid-template-rows: max-content auto;
+    grid-template-rows: max-content 1fr;
     column-gap: 2rem;
     max-width: 80rem;
     margin: 0 auto;
-    height: auto;
+    height: 100%;
     align-items: start;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .page-leaderboard .board-container,
 .page-leaderboard .player-container{
     grid-row:2;
-    padding-block:2rem;
     overflow-y:auto;
     overflow-x:auto;
-    max-height: auto;
-    min-height: 200px;
+    max-height: calc(100vh - 8rem);
     min-width:0;
     background-color: var(--color-background);
     z-index: 1;
@@ -36,6 +38,7 @@
 }
 .page-leaderboard .board-container {
     padding-inline: 1rem;
+    padding-block: 2rem;
 }
 .page-leaderboard .board {
     table-layout: auto;
