@@ -123,14 +123,14 @@ flex-direction:column;
 }
 
 .authors-box span:first-child{
-font-size:.65rem;
+font-size:.78rem;
 font-weight:700;
 text-transform:uppercase;
 color:var(--color-primary);
 }
 
 .authors-box span:last-child{
-font-size:.85rem;
+font-size:.95rem;
 }
 
 /* ================= STATS ================= */
@@ -151,24 +151,24 @@ text-align:center;
 
 /* Layout for ID + copy button */
 .id-copy-box{
-	display:flex;
+	display:inline-flex;
 	align-items:center;
-	gap:8px;
-	justify-content:space-between;
+	gap:6px;
+	margin:0 auto; /* center under the label */
 }
 .id-copy-box .stat-value{
-	flex:1;
+	flex:0 0 auto;
 	text-align:left;
 	font-variant-numeric: tabular-nums;
 }
 .copy-id{
-	margin-left:8px;
+	margin-left:6px;
 }
 
 .stat-label{
-font-size:.7rem;
+font-size:.82rem;
 font-weight:700;
-opacity:.8;
+opacity:.9;
 display:block;
 }
 
