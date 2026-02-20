@@ -8,7 +8,8 @@
 }
 
 main.dark,
-header.dark {
+header.dark,
+body.dark {
     color-scheme: dark;
     --color-background: #1c1b1f;
     --color-on-background: #ffffff;
@@ -22,6 +23,7 @@ html, body {
     font-family: 'Lexend Deca', sans-serif;
     background-color: var(--color-background);
     color: var(--color-on-background);
+    min-height: 100vh;
 }
 
 header, main {
@@ -41,8 +43,8 @@ header {
 
 .page-list-custom {
     display: grid;
-    grid-template-columns: 1fr minmax(16em, 1fr);
-    column-gap: 2rem;
+    grid-template-columns: 1fr 300px;
+    column-gap: 3rem;
     padding: 2rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -83,9 +85,16 @@ header {
 }
 
 .level-title-info h2 {
-    margin: 0;
+    margin: 0 0 10px 0;
     font-size: 1.6rem;
     text-transform: uppercase;
+}
+
+.level-details-side span, 
+.level-details-side p, 
+.level-details-side div {
+    line-height: 1.6;
+    margin-bottom: 4px;
 }
 
 .stats-middle-grid {
@@ -119,16 +128,27 @@ header {
 
 .meta-container {
     padding: 0;
-    overflow-y: auto;
+    height: auto;
+    overflow: visible;
 }
 
 .meta h3 {
-    margin-top: 0;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.meta p {
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    display: block;
 }
 
 .editors {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .editors li {
