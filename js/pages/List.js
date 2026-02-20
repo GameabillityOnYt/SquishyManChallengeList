@@ -53,7 +53,7 @@ export default {
                     </div>
 
                     <button class="victors-toggle" @click="toggledRecords[i] = !toggledRecords[i]">
-                        {{ toggledRecords[i] ? 'Nascondi Records' : 'Show Records' }}
+                        {{ toggledRecords[i] ? 'Hide Records' : 'Show Records' }}
                     </button>
 
                     <div v-if="toggledRecords[i]" class="records-expanded">
@@ -71,18 +71,20 @@ export default {
             </div>
 
             <div class="meta-container">
-                <div class="meta">
-                    <h3>List Editors.</h3>
-                    <ol class="editors">
+                <div class="meta-content">
+                    <h3 class="meta-title">List Editors</h3>
+                    <ul class="editors">
                         <li v-for="editor in editors">
                             <img :src="\`/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\`" :alt="editor.role">
                             <a v-if="editor.link" class="link" target="_blank" :href="editor.link">{{ editor.name }}</a>
                             <p v-else>{{ editor.name }}</p>
                         </li>
-                    </ol>
-                    <h3>Submission Requirements</h3>
-                    <p>Achieved the record without using hacks (FPS bypass allowed up to 360fps).</p>
-                    <p>Achieved the record on the level listed on the site.</p>
+                    </ul>
+                    <h3 class="meta-title">Submission Requirements</h3>
+                    <div class="requirements-list">
+                        <p>• Achieved the record without using hacks (FPS bypass allowed up to 360fps).</p>
+                        <p>• Achieved the record on the level listed on the site.</p>
+                    </div>
                 </div>
             </div>
         </main>
