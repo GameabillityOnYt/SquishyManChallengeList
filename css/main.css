@@ -233,3 +233,41 @@ header {
         transform: translateY(0);
     }
 }
+.level-rank {
+    background: var(--color-primary);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.id-copy-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.copy-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.level-video-side {
+    flex: 0 0 260px;
+    aspect-ratio: 16/9;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+    transition: all 0.3s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
