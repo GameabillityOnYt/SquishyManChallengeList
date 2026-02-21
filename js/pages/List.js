@@ -155,8 +155,11 @@ store
 
 }),
 async mounted(){
-this.list=await fetchList();
-this.editors=await fetchEditors();
+const fetchedList = await fetchList();
+this.list = Array.isArray(fetchedList)
+? fetchedList.filter(([level])=>Boolean(level))
+: [];
+this.editors=(await fetchEditors())||[];
 this.loading=false;
 
 this.$nextTick(()=>{
@@ -191,7 +194,11 @@ this.observer.unobserve(el);
 rootMargin:"200px"
 });
 
-this.$refs.lazyVideos.forEach(el=>{
+const lazyVideos = Array.isArray(this.$refs.lazyVideos)
+? this.$refs.lazyVideos
+: [this.$refs.lazyVideos].filter(Boolean);
+
+lazyVideos.forEach(el=>{
 this.observer.observe(el);
 });
 
