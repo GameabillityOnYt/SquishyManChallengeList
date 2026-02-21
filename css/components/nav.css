@@ -4,47 +4,17 @@
 }
 .nav .nav__tab {
     padding-top: 4px;
-    padding-bottom: 6px;
+    border-bottom: 4px solid transparent;
     display: flex;
     align-items: center;
     padding-inline: 0.5rem;
-    position: relative;
-    transition: color 100ms ease;
-}
-.nav .nav__tab::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 4px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 100ms ease;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-    background: linear-gradient(
-        90deg,
-        #ffd84d 0 calc(100% - 34px),
-        #87cefa calc(100% - 34px) calc(100% - 31px),
-        #ffd84d calc(100% - 31px) calc(100% - 28px),
-        #87cefa calc(100% - 28px) calc(100% - 24px),
-        #ffd84d calc(100% - 24px) calc(100% - 22px),
-        #87cefa calc(100% - 22px) calc(100% - 17px),
-        #ffd84d calc(100% - 17px) calc(100% - 15px),
-        #87cefa calc(100% - 15px) 100%
-    );
+    transition: border-color 100ms ease;
 }
 .nav .nav__tab.router-link-active {
-    border-color: transparent;
-}
-.nav .nav__tab.router-link-active::after {
-    opacity: 1;
+    border-color: var(--color-on-primary);
 }
 .nav .nav__tab:hover {
-    border-color: transparent;
-}
-.nav .nav__tab:hover::after {
-    opacity: 1;
+    border-color: var(--color-on-primary);
 }
 .nav .nav__actions {
     flex: 1;
