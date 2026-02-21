@@ -281,12 +281,13 @@ will-change:max-height,opacity,transform;
 transition:max-height .28s ease,opacity .2s ease,transform .2s ease;
 }
 
-.records-enter-from,
-.records-leave-to{
-opacity:0;
-transform:translateY(-8px);
-max-height:0;
+.records-enter-to,
+.records-leave-from{
+opacity:1;
+transform:translateY(0);
+max-height:500px;
 }
+
 
 .records-enter-to,
 records-leave-from{
