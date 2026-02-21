@@ -6,7 +6,7 @@ export function getYoutubeIdFromUrl(url) {
 }
 
 export function embed(video) {
-    return `https://www.youtube.com/embed/${getYoutubeIdFromUrl(video)}`;
+    return `https://www.youtube-nocookie.com/embed/${getYoutubeIdFromUrl(video)}`;
 }
 
 export function localize(num) {
