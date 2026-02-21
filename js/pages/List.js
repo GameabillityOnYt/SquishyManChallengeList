@@ -92,6 +92,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 @after-enter="afterRecordsEnter"
 @before-leave="beforeRecordsLeave"
 @leave="recordsLeave"
+@after-leave="afterRecordsLeave"
 >
 <div v-if="isOpen(i)" class="records-panel">
 <table v-if="level.records && level.records.length > 0" class="records">
@@ -216,27 +217,40 @@ el.style.transition='';
 el.style.willChange='';
 },
 beforeRecordsLeave(el){
-el.style.height=`${el.scrollHeight}px`;
+el.style.height=`${el.getBoundingClientRect().height}px`;
 el.style.opacity='1';
 el.style.transform='translateY(0)';
 el.style.overflow='hidden';
+el.style.transition='none';
+void el.offsetHeight;
 },
 recordsLeave(el,done){
 el.style.willChange='height,opacity,transform';
-el.style.transition='height .24s cubic-bezier(.4,0,.2,1), opacity .18s ease-in, transform .2s ease-in';
+el.style.transition='height .26s cubic-bezier(.22,1,.36,1), opacity .2s ease-in, transform .22s cubic-bezier(.22,1,.36,1)';
 
+requestAnimationFrame(()=>{
 requestAnimationFrame(()=>{
 el.style.height='0px';
 el.style.opacity='0';
 el.style.transform='translateY(-4px)';
 });
+});
 
+const timeoutId = setTimeout(()=>{
+el.removeEventListener('transitionend',onEnd);
+done();
+},320);
 const onEnd = (e)=>{
 if(e.propertyName!=='height') return;
 el.removeEventListener('transitionend',onEnd);
+clearTimeout(timeoutId);
 done();
 };
 el.addEventListener('transitionend',onEnd);
+},
+afterRecordsLeave(el){
+el.style.transition='';
+el.style.willChange='';
 },
 copyID(id){navigator.clipboard.writeText(id.toString())},
 iconFor(role){
