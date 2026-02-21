@@ -418,7 +418,7 @@ max-height:none;
 
 .show-records-btn{
   margin-top:10px;
-  background:linear-gradient(90deg,#f6c84f 0%, #f59a23 50%, #f6c84f 100%);
+  background:transparent;
   border:1.5px solid #f2b63a;
   color:#ffffff;
   padding:0.6rem 1rem;
