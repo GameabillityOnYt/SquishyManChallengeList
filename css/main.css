@@ -134,6 +134,20 @@ flex-direction:column;
 gap:4px;
 }
 
+.rank-row{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.legacy-rank-label{
+font-size:.95rem;
+font-weight:800;
+text-transform:uppercase;
+color:var(--color-on-background);
+line-height:1;
+}
+
 /* Level rank box styling */
 .level-rank{
 background-color:var(--color-primary);
