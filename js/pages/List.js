@@ -188,89 +188,62 @@ score,
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
 beforeRecordsEnter(el){
-if(el._recordsAnim){
-el._recordsAnim.cancel();
-el._recordsAnim = null;
+if(el._recordsEndHandler){
+el.removeEventListener('transitionend',el._recordsEndHandler);
+el._recordsEndHandler = null;
 }
+el.style.transition='none';
 el.style.height='0px';
-el.style.opacity='0';
-el.style.transform='translateY(-4px)';
 el.style.overflow='hidden';
+void el.offsetHeight;
 },
 recordsEnter(el,done){
 const targetHeight = `${el.scrollHeight}px`;
-el.style.willChange='height,opacity,transform';
-if(el._recordsAnim){
-el._recordsAnim.cancel();
-}
-const anim = el.animate(
-[
-{ height:'0px', opacity:0, transform:'translateY(-4px)' },
-{ height:targetHeight, opacity:1, transform:'translateY(0)' }
-],
-{ duration:260, easing:'cubic-bezier(.22,1,.36,1)', fill:'forwards' }
-);
-el._recordsAnim = anim;
-anim.onfinish = ()=>{
-el._recordsAnim = null;
+el.style.willChange='height';
+el.style.transition='height .26s cubic-bezier(.22,1,.36,1)';
+const onEnd = (e)=>{
+if(e.target!==el || e.propertyName!=='height') return;
+el.removeEventListener('transitionend',onEnd);
+el._recordsEndHandler = null;
 done();
 };
-anim.oncancel = ()=>{
-el._recordsAnim = null;
-done();
-};
+el._recordsEndHandler = onEnd;
+el.addEventListener('transitionend',onEnd);
+requestAnimationFrame(()=>{ el.style.height=targetHeight; });
 },
 afterRecordsEnter(el){
 el.style.height='auto';
 el.style.transition='';
 el.style.willChange='';
-el.style.opacity='1';
-el.style.transform='none';
 el.style.overflow='hidden';
 },
 beforeRecordsLeave(el){
-if(el._recordsAnim){
-el._recordsAnim.cancel();
-el._recordsAnim = null;
+if(el._recordsEndHandler){
+el.removeEventListener('transitionend',el._recordsEndHandler);
+el._recordsEndHandler = null;
 }
-el.style.height=`${el.getBoundingClientRect().height}px`;
-el.style.opacity='1';
-el.style.transform='none';
+el.style.transition='none';
+el.style.height=`${el.scrollHeight}px`;
 el.style.overflow='hidden';
+void el.offsetHeight;
 },
 recordsLeave(el,done){
-el.style.willChange='height,opacity';
-const startHeight = `${el.getBoundingClientRect().height}px`;
-if(startHeight === '0px'){
-done();
-return;
-}
-if(el._recordsAnim){
-el._recordsAnim.cancel();
-}
-const anim = el.animate(
-[
-{ height:startHeight, opacity:1, transform:'none' },
-{ height:'0px', opacity:0, transform:'none' }
-],
-{ duration:220, easing:'cubic-bezier(.4,0,1,1)', fill:'forwards' }
-);
-el._recordsAnim = anim;
-anim.onfinish = ()=>{
-el._recordsAnim = null;
+el.style.willChange='height';
+el.style.transition='height .22s cubic-bezier(.4,0,1,1)';
+const onEnd = (e)=>{
+if(e.target!==el || e.propertyName!=='height') return;
+el.removeEventListener('transitionend',onEnd);
+el._recordsEndHandler = null;
 done();
 };
-anim.oncancel = ()=>{
-el._recordsAnim = null;
-done();
-};
+el._recordsEndHandler = onEnd;
+el.addEventListener('transitionend',onEnd);
+requestAnimationFrame(()=>{ el.style.height='0px'; });
 },
 afterRecordsLeave(el){
 el.style.transition='';
 el.style.willChange='';
 el.style.height='';
-el.style.opacity='';
-el.style.transform='';
 el.style.overflow='';
 },
 copyID(id){navigator.clipboard.writeText(id.toString())},
