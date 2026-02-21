@@ -146,6 +146,10 @@ font-weight:800;
 text-transform:uppercase;
 color:var(--color-on-background);
 line-height:1;
+text-decoration:underline;
+text-decoration-color:var(--color-primary);
+text-underline-offset:3px;
+
 }
 
 /* Level rank box styling */
