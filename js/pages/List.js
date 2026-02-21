@@ -26,6 +26,7 @@ template:`
 <div class="level-details-side">
 
 <div class="level-title-info">
+<span v-if="level.formerTop1" class="former-top-1-tag">Former Top 1</span>
 <div class="title-left">
 <span class="level-rank">#{{i+1}}</span>
 <h2>{{level.name}}</h2>
