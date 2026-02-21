@@ -60,7 +60,7 @@ template:`
 <span class="stat-label">ID</span>
 <div class="id-copy-box">
 <span class="stat-value">{{level.id}}</span>
-<button class="copy-id" @click="copyID(level.id)">
+<button class="copy-id" :class="{ 'is-copied': copiedId===level.id }" @click="copyID(level.id)">
 <svg viewBox="0 0 24 24">
 <path fill="currentColor"
 d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
@@ -68,8 +68,8 @@ d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
 C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 5ZM19 21H8V7H19V21Z"/>
 </svg>
+<span class="copy-id-text" v-if="copiedId===level.id">Copied!</span>
 </button>
-<span v-if="copiedId===level.id" class="copied-chip">Copied</span>
 </div>
 </div>
 
