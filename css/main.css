@@ -175,14 +175,15 @@ font-size:.76rem;
 font-weight:700;
 line-height:1.1;
 letter-spacing:.01em;
-background:rgba(255,255,255,0.12);
-color:rgba(255,255,255,0.9);
+background:rgba(0,0,0,0.12);
+color:#000000;
 border:none;
 text-transform:none;
 }
 
 html.dark .qualify-box{
-color:#000000;
+background:rgba(255,255,255,0.12);
+color:#ffffff;
 }
 
 /* Level rank box styling */
