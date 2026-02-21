@@ -308,13 +308,13 @@ display:grid;
 grid-template-columns:minmax(0,1fr) 300px;
 gap:2rem;
 padding:2rem;
-height:calc(100vh - 5rem);
+align-items:start;
 }
 
 .central-container{
-overflow-y:auto;
-max-height:calc(100vh - 5rem);
 min-width:0;
+overflow:visible;
+max-height:none;
 }
 
 .meta-container{
@@ -322,10 +322,9 @@ display:flex;
 flex-direction:column;
 min-width:0;
 align-self:start;
-overflow-y:auto;
-max-height:calc(100vh - 5rem);
+overflow:visible;
+max-height:none;
 }
-
 /* Ensure editors list items align icons + names correctly */
 .editors li{
 	display:flex;
