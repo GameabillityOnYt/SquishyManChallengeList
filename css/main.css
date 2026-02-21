@@ -205,13 +205,11 @@ margin-top:10px;
 }
 
 .stat-card{
-background:
-linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
-linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 50%,var(--color-border-yellow) 50%,var(--color-border-yellow) 100%) border-box;
+background:var(--color-background-hover);
 padding:6px;
 border-radius:8px;
 text-align:center;
-border:2px solid transparent;
+border:2px solid var(--color-border-yellow);
 box-shadow: 0 2px 8px rgba(255,165,0,0.15);
 display:flex;
 flex-direction:column;
@@ -425,10 +423,8 @@ max-height:none;
 
 .show-records-btn{
   margin-top:10px;
-  background:
-  linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
-  linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 50%,var(--color-border-yellow) 50%,var(--color-border-yellow) 100%) border-box;
-  border:1.5px solid transparent;
+  background:transparent;
+  border:1.5px solid var(--color-border-yellow);
   color:#ffffff;
   padding:0.6rem 1rem;
   border-radius:6px;
