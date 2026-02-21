@@ -299,6 +299,10 @@ vertical-align:middle;
 overflow:hidden;
 }
 
+.records-panel-inner{
+min-height:0;
+}
+
 .records td{
 padding:.6rem 0!important;
 }
