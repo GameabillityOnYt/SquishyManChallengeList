@@ -1,33 +1,44 @@
 .page-leaderboard-container {
-    display: block;
-    height: 100vh;
-    /* allow the whole page to scroll so scrollbars reach the bottom */
-    overflow: auto;
+    display:block;
+    height:100vh;
+    overflow:hidden;
 }
 .page-leaderboard {
-    display: grid;
-    grid-template-columns: minmax(24rem, 2fr) 3fr;
-    grid-template-rows: max-content 1fr;
-    column-gap: 2rem;
-    max-width: 80rem;
-    margin: 0 auto;
-    height: 100%;
-    align-items: start;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    display:grid;
+    grid-template-columns:minmax(24rem,2fr) 3fr;
+    grid-template-rows:max-content 1fr;
+    column-gap:2rem;
+    max-width:80rem;
+    margin:0 auto;
+    height:100%;
+    align-items:start;
+    padding-top:2rem;
+    padding-bottom:2rem;
+    overflow:hidden;
 }
 
-.page-leaderboard .board-container,
+.page-leaderboard .board-container{
+    grid-row:2;
+    min-width:0;
+    background-color:var(--color-background);
+    z-index:1;
+    box-shadow:0 6px 18px rgba(0,0,0,0.04);
+    overflow-y:auto;
+    max-height:calc(100vh - 6rem);
+    padding-inline:1rem;
+    padding-block:2rem;
+}
+
 .page-leaderboard .player-container{
     grid-row:2;
-    /* use page scroll instead of inner scrollbars */
-    overflow: visible;
-    max-height: none;
     min-width:0;
-    background-color: var(--color-background);
-    z-index: 1;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+    background-color:var(--color-background);
+    z-index:1;
+    box-shadow:0 6px 18px rgba(0,0,0,0.04);
+    overflow-y:auto;
+    max-height:calc(100vh - 6rem);
 }
+
 .page-leaderboard .error-container {
     grid-row: 1;
     grid-column: 1 / span 2;
