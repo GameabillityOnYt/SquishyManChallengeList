@@ -437,7 +437,7 @@ max-height:none;
   margin-top:10px;
   background:transparent;
   border:1.5px solid var(--color-border-yellow);
-  color:#ffffff;
+  color:var(--color-on-background);
   padding:0.6rem 1rem;
   border-radius:6px;
   cursor:pointer;
