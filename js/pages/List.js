@@ -28,7 +28,11 @@ template:`
 <div class="level-title-info">
 <span v-if="level.formerTop1" class="former-top-1-tag">Former Top 1</span>
 <div class="title-left">
-<span class="level-rank">#{{i+1}}<span v-if="i+1>150"> legacy</span></span>
+<div class="rank-row">
+<span class="level-rank">#{{i+1}}</span>
+<span v-if="i+1>150" class="legacy-rank-label">legacy</span>
+</div>
+
 <h2>{{level.name}}</h2>
 </div>
 </div>
