@@ -35,7 +35,7 @@ template:`
 
 <div class="level-name-row">
 <h2>{{level.name}}</h2>
-<span v-if="Number(level.percentToQualify) < 100" class="qualify-box">{{ level.percentToQualify }}% or more required</span>
+<span class="qualify-box">{{ Number(level.percentToQualify) === 100 ? '100% required' : (level.percentToQualify + '% or more required') }}</span>
 </div>
 </div>
 </div>
