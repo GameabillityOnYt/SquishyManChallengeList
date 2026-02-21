@@ -102,6 +102,28 @@ font-size:1.4rem;
 text-transform:uppercase;
 }
 
+.level-title-info{
+position:relative;
+padding-right:140px;
+min-height:28px;
+}
+
+.former-top-1-tag{
+position:absolute;
+top:0;
+right:0;
+display:inline-block;
+padding:4px 8px;
+border-radius:6px;
+background:#9ed8ff;
+color:#08334d;
+font-size:.72rem;
+font-weight:800;
+text-transform:uppercase;
+line-height:1.1;
+border:1px solid #6abde8;
+}
+
 .level-title{
 display:flex;
 flex-direction:column;
