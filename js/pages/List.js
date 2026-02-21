@@ -128,6 +128,7 @@ list:[],
 editors:[],
 loading:true,
 toggledRecords:{},
+observer:null,
 store
 
 }),
@@ -135,6 +136,38 @@ async mounted(){
 this.list=await fetchList();
 this.editors=await fetchEditors();
 this.loading=false;
+
+this.$nextTick(()=>{
+
+this.observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+
+const el = entry.target;
+const src = el.dataset.src;
+
+el.innerHTML = `
+<iframe src="${src}"
+allowfullscreen
+loading="lazy"
+frameborder="0">
+</iframe>
+`;
+
+this.observer.unobserve(el);
+
+}
+});
+},{
+rootMargin:"200px"
+});
+
+this.$refs.lazyVideos.forEach(el=>{
+this.observer.observe(el);
+});
+
+});
+
 },
 methods:{
 embed,
