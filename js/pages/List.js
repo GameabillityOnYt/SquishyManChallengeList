@@ -72,8 +72,8 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 
 <div class="stat-card">
-<span class="stat-label">{{(level.length||level.Length)?'Length':'Password'}}</span>
-<span class="stat-value">{{level.length||level.Length||level.password||'Free'}}</span>
+<span class="stat-label">Password</span>
+<span class="stat-value">{{level.password||'Free'}}</span>
 </div>
 
 </div>
@@ -84,14 +84,13 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 
 <transition name="records">
 <div v-if="isOpen(i)" class="records-panel">
-<table v-if="level.records && level.records.length > 0" class="records">
+<table class="records">
 <tr v-for="record in level.records">
 <td>{{record.percent}}%</td>
 <td><a :href="record.link" target="_blank">{{record.user}}</a></td>
 <td>{{record.hz}}Hz</td>
 </tr>
 </table>
-<p v-if="!level.records || level.records.length===0" class="no-records-message">No records on this level yet.</p>
 </div>
 </transition>
 
