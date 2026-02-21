@@ -176,6 +176,13 @@ frameborder="0">
 </iframe>
 `;
 
+const iframe = el.querySelector("iframe");
+if(iframe){
+const stopOthers = ()=>this.pauseOtherVideos(iframe);
+iframe.addEventListener("pointerdown",stopOthers,{ passive:true });
+iframe.addEventListener("focus",stopOthers);
+}
+
 this.observer.unobserve(el);
 
 }
@@ -194,6 +201,20 @@ this.observer.observe(el);
 methods:{
 embed,
 score,
+pauseOtherVideos(currentIframe){
+const iframes = this.$el.querySelectorAll(".lazy-video iframe");
+iframes.forEach(iframe=>{
+if(iframe===currentIframe) return;
+iframe.contentWindow?.postMessage(
+JSON.stringify({
+event:"command",
+func:"pauseVideo",
+args:[]
+}),
+"https://www.youtube-nocookie.com"
+);
+});
+},
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
 beforeRecordsEnter(el){
@@ -323,3 +344,4 @@ iconFor(role){
 }
 }
 };
+
