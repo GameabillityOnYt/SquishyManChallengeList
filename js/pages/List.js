@@ -31,10 +31,12 @@ template:`
 <div class="rank-row">
 <span class="level-rank">#{{i+1}}</span>
 <span v-if="i+1>150" class="legacy-rank-label">legacy</span>
-<span class="qualify-label">Req {{ level.percentToQualify }}%</span>
 </div>
 
+<div class="level-name-row">
 <h2>{{level.name}}</h2>
+<span class="qualify-box">Req {{ level.percentToQualify }}%</span>
+</div>
 </div>
 </div>
 
