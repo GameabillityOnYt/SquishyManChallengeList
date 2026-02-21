@@ -86,7 +86,13 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 {{isOpen(i)?'Hide Records':'Show Records'}}
 </button>
 
-<transition name="records">
+<transition
+@before-enter="beforeRecordsEnter"
+@enter="recordsEnter"
+@after-enter="afterRecordsEnter"
+@before-leave="beforeRecordsLeave"
+@leave="recordsLeave"
+>
 <div v-if="isOpen(i)" class="records-panel">
 <table v-if="level.records && level.records.length > 0" class="records">
 <tr v-for="record in level.records">
@@ -180,6 +186,58 @@ embed,
 score,
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
+beforeRecordsEnter(el){
+el.style.height='0px';
+el.style.opacity='0';
+el.style.transform='translateY(-4px)';
+},
+recordsEnter(el,done){
+const targetHeight = `${el.scrollHeight}px`;
+el.style.overflow='hidden';
+el.style.willChange='height,opacity,transform';
+el.style.transition='height .28s cubic-bezier(.22,1,.36,1), opacity .2s ease-out, transform .24s cubic-bezier(.22,1,.36,1)';
+
+requestAnimationFrame(()=>{
+el.style.height=targetHeight;
+el.style.opacity='1';
+el.style.transform='translateY(0)';
+});
+
+const onEnd = (e)=>{
+if(e.propertyName!=='height') return;
+el.removeEventListener('transitionend',onEnd);
+done();
+};
+el.addEventListener('transitionend',onEnd);
+},
+afterRecordsEnter(el){
+el.style.height='auto';
+el.style.transition='';
+el.style.willChange='';
+},
+beforeRecordsLeave(el){
+el.style.height=`${el.scrollHeight}px`;
+el.style.opacity='1';
+el.style.transform='translateY(0)';
+el.style.overflow='hidden';
+},
+recordsLeave(el,done){
+el.style.willChange='height,opacity,transform';
+el.style.transition='height .24s cubic-bezier(.4,0,.2,1), opacity .18s ease-in, transform .2s ease-in';
+
+requestAnimationFrame(()=>{
+el.style.height='0px';
+el.style.opacity='0';
+el.style.transform='translateY(-4px)';
+});
+
+const onEnd = (e)=>{
+if(e.propertyName!=='height') return;
+el.removeEventListener('transitionend',onEnd);
+done();
+};
+el.addEventListener('transitionend',onEnd);
+},
 copyID(id){navigator.clipboard.writeText(id.toString())},
 iconFor(role){
 	const map = {
