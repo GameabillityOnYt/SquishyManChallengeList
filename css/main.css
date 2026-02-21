@@ -34,30 +34,6 @@ height:4rem;
 background-color:var(--color-primary);
 color:var(--color-on-primary);
 align-items:center;
-position:relative;
-z-index:2;
-}
-
-header::after{
-content:"";
-position:absolute;
-left:0;
-right:0;
-bottom:-6px;
-height:6px;
-pointer-events:none;
-z-index:3;
-background:linear-gradient(
-90deg,
-#ffd84d 0 52%,
-#87cefa 52% 53%,
-#ffd84d 53% 54.5%,
-#87cefa 54.5% 56.5%,
-#ffd84d 56.5% 57.5%,
-#87cefa 57.5% 60%,
-#ffd84d 60% 61%,
-#87cefa 61% 100%
-);
 }
 
 /* ================= MAIN GRID ================= */
