@@ -417,22 +417,22 @@ max-height:none;
 /* SHOW RECORDS BACK TO ORIGINAL */
 
 .show-records-btn{
-margin-top:10px;
-background:transparent;
-border:1.5px solid var(--color-primary);
-color:var(--color-on-background);
-padding:0.6rem 1rem;
-border-radius:6px;
-cursor:pointer;
-font-weight:700;
-text-transform:uppercase;
-font-size:0.85rem;
+  margin-top:10px;
+  background:linear-gradient(90deg,#f6c84f 0%, #f59a23 50%, #f6c84f 100%);
+  border:1.5px solid #f2b63a;
+  color:#ffffff;
+  padding:0.6rem 1rem;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:700;
+  text-transform:uppercase;
+  font-size:0.85rem;
 }
 
 .show-records-btn:hover{
-  background:#ffd200;
-  border-color:#ffd200;
-  color:#000;
+  background:linear-gradient(90deg,#f4be3b 0%, #f08b18 50%, #f4be3b 100%);
+  border-color:#f0b12d;
+  color:#ffffff;
 }
 
 
