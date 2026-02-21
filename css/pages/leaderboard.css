@@ -60,9 +60,9 @@
 .page-leaderboard .board .rank {
      padding-block: 1rem;
     text-align: end;
-    color: #FFA500; 
+    color: var(--color-border-blue);
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5); 
+    text-shadow: 0 0 10px rgba(135, 206, 250, 0.7), 0 0 18px rgba(135, 206, 250, 0.45);
 }
 .page-leaderboard .board .total {
     padding: 1rem;
@@ -84,7 +84,7 @@
 }
 .page-leaderboard .board .user button:hover {
     background-color: var(--color-background-hover);
-    color: var(--color-on-background-hover);
+    color: var(--color-on-background);
     cursor: pointer;
 }
 .page-leaderboard .board .user.active button {
@@ -110,6 +110,11 @@
 .page-leaderboard .player .table .rank p,
 .page-leaderboard .player .table .score p {
     text-align: end;
+}
+.page-leaderboard .player .table .rank p {
+    color: var(--color-border-blue);
+    font-weight: 800;
+    text-shadow: 0 0 8px rgba(135, 206, 250, 0.65), 0 0 14px rgba(135, 206, 250, 0.4);
 }
 .page-leaderboard .player .table .level {
     width: 100%;
