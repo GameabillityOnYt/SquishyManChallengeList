@@ -114,7 +114,7 @@
 .page-leaderboard .player .table .rank p {
     color: var(--color-border-blue);
     font-weight: 800;
-    text-shadow: 0 0 8px rgba(135, 206, 250, 0.65), 0 0 14px rgba(135, 206, 250, 0.4);
+    text-shadow: 0 0 5px rgba(135, 206, 250, 0.45), 0 0 9px rgba(135, 206, 250, 0.25);
 }
 .page-leaderboard .player .table .level {
     width: 100%;
