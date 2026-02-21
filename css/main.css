@@ -48,8 +48,6 @@ margin:0 auto;
 align-items:start;
 }
 
-/* ⚠️ QUESTO È IL FIX CHE FA RIAPPARIRE STAFF + RULES */
-
 .central-container{
 min-width:0;
 }
