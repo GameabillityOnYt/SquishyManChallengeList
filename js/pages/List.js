@@ -35,7 +35,6 @@ template:`
 
 <div class="level-name-row">
 <h2>{{level.name}}</h2>
-<span class="qualify-box">{{ Number(level.percentToQualify) === 100 ? '100% required' : (level.percentToQualify + '% or more required') }}</span>
 </div>
 </div>
 </div>
@@ -81,6 +80,11 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 <div class="stat-card">
 <span class="stat-label">{{(level.length||level.Length)?'Length':'Password'}}</span>
 <span class="stat-value">{{level.length||level.Length||level.password||'Free'}}</span>
+</div>
+
+<div class="stat-card">
+<span class="stat-label">Requirement</span>
+<span class="stat-value">{{ Number(level.percentToQualify) === 100 ? '100%' : (level.percentToQualify + '%+') }}</span>
 </div>
 
 </div>
