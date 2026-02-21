@@ -151,8 +151,6 @@ editors:[],
 loading:true,
 toggledRecords:{},
 observer:null,
-youtubeApiPromise:null,
-youtubePlayers:[],
 store
 
 }),
@@ -163,7 +161,6 @@ this.list = Array.isArray(fetchedList)
 : [];
 this.editors=(await fetchEditors())||[];
 this.loading=false;
-this.ensureYouTubeApi();
 
 this.$nextTick(()=>{
 
@@ -183,9 +180,6 @@ frameborder="0">
 `;
 
 const iframe = el.querySelector("iframe");
-if(iframe){
-this.initYouTubePlayer(iframe);
-}
 
 this.observer.unobserve(el);
 
@@ -210,79 +204,10 @@ beforeUnmount(){
 if(this.observer){
 this.observer.disconnect();
 }
-this.youtubePlayers.forEach(player=>{
-try{
-player.destroy();
-}catch{}
-});
-this.youtubePlayers = [];
 },
 methods:{
 embed,
 score,
-ensureYouTubeApi(){
-if(window.YT && window.YT.Player){
-return Promise.resolve(window.YT);
-}
-if(this.youtubeApiPromise){
-return this.youtubeApiPromise;
-}
-
-this.youtubeApiPromise = new Promise(resolve=>{
-const previous = window.onYouTubeIframeAPIReady;
-window.onYouTubeIframeAPIReady = ()=>{
-if(typeof previous==="function"){
-previous();
-}
-resolve(window.YT);
-};
-
-if(!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')){
-const script = document.createElement("script");
-script.src = "https://www.youtube.com/iframe_api";
-document.head.appendChild(script);
-}
-});
-
-return this.youtubeApiPromise;
-},
-initYouTubePlayer(iframe){
-this.ensureYouTubeApi().then(YT=>{
-if(!iframe || !iframe.isConnected) return;
-
-const player = new YT.Player(iframe,{
-events:{
-onStateChange:(event)=>{
-if(event.data===YT.PlayerState.PLAYING){
-this.pauseOtherPlayers(player);
-}
-}
-}
-});
-
-this.youtubePlayers.push(player);
-}).catch(()=>{});
-},
-pauseOtherPlayers(currentPlayer){
-const currentIframe = currentPlayer?.getIframe?.();
-this.youtubePlayers = this.youtubePlayers.filter(player=>player && player.getIframe);
-this.youtubePlayers.forEach(player=>{
-const playerIframe = player.getIframe?.();
-if(!playerIframe || !playerIframe.isConnected) return;
-if(player===currentPlayer) return;
-if(currentIframe && playerIframe===currentIframe) return;
-try{
-player.stopVideo();
-}catch{}
-try{
-const src = playerIframe.getAttribute("src");
-if(src){
-playerIframe.setAttribute("src","");
-playerIframe.setAttribute("src",src);
-}
-}catch{}
-});
-},
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
 beforeRecordsEnter(el){
