@@ -264,10 +264,22 @@ this.youtubePlayers.push(player);
 }).catch(()=>{});
 },
 pauseOtherPlayers(currentPlayer){
+const currentIframe = currentPlayer?.getIframe?.();
+this.youtubePlayers = this.youtubePlayers.filter(player=>player && player.getIframe);
 this.youtubePlayers.forEach(player=>{
+const playerIframe = player.getIframe?.();
+if(!playerIframe || !playerIframe.isConnected) return;
 if(player===currentPlayer) return;
+if(currentIframe && playerIframe===currentIframe) return;
 try{
-player.pauseVideo();
+player.stopVideo();
+}catch{}
+try{
+const src = playerIframe.getAttribute("src");
+if(src){
+playerIframe.setAttribute("src","");
+playerIframe.setAttribute("src",src);
+}
 }catch{}
 });
 },
