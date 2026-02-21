@@ -6,7 +6,15 @@ export function getYoutubeIdFromUrl(url) {
 }
 
 export function embed(video) {
-    return `https://www.youtube-nocookie.com/embed/${getYoutubeIdFromUrl(video)}`;
+    const id = getYoutubeIdFromUrl(video);
+    const params = new URLSearchParams({
+        enablejsapi: "1",
+        playsinline: "1",
+        rel: "0",
+        origin: window.location.origin,
+    });
+
+    return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
 }
 
 export function localize(num) {
@@ -39,3 +47,4 @@ export function shuffle(array) {
 
     return array;
 }
+
