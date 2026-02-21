@@ -1,7 +1,8 @@
 .page-leaderboard-container {
     display: block;
     height: 100vh;
-    overflow: hidden;
+    /* allow the whole page to scroll so scrollbars reach the bottom */
+    overflow: auto;
 }
 .page-leaderboard {
     display: grid;
@@ -19,9 +20,9 @@
 .page-leaderboard .board-container,
 .page-leaderboard .player-container{
     grid-row:2;
-    overflow-y:auto;
-    overflow-x:auto;
-    max-height: calc(100vh - 8rem);
+    /* use page scroll instead of inner scrollbars */
+    overflow: visible;
+    max-height: none;
     min-width:0;
     background-color: var(--color-background);
     z-index: 1;
