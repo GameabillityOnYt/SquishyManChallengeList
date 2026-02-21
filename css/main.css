@@ -5,6 +5,8 @@
 --color-on-background-hover:#000000;
 --color-primary:#FFA500;
 --color-on-primary:#ffffff;
+--color-border-blue:#87cefa;
+--color-border-yellow:#f2b63a;
 }
 
 html.dark{
@@ -63,8 +65,11 @@ overflow:visible!important;
 
 .level-card{
 background-color:var(--color-background-hover);
-border:2px solid var(--color-primary);
+border:2px solid transparent;
 border-radius:15px;
+background:
+linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
+linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 42%,#bfd6a6 50%,var(--color-border-yellow) 58%,var(--color-border-yellow) 100%) border-box;
 padding:1rem 1.5rem;
 display:flex;
 gap:1.5rem;
@@ -200,11 +205,13 @@ margin-top:10px;
 }
 
 .stat-card{
-background:var(--color-background-hover);
+background:
+linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
+linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 42%,#bfd6a6 50%,var(--color-border-yellow) 58%,var(--color-border-yellow) 100%) border-box;
 padding:6px;
 border-radius:8px;
 text-align:center;
-border:2px solid var(--color-primary);
+border:2px solid transparent;
 box-shadow: 0 2px 8px rgba(255,165,0,0.15);
 display:flex;
 flex-direction:column;
@@ -418,8 +425,10 @@ max-height:none;
 
 .show-records-btn{
   margin-top:10px;
-  background:transparent;
-  border:1.5px solid #f2b63a;
+  background:
+  linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
+  linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 42%,#bfd6a6 50%,var(--color-border-yellow) 58%,var(--color-border-yellow) 100%) border-box;
+  border:1.5px solid transparent;
   color:#ffffff;
   padding:0.6rem 1rem;
   border-radius:6px;
