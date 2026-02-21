@@ -48,6 +48,8 @@ margin:0 auto;
 align-items:start;
 }
 
+/* ⚠️ QUESTO È IL FIX CHE FA RIAPPARIRE STAFF + RULES */
+
 .central-container{
 min-width:0;
 }
@@ -119,7 +121,7 @@ font-size:.72rem;
 font-weight:800;
 text-transform:uppercase;
 line-height:1.1;
-border:2px solid #0047AB;
+border:1px solid #0047AB;
 opacity:1;
 text-shadow:0 1px 0 rgba(0,0,0,0.35);
 }
@@ -273,25 +275,32 @@ vertical-align:middle;
 
 .records-panel{
 overflow:hidden;
+display:grid;
+grid-template-rows:1fr;
+will-change:grid-template-rows,opacity,transform;
+}
+
+.records-panel > *{
+min-height:0;
 }
 
 .records-enter-active,
 .records-leave-active{
-transition:all .25s ease;
+transition:grid-template-rows .22s ease,opacity .2s ease,transform .2s ease;
 }
 
 .records-enter-from,
 .records-leave-to{
 opacity:0;
-transform:translateY(-8px);
-max-height:0;
+transform:translateY(-6px);
+grid-template-rows:0fr;
 }
 
 .records-enter-to,
 .records-leave-from{
 opacity:1;
 transform:translateY(0);
-max-height:500px;
+grid-template-rows:1fr;
 }
 
 .records td{
