@@ -151,7 +151,8 @@ editors:[],
 loading:true,
 toggledRecords:{},
 observer:null,
-youtubeMessageHandler:null,
+youtubeApiPromise:null,
+youtubePlayers:[],
 store
 
 }),
@@ -162,8 +163,7 @@ this.list = Array.isArray(fetchedList)
 : [];
 this.editors=(await fetchEditors())||[];
 this.loading=false;
-this.youtubeMessageHandler = this.onYouTubeMessage.bind(this);
-window.addEventListener("message",this.youtubeMessageHandler);
+this.ensureYouTubeApi();
 
 this.$nextTick(()=>{
 
@@ -184,7 +184,7 @@ frameborder="0">
 
 const iframe = el.querySelector("iframe");
 if(iframe){
-this.registerYouTubeStateListener(iframe);
+this.initYouTubePlayer(iframe);
 }
 
 this.observer.unobserve(el);
@@ -210,60 +210,65 @@ beforeUnmount(){
 if(this.observer){
 this.observer.disconnect();
 }
-if(this.youtubeMessageHandler){
-window.removeEventListener("message",this.youtubeMessageHandler);
-}
+this.youtubePlayers.forEach(player=>{
+try{
+player.destroy();
+}catch{}
+});
+this.youtubePlayers = [];
 },
 methods:{
 embed,
 score,
-registerYouTubeStateListener(iframe){
-const attachListener = ()=>{
-iframe.contentWindow?.postMessage(
-JSON.stringify({
-event:"command",
-func:"addEventListener",
-args:["onStateChange"]
-}),
-"*"
-);
+ensureYouTubeApi(){
+if(window.YT && window.YT.Player){
+return Promise.resolve(window.YT);
+}
+if(this.youtubeApiPromise){
+return this.youtubeApiPromise;
+}
+
+this.youtubeApiPromise = new Promise(resolve=>{
+const previous = window.onYouTubeIframeAPIReady;
+window.onYouTubeIframeAPIReady = ()=>{
+if(typeof previous==="function"){
+previous();
+}
+resolve(window.YT);
 };
 
-iframe.addEventListener("load",()=>{
-attachListener();
-setTimeout(attachListener,150);
-},{ once:true });
-},
-onYouTubeMessage(event){
-if(
-event.origin!=="https://www.youtube.com" &&
-event.origin!=="https://www.youtube-nocookie.com"
-) return;
+if(!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')){
+const script = document.createElement("script");
+script.src = "https://www.youtube.com/iframe_api";
+document.head.appendChild(script);
+}
+});
 
-let data = event.data;
-if(typeof data==="string"){
+return this.youtubeApiPromise;
+},
+initYouTubePlayer(iframe){
+this.ensureYouTubeApi().then(YT=>{
+if(!iframe || !iframe.isConnected) return;
+
+const player = new YT.Player(iframe,{
+events:{
+onStateChange:(event)=>{
+if(event.data===YT.PlayerState.PLAYING){
+this.pauseOtherPlayers(player);
+}
+}
+}
+});
+
+this.youtubePlayers.push(player);
+}).catch(()=>{});
+},
+pauseOtherPlayers(currentPlayer){
+this.youtubePlayers.forEach(player=>{
+if(player===currentPlayer) return;
 try{
-data = JSON.parse(data);
-}catch{
-return;
-}
-}
-
-if(!data || data.event!=="onStateChange" || Number(data.info)!==1) return;
-this.pauseOtherVideosByWindow(event.source);
-},
-pauseOtherVideosByWindow(currentWindow){
-const iframes = this.$el.querySelectorAll(".lazy-video iframe");
-iframes.forEach(iframe=>{
-if(iframe.contentWindow===currentWindow) return;
-iframe.contentWindow?.postMessage(
-JSON.stringify({
-event:"command",
-func:"pauseVideo",
-args:[]
-}),
-"*"
-);
+player.pauseVideo();
+}catch{}
 });
 },
 isOpen(i){return this.toggledRecords[i]===true},
