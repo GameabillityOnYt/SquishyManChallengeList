@@ -83,7 +83,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </button>
 
 <transition name="records">
-<div v-if="isOpen(i)" class="records-panel">
+<div v-show="isOpen(i)" class="records-panel">
 <table class="records">
 <tr v-for="record in level.records">
 <td>{{record.percent}}%</td>
