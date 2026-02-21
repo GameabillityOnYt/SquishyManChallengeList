@@ -57,3 +57,10 @@
     list-style: none;
     padding: 0;
 }
+
+/* Ensure the list page can grow to viewport height so page scrollbar reaches bottom */
+.page-list-custom{
+    min-height: calc(100vh - 4rem);
+    /* allow page-level scrolling */
+    overflow: visible;
+}
