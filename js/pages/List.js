@@ -223,13 +223,19 @@ el.removeEventListener('transitionend',el._recordsEndHandler);
 el._recordsEndHandler = null;
 }
 el.style.transition='none';
-el.style.height=`${el.scrollHeight}px`;
+el.style.height=`${el.getBoundingClientRect().height}px`;
 el.style.overflow='hidden';
 void el.offsetHeight;
 },
 recordsLeave(el,done){
+const startHeight = el.getBoundingClientRect().height;
+if(startHeight <= 1){
+done();
+return;
+}
+const duration = Math.max(140, Math.min(260, Math.round(startHeight * 1.8)));
 el.style.willChange='height';
-el.style.transition='height .22s cubic-bezier(.4,0,1,1)';
+el.style.transition=`height ${duration}ms linear`;
 const onEnd = (e)=>{
 if(e.target!==el || e.propertyName!=='height') return;
 el.removeEventListener('transitionend',onEnd);
