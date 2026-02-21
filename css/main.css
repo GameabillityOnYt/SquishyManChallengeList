@@ -83,7 +83,7 @@ overflow:hidden;
 .level-card::after{
 content:"😤";
 position:absolute;
-right:18px;
+left:calc(1.5rem + 130px);
 bottom:10px;
 font-size:3.1rem;
 line-height:1;
@@ -95,7 +95,7 @@ text-shadow:
 1px 1px 0 rgba(255,255,255,0.22),
 -1px -1px 0 rgba(0,0,0,0.18),
 0 2px 3px rgba(0,0,0,0.18);
-transform:rotate(-10deg);
+transform:translateX(-50%) rotate(-10deg);
 filter:grayscale(1) saturate(0) contrast(1.08) brightness(0.95);
 mix-blend-mode:soft-light;
 }
