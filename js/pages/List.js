@@ -219,34 +219,33 @@ el.style.willChange='';
 beforeRecordsLeave(el){
 el.style.height=`${el.getBoundingClientRect().height}px`;
 el.style.opacity='1';
-el.style.transform='translateY(0)';
+el.style.transform='none';
 el.style.overflow='hidden';
 el.style.transition='none';
 void el.offsetHeight;
 },
 recordsLeave(el,done){
-el.style.willChange='height,opacity,transform';
-el.style.transition='height .26s cubic-bezier(.22,1,.36,1), opacity .2s ease-in, transform .22s cubic-bezier(.22,1,.36,1)';
+el.style.willChange='height';
+el.style.transition='height .22s cubic-bezier(.4,0,1,1)';
 
-requestAnimationFrame(()=>{
 requestAnimationFrame(()=>{
 el.style.height='0px';
-el.style.opacity='0';
-el.style.transform='translateY(-4px)';
-});
 });
 
-const timeoutId = setTimeout(()=>{
-el.removeEventListener('transitionend',onEnd);
-done();
-},320);
-const onEnd = (e)=>{
-if(e.propertyName!=='height') return;
+let finished = false;
+const finish = ()=>{
+if(finished) return;
+finished = true;
 el.removeEventListener('transitionend',onEnd);
 clearTimeout(timeoutId);
 done();
 };
+const onEnd = (e)=>{
+if(e.target!==el || e.propertyName!=='height') return;
+finish();
+};
 el.addEventListener('transitionend',onEnd);
+const timeoutId = setTimeout(finish,280);
 },
 afterRecordsLeave(el){
 el.style.transition='';
