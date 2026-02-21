@@ -69,6 +69,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 5ZM19 21H8V7H19V21Z"/>
 </svg>
 </button>
+<span v-if="copiedId===level.id" class="copied-chip">Copied</span>
 </div>
 </div>
 
@@ -152,7 +153,9 @@ loading:true,
 toggledRecords:{},
 observer:null,
 store
-
+,
+copiedId:null,
+copyToastTimer:null
 }),
 async mounted(){
 const fetchedList = await fetchList();
@@ -203,6 +206,10 @@ this.observer.observe(el);
 beforeUnmount(){
 if(this.observer){
 this.observer.disconnect();
+}
+if(this.copyToastTimer){
+clearTimeout(this.copyToastTimer);
+this.copyToastTimer = null;
 }
 },
 methods:{
@@ -324,7 +331,44 @@ inner.style.opacity='';
 inner.style.transform='';
 }
 },
-copyID(id){navigator.clipboard.writeText(id.toString())},
+copyID(id){
+const text = id.toString();
+const copied = ()=>{
+this.copiedId = id;
+if(this.copyToastTimer){
+clearTimeout(this.copyToastTimer);
+}
+this.copyToastTimer = setTimeout(()=>{
+this.copiedId = null;
+this.copyToastTimer = null;
+},1100);
+};
+
+if(navigator.clipboard?.writeText){
+navigator.clipboard.writeText(text).then(copied).catch(()=>{
+this.fallbackCopy(text,copied);
+});
+return;
+}
+
+this.fallbackCopy(text,copied);
+},
+fallbackCopy(text,onSuccess){
+const ta = document.createElement("textarea");
+ta.value = text;
+ta.setAttribute("readonly","");
+ta.style.position = "fixed";
+ta.style.opacity = "0";
+ta.style.pointerEvents = "none";
+document.body.appendChild(ta);
+ta.focus();
+ta.select();
+try{
+document.execCommand("copy");
+onSuccess();
+}catch{}
+document.body.removeChild(ta);
+},
 iconFor(role){
 	const map = {
 		owner: 'crown',
