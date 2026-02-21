@@ -151,6 +151,7 @@ editors:[],
 loading:true,
 toggledRecords:{},
 observer:null,
+youtubeMessageHandler:null,
 store
 
 }),
@@ -161,6 +162,8 @@ this.list = Array.isArray(fetchedList)
 : [];
 this.editors=(await fetchEditors())||[];
 this.loading=false;
+this.youtubeMessageHandler = this.onYouTubeMessage.bind(this);
+window.addEventListener("message",this.youtubeMessageHandler);
 
 this.$nextTick(()=>{
 
@@ -181,9 +184,7 @@ frameborder="0">
 
 const iframe = el.querySelector("iframe");
 if(iframe){
-const stopOthers = ()=>this.pauseOtherVideos(iframe);
-iframe.addEventListener("pointerdown",stopOthers,{ passive:true });
-iframe.addEventListener("focus",stopOthers);
+this.registerYouTubeStateListener(iframe);
 }
 
 this.observer.unobserve(el);
@@ -205,20 +206,63 @@ this.observer.observe(el);
 });
 
 },
+beforeUnmount(){
+if(this.observer){
+this.observer.disconnect();
+}
+if(this.youtubeMessageHandler){
+window.removeEventListener("message",this.youtubeMessageHandler);
+}
+},
 methods:{
 embed,
 score,
-pauseOtherVideos(currentIframe){
+registerYouTubeStateListener(iframe){
+const attachListener = ()=>{
+iframe.contentWindow?.postMessage(
+JSON.stringify({
+event:"command",
+func:"addEventListener",
+args:["onStateChange"]
+}),
+"*"
+);
+};
+
+iframe.addEventListener("load",()=>{
+attachListener();
+setTimeout(attachListener,150);
+},{ once:true });
+},
+onYouTubeMessage(event){
+if(
+event.origin!=="https://www.youtube.com" &&
+event.origin!=="https://www.youtube-nocookie.com"
+) return;
+
+let data = event.data;
+if(typeof data==="string"){
+try{
+data = JSON.parse(data);
+}catch{
+return;
+}
+}
+
+if(!data || data.event!=="onStateChange" || Number(data.info)!==1) return;
+this.pauseOtherVideosByWindow(event.source);
+},
+pauseOtherVideosByWindow(currentWindow){
 const iframes = this.$el.querySelectorAll(".lazy-video iframe");
 iframes.forEach(iframe=>{
-if(iframe===currentIframe) return;
+if(iframe.contentWindow===currentWindow) return;
 iframe.contentWindow?.postMessage(
 JSON.stringify({
 event:"command",
 func:"pauseVideo",
 args:[]
 }),
-"https://www.youtube-nocookie.com"
+"*"
 );
 });
 },
