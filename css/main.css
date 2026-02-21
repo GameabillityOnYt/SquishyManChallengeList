@@ -115,13 +115,13 @@ right:0;
 display:inline-block;
 padding:4px 8px;
 border-radius:6px;
-background:#9ed8ff;
+background:rgba(158,216,255,0.35);
 color:#08334d;
 font-size:.72rem;
 font-weight:800;
 text-transform:uppercase;
 line-height:1.1;
-border:1px solid #6abde8;
+border:1px solid #5fb3e3;
 }
 
 .level-title{
