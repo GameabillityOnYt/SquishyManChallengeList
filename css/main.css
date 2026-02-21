@@ -273,11 +273,12 @@ vertical-align:middle;
 
 .records-panel{
 overflow:hidden;
+will-change:max-height,opacity,transform;
 }
 
 .records-enter-active,
 .records-leave-active{
-transition:all .25s ease;
+transition:max-height .28s ease,opacity .2s ease,transform .2s ease;
 }
 
 .records-enter-from,
@@ -288,7 +289,7 @@ max-height:0;
 }
 
 .records-enter-to,
-.records-leave-from{
+records-leave-from{
 opacity:1;
 transform:translateY(0);
 max-height:500px;
