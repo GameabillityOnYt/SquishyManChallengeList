@@ -8,13 +8,37 @@
     display: flex;
     align-items: center;
     padding-inline: 0.5rem;
-    transition: border-color 100ms ease;
+    position: relative;
+    transition: color 100ms ease;
+}
+.nav .nav__tab::after {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0;
+    height: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 100ms ease;
+    background:
+        linear-gradient(90deg, transparent 0 39%, #87cefa 39% 40%, transparent 40% 100%),
+        linear-gradient(90deg, transparent 0 43%, #87cefa 43% 45%, transparent 45% 100%),
+        linear-gradient(90deg, transparent 0 48%, #87cefa 48% 51%, transparent 51% 100%),
+        linear-gradient(90deg, transparent 0 53%, #87cefa 53% 56%, transparent 56% 100%),
+        linear-gradient(90deg, var(--color-primary) 0 56%, #87cefa 56% 100%);
 }
 .nav .nav__tab.router-link-active {
-    border-color: var(--color-on-primary);
+    border-color: transparent;
+}
+.nav .nav__tab.router-link-active::after {
+    opacity: 1;
 }
 .nav .nav__tab:hover {
-    border-color: var(--color-on-primary);
+    border-color: transparent;
+}
+.nav .nav__tab:hover::after {
+    opacity: 1;
 }
 .nav .nav__actions {
     flex: 1;
