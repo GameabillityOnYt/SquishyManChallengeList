@@ -17,7 +17,10 @@ template:`
 <div v-for="([level,err],i) in list" class="level-card">
 
 <div class="level-video-side">
-<iframe :src="embed(level.verification)" allowfullscreen></iframe>
+<div class="lazy-video"
+     :data-src="embed(level.verification)"
+     ref="lazyVideos">
+</div>
 </div>
 
 <div class="level-details-side">
