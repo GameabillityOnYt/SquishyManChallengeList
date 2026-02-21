@@ -95,6 +95,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 @after-leave="afterRecordsLeave"
 >
 <div v-if="isOpen(i)" class="records-panel">
+<div class="records-panel-inner">
 <table v-if="level.records && level.records.length > 0" class="records">
 <tr v-for="record in level.records">
 <td>{{record.percent}}%</td>
@@ -103,6 +104,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </tr>
 </table>
 <p v-if="!level.records || level.records.length===0" class="no-records-message">No records on this level yet.</p>
+</div>
 </div>
 </transition>
 
@@ -192,15 +194,26 @@ if(el._recordsEndHandler){
 el.removeEventListener('transitionend',el._recordsEndHandler);
 el._recordsEndHandler = null;
 }
+const inner = el.querySelector('.records-panel-inner');
 el.style.transition='none';
 el.style.height='0px';
 el.style.overflow='hidden';
+if(inner){
+inner.style.transition='none';
+inner.style.opacity='0';
+inner.style.transform='translateY(-3px)';
+}
 void el.offsetHeight;
 },
 recordsEnter(el,done){
 const targetHeight = `${el.scrollHeight}px`;
+const inner = el.querySelector('.records-panel-inner');
 el.style.willChange='height';
 el.style.transition='height .26s cubic-bezier(.22,1,.36,1)';
+if(inner){
+inner.style.willChange='opacity,transform';
+inner.style.transition='opacity .18s ease-out, transform .22s cubic-bezier(.22,1,.36,1)';
+}
 const onEnd = (e)=>{
 if(e.target!==el || e.propertyName!=='height') return;
 el.removeEventListener('transitionend',onEnd);
@@ -209,26 +222,46 @@ done();
 };
 el._recordsEndHandler = onEnd;
 el.addEventListener('transitionend',onEnd);
-requestAnimationFrame(()=>{ el.style.height=targetHeight; });
+requestAnimationFrame(()=>{
+el.style.height=targetHeight;
+if(inner){
+inner.style.opacity='1';
+inner.style.transform='translateY(0)';
+}
+});
 },
 afterRecordsEnter(el){
+const inner = el.querySelector('.records-panel-inner');
 el.style.height='auto';
 el.style.transition='';
 el.style.willChange='';
 el.style.overflow='hidden';
+if(inner){
+inner.style.transition='';
+inner.style.willChange='';
+inner.style.opacity='1';
+inner.style.transform='none';
+}
 },
 beforeRecordsLeave(el){
 if(el._recordsEndHandler){
 el.removeEventListener('transitionend',el._recordsEndHandler);
 el._recordsEndHandler = null;
 }
+const inner = el.querySelector('.records-panel-inner');
 el.style.transition='none';
 el.style.height=`${el.getBoundingClientRect().height}px`;
 el.style.overflow='hidden';
+if(inner){
+inner.style.transition='none';
+inner.style.opacity='1';
+inner.style.transform='none';
+}
 void el.offsetHeight;
 },
 recordsLeave(el,done){
 const startHeight = el.getBoundingClientRect().height;
+const inner = el.querySelector('.records-panel-inner');
 if(startHeight <= 1){
 done();
 return;
@@ -236,6 +269,11 @@ return;
 const duration = Math.max(140, Math.min(260, Math.round(startHeight * 1.8)));
 el.style.willChange='height';
 el.style.transition=`height ${duration}ms linear`;
+if(inner){
+const fadeDuration = Math.max(110, Math.min(180, Math.round(duration * 0.7)));
+inner.style.willChange='opacity,transform';
+inner.style.transition=`opacity ${fadeDuration}ms ease-out, transform ${fadeDuration}ms ease-out`;
+}
 const onEnd = (e)=>{
 if(e.target!==el || e.propertyName!=='height') return;
 el.removeEventListener('transitionend',onEnd);
@@ -244,13 +282,26 @@ done();
 };
 el._recordsEndHandler = onEnd;
 el.addEventListener('transitionend',onEnd);
-requestAnimationFrame(()=>{ el.style.height='0px'; });
+requestAnimationFrame(()=>{
+el.style.height='0px';
+if(inner){
+inner.style.opacity='0';
+inner.style.transform='translateY(-2px)';
+}
+});
 },
 afterRecordsLeave(el){
+const inner = el.querySelector('.records-panel-inner');
 el.style.transition='';
 el.style.willChange='';
 el.style.height='';
 el.style.overflow='';
+if(inner){
+inner.style.transition='';
+inner.style.willChange='';
+inner.style.opacity='';
+inner.style.transform='';
+}
 },
 copyID(id){navigator.clipboard.writeText(id.toString())},
 iconFor(role){
