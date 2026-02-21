@@ -31,6 +31,7 @@ template:`
 <div class="rank-row">
 <span class="level-rank">#{{i+1}}</span>
 <span v-if="i+1>150" class="legacy-rank-label">legacy</span>
+<span class="qualify-label">Req {{ level.percentToQualify }}%</span>
 </div>
 
 <h2>{{level.name}}</h2>
