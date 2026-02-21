@@ -207,7 +207,7 @@ margin-top:10px;
 .stat-card{
 background:
 linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
-linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 42%,#bfd6a6 50%,var(--color-border-yellow) 58%,var(--color-border-yellow) 100%) border-box;
+linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 50%,var(--color-border-yellow) 50%,var(--color-border-yellow) 100%) border-box;
 padding:6px;
 border-radius:8px;
 text-align:center;
@@ -427,7 +427,7 @@ max-height:none;
   margin-top:10px;
   background:
   linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
-  linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 42%,#bfd6a6 50%,var(--color-border-yellow) 58%,var(--color-border-yellow) 100%) border-box;
+  linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 50%,var(--color-border-yellow) 50%,var(--color-border-yellow) 100%) border-box;
   border:1.5px solid transparent;
   color:#ffffff;
   padding:0.6rem 1rem;
