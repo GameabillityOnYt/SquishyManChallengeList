@@ -8,10 +8,11 @@
 }
 
 html.dark{
-color-scheme:dark;
---color-background:#1c1b1f;
---color-on-background:#ffffff;
---color-background-hover:#27262c;
+    color-scheme:dark;
+    --color-background:#1c1b1f;
+    --color-on-background:#ffffff;
+    --color-background-hover:#27262c;
+    --color-on-background-hover:#ffffff; /* lb text fix */
 }
 
 html,body{
