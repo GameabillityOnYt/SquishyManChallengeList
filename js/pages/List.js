@@ -188,68 +188,90 @@ score,
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
 beforeRecordsEnter(el){
+if(el._recordsAnim){
+el._recordsAnim.cancel();
+el._recordsAnim = null;
+}
 el.style.height='0px';
 el.style.opacity='0';
 el.style.transform='translateY(-4px)';
+el.style.overflow='hidden';
 },
 recordsEnter(el,done){
 const targetHeight = `${el.scrollHeight}px`;
-el.style.overflow='hidden';
 el.style.willChange='height,opacity,transform';
-el.style.transition='height .28s cubic-bezier(.22,1,.36,1), opacity .2s ease-out, transform .24s cubic-bezier(.22,1,.36,1)';
-
-requestAnimationFrame(()=>{
-el.style.height=targetHeight;
-el.style.opacity='1';
-el.style.transform='translateY(0)';
-});
-
-const onEnd = (e)=>{
-if(e.propertyName!=='height') return;
-el.removeEventListener('transitionend',onEnd);
+if(el._recordsAnim){
+el._recordsAnim.cancel();
+}
+const anim = el.animate(
+[
+{ height:'0px', opacity:0, transform:'translateY(-4px)' },
+{ height:targetHeight, opacity:1, transform:'translateY(0)' }
+],
+{ duration:260, easing:'cubic-bezier(.22,1,.36,1)', fill:'forwards' }
+);
+el._recordsAnim = anim;
+anim.onfinish = ()=>{
+el._recordsAnim = null;
 done();
 };
-el.addEventListener('transitionend',onEnd);
+anim.oncancel = ()=>{
+el._recordsAnim = null;
+done();
+};
 },
 afterRecordsEnter(el){
 el.style.height='auto';
 el.style.transition='';
 el.style.willChange='';
+el.style.opacity='1';
+el.style.transform='none';
+el.style.overflow='hidden';
 },
 beforeRecordsLeave(el){
+if(el._recordsAnim){
+el._recordsAnim.cancel();
+el._recordsAnim = null;
+}
 el.style.height=`${el.getBoundingClientRect().height}px`;
 el.style.opacity='1';
 el.style.transform='none';
 el.style.overflow='hidden';
-el.style.transition='none';
-void el.offsetHeight;
 },
 recordsLeave(el,done){
-el.style.willChange='height';
-el.style.transition='height .22s cubic-bezier(.4,0,1,1)';
-
-requestAnimationFrame(()=>{
-el.style.height='0px';
-});
-
-let finished = false;
-const finish = ()=>{
-if(finished) return;
-finished = true;
-el.removeEventListener('transitionend',onEnd);
-clearTimeout(timeoutId);
+el.style.willChange='height,opacity';
+const startHeight = `${el.getBoundingClientRect().height}px`;
+if(startHeight === '0px'){
+done();
+return;
+}
+if(el._recordsAnim){
+el._recordsAnim.cancel();
+}
+const anim = el.animate(
+[
+{ height:startHeight, opacity:1, transform:'none' },
+{ height:'0px', opacity:0, transform:'none' }
+],
+{ duration:220, easing:'cubic-bezier(.4,0,1,1)', fill:'forwards' }
+);
+el._recordsAnim = anim;
+anim.onfinish = ()=>{
+el._recordsAnim = null;
 done();
 };
-const onEnd = (e)=>{
-if(e.target!==el || e.propertyName!=='height') return;
-finish();
+anim.oncancel = ()=>{
+el._recordsAnim = null;
+done();
 };
-el.addEventListener('transitionend',onEnd);
-const timeoutId = setTimeout(finish,280);
 },
 afterRecordsLeave(el){
 el.style.transition='';
 el.style.willChange='';
+el.style.height='';
+el.style.opacity='';
+el.style.transform='';
+el.style.overflow='';
 },
 copyID(id){navigator.clipboard.writeText(id.toString())},
 iconFor(role){
