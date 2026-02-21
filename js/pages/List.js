@@ -35,7 +35,7 @@ template:`
 
 <div class="level-name-row">
 <h2>{{level.name}}</h2>
-<span class="qualify-box">Req {{ level.percentToQualify }}%</span>
+<span class="qualify-box">{{ level.percentToQualify }}% or more required</span>
 </div>
 </div>
 </div>
