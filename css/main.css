@@ -76,6 +76,39 @@ display:flex;
 gap:1.5rem;
 margin-bottom:1.5rem;
 align-items:flex-start;
+position:relative;
+overflow:hidden;
+}
+
+.level-card::after{
+content:"😤";
+position:absolute;
+right:18px;
+bottom:10px;
+font-size:3.1rem;
+line-height:1;
+pointer-events:none;
+user-select:none;
+opacity:.22;
+color:rgba(100,96,90,0.9);
+text-shadow:
+1px 1px 0 rgba(255,255,255,0.22),
+-1px -1px 0 rgba(0,0,0,0.18),
+0 2px 3px rgba(0,0,0,0.18);
+transform:rotate(-10deg);
+filter:grayscale(1) saturate(0) contrast(1.08) brightness(0.95);
+mix-blend-mode:soft-light;
+}
+
+html.dark .level-card::after{
+opacity:.28;
+color:rgba(210,210,210,0.9);
+text-shadow:
+1px 1px 0 rgba(255,255,255,0.1),
+-1px -1px 0 rgba(0,0,0,0.45),
+0 2px 3px rgba(0,0,0,0.35);
+filter:grayscale(1) saturate(0) contrast(1.12) brightness(1.06);
+mix-blend-mode:overlay;
 }
 
 .level-video-side{
