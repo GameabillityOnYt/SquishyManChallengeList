@@ -301,13 +301,18 @@ overflow:hidden;
 
 .records-enter-active,
 .records-leave-active{
-transition:all .25s ease;
+transition:
+opacity .2s ease-out,
+transform .24s cubic-bezier(.22,1,.36,1),
+max-height .28s cubic-bezier(.22,1,.36,1);
+overflow:hidden;
+will-change:opacity,transform,max-height;
 }
 
 .records-enter-from,
 .records-leave-to{
 opacity:0;
-transform:translateY(-8px);
+transform:translateY(-5px);
 max-height:0;
 }
 
@@ -315,7 +320,7 @@ max-height:0;
 .records-leave-from{
 opacity:1;
 transform:translateY(0);
-max-height:500px;
+max-height:720px;
 }
 
 .records td{
