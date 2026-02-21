@@ -429,6 +429,13 @@ text-transform:uppercase;
 font-size:0.85rem;
 }
 
+.show-records-btn:hover{
+  background:#ffd200;
+  border-color:#ffd200;
+  color:#000;
+}
+
+
 .lazy-video{
 width:100%;
 height:146px;
