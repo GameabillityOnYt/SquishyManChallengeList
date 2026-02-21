@@ -21,15 +21,16 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 100ms ease;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
     background: linear-gradient(
         90deg,
-        var(--color-primary) 0 calc(100% - 34px),
+        #ffd84d 0 calc(100% - 34px),
         #87cefa calc(100% - 34px) calc(100% - 31px),
-        var(--color-primary) calc(100% - 31px) calc(100% - 28px),
+        #ffd84d calc(100% - 31px) calc(100% - 28px),
         #87cefa calc(100% - 28px) calc(100% - 24px),
-        var(--color-primary) calc(100% - 24px) calc(100% - 22px),
+        #ffd84d calc(100% - 24px) calc(100% - 22px),
         #87cefa calc(100% - 22px) calc(100% - 17px),
-        var(--color-primary) calc(100% - 17px) calc(100% - 15px),
+        #ffd84d calc(100% - 17px) calc(100% - 15px),
         #87cefa calc(100% - 15px) 100%
     );
 }
