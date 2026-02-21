@@ -5,6 +5,7 @@
     "creators": ["CREATORS"],
     "verifier": "VERIFIER",
     "verification": "VIDEO_LINK",
+    "formerTop1": false,
     "percentToQualify": "100",
     "Length": "Time",
     "records": []
