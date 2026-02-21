@@ -169,20 +169,23 @@ justify-content:center;
 gap:4px;
 }
 
-/* Layout for ID + copy button */
+/* Layout for ID + copy button: stack vertically so ID label is centered with number below */
 .id-copy-box{
 	display:flex;
+	flex-direction:column;
 	align-items:center;
 	gap:6px;
 	justify-content:center;
-	margin-left:-2px;
+	margin-left:0;
 }
 .id-copy-box .stat-value{
 	flex:0 0 auto;
 	font-variant-numeric: tabular-nums;
+	text-align:center;
 }
 .copy-id{
 	flex:0 0 auto;
+	margin-top:4px;
 }
 
 .stat-label{
