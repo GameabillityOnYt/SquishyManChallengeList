@@ -116,12 +116,14 @@ display:inline-block;
 padding:4px 8px;
 border-radius:6px;
 background:rgba(158,216,255,0.35);
-color:#08334d;
+color:#eaf7ff;
 font-size:.72rem;
 font-weight:800;
 text-transform:uppercase;
 line-height:1.1;
 border:1px solid #5fb3e3;
+opacity:1;
+text-shadow:0 1px 0 rgba(0,0,0,0.35);
 }
 
 .level-title{
