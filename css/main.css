@@ -297,36 +297,6 @@ vertical-align:middle;
 
 .records-panel{
 overflow:hidden;
-display:grid;
-grid-template-rows:1fr;
-}
-
-.records-panel > *{
-min-height:0;
-}
-
-.records-enter-active,
-.records-leave-active{
-transition:
-opacity .2s ease-out,
-transform .24s cubic-bezier(.22,1,.36,1),
-grid-template-rows .24s cubic-bezier(.22,1,.36,1);
-overflow:hidden;
-will-change:opacity,transform,grid-template-rows;
-}
-
-.records-enter-from,
-.records-leave-to{
-opacity:0;
-transform:translateY(-4px);
-grid-template-rows:0fr;
-}
-
-.records-enter-to,
-.records-leave-from{
-opacity:1;
-transform:translateY(0);
-grid-template-rows:1fr;
 }
 
 .records td{
