@@ -4,7 +4,7 @@
 }
 .nav .nav__tab {
     padding-top: 4px;
-    border-bottom: 4px solid transparent;
+    padding-bottom: 6px;
     display: flex;
     align-items: center;
     padding-inline: 0.5rem;
@@ -14,19 +14,24 @@
 .nav .nav__tab::after {
     content: "";
     position: absolute;
-    left: 0.5rem;
-    right: 0.5rem;
+    left: 0;
+    right: 0;
     bottom: 0;
     height: 4px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 100ms ease;
-    background:
-        linear-gradient(90deg, transparent 0 39%, #87cefa 39% 40%, transparent 40% 100%),
-        linear-gradient(90deg, transparent 0 43%, #87cefa 43% 45%, transparent 45% 100%),
-        linear-gradient(90deg, transparent 0 48%, #87cefa 48% 51%, transparent 51% 100%),
-        linear-gradient(90deg, transparent 0 53%, #87cefa 53% 56%, transparent 56% 100%),
-        linear-gradient(90deg, var(--color-primary) 0 56%, #87cefa 56% 100%);
+    background: linear-gradient(
+        90deg,
+        var(--color-primary) 0 calc(100% - 34px),
+        #87cefa calc(100% - 34px) calc(100% - 31px),
+        var(--color-primary) calc(100% - 31px) calc(100% - 28px),
+        #87cefa calc(100% - 28px) calc(100% - 24px),
+        var(--color-primary) calc(100% - 24px) calc(100% - 22px),
+        #87cefa calc(100% - 22px) calc(100% - 17px),
+        var(--color-primary) calc(100% - 17px) calc(100% - 15px),
+        #87cefa calc(100% - 15px) 100%
+    );
 }
 .nav .nav__tab.router-link-active {
     border-color: transparent;
