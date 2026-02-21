@@ -321,6 +321,18 @@ max-height:500px;
 padding:.6rem 0!important;
 }
 
+.records a{
+color:var(--color-on-background);
+text-decoration:none;
+transition:color 0.2s;
+cursor:pointer;
+}
+
+.records a:hover{
+color:var(--color-primary);
+text-decoration:underline;
+}
+
 /* ================= LEADERBOARD SPACING ================= */
 
 .page-leaderboard .player .table tr{
