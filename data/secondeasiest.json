@@ -5,6 +5,7 @@
     "creators": ["Sdrawkcab"],
     "verifier": "Sdrawkcab",
     "verification": "https://youtu.be/TbzYiyY9MFA?si=6I0PqQhkgzFR5qPI",
+    "decorated": true,
     "percentToQualify": "100",
     "password": "open",
     "records": [
