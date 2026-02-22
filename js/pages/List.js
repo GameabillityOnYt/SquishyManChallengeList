@@ -213,7 +213,13 @@ delete next[index];
 this.gridRecordAnimating = next;
 },
 isOpen(i){return this.toggledRecords[i]===true},
-toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
+toggleRecords(i){
+const wasOpen = this.toggledRecords[i]===true;
+if(this.store.listView === 'grid' && wasOpen){
+this.setGridAnimating(i,true);
+}
+this.toggledRecords = {[i]:!wasOpen};
+},
 isLevelNew(level){
 const path = String(level?.path||'').toLowerCase();
 if(!path) return false;
@@ -230,10 +236,9 @@ return days >= 0 && days < 7;
 beforeRecordsEnter(el){
 if(this.store.listView === 'grid'){
 el.style.transition = 'none';
-el.style.willChange = 'opacity, transform, filter';
+el.style.willChange = 'opacity, transform';
 el.style.opacity = '0';
-el.style.transform = 'translateY(8px) scale(.985)';
-el.style.filter = 'blur(1px)';
+el.style.transform = 'translateY(6px) scale(.992)';
 el.style.overflow = 'hidden';
 void el.offsetHeight;
 return;
@@ -256,12 +261,11 @@ const index = Number(el.dataset.index);
 if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
 this.setGridAnimating(index,false);
 }
-el.style.transition = 'opacity .24s ease, transform .28s cubic-bezier(.22,1,.36,1), filter .24s ease';
+el.style.transition = 'opacity .28s ease, transform .34s cubic-bezier(.16,1,.3,1)';
 this.attachTransitionEnd(el,'opacity',done);
 requestAnimationFrame(()=>{
 el.style.opacity = '1';
 el.style.transform = 'translateY(0) scale(1)';
-el.style.filter = 'blur(0)';
 });
 return;
 }
@@ -290,7 +294,6 @@ el.style.willChange = '';
 el.style.overflow = 'hidden';
 el.style.opacity = '';
 el.style.transform = '';
-el.style.filter = '';
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
@@ -309,10 +312,9 @@ beforeRecordsLeave(el){
 if(this.store.listView === 'grid'){
 this.clearEndHandler(el);
 el.style.transition = 'none';
-el.style.willChange = 'opacity, transform, filter';
+el.style.willChange = 'opacity, transform';
 el.style.opacity = '1';
 el.style.transform = 'translateY(0) scale(1)';
-el.style.filter = 'blur(0)';
 el.style.overflow = 'hidden';
 void el.offsetHeight;
 return;
@@ -332,15 +334,14 @@ void el.offsetHeight;
 recordsLeave(el,done){
 if(this.store.listView === 'grid'){
 const index = Number(el.dataset.index);
-if(!Number.isNaN(index)){
+if(!Number.isNaN(index) && !this.gridRecordAnimating[index]){
 this.setGridAnimating(index,true);
 }
-el.style.transition = 'opacity .2s ease, transform .22s cubic-bezier(.4,0,.2,1), filter .2s ease';
+el.style.transition = 'opacity .24s ease, transform .28s cubic-bezier(.4,0,.2,1)';
 this.attachTransitionEnd(el,'opacity',done);
 requestAnimationFrame(()=>{
 el.style.opacity = '0';
-el.style.transform = 'translateY(8px) scale(.985)';
-el.style.filter = 'blur(1px)';
+el.style.transform = 'translateY(6px) scale(.992)';
 });
 return;
 }
@@ -379,7 +380,6 @@ el.style.height = '';
 el.style.overflow = '';
 el.style.opacity = '';
 el.style.transform = '';
-el.style.filter = '';
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
