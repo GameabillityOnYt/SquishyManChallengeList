@@ -30,20 +30,25 @@ color:var(--color-on-background);
 /* ================= SPINNER ================= */
 
 .spinner-wrap{
+position:fixed;
+inset:0;
 display:flex;
 align-items:center;
 justify-content:center;
 width:100%;
-min-height:calc(100vh - 4rem);
+min-height:100vh;
+z-index:999;
+pointer-events:none;
 }
 
 .spinner{
 width:68px;
 height:68px;
 border-radius:50%;
-border:5px solid rgba(160,160,160,0.28);
-border-top-color:#bcbcbc;
-animation:spin .9s linear infinite;
+border:6px solid rgba(160,160,160,0.25);
+border-top-color:#d6d6d6;
+border-right-color:rgba(95,95,95,0.32);
+animation:spin .95s linear infinite;
 }
 
 @keyframes spin{
