@@ -304,6 +304,7 @@ margin-bottom:1.2rem;
 display:flex;
 flex-direction:column;
 gap:6px;
+padding-bottom:.35rem;
 }
 
 /* Slight visual alternation for long lists */
@@ -422,6 +423,8 @@ margin-top:0;
 	display:flex;
 	align-items:center;
 	gap:8px;
+	line-height:1.25;
+	padding-bottom:2px;
 }
 
 .editors li a{
@@ -445,7 +448,7 @@ margin-top:0;
 
 /* Combine editors and requirements under single scrollbar */
 .editors-panel{
-	padding-bottom:0;
+	padding-bottom:.5rem;
 	border-bottom:none;
 	margin-bottom:0;
 }
