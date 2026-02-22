@@ -143,7 +143,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 
 </div>
-<div v-if="copyPopup.visible" class="copy-popup" :style="{ left: copyPopup.x + 'px', top: copyPopup.y + 'px' }">
+<div v-if="copyPopup.visible" ref="copyPopupEl" class="copy-popup">
 <svg viewBox="0 0 24 24" aria-hidden="true">
 <path fill="currentColor"
 d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
@@ -164,13 +164,12 @@ observer:null,
 store
 ,
 copyToastTimer:null,
-mouseMoveHandler:null,
+pointerMoveHandler:null,
 lastMouseX:0,
 lastMouseY:0,
+popupRaf:null,
 copyPopup:{
-visible:false,
-x:0,
-y:0
+visible:false
 }
 }),
 async mounted(){
@@ -180,8 +179,8 @@ this.list = Array.isArray(fetchedList)
 : [];
 this.editors=(await fetchEditors())||[];
 this.loading=false;
-this.mouseMoveHandler = (e)=>this.onMouseMove(e);
-window.addEventListener("mousemove",this.mouseMoveHandler);
+this.pointerMoveHandler = (e)=>this.onPointerMove(e);
+window.addEventListener("pointermove",this.pointerMoveHandler,{ passive:true });
 
 this.$nextTick(()=>{
 
@@ -229,9 +228,13 @@ if(this.copyToastTimer){
 clearTimeout(this.copyToastTimer);
 this.copyToastTimer = null;
 }
-if(this.mouseMoveHandler){
-window.removeEventListener("mousemove",this.mouseMoveHandler);
-this.mouseMoveHandler = null;
+if(this.pointerMoveHandler){
+window.removeEventListener("pointermove",this.pointerMoveHandler);
+this.pointerMoveHandler = null;
+}
+if(this.popupRaf){
+cancelAnimationFrame(this.popupRaf);
+this.popupRaf = null;
 }
 },
 methods:{
@@ -375,19 +378,27 @@ return;
 
 this.fallbackCopy(text,copied);
 },
-onMouseMove(evt){
+onPointerMove(evt){
 this.lastMouseX = evt.clientX;
 this.lastMouseY = evt.clientY;
 if(!this.copyPopup.visible) return;
-this.copyPopup.x = this.lastMouseX + 16;
-this.copyPopup.y = this.lastMouseY - 10;
+if(this.popupRaf) return;
+this.popupRaf = requestAnimationFrame(()=>{
+this.popupRaf = null;
+this.moveCopyPopup(this.lastMouseX,this.lastMouseY);
+});
 },
 showCopyPopup(evt){
 const x = evt?.clientX ?? this.lastMouseX;
 const y = evt?.clientY ?? this.lastMouseY;
-this.copyPopup.x = x + 16;
-this.copyPopup.y = y - 10;
 this.copyPopup.visible = true;
+this.$nextTick(()=>this.moveCopyPopup(x,y));
+},
+moveCopyPopup(x,y){
+const popup = this.$refs.copyPopupEl;
+if(!popup) return;
+popup.style.left = `${x + 16}px`;
+popup.style.top = `${y - 10}px`;
 },
 fallbackCopy(text,onSuccess){
 const ta = document.createElement("textarea");
