@@ -509,14 +509,6 @@ overflow:auto;
 padding-right:.2rem;
 }
 
-.meta h3{
-position:sticky;
-top:0;
-background:var(--color-background-hover);
-z-index:1;
-padding-top:.1rem;
-}
-
 .level-card{
 padding:.9rem;
 gap:.9rem;
@@ -569,10 +561,6 @@ top:auto;
 max-height:none;
 overflow:visible;
 padding-right:0;
-}
-
-.meta h3{
-position:static;
 }
 }
 
