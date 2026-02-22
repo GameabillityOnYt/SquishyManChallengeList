@@ -3,7 +3,7 @@
     grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
     gap: 1.25rem;
     align-items: start;
-    padding: 1rem;
+    padding: 0.35rem 1rem 1rem;
 }
 
 /* Desktop: keep only the levels scrollbar and lock page-level scrolling */
@@ -28,7 +28,7 @@
     align-items: flex-start;
     width: 100%;
     position: sticky;
-    top: 5rem;
+    top: 4.2rem;
 }
 .page-roulette .sidebar a {
     text-decoration: underline;
@@ -191,8 +191,8 @@
 }
 .page-roulette .levels .level .actions {
     grid-column: 1 / span 2;
-    background-color: #162b46;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--color-background-hover);
+    border-top: 1px solid rgba(128, 128, 128, 0.24);
     margin: 0;
     padding: 0.95rem;
     display: flex;
@@ -203,9 +203,9 @@
     border: none;
     border-radius: 0.5rem;
     padding: 0.9rem 1rem;
-    background-color: #4d6288;
+    background: rgba(128, 128, 128, 0.22);
     flex: 1;
-    color: white;
+    color: var(--color-on-background);
     font-size: 1rem;
     font-weight: 700;
     min-width: 8rem;
@@ -213,7 +213,7 @@
     -moz-appearance: textfield;
 }
 .page-roulette .levels .level .actions input[type="number"]::placeholder {
-    color: #7487aa;
+    color: rgba(128, 128, 128, 0.95);
 }
 .page-roulette .levels .level .actions input[type="number"]::-webkit-outer-spin-button,
 .page-roulette .levels .level .actions input[type="number"]::-webkit-inner-spin-button {
@@ -227,21 +227,6 @@
 }
 .page-roulette .levels .level .actions .btn {
     min-width: 6.2rem;
-}
-
-/* Lighter action strip in light mode (dark mode keeps the blue style) */
-html:not(.dark) .page-roulette .levels .level .actions {
-    background: #e8edf5;
-    border-top-color: rgba(0, 0, 0, 0.08);
-}
-
-html:not(.dark) .page-roulette .levels .level .actions input[type="number"] {
-    background: #cfd8e7;
-    color: #1b2738;
-}
-
-html:not(.dark) .page-roulette .levels .level .actions input[type="number"]::placeholder {
-    color: #5f6f89;
 }
 .page-roulette .levels .results {
     display: flex;
