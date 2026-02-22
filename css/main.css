@@ -197,6 +197,7 @@ grid-auto-rows:560px;
 .central-container.view-mode-grid .level-card{
 margin-bottom:0;
 flex-direction:column;
+align-items:stretch;
 gap:.65rem;
 height:100%;
 min-height:0;
@@ -300,7 +301,14 @@ display:flex;
 flex-direction:column;
 height:100%;
 min-height:0;
+width:100%;
 justify-content:flex-start;
+}
+
+.central-container.view-mode-grid .level-title-info,
+.central-container.view-mode-grid .authors-box,
+.central-container.view-mode-grid .stats-middle-grid{
+width:100%;
 }
 
 .central-container.view-mode-grid .level-card.grid-records-open .records-panel{
