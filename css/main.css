@@ -30,16 +30,16 @@ color:var(--color-on-background);
 /* Subtle ambient background (lightweight, no images) */
 body{
 background-image:
-radial-gradient(900px 520px at 8% -8%, rgba(255,165,0,0.06), transparent 62%),
-radial-gradient(860px 520px at 92% 108%, rgba(135,206,250,0.07), transparent 62%),
-linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+radial-gradient(1200px 700px at 8% -10%, rgba(255,165,0,0.15), transparent 58%),
+radial-gradient(1100px 680px at 92% 110%, rgba(135,206,250,0.16), transparent 58%),
+linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
 }
 
 html.dark body{
 background-image:
-radial-gradient(980px 560px at 10% -10%, rgba(255,165,0,0.08), transparent 62%),
-radial-gradient(920px 560px at 90% 110%, rgba(135,206,250,0.09), transparent 62%),
-linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.08));
+radial-gradient(1300px 760px at 10% -12%, rgba(255,165,0,0.19), transparent 57%),
+radial-gradient(1200px 740px at 90% 112%, rgba(135,206,250,0.2), transparent 57%),
+linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
 }
 
 /* ================= HEADER ================= */
