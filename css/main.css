@@ -272,6 +272,7 @@ line-height:1.1;
 border:2px solid #0047AB;
 text-shadow:0 1px 0 rgba(0,0,0,0.45);
 box-shadow:inset 0 1px 0 rgba(255,255,255,0.2), 0 0 0 1px rgba(0,0,0,0.15);
+transition:transform .16s ease, box-shadow .16s ease;
 }
 
 .decorated-tag{
@@ -287,10 +288,19 @@ line-height:1.1;
 border:2px solid #0a6a28;
 text-shadow:0 1px 0 rgba(0,0,0,0.45);
 box-shadow:inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 1px rgba(0,0,0,0.15);
+transition:transform .16s ease, box-shadow .16s ease;
 }
 
 html.dark .former-top-1-tag{
-color:#ffffff;
+color:#8fc5ff;
+}
+
+@media (hover:hover) and (pointer:fine){
+.former-top-1-tag:hover,
+.decorated-tag:hover{
+transform:translateY(-1px) scale(1.05);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.22), 0 8px 14px rgba(0,0,0,0.22);
+}
 }
 
 .rank-row{
