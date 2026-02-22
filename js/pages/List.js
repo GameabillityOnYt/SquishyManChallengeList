@@ -20,7 +20,7 @@ template:`
 
 <div class="level-video-side">
 <div class="lazy-video"
-     :data-src="embed(level.verification)"
+     :data-src="embedWithPlayerApi(level.verification)"
      ref="lazyVideos">
 </div>
 </div>
@@ -158,6 +158,8 @@ loading:true,
 toggledRecords:{},
 observer:null,
 newTags:{},
+youtubePlayers:[],
+youtubeApiPromise:null,
 store
 }),
 async mounted(){
@@ -187,6 +189,7 @@ frameborder="0">
 `;
 
 const iframe = el.querySelector("iframe");
+this.attachYoutubePlayer(iframe);
 
 this.observer.unobserve(el);
 
@@ -211,9 +214,82 @@ beforeUnmount(){
 if(this.observer){
 this.observer.disconnect();
 }
+this.youtubePlayers.forEach(player=>{
+try{
+player.destroy();
+}catch{}
+});
+this.youtubePlayers = [];
 },
 methods:{
 embed,
+embedWithPlayerApi(video){
+const base = this.embed(video);
+const sep = base.includes('?') ? '&' : '?';
+return `${base}${sep}enablejsapi=1&playsinline=1&rel=0&modestbranding=1`;
+},
+ensureYoutubeApi(){
+if(window.YT?.Player){
+return Promise.resolve(window.YT);
+}
+if(this.youtubeApiPromise){
+return this.youtubeApiPromise;
+}
+this.youtubeApiPromise = new Promise((resolve,reject)=>{
+const previousReady = window.onYouTubeIframeAPIReady;
+window.onYouTubeIframeAPIReady = ()=>{
+if(typeof previousReady === 'function'){
+try{ previousReady(); }catch{}
+}
+resolve(window.YT);
+};
+
+let script = document.querySelector('script[data-youtube-iframe-api]');
+if(!script){
+script = document.createElement('script');
+script.src = 'https://www.youtube.com/iframe_api';
+script.async = true;
+script.setAttribute('data-youtube-iframe-api','1');
+script.onerror = ()=>reject(new Error('Failed to load YouTube API'));
+document.head.appendChild(script);
+}
+});
+return this.youtubeApiPromise;
+},
+pauseOtherVideos(activeIframe){
+this.youtubePlayers.forEach(player=>{
+try{
+const playerIframe = player.getIframe?.();
+if(playerIframe && playerIframe !== activeIframe){
+player.pauseVideo();
+}
+}catch{}
+});
+},
+attachYoutubePlayer(iframe){
+if(!iframe || iframe.dataset.youtubeBound === '1'){
+return;
+}
+iframe.dataset.youtubeBound = '1';
+this.ensureYoutubeApi()
+.then(YT=>{
+if(!YT?.Player){
+return;
+}
+const player = new YT.Player(iframe,{
+events:{
+onStateChange: event=>{
+if(event?.data === YT.PlayerState.PLAYING){
+const currentIframe = event.target?.getIframe?.() ?? iframe;
+this.pauseOtherVideos(currentIframe);
+}
+}
+}
+});
+this.youtubePlayers.push(player);
+})
+.catch(()=>{});
+},
 score,
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
