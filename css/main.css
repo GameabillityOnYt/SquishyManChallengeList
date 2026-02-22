@@ -109,15 +109,15 @@ mix-blend-mode:soft-light;
 
 .new-corner-tag{
 position:absolute;
-left:6px;
-bottom:10px;
-width:86px;
-height:52px;
+left:0;
+bottom:0;
+width:66px;
+height:40px;
 display:flex;
 align-items:flex-end;
 justify-content:flex-start;
-padding:0 0 7px 8px;
-font-size:.68rem;
+padding:0 0 7px 9px;
+font-size:.78rem;
 font-weight:900;
 letter-spacing:.03em;
 text-transform:uppercase;
