@@ -2,45 +2,26 @@
     display: flex;
     column-gap: 2rem;
 }
-
 .nav .nav__tab {
     padding-top: 4px;
     border-bottom: 4px solid transparent;
-    border-radius: 0;
     display: flex;
     align-items: center;
     padding-inline: 0.5rem;
-    opacity: 0.92;
-    transition: border-color 140ms ease, background-color 140ms ease, transform 140ms ease,
-        opacity 140ms ease;
+    transition: border-color 100ms ease;
 }
-
 .nav .nav__tab.router-link-active {
     border-color: var(--color-on-primary);
-    background-color: rgba(255, 255, 255, 0.14);
-    opacity: 1;
 }
-
 .nav .nav__tab:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    background-color: rgba(255, 255, 255, 0.12);
-    opacity: 1;
+    border-color: var(--color-on-primary);
 }
-
-.nav .nav__tab:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.85);
-    outline-offset: 2px;
-}
-
 .nav .nav__actions {
     flex: 1;
-    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 0.2rem;
 }
-
 .nav .nav__actions .nav__icon {
     height: 3rem;
     width: 3rem;
@@ -51,42 +32,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 140ms ease, transform 140ms ease;
+    transition: background-color 100ms ease;
 }
-
 .nav .nav__actions .nav__icon:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
 }
-
-.nav .nav__actions .nav__icon:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.85);
-    outline-offset: 2px;
-}
-
 .nav .nav__actions .nav__icon img {
-    height: 1.4rem;
+    height: 1.5rem;
 }
-
 .nav .nav__actions .nav__cta {
     margin-left: 1rem;
-    padding: 0.9rem 1.2rem;
+    padding: 1rem;
     background-color: var(--color-on-primary);
-    color: #cc8400;
-    border-radius: 0.7rem;
-    border: 1px solid rgba(204, 132, 0, 0.2);
-    box-shadow: 0 6px 14px rgba(0, 0, 102, 0.2);
-    white-space: nowrap;
-    transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+    color: var(--color-primary);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 0.5rem 0 rgba(0, 0, 102, 0.5);
+    transition: transform 100ms ease;
 }
-
 .nav .nav__actions .nav__cta:hover:not(:active) {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 102, 0.24);
-    background-color: #fff9ed;
-}
-
-.nav .nav__actions .nav__cta:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.9);
-    outline-offset: 2px;
 }
