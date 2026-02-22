@@ -180,12 +180,6 @@ html.dark .former-top-1-tag{
 color:#ffffff;
 }
 
-.level-title{
-display:flex;
-flex-direction:column;
-gap:4px;
-}
-
 .rank-row{
 display:flex;
 align-items:center;
@@ -202,26 +196,6 @@ text-decoration:underline;
 text-decoration-color:var(--color-primary);
 text-underline-offset:3px;
 
-}
-
-.qualify-box{
-display:inline-flex;
-align-items:center;
-padding:4px 10px;
-border-radius:4px;
-font-size:.82rem;
-font-weight:700;
-line-height:1.1;
-letter-spacing:.01em;
-background:rgba(0,0,0,0.12);
-color:#000000;
-border:none;
-text-transform:none;
-}
-
-html.dark .qualify-box{
-background:rgba(255,255,255,0.12);
-color:#ffffff;
 }
 
 /* Level rank box styling */
@@ -328,15 +302,6 @@ margin-bottom:1.2rem;
 display:flex;
 flex-direction:column;
 gap:6px;
-}
-
-.editors div,
-.editor,
-.editor-entry{
-display:flex!important;
-align-items:center!important;
-gap:6px;
-white-space:nowrap;
 }
 
 /* ================= RECORDS ================= */
