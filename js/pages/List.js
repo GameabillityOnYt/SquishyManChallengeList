@@ -18,7 +18,7 @@ template:`
 <div
 v-for="([level,err],i) in list"
 class="level-card"
-:class="{ 'grid-records-open': store.listView === 'grid' && isOpen(i) }"
+:class="{ 'grid-records-open': store.listView === 'grid' && (isOpen(i) || gridRecordAnimating[i] === true) }"
 >
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
@@ -112,7 +112,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 @leave="recordsLeave"
 @after-leave="afterRecordsLeave"
 >
-<div v-if="isOpen(i)" class="records-panel">
+<div v-if="isOpen(i)" class="records-panel" :data-index="i">
 <div class="records-panel-inner">
 <div class="records-scroll-area">
 <table v-if="level.records && level.records.length > 0" class="records">
@@ -164,6 +164,7 @@ list:[],
 editors:[],
 loading:true,
 toggledRecords:{},
+gridRecordAnimating:{},
 newTags:{},
 store
 }),
@@ -223,6 +224,12 @@ void el.offsetHeight;
 },
 recordsEnter(el,done){
 if(this.store.listView === 'grid'){
+const index = Number(el.dataset.index);
+if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
+const next = {...this.gridRecordAnimating};
+delete next[index];
+this.gridRecordAnimating = next;
+}
 el.style.transition = 'opacity .18s ease, transform .22s cubic-bezier(.22,1,.36,1)';
 const onEnd = (e)=>{
 if(e.target!==el || e.propertyName!=='opacity') return;
@@ -314,6 +321,13 @@ void el.offsetHeight;
 },
 recordsLeave(el,done){
 if(this.store.listView === 'grid'){
+const index = Number(el.dataset.index);
+if(!Number.isNaN(index)){
+this.gridRecordAnimating = {
+...this.gridRecordAnimating,
+[index]:true
+};
+}
 el.style.transition = 'opacity .14s ease, transform .18s ease';
 const onEnd = (e)=>{
 if(e.target!==el || e.propertyName!=='opacity') return;
@@ -361,6 +375,12 @@ inner.style.transform='translateY(-2px)';
 },
 afterRecordsLeave(el){
 if(this.store.listView === 'grid'){
+const index = Number(el.dataset.index);
+if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
+const next = {...this.gridRecordAnimating};
+delete next[index];
+this.gridRecordAnimating = next;
+}
 el.style.transition = '';
 el.style.willChange = '';
 el.style.height = '';
