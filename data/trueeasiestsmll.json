@@ -5,6 +5,7 @@
   "creators": ["sizzers"],
   "verifier": "sizzers",
   "verification": "https://youtu.be/YkDx8U3VAnY?si=iF1aSukpf2qWv1ns",
+  "decorated": true,
   "percentToQualify": "100",
   "password": "open",
   "records": []
