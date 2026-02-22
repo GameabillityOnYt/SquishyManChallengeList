@@ -13,7 +13,7 @@ template:`
 <div v-else class="page-list-scroll-shell">
 <div class="page-list-custom">
 
-<div class="central-container">
+<div class="central-container" :class="'view-mode-' + (store.listView || 'list')">
 
 <div v-for="([level,err],i) in list" class="level-card">
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
