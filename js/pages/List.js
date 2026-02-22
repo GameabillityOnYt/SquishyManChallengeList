@@ -10,7 +10,8 @@ template:`
 
 <main v-if="loading"><Spinner/></main>
 
-<div v-else class="page-list-custom">
+<div v-else class="page-list-scroll-shell">
+<div class="page-list-custom">
 
 <div class="central-container">
 
@@ -143,6 +144,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 </div>
 
+</div>
 </div>
 `,
 data:()=>({
