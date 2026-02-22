@@ -5,6 +5,7 @@
   "creators": ["bobplaysgeodash"],
   "verifier": "bobplaysgeodash",
   "verification": "https://youtu.be/GO0y5FZj6lw",
+  "decorated": true,
   "percentToQualify": "100",
   "password": "open",
   "records": [
