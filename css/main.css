@@ -593,7 +593,7 @@ padding:.85rem;
 
 .meta-container{
 position:sticky;
-top:4.75rem;
+top:.75rem;
 max-height:calc(100vh - 5.5rem);
 overflow:auto;
 padding-right:.2rem;
