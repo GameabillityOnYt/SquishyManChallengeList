@@ -18,7 +18,7 @@ template:`
 <div
 v-for="([level],i) in list"
 class="level-card"
-:class="{ 'grid-records-open': store.listView === 'grid' && (isOpen(i) || gridRecordAnimating[i] === true) }"
+:class="{ 'grid-records-open': store.listView === 'grid' && isOpen(i) }"
 >
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
@@ -167,7 +167,6 @@ list:[],
 editors:[],
 loading:true,
 toggledRecords:{},
-gridRecordAnimating:{},
 newTags:{},
 store
 }),
@@ -252,16 +251,6 @@ done();
 el._recordsEndHandler = onEnd;
 el.addEventListener('transitionend',onEnd);
 },
-setGridAnimating(index,isAnimating){
-if(Number.isNaN(index)) return;
-const next = {...this.gridRecordAnimating};
-if(isAnimating){
-next[index] = true;
-}else{
-delete next[index];
-}
-this.gridRecordAnimating = next;
-},
 queueAuthorNameFit(){
 if(this._authorFitRaf){
 cancelAnimationFrame(this._authorFitRaf);
@@ -328,9 +317,6 @@ attempts += 1;
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){
 const wasOpen = this.toggledRecords[i]===true;
-if(this.store.listView === 'grid' && wasOpen){
-this.setGridAnimating(i,true);
-}
 this.toggledRecords = {[i]:!wasOpen};
 this.$nextTick(()=>this.queueAuthorNameFit());
 },
@@ -372,10 +358,6 @@ void el.offsetHeight;
 },
 recordsEnter(el,done){
 if(this.store.listView === 'grid'){
-const index = Number(el.dataset.index);
-if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
-this.setGridAnimating(index,false);
-}
 el.style.transition = 'none';
 el.style.overflow = 'hidden';
 el.style.willChange = 'opacity, transform';
@@ -436,14 +418,6 @@ inner.style.transform='none';
 },
 beforeRecordsLeave(el){
 if(this.store.listView === 'grid'){
-this.clearGridAnimation(el);
-this.clearEndHandler(el);
-el.style.transition = 'none';
-el.style.willChange = 'opacity, transform';
-el.style.opacity = '1';
-el.style.transform = 'translateY(0) scale(1)';
-el.style.overflow = 'hidden';
-void el.offsetHeight;
 return;
 }
 this.clearEndHandler(el);
@@ -460,26 +434,7 @@ void el.offsetHeight;
 },
 recordsLeave(el,done){
 if(this.store.listView === 'grid'){
-const index = Number(el.dataset.index);
-if(!Number.isNaN(index) && !this.gridRecordAnimating[index]){
-this.setGridAnimating(index,true);
-}
-el.style.transition = 'none';
-el.style.overflow = 'hidden';
-el.style.willChange = 'opacity, transform';
-this.runGridAnimation(
-el,
-[
-{ opacity:'1', transform:'translateY(0) scale(1)' },
-{ opacity:'.0', transform:'translateY(12px) scale(.985)' }
-],
-{
-duration:220,
-easing:'cubic-bezier(.4,0,.2,1)',
-fill:'forwards'
-},
-done
-);
+done();
 return;
 }
 const startHeight = el.getBoundingClientRect().height;
@@ -507,17 +462,6 @@ inner.style.transform='translateY(-2px)';
 },
 afterRecordsLeave(el){
 if(this.store.listView === 'grid'){
-this.clearGridAnimation(el);
-const index = Number(el.dataset.index);
-if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
-this.setGridAnimating(index,false);
-}
-el.style.transition = '';
-el.style.willChange = '';
-el.style.height = '';
-el.style.overflow = '';
-el.style.opacity = '';
-el.style.transform = '';
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
@@ -582,3 +526,4 @@ iconFor(role){
 }
 }
 };
+
