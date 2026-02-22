@@ -343,19 +343,27 @@ overflow:hidden;
 .central-container.view-mode-grid .authors-box{
 margin-top:0;
 min-height:84px;
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
 align-content:flex-start;
-gap:.7rem 1rem;
+align-items:start;
+gap:.55rem .75rem;
 }
 
 .central-container.view-mode-grid .authors-box div{
 min-width:0;
 }
 
+.central-container.view-mode-grid .authors-box span:first-child{
+white-space:nowrap;
+}
+
 .central-container.view-mode-grid .authors-box span:last-child{
 display:block;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
+white-space:normal;
+overflow-wrap:anywhere;
+word-break:break-word;
+line-height:1.15;
 }
 
 .central-container.view-mode-grid .stat-card{
