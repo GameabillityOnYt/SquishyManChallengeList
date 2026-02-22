@@ -1,3 +1,4 @@
+
 :root{
 --color-background:#ffffff;
 --color-on-background:#000000;
@@ -225,16 +226,13 @@ justify-content:flex-start;
 
 .central-container.view-mode-grid .level-badges{
 min-height:28px;
+position:static;
+justify-content:flex-start;
+margin-bottom:.35rem;
 }
 
 .central-container.view-mode-grid .level-badges.is-empty{
 visibility:hidden;
-}
-
-.central-container.view-mode-grid .level-badges{
-position:static;
-justify-content:flex-start;
-margin-bottom:.35rem;
 }
 
 .central-container.view-mode-grid .stats-middle-grid{
@@ -246,6 +244,7 @@ margin-top:6px;
 .central-container.view-mode-grid .show-records-btn{
 width:100%;
 margin-top:auto;
+flex:0 0 auto;
 }
 
 .central-container.view-mode-grid .records td{
@@ -370,10 +369,6 @@ line-height:1.15;
 min-height:72px;
 }
 
-.central-container.view-mode-grid .show-records-btn{
-flex:0 0 auto;
-}
-
 .meta-container{
 display:flex;
 flex-direction:column;
@@ -382,6 +377,7 @@ align-self:start;
 height:auto!important;
 overflow:visible!important;
 max-height:none;
+gap:1rem;
 }
 
 /* ================= LEVEL CARD ================= */
@@ -783,9 +779,6 @@ height:18px;
 }
 /* ================= LIST PAGE ================= */
 /* Ensure editors list items align icons + names correctly */
-.meta-container{
-gap:1rem;
-}
 
 .meta{
 background:var(--color-background-hover);
