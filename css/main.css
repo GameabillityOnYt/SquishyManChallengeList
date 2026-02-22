@@ -27,6 +27,29 @@ background-color:var(--color-background);
 color:var(--color-on-background);
 }
 
+/* ================= SPINNER ================= */
+
+.spinner-wrap{
+display:flex;
+align-items:center;
+justify-content:center;
+width:100%;
+min-height:calc(100vh - 4rem);
+}
+
+.spinner{
+width:52px;
+height:52px;
+border-radius:50%;
+border:4px solid rgba(255,165,0,0.2);
+border-top-color:var(--color-primary);
+animation:spin .9s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
 /* ================= HEADER ================= */
 
 header{
