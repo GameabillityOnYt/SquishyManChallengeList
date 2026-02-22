@@ -5,6 +5,7 @@
     "creators": ["pilka2"],
     "verifier": "pilka2",
     "verification": "https://youtu.be/ESzsvrpW0Jo?si=0X1GmbEuyfDyF6ha",
+    "decorated": true,
     "percentToQualify": "100",
     "password": "Open",
     "records": [
