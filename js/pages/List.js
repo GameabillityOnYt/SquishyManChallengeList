@@ -204,8 +204,10 @@ return days >= 0 && days < 7;
 beforeRecordsEnter(el){
 if(this.store.listView === 'grid'){
 el.style.transition = 'none';
+el.style.willChange = 'opacity, transform, filter';
 el.style.opacity = '0';
-el.style.transform = 'translateY(6px) scale(.985)';
+el.style.transform = 'translateY(8px) scale(.985)';
+el.style.filter = 'blur(1px)';
 el.style.overflow = 'hidden';
 void el.offsetHeight;
 return;
@@ -233,7 +235,7 @@ const next = {...this.gridRecordAnimating};
 delete next[index];
 this.gridRecordAnimating = next;
 }
-el.style.transition = 'opacity .18s ease, transform .22s cubic-bezier(.22,1,.36,1)';
+el.style.transition = 'opacity .24s ease, transform .28s cubic-bezier(.22,1,.36,1), filter .24s ease';
 const onEnd = (e)=>{
 if(e.target!==el || e.propertyName!=='opacity') return;
 el.removeEventListener('transitionend',onEnd);
@@ -245,6 +247,7 @@ el.addEventListener('transitionend',onEnd);
 requestAnimationFrame(()=>{
 el.style.opacity = '1';
 el.style.transform = 'translateY(0) scale(1)';
+el.style.filter = 'blur(0)';
 });
 return;
 }
@@ -280,6 +283,7 @@ el.style.willChange = '';
 el.style.overflow = 'hidden';
 el.style.opacity = '';
 el.style.transform = '';
+el.style.filter = '';
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
@@ -301,8 +305,10 @@ el.removeEventListener('transitionend',el._recordsEndHandler);
 el._recordsEndHandler = null;
 }
 el.style.transition = 'none';
+el.style.willChange = 'opacity, transform, filter';
 el.style.opacity = '1';
 el.style.transform = 'translateY(0) scale(1)';
+el.style.filter = 'blur(0)';
 el.style.overflow = 'hidden';
 void el.offsetHeight;
 return;
@@ -331,7 +337,7 @@ this.gridRecordAnimating = {
 [index]:true
 };
 }
-el.style.transition = 'opacity .14s ease, transform .18s ease';
+el.style.transition = 'opacity .2s ease, transform .22s cubic-bezier(.4,0,.2,1), filter .2s ease';
 const onEnd = (e)=>{
 if(e.target!==el || e.propertyName!=='opacity') return;
 el.removeEventListener('transitionend',onEnd);
@@ -342,7 +348,8 @@ el._recordsEndHandler = onEnd;
 el.addEventListener('transitionend',onEnd);
 requestAnimationFrame(()=>{
 el.style.opacity = '0';
-el.style.transform = 'translateY(4px) scale(.99)';
+el.style.transform = 'translateY(8px) scale(.985)';
+el.style.filter = 'blur(1px)';
 });
 return;
 }
@@ -390,6 +397,7 @@ el.style.height = '';
 el.style.overflow = '';
 el.style.opacity = '';
 el.style.transform = '';
+el.style.filter = '';
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
