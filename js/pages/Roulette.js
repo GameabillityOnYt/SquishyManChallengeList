@@ -1,301 +1,336 @@
-import { fetchList } from '../content.js';
-import { getThumbnailFromId, getYoutubeIdFromUrl, shuffle } from '../util.js';
+.page-roulette {
+    display: grid;
+    grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+    padding: 0.35rem 1rem 1rem;
+}
 
-import Spinner from '../components/Spinner.js';
-import Btn from '../components/Btn.js';
+/* Desktop: keep only the levels scrollbar and lock page-level scrolling */
+@media screen and (min-width: 1201px) {
+    html:has(.page-roulette),
+    body:has(.page-roulette) {
+        height: 100%;
+        overflow: hidden;
+    }
 
-export default {
-    components: { Spinner, Btn },
-    template: `
-        <main v-if="loading">
-            <Spinner></Spinner>
-        </main>
-        <main v-else class="page-roulette">
-            <div class="sidebar">
-                <div class="sidebar-panel sidebar-intro">
-                    <p class="type-label-md roulette-note">
-                        Shameless copy of the Extreme Demon Roulette by <a href="https://matcool.github.io/extreme-demon-roulette/" target="_blank">matcool</a>.
-                    </p>
-                </div>
-                <form class="options sidebar-panel">
-                    <h3>Roulette Setup</h3>
-                    <div class="check">
-                        <input type="checkbox" id="main" value="Main List" v-model="useMainList">
-                        <label for="main">Main List</label>
-                    </div>
-                    <div class="check">
-                        <input type="checkbox" id="extended" value="Extended List" v-model="useExtendedList">
-                        <label for="extended">Extended List</label>
-                    </div>
-                    <Btn @click.native.prevent="onStart">Start</Btn>
-                </form>
-                <div class="sidebar-panel sidebar-autosave">
-                    <p class="type-label-md roulette-note">
-                        The roulette saves automatically.
-                    </p>
-                </div>
-                <form class="save sidebar-panel">
-                    <h3>Manual Load/Save</h3>
-                    <div class="btns">
-                        <Btn @click.native.prevent="onImport">Import</Btn>
-                        <Btn :disabled="!isActive" @click.native.prevent="onExport">Export</Btn>
-                    </div>
-                </form>
-            </div>
-            <section class="levels-container">
-                <div class="levels">
-                    <template v-if="levels.length > 0">
-                        <!-- Completed Levels -->
-                        <div class="level" v-for="(level, i) in levels.slice(0, progression.length)">
-                            <a :href="level.video" class="video">
-                                <img :src="getThumbnailFromId(getYoutubeIdFromUrl(level.video))" alt="">
-                            </a>
-                            <div class="meta">
-                                <p>#{{ level.rank }}</p>
-                                <h2>{{ level.name }}</h2>
-                                <p style="color: #00b54b; font-weight: 700">{{ progression[i] }}%</p>
-                            </div>
-                        </div>
-                        <!-- Current Level -->
-                        <div class="level" v-if="!hasCompleted">
-                            <a :href="currentLevel.video" target="_blank" class="video">
-                                <img :src="getThumbnailFromId(getYoutubeIdFromUrl(currentLevel.video))" alt="">
-                            </a>
-                            <div class="meta">
-                                <p>#{{ currentLevel.rank }}</p>
-                                <h2>{{ currentLevel.name }}</h2>
-                                <p>{{ currentLevel.id }}</p>
-                            </div>
-                            <form class="actions" v-if="!givenUp">
-                                <input type="number" v-model="percentage" :placeholder="placeholder" :min="currentPercentage + 1" max=100>
-                                <Btn @click.native.prevent="onDone">Done</Btn>
-                                <Btn @click.native.prevent="onGiveUp" style="background-color: #e91e63;">Give Up</Btn>
-                            </form>
-                        </div>
-                        <!-- Results -->
-                        <div v-if="givenUp || hasCompleted" class="results">
-                            <h1>Results</h1>
-                            <p>Number of levels: {{ progression.length }}</p>
-                            <p>Highest percent: {{ currentPercentage }}%</p>
-                            <Btn v-if="currentPercentage < 99 && !hasCompleted" @click.native.prevent="showRemaining = true">Show remaining levels</Btn>
-                        </div>
-                        <!-- Remaining Levels -->
-                        <template v-if="givenUp && showRemaining">
-                            <div class="level" v-for="(level, i) in levels.slice(progression.length + 1, levels.length - currentPercentage + progression.length)">
-                                <a :href="level.video" target="_blank" class="video">
-                                    <img :src="getThumbnailFromId(getYoutubeIdFromUrl(level.video))" alt="">
-                                </a>
-                                <div class="meta">
-                                    <p>#{{ level.rank }}</p>
-                                    <h2>{{ level.name }}</h2>
-                                    <p style="color: #d50000; font-weight: 700">{{ currentPercentage + 2 + i }}%</p>
-                                </div>
-                            </div>
-                        </template>
-                    </template>
-                </div>
-            </section>
-            <div class="toasts-container">
-                <div class="toasts">
-                    <div v-for="toast in toasts" class="toast">
-                        <p>{{ toast }}</p>
-                    </div>
-                </div>
-            </div>
-        </main>
-    `,
-    data: () => ({
-        loading: false,
-        levels: [],
-        progression: [], // list of percentages completed
-        percentage: undefined,
-        givenUp: false,
-        showRemaining: false,
-        useMainList: true,
-        useExtendedList: true,
-        toasts: [],
-        fileInput: undefined,
-    }),
-    mounted() {
-        // Create File Input
-        this.fileInput = document.createElement('input');
-        this.fileInput.type = 'file';
-        this.fileInput.multiple = false;
-        this.fileInput.accept = '.json';
-        this.fileInput.addEventListener('change', this.onImportUpload);
+    .page-roulette {
+        height: calc(100vh - 4rem);
+        overflow: hidden;
+    }
+}
 
-        // Load progress from local storage
-        const roulette = JSON.parse(localStorage.getItem('roulette'));
+.page-roulette .sidebar {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    width: 100%;
+    position: sticky;
+    top: 4.2rem;
+}
+.page-roulette .sidebar a {
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 165, 0, 0.65);
+}
+.page-roulette .sidebar a:hover {
+    color: var(--color-primary);
+}
 
-        if (!roulette) {
-            return;
-        }
+.page-roulette .sidebar .sidebar-panel {
+    width: 100%;
+    background:
+        linear-gradient(var(--color-background-hover), var(--color-background-hover)) padding-box,
+        linear-gradient(135deg, rgba(135, 206, 250, 0.85), rgba(242, 182, 58, 0.8)) border-box;
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    padding: 1rem 1rem 1.1rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
 
-        this.levels = roulette.levels;
-        this.progression = roulette.progression;
-    },
-    computed: {
-        currentLevel() {
-            return this.levels[this.progression.length];
-        },
-        currentPercentage() {
-            return this.progression[this.progression.length - 1] || 0;
-        },
-        placeholder() {
-            return `At least ${this.currentPercentage + 1}%`;
-        },
-        hasCompleted() {
-            return (
-                this.progression[this.progression.length - 1] >= 100 ||
-                this.progression.length === this.levels.length
-            );
-        },
-        isActive() {
-            return (
-                this.progression.length > 0 &&
-                !this.givenUp &&
-                !this.hasCompleted
-            );
-        },
-    },
-    methods: {
-        shuffle,
-        getThumbnailFromId,
-        getYoutubeIdFromUrl,
-        async onStart() {
-            if (this.isActive) {
-                this.showToast('Give up before starting a new roulette.');
-                return;
-            }
+.page-roulette .sidebar .roulette-note {
+    margin: 0;
+    color: #a8a8ad;
+    line-height: 1.45;
+}
 
-            if (!this.useMainList && !this.useExtendedList) {
-                return;
-            }
+.page-roulette .sidebar h3 {
+    margin: 0 0 0.85rem;
+    font-size: 1.25rem;
+    border-bottom: 1px solid rgba(242, 182, 58, 0.5);
+    padding-bottom: 0.35rem;
+}
 
-            this.loading = true;
+.page-roulette .sidebar .check {
+    display: flex;
+    gap: 0.65rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.52rem 0.68rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
 
-            const fullList = await fetchList();
+.page-roulette .sidebar .check input[type='checkbox'] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #9ba0ab;
+    border-radius: 4px;
+    display: grid;
+    place-content: center;
+    background: rgba(0, 0, 0, 0.18);
+    margin: 0;
+    cursor: pointer;
+}
 
-            if (fullList.filter(([_, err]) => err).length > 0) {
-                this.loading = false;
-                this.showToast(
-                    'List is currently broken. Wait until it\'s fixed to start a roulette.',
-                );
-                return;
-            }
+.page-roulette .sidebar .check input[type='checkbox']::before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    transform: scale(0);
+    transition: transform 0.12s ease-in-out;
+    clip-path: polygon(14% 44%, 0 63%, 44% 100%, 100% 17%, 80% 0, 43% 62%);
+    background: var(--color-primary);
+}
 
-            const fullListMapped = fullList.map(([lvl, _], i) => ({
-                rank: i + 1,
-                id: lvl.id,
-                name: lvl.name,
-                video: lvl.verification,
-            }));
-            const list = [];
-            if (this.useMainList) list.push(...fullListMapped.slice(0, 75));
-            if (this.useExtendedList) {
-                list.push(...fullListMapped.slice(75, 150));
-            }
+.page-roulette .sidebar .check input[type='checkbox']:checked {
+    border-color: var(--color-primary);
+    background: rgba(255, 165, 0, 0.13);
+}
 
-            // random 100 levels
-            this.levels = shuffle(list).slice(0, 100);
-            this.showRemaining = false;
-            this.givenUp = false;
-            this.progression = [];
-            this.percentage = undefined;
+.page-roulette .sidebar .check input[type='checkbox']:checked::before {
+    transform: scale(1);
+}
 
-            this.loading = false;
-        },
-        save() {
-            localStorage.setItem(
-                'roulette',
-                JSON.stringify({
-                    levels: this.levels,
-                    progression: this.progression,
-                }),
-            );
-        },
-        onDone() {
-            if (!this.percentage) {
-                return;
-            }
+.page-roulette .sidebar .check:has(input[type='checkbox']:checked) {
+    border-color: rgba(255, 165, 0, 0.5);
+    background: rgba(255, 165, 0, 0.04);
+}
 
-            if (
-                this.percentage <= this.currentPercentage ||
-                this.percentage > 100
-            ) {
-                this.showToast('Invalid percentage.');
-                return;
-            }
+.page-roulette .sidebar .check label {
+    font-size: 1.03rem;
+    font-weight: 700;
+    cursor: pointer;
+}
 
-            this.progression.push(this.percentage);
-            this.percentage = undefined;
+.page-roulette .sidebar form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+}
 
-            this.save();
-        },
-        onGiveUp() {
-            this.givenUp = true;
+.page-roulette .sidebar .save .btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
 
-            // Save progress
-            localStorage.removeItem('roulette');
-        },
-        onImport() {
-            if (
-                this.isActive &&
-                !window.confirm('This will overwrite the currently running roulette. Continue?')
-            ) {
-                return;
-            }
+.page-roulette .sidebar .btn {
+    min-width: 112px;
+}
 
-            this.fileInput.showPicker();
-        },
-        async onImportUpload() {
-            if (this.fileInput.files.length === 0) return;
+.page-roulette .sidebar .save .btn:disabled {
+    filter: grayscale(0.15) brightness(0.82);
+}
 
-            const file = this.fileInput.files[0];
+.page-roulette .levels-container {
+    grid-row: 1;
+    grid-column: 2;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+    min-width: 0;
+    max-height: calc(100vh - 5.25rem);
+}
 
-            if (file.type !== 'application/json') {
-                this.showToast('Invalid file.');
-                return;
-            }
+.page-roulette .levels {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-block: 0.2rem 1.25rem;
+    gap: 1rem;
+    align-items: start;
+}
 
-            try {
-                const roulette = JSON.parse(await file.text());
+.page-roulette .levels .level {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    grid-auto-rows: max-content;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background:
+        linear-gradient(var(--color-background-hover), var(--color-background-hover)) padding-box,
+        linear-gradient(135deg, rgba(135, 206, 250, 0.85), rgba(242, 182, 58, 0.75)) border-box;
+    border: 1.5px solid transparent;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.17);
+}
+.page-roulette .levels .level .video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.page-roulette .levels .level .meta {
+    flex: 1;
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
 
-                if (!roulette.levels || !roulette.progression) {
-                    this.showToast('Invalid file.');
-                    return;
-                }
+.page-roulette .levels .level .meta h2 {
+    margin: 0;
+    line-height: 1.12;
+    font-size: clamp(1.55rem, 1.35rem + 0.8vw, 2.25rem);
+    overflow-wrap: anywhere;
+}
 
-                this.levels = roulette.levels;
-                this.progression = roulette.progression;
-                this.save();
-                this.givenUp = false;
-                this.showRemaining = false;
-                this.percentage = undefined;
-            } catch {
-                this.showToast('Invalid file.');
-                return;
-            }
-        },
-        onExport() {
-            const file = new Blob(
-                [JSON.stringify({
-                    levels: this.levels,
-                    progression: this.progression,
-                })],
-                { type: 'application/json' },
-            );
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(file);
-            a.download = 'tsl_roulette';
-            a.click();
-            URL.revokeObjectURL(a.href);
-        },
-        showToast(msg) {
-            this.toasts.push(msg);
-            setTimeout(() => {
-                this.toasts.shift();
-            }, 3000);
-        },
-    },
-};
+.page-roulette .levels .level .meta p {
+    margin: 0;
+}
+.page-roulette .levels .level .actions {
+    grid-column: 1 / span 2;
+    background-color: #162b46;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 0;
+    padding: 0.95rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.page-roulette .levels .level .actions input[type="number"] {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.9rem 1rem;
+    background-color: #4d6288;
+    flex: 1;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    min-width: 8rem;
+    min-height: 3.35rem;
+    -moz-appearance: textfield;
+}
+.page-roulette .levels .level .actions input[type="number"]::placeholder {
+    color: #7487aa;
+}
+.page-roulette .levels .level .actions input[type="number"]::-webkit-outer-spin-button,
+.page-roulette .levels .level .actions input[type="number"]::-webkit-inner-spin-button {
+    opacity: 1;
+    width: 1.9rem;
+    height: 2.25rem;
+    transform: scale(1.25);
+    transform-origin: right center;
+    filter: invert(1) brightness(1.35) contrast(1.15);
+    cursor: pointer;
+}
+.page-roulette .levels .level .actions .btn {
+    min-width: 6.2rem;
+}
+
+/* Lighter action strip in light mode (dark mode keeps the blue style) */
+html:not(.dark) .page-roulette .levels .level .actions {
+    background: #e8edf5;
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .page-roulette .levels .level .actions input[type="number"] {
+    background: #cfd8e7;
+    color: #1b2738;
+}
+
+html:not(.dark) .page-roulette .levels .level .actions input[type="number"]::placeholder {
+    color: #5f6f89;
+}
+.page-roulette .levels .results {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 1.5px solid rgba(242, 182, 58, 0.45);
+    background: var(--color-background-hover);
+}
+.page-roulette .levels .results h1 {
+    margin-bottom: 0.5rem;
+}
+.page-roulette .levels .results .btn {
+    margin-top: 1rem;
+}
+.page-roulette .toasts-container {
+    position: fixed;
+    right: 1rem;
+    top: 5rem;
+    width: min(360px, 92vw);
+    z-index: 20;
+    pointer-events: none;
+}
+.page-roulette .toasts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.page-roulette .toast {
+    display: flex;
+    background-color: #d50000;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+}
+
+@media screen and (max-width: 1200px) {
+    .page-roulette {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+        padding: 0.7rem;
+    }
+
+    .page-roulette .sidebar {
+        position: static;
+    }
+
+    .page-roulette .levels-container {
+        grid-column: 1;
+        grid-row: auto;
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+    }
+
+    .page-roulette .levels {
+        grid-template-columns: 1fr;
+    }
+
+    .page-roulette .sidebar .sidebar-panel {
+        padding: 0.85rem 0.9rem 0.95rem;
+    }
+
+    .page-roulette .sidebar h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .page-roulette .levels .level {
+        grid-template-columns: 1fr;
+    }
+
+    .page-roulette .levels .level .video {
+        aspect-ratio: 16 / 9;
+    }
+
+    .page-roulette .levels .level .actions {
+        flex-wrap: wrap;
+        gap: 0.7rem;
+    }
+
+    .page-roulette .levels .level .actions .btn {
+        flex: 1 1 8rem;
+    }
+
+    .page-roulette .levels .level .actions input[type="number"] {
+        width: 100%;
+    }
+}
