@@ -1,538 +1,431 @@
-:root{
---color-background:#ffffff;
---color-on-background:#000000;
---color-background-hover:#f5f5f5;
---color-on-background-hover:#000000;
---color-primary:#FFA500;
---color-on-primary:#ffffff;
---color-border-blue:#87cefa;
---color-border-yellow:#f2b63a;
-}
-
-html.dark{
-color-scheme:dark;
---color-background:#1c1b1f;
---color-on-background:#ffffff;
---color-background-hover:#27262c;
---color-on-background-hover:#ffffff;
-}
-
-html,body{
-margin:0;
-padding:0;
-width:100%;
-min-height:100vh;
-font-family:'Lexend Deca',sans-serif;
-background-color:var(--color-background);
-color:var(--color-on-background);
-}
-
-/* ================= HEADER ================= */
-
-header{
-display:flex;
-justify-content:space-between;
-padding-inline:2rem;
-height:4rem;
-background-color:var(--color-primary);
-color:var(--color-on-primary);
-align-items:center;
-}
-
-/* ================= MAIN GRID ================= */
-
-.page-list-custom{
-display:grid;
-grid-template-columns:minmax(0,1fr) 300px;
-gap:3rem;
-padding:2rem;
-max-width:1400px;
-margin:0 auto;
-align-items:start;
-}
-
-.central-container{
-min-width:0;
-}
-
-.meta-container{
-min-width:0;
-align-self:start;
-height:auto!important;
-overflow:visible!important;
-}
-
-/* ================= LEVEL CARD ================= */
-
-.level-card{
-background-color:var(--color-background-hover);
-border:2px solid transparent;
-border-radius:15px;
-background:
-linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
-linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 42%,#bfd6a6 50%,var(--color-border-yellow) 58%,var(--color-border-yellow) 100%) border-box;
-padding:1rem 1.5rem;
-display:flex;
-gap:1.5rem;
-margin-bottom:1.5rem;
-align-items:flex-start;
-position:relative;
-overflow:hidden;
-}
-
-.level-card::after{
-content:"😤";
-position:absolute;
-left:8px;
-bottom: 14px;
-font-size:3.6rem;
-line-height:1;
-pointer-events:none;
-user-select:none;
-opacity:.22;
-color:rgba(100,96,90,0.9);
-text-shadow:
-1px 1px 0 rgba(255,255,255,0.22),
--1px -1px 0 rgba(0,0,0,0.18),
-0 2px 3px rgba(0,0,0,0.18);
-transform:none;
-filter:grayscale(1) saturate(0) contrast(1.08) brightness(0.95);
-mix-blend-mode:soft-light;
-}
-
-html.dark .level-card::after{
-opacity:.28;
-color:rgba(210,210,210,0.9);
-text-shadow:
-1px 1px 0 rgba(255,255,255,0.1),
--1px -1px 0 rgba(0,0,0,0.45),
-0 2px 3px rgba(0,0,0,0.35);
-filter:grayscale(1) saturate(0) contrast(1.12) brightness(1.06);
-mix-blend-mode:overlay;
-}
-
-.level-video-side{
-flex:0 0 260px;
-height:146px;
-}
-
-.level-video-side iframe{
-width:100%;
-height:146px;
-border-radius:8px;
-border:none;
-}
-
-.level-details-side{
-flex:1;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-min-width:0;
-}
-
-/* ================= TITLE ================= */
-
-.level-title-info h2{
-margin:0;
-font-size:1.4rem;
-text-transform:uppercase;
-}
-
-.level-name-row{
-display:flex;
-align-items:center;
-gap:12px;
-flex-wrap:wrap;
-margin-top:2px;
-}
-
-.level-title-info{
-position:relative;
-padding-right:140px;
-min-height:28px;
-}
-
-.former-top-1-tag{
-position:absolute;
-top:0;
-right:0;
-display:inline-block;
-padding:4px 8px;
-border-radius:6px;
-background:rgba(135,206,250,0.6);
-color:#08334d;
-font-size:.72rem;
-font-weight:800;
-text-transform:uppercase;
-line-height:1.1;
-border:2px solid #0047AB;
-opacity:1;
-text-shadow:0 1px 0 rgba(0,0,0,0.35);
-}
-
-html.dark .former-top-1-tag{
-color:#ffffff;
-}
-
-.level-title{
-display:flex;
-flex-direction:column;
-gap:4px;
-}
-
-.rank-row{
-display:flex;
-align-items:center;
-gap:14px;
-}
-
-.legacy-rank-label{
-font-size:.95rem;
-font-weight:800;
-text-transform:uppercase;
-color:var(--color-on-background);
-line-height:1;
-text-decoration:underline;
-text-decoration-color:var(--color-primary);
-text-underline-offset:3px;
-
-}
-
-.qualify-box{
-display:inline-flex;
-align-items:center;
-padding:4px 10px;
-border-radius:4px;
-font-size:.82rem;
-font-weight:700;
-line-height:1.1;
-letter-spacing:.01em;
-background:rgba(0,0,0,0.12);
-color:#000000;
-border:none;
-text-transform:none;
-}
-
-html.dark .qualify-box{
-background:rgba(255,255,255,0.12);
-color:#ffffff;
-}
-
-/* Level rank box styling */
-.level-rank{
-background-color:var(--color-primary);
-color:var(--color-on-primary);
-padding:6px 12px;
-border-radius:6px;
-font-weight:900;
-font-size:1rem;
-display:inline-block;
-width:fit-content;
-box-shadow: 0 2px 8px rgba(255,165,0,0.3);
-}
-
-/* ================= CREATORS ================= */
-
-.authors-box{
-display:flex;
-gap:1.2rem;
-flex-wrap:wrap;
-margin-top:4px;
-}
-
-.authors-box div{
-display:flex;
-flex-direction:column;
-}
-
-.authors-box span:first-child{
-font-size:.78rem;
-font-weight:700;
-text-transform:uppercase;
-color:var(--color-primary);
-}
-
-.authors-box span:last-child{
-font-size:.95rem;
-}
-
-/* ================= STATS ================= */
-
-.stats-middle-grid{
-display:grid;
-grid-template-columns:repeat(4,minmax(0,1fr));
-gap:10px;
-margin-top:10px;
-}
-
-.stat-card{
-background:var(--color-background-hover);
-padding:6px;
-border-radius:8px;
-text-align:center;
-border:2px solid var(--color-border-yellow);
-box-shadow: 0 2px 8px rgba(255,165,0,0.15);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:4px;
-}
-
-/* Layout for ID + copy button: stack vertically so ID label is centered with number below */
-.id-copy-box{
-display:flex;
-flex-direction:row;
-align-items:center;
-justify-content:center;
-gap:8px;
-}
-
-.id-copy-box .stat-value{
-font-variant-numeric: tabular-nums;
-}
-
-.copy-id{
-margin-top:0;
-}
+import { store } from "../main.js";
+import { embed } from "../util.js";
+import { score } from "../score.js";
+import { fetchEditors, fetchList } from "../content.js";
+import Spinner from "../components/Spinner.js";
+
+export default {
+components:{Spinner},
+template:`
+
+<main v-if="loading"><Spinner/></main>
+
+<div v-else class="page-list-custom">
+
+<div class="central-container">
+
+<div v-for="([level,err],i) in list" class="level-card">
+
+<div class="level-video-side">
+<div class="lazy-video"
+     :data-src="embed(level.verification)"
+     ref="lazyVideos">
+</div>
+</div>
+
+<div class="level-details-side">
+
+<div class="level-title-info">
+<span v-if="level.formerTop1" class="former-top-1-tag">Former Top 1</span>
+<div class="title-left">
+<div class="rank-row">
+<span class="level-rank">#{{i+1}}</span>
+<span v-if="i+1>150" class="legacy-rank-label">legacy</span>
+</div>
+
+<div class="level-name-row">
+<h2>{{level.name}}</h2>
+</div>
+</div>
+</div>
+
+<div class="authors-box centered-authors">
+<div>
+<span>CREATOR</span>
+<span>{{level.creators.join(', ')}}</span>
+</div>
+<div>
+<span>VERIFIER</span>
+<span>{{level.verifier}}</span>
+</div>
+<div>
+<span>PUBLISHER</span>
+<span>{{level.publisher||level.author}}</span>
+</div>
+</div>
+
+<div class="stats-middle-grid">
+
+<div class="stat-card">
+<span class="stat-label">ID</span>
+<div class="id-copy-box">
+<span class="stat-value">{{level.id}}</span>
+<button class="copy-id" @click="copyID(level.id,$event)">
+<svg viewBox="0 0 24 24">
+<path fill="currentColor"
+d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
+5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19
+C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
+5ZM19 21H8V7H19V21Z"/>
+</svg>
+</button>
+</div>
+</div>
+
+<div class="stat-card">
+<span class="stat-label">Points</span>
+<span class="stat-value">{{score(i+1,100,level.percentToQualify)}}</span>
+</div>
+
+<div class="stat-card">
+<span class="stat-label">{{(level.length||level.Length)?'Length':'Password'}}</span>
+<span class="stat-value">{{level.length||level.Length||level.password||'Free'}}</span>
+</div>
+
+<div class="stat-card">
+<span class="stat-label">Requirement</span>
+<span class="stat-value">{{ Number(level.percentToQualify) === 100 ? '100%' : (level.percentToQualify + '%+') }}</span>
+</div>
+
+</div>
+
+<button class="show-records-btn" @click="toggleRecords(i)">
+{{isOpen(i)?'Hide Records':'Show Records'}}
+</button>
+
+<transition
+@before-enter="beforeRecordsEnter"
+@enter="recordsEnter"
+@after-enter="afterRecordsEnter"
+@before-leave="beforeRecordsLeave"
+@leave="recordsLeave"
+@after-leave="afterRecordsLeave"
+>
+<div v-if="isOpen(i)" class="records-panel">
+<div class="records-panel-inner">
+<table v-if="level.records && level.records.length > 0" class="records">
+<tr v-for="record in level.records">
+<td>{{record.percent}}%</td>
+<td><a :href="record.link" target="_blank">{{record.user}}</a></td>
+<td>{{record.hz}}Hz</td>
+</tr>
+</table>
+<p v-if="!level.records || level.records.length===0" class="no-records-message">No records on this level yet.</p>
+</div>
+</div>
+</transition>
+
+</div>
+</div>
+</div>
+
+<div class="meta-container">
+<div class="meta editors-panel">
+<h3>List Editors</h3>
+<ol class="editors">
+<li v-for="editor in editors">
+<img :src="iconFor(editor.role)">
+<a :href="editor.link" target="_blank">{{editor.name}}</a>
+</li>
+</ol>
+</div>
+<div class="meta requirements-panel">
+<h3>Submission Requirements</h3>
+<p>Achieved the record without using hacks (however, FPS bypass is allowed, up to 360fps)</p>
+<p>Achieved the record on the level that is listed on the site - please check the level ID before you submit a record</p>
+<p>Have either source audio or clicks/taps in the video. Edited audio only does not count</p>
+<p>The recording must have a previous attempt and entire death animation shown before the completion, unless the completion is on the first attempt. Everyplay records are exempt from this</p>
+<p>The recording must also show the player hit the endwall, or the completion will be invalidated.</p>
+<p>Do not use secret routes or bug routes</p>
+<p>Do not use easy modes, only a record of the unmodified level qualifies</p>
+<p>Once a level falls onto the Legacy List, we accept records for it for 24 hours after it falls off, then afterwards we never accept records for said level</p>
+</div>
+</div>
+
+</div>
+<div v-if="copyPopup.visible" ref="copyPopupEl" class="copy-popup">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor"
+d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
+5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19
+C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
+5ZM19 21H8V7H19V21Z"/>
+</svg>
+<span>Copied!</span>
+</div>
+`,
+data:()=>({
+
+list:[],
+editors:[],
+loading:true,
+toggledRecords:{},
+observer:null,
+store
+,
+copyToastTimer:null,
+pointerMoveHandler:null,
+lastMouseX:0,
+lastMouseY:0,
+popupRaf:null,
+copyPopup:{
+visible:false
+}
+}),
+async mounted(){
+const fetchedList = await fetchList();
+this.list = Array.isArray(fetchedList)
+? fetchedList.filter(([level])=>Boolean(level))
+: [];
+this.editors=(await fetchEditors())||[];
+this.loading=false;
+this.pointerMoveHandler = (e)=>this.onPointerMove(e);
+window.addEventListener("pointermove",this.pointerMoveHandler,{ passive:true });
+
+this.$nextTick(()=>{
+
+this.observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+
+const el = entry.target;
+const src = el.dataset.src;
+
+el.innerHTML = `
+<iframe src="${src}"
+allowfullscreen
+loading="lazy"
+frameborder="0">
+</iframe>
+`;
+
+const iframe = el.querySelector("iframe");
+
+this.observer.unobserve(el);
+
+}
+});
+},{
+rootMargin:"200px"
+});
+
+const lazyVideos = Array.isArray(this.$refs.lazyVideos)
+? this.$refs.lazyVideos
+: [this.$refs.lazyVideos].filter(Boolean);
+
+lazyVideos.forEach(el=>{
+this.observer.observe(el);
+});
+
+});
+
+},
+beforeUnmount(){
+if(this.observer){
+this.observer.disconnect();
+}
+if(this.copyToastTimer){
+clearTimeout(this.copyToastTimer);
+this.copyToastTimer = null;
+}
+if(this.pointerMoveHandler){
+window.removeEventListener("pointermove",this.pointerMoveHandler);
+this.pointerMoveHandler = null;
+}
+if(this.popupRaf){
+cancelAnimationFrame(this.popupRaf);
+this.popupRaf = null;
+}
+},
+methods:{
+embed,
+score,
+isOpen(i){return this.toggledRecords[i]===true},
+toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
+beforeRecordsEnter(el){
+if(el._recordsEndHandler){
+el.removeEventListener('transitionend',el._recordsEndHandler);
+el._recordsEndHandler = null;
+}
+const inner = el.querySelector('.records-panel-inner');
+el.style.transition='none';
+el.style.height='0px';
+el.style.overflow='hidden';
+if(inner){
+inner.style.transition='none';
+inner.style.opacity='0';
+inner.style.transform='translateY(-3px)';
+}
+void el.offsetHeight;
+},
+recordsEnter(el,done){
+const targetHeight = `${el.scrollHeight}px`;
+const inner = el.querySelector('.records-panel-inner');
+el.style.willChange='height';
+el.style.transition='height .26s cubic-bezier(.22,1,.36,1)';
+if(inner){
+inner.style.willChange='opacity,transform';
+inner.style.transition='opacity .18s ease-out, transform .22s cubic-bezier(.22,1,.36,1)';
+}
+const onEnd = (e)=>{
+if(e.target!==el || e.propertyName!=='height') return;
+el.removeEventListener('transitionend',onEnd);
+el._recordsEndHandler = null;
+done();
+};
+el._recordsEndHandler = onEnd;
+el.addEventListener('transitionend',onEnd);
+requestAnimationFrame(()=>{
+el.style.height=targetHeight;
+if(inner){
+inner.style.opacity='1';
+inner.style.transform='translateY(0)';
+}
+});
+},
+afterRecordsEnter(el){
+const inner = el.querySelector('.records-panel-inner');
+el.style.height='auto';
+el.style.transition='';
+el.style.willChange='';
+el.style.overflow='hidden';
+if(inner){
+inner.style.transition='';
+inner.style.willChange='';
+inner.style.opacity='1';
+inner.style.transform='none';
+}
+},
+beforeRecordsLeave(el){
+if(el._recordsEndHandler){
+el.removeEventListener('transitionend',el._recordsEndHandler);
+el._recordsEndHandler = null;
+}
+const inner = el.querySelector('.records-panel-inner');
+el.style.transition='none';
+el.style.height=`${el.getBoundingClientRect().height}px`;
+el.style.overflow='hidden';
+if(inner){
+inner.style.transition='none';
+inner.style.opacity='1';
+inner.style.transform='none';
+}
+void el.offsetHeight;
+},
+recordsLeave(el,done){
+const startHeight = el.getBoundingClientRect().height;
+const inner = el.querySelector('.records-panel-inner');
+if(startHeight <= 1){
+done();
+return;
+}
+const duration = Math.max(140, Math.min(260, Math.round(startHeight * 1.8)));
+el.style.willChange='height';
+el.style.transition=`height ${duration}ms linear`;
+if(inner){
+const fadeDuration = Math.max(110, Math.min(180, Math.round(duration * 0.7)));
+inner.style.willChange='opacity,transform';
+inner.style.transition=`opacity ${fadeDuration}ms ease-out, transform ${fadeDuration}ms ease-out`;
+}
+const onEnd = (e)=>{
+if(e.target!==el || e.propertyName!=='height') return;
+el.removeEventListener('transitionend',onEnd);
+el._recordsEndHandler = null;
+done();
+};
+el._recordsEndHandler = onEnd;
+el.addEventListener('transitionend',onEnd);
+requestAnimationFrame(()=>{
+el.style.height='0px';
+if(inner){
+inner.style.opacity='0';
+inner.style.transform='translateY(-2px)';
+}
+});
+},
+afterRecordsLeave(el){
+const inner = el.querySelector('.records-panel-inner');
+el.style.transition='';
+el.style.willChange='';
+el.style.height='';
+el.style.overflow='';
+if(inner){
+inner.style.transition='';
+inner.style.willChange='';
+inner.style.opacity='';
+inner.style.transform='';
+}
+},
+copyID(id,evt){
+const text = id.toString();
+const copied = ()=>{
+this.showCopyPopup(evt);
+if(this.copyToastTimer){
+clearTimeout(this.copyToastTimer);
+}
+this.copyToastTimer = setTimeout(()=>{
+this.copyPopup.visible = false;
+this.copyToastTimer = null;
+},1100);
+};
+
+if(navigator.clipboard?.writeText){
+navigator.clipboard.writeText(text).then(copied).catch(()=>{
+this.fallbackCopy(text,copied);
+});
+return;
+}
+
+this.fallbackCopy(text,copied);
+},
+onPointerMove(evt){
+this.lastMouseX = evt.clientX;
+this.lastMouseY = evt.clientY;
+if(!this.copyPopup.visible) return;
+if(this.popupRaf) return;
+this.popupRaf = requestAnimationFrame(()=>{
+this.popupRaf = null;
+this.moveCopyPopup(this.lastMouseX,this.lastMouseY);
+});
+},
+showCopyPopup(evt){
+const x = evt?.clientX ?? this.lastMouseX;
+const y = evt?.clientY ?? this.lastMouseY;
+this.copyPopup.visible = true;
+this.$nextTick(()=>this.moveCopyPopup(x,y));
+},
+moveCopyPopup(x,y){
+const popup = this.$refs.copyPopupEl;
+if(!popup) return;
+popup.style.left = `${x + 16}px`;
+popup.style.top = `${y - 10}px`;
+},
+fallbackCopy(text,onSuccess){
+const ta = document.createElement("textarea");
+ta.value = text;
+ta.setAttribute("readonly","");
+ta.style.position = "fixed";
+ta.style.opacity = "0";
+ta.style.pointerEvents = "none";
+document.body.appendChild(ta);
+ta.focus();
+ta.select();
+try{
+document.execCommand("copy");
+onSuccess();
+}catch{}
+document.body.removeChild(ta);
+},
+iconFor(role){
+	const map = {
+		owner: 'crown',
+		admin: 'user-shield',
+		helper: 'user-shield',
+		dev: 'code'
+	};
+	const name = map[role] || 'user-gear';
+	return `/assets/${name}${this.store.dark?'-dark':''}.svg`;
+}
+}
+};
 
-.id-copy-box .stat-value{
-	flex:0 0 auto;
-	font-variant-numeric: tabular-nums;
-	text-align:center;
-}
-.copy-id{
-	flex:0 0 auto;
-	margin-top:4px;
-}
-
-.stat-label{
-font-size:.82rem;
-font-weight:700;
-opacity:.9;
-display:block;
-text-align:center;
-}
-
-.stat-value{
-font-size:.95rem;
-font-weight:900;
-}
-
-.meta h3{
-margin-top:2rem;
-margin-bottom:1rem;
-border-bottom:1px solid var(--color-primary);
-}
-
-.meta p{
-white-space:normal;
-line-height:1.6;
-margin-bottom:1.2rem;
-}
-
-.editors{
-display:flex;
-flex-direction:column;
-gap:6px;
-}
-
-.editors div,
-.editor,
-.editor-entry{
-display:flex!important;
-align-items:center!important;
-gap:6px;
-white-space:nowrap;
-}
-
-.editors img{
-width:20px;
-height:20px;
-display:inline-block;
-vertical-align:middle;
-}
-
-/* ================= RECORDS ================= */
-
-.records-panel{
-overflow:hidden;
-}
-
-.records-panel-inner{
-min-height:0;
-}
-
-.records td{
-padding:.6rem 0!important;
-}
-
-.records a{
-color:var(--color-on-background);
-text-decoration:none;
-transition:color 0.2s;
-cursor:pointer;
-}
-
-.records a:hover{
-color:var(--color-primary);
-text-decoration:underline;
-}
-
-/* ================= LEADERBOARD SPACING ================= */
-
-.page-leaderboard .player .table tr{
-height:48px!important;
-}
-
-.page-leaderboard .player{
-gap:1.4rem!important;
-}
-
-.page-leaderboard .player .table p,
-.page-leaderboard .player .table a{
-padding-block:.8rem!important;
-}
-
-/* ================= COPY ID ================= */
-
-.copy-id{
-background:none;
-border:none;
-cursor:pointer;
-padding:4px;
-display:flex;
-align-items:center;
-opacity:.7;
-transition:.2s;
-}
-
-.copy-id:hover{
-opacity:1;
-transform:scale(1.15);
-}
-
-.copy-id svg{
-width:18px;
-height:18px;
-}
-
-.copy-popup{
-position:fixed;
-z-index:9999;
-pointer-events:none;
-display:inline-flex;
-align-items:center;
-gap:8px;
-padding:8px 12px;
-border-radius:8px;
-background:var(--color-primary);
-color:var(--color-on-primary);
-border:2px solid rgba(255,255,255,0.78);
-box-shadow:0 8px 18px rgba(0,0,0,0.35);
-font-size:.9rem;
-font-weight:900;
-line-height:1;
-}
-
-.copy-popup svg{
-width:18px;
-height:18px;
-}
-/* ================= LIST PAGE ================= */
-
-.page-list-custom{
-display:grid;
-grid-template-columns:minmax(0,1fr) 300px;
-gap:2rem;
-padding:2rem;
-align-items:start;
-}
-
-.central-container{
-min-width:0;
-overflow:visible;
-max-height:none;
-}
-
-.meta-container{
-display:flex;
-flex-direction:column;
-min-width:0;
-align-self:start;
-overflow:visible;
-max-height:none;
-}
-/* Ensure editors list items align icons + names correctly */
-.editors li{
-	display:flex;
-	align-items:center;
-	gap:8px;
-}
-
-.editors li a{
-	color:var(--color-on-background);
-	text-decoration:none;
-	transition:color 0.2s;
-	cursor:pointer;
-}
-
-.editors li a:hover{
-	color:var(--color-primary);
-	text-decoration:underline;
-}
-
-.editors img{
-	width:22px;
-	height:22px;
-	object-fit:contain;
-	display:inline-block;
-}
-
-/* Combine editors and requirements under single scrollbar */
-.editors-panel{
-	padding-bottom:1rem;
-	border-bottom:1px solid var(--color-primary);
-	margin-bottom:1rem;
-}
-
-.requirements-panel{
-	padding-top:0;
-}
-
-/* SHOW RECORDS BACK TO ORIGINAL */
-
-.show-records-btn{
-  margin-top:10px;
-  background:transparent;
-  border:1.5px solid var(--color-border-yellow);
-  color:var(--color-on-background);
-  padding:0.6rem 1rem;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:700;
-  text-transform:uppercase;
-  font-size:0.85rem;
-}
-
-.show-records-btn:hover{
-  background:linear-gradient(90deg,#f4be3b 0%, #f08b18 50%, #f4be3b 100%);
-  border-color:#f0b12d;
-  color:#ffffff;
-}
-
-
-.lazy-video{
-width:100%;
-height:146px;
-background:#000;
-border-radius:8px;
-overflow:hidden;
-}
-
-.lazy-video iframe{
-width:100%;
-height:100%;
-border:none;
-}
