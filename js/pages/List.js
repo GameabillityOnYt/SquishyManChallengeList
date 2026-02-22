@@ -266,8 +266,14 @@ if(!playerIframe || !playerIframe.isConnected){
 return false;
 }
 if(playerIframe && playerIframe !== activeIframe){
+const state = typeof player.getPlayerState === 'function'
+? player.getPlayerState()
+: null;
+const isActive = state === 1 || state === 3;
+if(isActive){
 this.resetClosedPlayer(player, playerIframe);
 return false;
+}
 }
 }catch{}
 return true;
