@@ -28,7 +28,10 @@ template:`
 <div class="level-details-side">
 
 <div class="level-title-info">
+<div v-if="isLevelDecorated(level) || level.formerTop1" class="level-badges">
+<span v-if="isLevelDecorated(level)" class="decorated-tag">Decorated</span>
 <span v-if="level.formerTop1" class="former-top-1-tag">Former Top 1</span>
+</div>
 <div class="title-left">
 <div class="rank-row">
 <span class="level-rank">#{{i+1}}</span>
@@ -366,6 +369,18 @@ try{
 document.execCommand("copy");
 }catch{}
 document.body.removeChild(ta);
+},
+isLevelDecorated(level){
+const value =
+level?.decorated ??
+level?.isDecorated ??
+level?.decoration ??
+level?.decoratedTag;
+if(typeof value === 'string'){
+const normalized = value.trim().toLowerCase();
+return normalized === 'true' || normalized === 'yes' || normalized === '1' || normalized === 'decorated';
+}
+return value === true || value === 1;
 },
 iconFor(role){
 	const map = {
