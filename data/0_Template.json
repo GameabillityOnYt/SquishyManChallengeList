@@ -6,6 +6,7 @@
     "verifier": "VERIFIER",
     "verification": "VIDEO_LINK",
     "formerTop1": false,
+    "decorated": false,
     "percentToQualify": "100",
     "Length": "Time",
     "records": []
