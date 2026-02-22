@@ -1,5 +1,5 @@
 import { store } from "../main.js";
-import { embed } from "../util.js";
+import { getThumbnailFromId, getYoutubeIdFromUrl } from "../util.js";
 import { score } from "../score.js";
 import { fetchEditors, fetchList, fetchNewTags } from "../content.js";
 import Spinner from "../components/Spinner.js";
@@ -19,10 +19,12 @@ template:`
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
 <div class="level-video-side">
-<div class="lazy-video"
-     :data-src="embedWithPlayerApi(level.verification)"
-     ref="lazyVideos">
-</div>
+<a class="lazy-video"
+   :href="level.verification"
+   target="_blank"
+   rel="noopener noreferrer">
+<img :src="thumbnailFor(level.verification)" :alt="'Thumbnail for ' + level.name" loading="lazy" decoding="async">
+</a>
 </div>
 
 <div class="level-details-side">
@@ -156,10 +158,7 @@ list:[],
 editors:[],
 loading:true,
 toggledRecords:{},
-observer:null,
 newTags:{},
-youtubePlayers:[],
-youtubeApiPromise:null,
 store
 }),
 async mounted(){
@@ -170,164 +169,11 @@ this.list = Array.isArray(fetchedList)
 this.editors=(await fetchEditors())||[];
 this.newTags=(await fetchNewTags())||{};
 this.loading=false;
-this.ensureYoutubeApi().catch(()=>{});
-
-this.$nextTick(()=>{
-
-this.observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-
-const el = entry.target;
-const src = el.dataset.src;
-
-el.innerHTML = `
-<iframe src="${src}"
-allowfullscreen
-loading="lazy"
-frameborder="0">
-</iframe>
-`;
-
-const iframe = el.querySelector("iframe");
-this.attachYoutubePlayer(iframe);
-
-this.observer.unobserve(el);
-
-}
-});
-},{
-rootMargin:"900px 0px",
-threshold:0.01
-});
-
-const lazyVideos = Array.isArray(this.$refs.lazyVideos)
-? this.$refs.lazyVideos
-: [this.$refs.lazyVideos].filter(Boolean);
-
-lazyVideos.forEach(el=>{
-this.observer.observe(el);
-});
-
-});
-
-},
-beforeUnmount(){
-if(this.observer){
-this.observer.disconnect();
-}
-this.youtubePlayers.forEach(player=>{
-try{
-player.destroy();
-}catch{}
-});
-this.youtubePlayers = [];
 },
 methods:{
-embed,
-embedWithPlayerApi(video){
-const base = this.embed(video);
-const sep = base.includes('?') ? '&' : '?';
-return `${base}${sep}enablejsapi=1&playsinline=1&rel=0&modestbranding=1`;
-},
-ensureYoutubeApi(){
-if(window.YT?.Player){
-return Promise.resolve(window.YT);
-}
-if(this.youtubeApiPromise){
-return this.youtubeApiPromise;
-}
-this.youtubeApiPromise = new Promise((resolve,reject)=>{
-const previousReady = window.onYouTubeIframeAPIReady;
-window.onYouTubeIframeAPIReady = ()=>{
-if(typeof previousReady === 'function'){
-try{ previousReady(); }catch{}
-}
-resolve(window.YT);
-};
-
-let script = document.querySelector('script[data-youtube-iframe-api]');
-if(!script){
-script = document.createElement('script');
-script.src = 'https://www.youtube.com/iframe_api';
-script.async = true;
-script.setAttribute('data-youtube-iframe-api','1');
-script.onerror = ()=>reject(new Error('Failed to load YouTube API'));
-document.head.appendChild(script);
-}
-});
-return this.youtubeApiPromise;
-},
-pauseOtherVideos(activeIframe){
-this.youtubePlayers = this.youtubePlayers.filter(player=>{
-try{
-const playerIframe = player.getIframe?.();
-if(!playerIframe || !playerIframe.isConnected){
-return false;
-}
-if(playerIframe && playerIframe !== activeIframe){
-const state = typeof player.getPlayerState === 'function'
-? player.getPlayerState()
-: null;
-const isActive = state === 1 || state === 3;
-if(isActive){
-this.resetClosedPlayer(player, playerIframe);
-return false;
-}
-}
-}catch{}
-return true;
-});
-},
-resetClosedPlayer(player, playerIframe){
-const parent = playerIframe?.parentElement;
-const src = playerIframe?.src || playerIframe?.dataset?.src;
-try{
-player.destroy();
-}catch{}
-if(!parent || !src){
-return;
-}
-parent.innerHTML = `
-<iframe src="${src}"
-allowfullscreen
-loading="lazy"
-frameborder="0">
-</iframe>
-`;
-const freshIframe = parent.querySelector("iframe");
-this.attachYoutubePlayer(freshIframe);
-},
-attachYoutubePlayer(iframe){
-if(!iframe || iframe.dataset.youtubeBound === '1'){
-return;
-}
-iframe.dataset.youtubeBound = '1';
-const setup = ()=>{
-this.ensureYoutubeApi()
-.then(YT=>{
-if(!YT?.Player){
-return;
-}
-const player = new YT.Player(iframe,{
-events:{
-onStateChange: event=>{
-if(event?.data === YT.PlayerState.PLAYING){
-const currentIframe = event.target?.getIframe?.() ?? iframe;
-this.pauseOtherVideos(currentIframe);
-}
-}
-}
-});
-this.youtubePlayers.push(player);
-})
-.catch(()=>{});
-};
-if(typeof window.requestIdleCallback === 'function'){
-window.requestIdleCallback(setup,{ timeout: 300 });
-}else{
-setTimeout(setup,0);
-}
+thumbnailFor(video){
+const id = getYoutubeIdFromUrl(video);
+return id ? getThumbnailFromId(id) : "e.png";
 },
 score,
 isOpen(i){return this.toggledRecords[i]===true},
