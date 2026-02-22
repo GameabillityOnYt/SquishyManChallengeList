@@ -1,7 +1,7 @@
 import { store } from "../main.js";
 import { embed } from "../util.js";
 import { score } from "../score.js";
-import { fetchEditors, fetchList } from "../content.js";
+import { fetchEditors, fetchList, fetchNewTags } from "../content.js";
 import Spinner from "../components/Spinner.js";
 
 export default {
@@ -15,6 +15,7 @@ template:`
 <div class="central-container">
 
 <div v-for="([level,err],i) in list" class="level-card">
+<span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
 <div class="level-video-side">
 <div class="lazy-video"
@@ -151,6 +152,7 @@ editors:[],
 loading:true,
 toggledRecords:{},
 observer:null,
+newTags:{},
 store
 }),
 async mounted(){
@@ -159,6 +161,7 @@ this.list = Array.isArray(fetchedList)
 ? fetchedList.filter(([level])=>Boolean(level))
 : [];
 this.editors=(await fetchEditors())||[];
+this.newTags=(await fetchNewTags())||{};
 this.loading=false;
 
 this.$nextTick(()=>{
@@ -209,6 +212,19 @@ embed,
 score,
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
+isLevelNew(level){
+const path = String(level?.path||'').toLowerCase();
+if(!path) return false;
+const keyWithExt = `${path}.json`;
+const raw = this.newTags[path] ?? this.newTags[keyWithExt];
+if(!raw || typeof raw!=='string') return false;
+const addedAt = new Date(`${raw}T00:00:00`);
+if(Number.isNaN(addedAt.getTime())) return false;
+const now = new Date();
+const diff = now.getTime() - addedAt.getTime();
+const days = diff / 86400000;
+return days >= 0 && days < 7;
+},
 beforeRecordsEnter(el){
 if(el._recordsEndHandler){
 el.removeEventListener('transitionend',el._recordsEndHandler);
