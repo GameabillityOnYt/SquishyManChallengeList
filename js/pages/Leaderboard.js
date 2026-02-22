@@ -1,7 +1,7 @@
 import { fetchLeaderboard } from '../content.js';
 import { localize } from '../util.js';
 
-import Spinner from '../components/Spinner.js';
+import Spinner from '../components/spinner.js';
 
 export default {
     components: {
@@ -119,3 +119,4 @@ export default {
         localize,
     },
 };
+
