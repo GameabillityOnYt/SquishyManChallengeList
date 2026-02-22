@@ -5,16 +5,23 @@
 .nav .nav__tab {
     padding-top: 4px;
     border-bottom: 4px solid transparent;
+    border-radius: 0.5rem 0.5rem 0 0;
     display: flex;
     align-items: center;
     padding-inline: 0.5rem;
-    transition: border-color 100ms ease;
+    transition: border-color 140ms ease, background-color 140ms ease, transform 140ms ease;
 }
 .nav .nav__tab.router-link-active {
     border-color: var(--color-on-primary);
+    background-color: rgba(255, 255, 255, 0.14);
 }
 .nav .nav__tab:hover {
     border-color: var(--color-on-primary);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+.nav .nav__tab:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 2px;
 }
 .nav .nav__actions {
     flex: 1;
@@ -32,10 +39,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 100ms ease;
+    transition: background-color 140ms ease, transform 140ms ease;
 }
 .nav .nav__actions .nav__icon:hover {
     background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px) scale(1.04);
+}
+.nav .nav__actions .nav__icon:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 2px;
 }
 .nav .nav__actions .nav__icon img {
     height: 1.5rem;
@@ -47,8 +59,14 @@
     color: var(--color-primary);
     border-radius: 0.5rem;
     box-shadow: 0 1px 0.5rem 0 rgba(0, 0, 102, 0.5);
-    transition: transform 100ms ease;
+    transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
 }
 .nav .nav__actions .nav__cta:hover:not(:active) {
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 18px rgba(0, 0, 102, 0.3);
+    background-color: #fff9ef;
+}
+.nav .nav__actions .nav__cta:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 2px;
 }
