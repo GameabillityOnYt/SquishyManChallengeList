@@ -5,6 +5,7 @@
     "creators": ["5ek0"],
     "verifier": "5ek0",
     "verification": "https://youtu.be/5JWV7GWDshY",
+    "decorated": true,
     "percentToQualify": "100",
     "password": "Open",
     "records": []
