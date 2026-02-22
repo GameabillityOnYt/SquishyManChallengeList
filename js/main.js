@@ -2,6 +2,9 @@ import routes from './routes.js';
 
 export const store = Vue.reactive({
     dark: JSON.parse(localStorage.getItem('dark')) || false,
+    listView: ['list', 'grid'].includes(localStorage.getItem('listView'))
+        ? localStorage.getItem('listView')
+        : 'list',
 
     toggleDark() {
         this.dark = !this.dark;
@@ -12,6 +15,14 @@ export const store = Vue.reactive({
         } else {
             document.documentElement.classList.remove('dark');
         }
+    },
+
+    setListView(mode) {
+        if (mode !== 'list' && mode !== 'grid') {
+            return;
+        }
+        this.listView = mode;
+        localStorage.setItem('listView', mode);
     },
 });
 
