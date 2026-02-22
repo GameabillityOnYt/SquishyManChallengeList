@@ -5,6 +5,7 @@
     "creators": ["Jabohappy"],
     "verifier": "Jabohappy",
     "verification": "https://www.youtube.com/watch?v=hFDWnYYd0BY",
+    "decorated": true,
     "percentToQualify": "100",
     "password": "open",
     "records": [
