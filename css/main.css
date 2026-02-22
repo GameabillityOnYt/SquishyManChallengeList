@@ -31,12 +31,14 @@ color:var(--color-on-background);
 
 .spinner-wrap{
 position:fixed;
-inset:0;
+top:50vh;
+left:50vw;
+transform:translate(-50%,-50%);
 display:flex;
 align-items:center;
 justify-content:center;
-width:100%;
-min-height:100vh;
+width:auto;
+min-height:0;
 z-index:999;
 pointer-events:none;
 }
