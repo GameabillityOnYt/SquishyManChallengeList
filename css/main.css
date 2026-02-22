@@ -109,14 +109,14 @@ mix-blend-mode:soft-light;
 
 .new-corner-tag{
 position:absolute;
-left:0;
-bottom:0;
+left:2px;
+bottom:2px;
 width:72px;
 height:70px;
 display:flex;
 align-items:flex-end;
 justify-content:flex-start;
-padding:0 0 10px 5px;
+padding:0 0 10px 4px;
 font-size:.96rem;
 font-weight:900;
 letter-spacing:.01em;
@@ -124,8 +124,6 @@ line-height:1;
 text-transform:uppercase;
 color:#08334d;
 background:rgba(135,206,250,0.92);
-border-left:2px solid var(--color-border-blue);
-border-bottom:2px solid var(--color-border-blue);
 clip-path:polygon(0 0, 100% 100%, 0 100%);
 z-index:2;
 pointer-events:none;
