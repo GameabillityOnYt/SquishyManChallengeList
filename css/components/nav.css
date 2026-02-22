@@ -1,30 +1,52 @@
 .nav {
     display: flex;
-    column-gap: 2rem;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    margin-left: 1.5rem;
+    column-gap: 0.75rem;
 }
+
 .nav .nav__tab {
-    padding-top: 4px;
-    border-bottom: 4px solid transparent;
+    padding: 0.65rem 0.9rem;
+    border-bottom: 3px solid transparent;
+    border-radius: 0.6rem 0.6rem 0 0;
     display: flex;
     align-items: center;
-    padding-inline: 0.5rem;
-    transition: border-color 100ms ease;
+    opacity: 0.92;
+    transition: border-color 140ms ease, background-color 140ms ease, transform 140ms ease,
+        opacity 140ms ease;
 }
+
 .nav .nav__tab.router-link-active {
     border-color: var(--color-on-primary);
+    background-color: rgba(255, 255, 255, 0.14);
+    opacity: 1;
 }
+
 .nav .nav__tab:hover {
-    border-color: var(--color-on-primary);
+    border-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.12);
+    opacity: 1;
 }
+
+.nav .nav__tab:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.85);
+    outline-offset: 2px;
+}
+
 .nav .nav__actions {
     flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap: 0.2rem;
 }
+
 .nav .nav__actions .nav__icon {
-    height: 3rem;
-    width: 3rem;
+    height: 2.8rem;
+    width: 2.8rem;
     border: none;
     background-color: transparent;
     border-radius: 50%;
@@ -32,23 +54,42 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 100ms ease;
+    transition: background-color 140ms ease, transform 140ms ease;
 }
+
 .nav .nav__actions .nav__icon:hover {
     background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
 }
+
+.nav .nav__actions .nav__icon:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.85);
+    outline-offset: 2px;
+}
+
 .nav .nav__actions .nav__icon img {
-    height: 1.5rem;
+    height: 1.4rem;
 }
+
 .nav .nav__actions .nav__cta {
-    margin-left: 1rem;
-    padding: 1rem;
+    margin-left: 0.65rem;
+    padding: 0.9rem 1.2rem;
     background-color: var(--color-on-primary);
-    color: var(--color-primary);
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 0.5rem 0 rgba(0, 0, 102, 0.5);
-    transition: transform 100ms ease;
+    color: #cc8400;
+    border-radius: 0.7rem;
+    border: 1px solid rgba(204, 132, 0, 0.2);
+    box-shadow: 0 6px 14px rgba(0, 0, 102, 0.2);
+    white-space: nowrap;
+    transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
 }
+
 .nav .nav__actions .nav__cta:hover:not(:active) {
     transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 102, 0.24);
+    background-color: #fff9ed;
+}
+
+.nav .nav__actions .nav__cta:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 2px;
 }
