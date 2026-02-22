@@ -49,6 +49,7 @@ export default {
                         <p v-if="entry.user === 'BLuuTemp'" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'GD Bean'" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'Liquidman6776'" class="champion-text">Champion</p>
+                        <p v-if="entry.user === 'GamerAJG2012" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'Sdrawkcab'" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'Pijeon'" class="champion-text">Champion</p>
                         <p v-if="entry.user === 'Panda'" class="champion-text">Champion</p>
