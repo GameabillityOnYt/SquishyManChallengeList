@@ -191,7 +191,7 @@ display:grid;
 grid-template-columns:repeat(3,minmax(0,1fr));
 gap:1rem;
 align-items:stretch;
-grid-auto-rows:540px;
+grid-auto-rows:560px;
 }
 
 .central-container.view-mode-grid .level-card{
@@ -217,7 +217,7 @@ aspect-ratio:auto;
 
 .central-container.view-mode-grid .level-title-info{
 padding-right:0;
-min-height:96px;
+min-height:88px;
 display:flex;
 flex-direction:column;
 justify-content:flex-start;
@@ -245,7 +245,7 @@ margin-top:6px;
 
 .central-container.view-mode-grid .show-records-btn{
 width:100%;
-margin-top:8px;
+margin-top:auto;
 }
 
 .central-container.view-mode-grid .records td{
@@ -342,7 +342,7 @@ overflow:hidden;
 
 .central-container.view-mode-grid .authors-box{
 margin-top:0;
-min-height:96px;
+min-height:84px;
 align-content:flex-start;
 gap:.7rem 1rem;
 }
@@ -359,7 +359,7 @@ white-space:nowrap;
 }
 
 .central-container.view-mode-grid .stat-card{
-min-height:80px;
+min-height:72px;
 }
 
 .central-container.view-mode-grid .show-records-btn{
