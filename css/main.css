@@ -278,7 +278,7 @@ text-shadow:0 1px 0 rgba(0,0,0,0.35);
 display:inline-block;
 padding:4px 8px;
 border-radius:6px;
-background:#27b44b;
+background: rgba(39, 180, 75, 0.6);
 color:#ffffff;
 font-size:.72rem;
 font-weight:800;
