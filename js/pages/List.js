@@ -15,7 +15,11 @@ template:`
 
 <div class="central-container" :class="'view-mode-' + (store.listView || 'list')">
 
-<div v-for="([level,err],i) in list" class="level-card">
+<div
+v-for="([level,err],i) in list"
+class="level-card"
+:class="{ 'grid-records-open': store.listView === 'grid' && isOpen(i) }"
+>
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
 <div class="level-video-side">
@@ -110,6 +114,11 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 >
 <div v-if="isOpen(i)" class="records-panel">
 <div class="records-panel-inner">
+<div class="records-overlay-header">
+<strong>#{{i+1}} {{level.name}}</strong>
+<button class="records-close-btn" @click="toggleRecords(i)">Back</button>
+</div>
+<div class="records-scroll-area">
 <table v-if="level.records && level.records.length > 0" class="records">
 <tr v-for="record in level.records">
 <td>{{record.percent}}%</td>
@@ -118,6 +127,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </tr>
 </table>
 <p v-if="!level.records || level.records.length===0" class="no-records-message">No records on this level yet.</p>
+</div>
 </div>
 </div>
 </transition>
@@ -192,6 +202,12 @@ const days = diff / 86400000;
 return days >= 0 && days < 7;
 },
 beforeRecordsEnter(el){
+if(this.store.listView === 'grid'){
+el.style.height = '';
+el.style.transition = '';
+el.style.overflow = 'hidden';
+return;
+}
 if(el._recordsEndHandler){
 el.removeEventListener('transitionend',el._recordsEndHandler);
 el._recordsEndHandler = null;
@@ -208,6 +224,10 @@ inner.style.transform='translateY(-3px)';
 void el.offsetHeight;
 },
 recordsEnter(el,done){
+if(this.store.listView === 'grid'){
+done();
+return;
+}
 const targetHeight = `${el.scrollHeight}px`;
 const inner = el.querySelector('.records-panel-inner');
 el.style.willChange='height';
@@ -233,6 +253,13 @@ inner.style.transform='translateY(0)';
 });
 },
 afterRecordsEnter(el){
+if(this.store.listView === 'grid'){
+el.style.height = '';
+el.style.transition = '';
+el.style.willChange = '';
+el.style.overflow = 'hidden';
+return;
+}
 const inner = el.querySelector('.records-panel-inner');
 el.style.height='auto';
 el.style.transition='';
@@ -246,6 +273,12 @@ inner.style.transform='none';
 }
 },
 beforeRecordsLeave(el){
+if(this.store.listView === 'grid'){
+el.style.height = '';
+el.style.transition = '';
+el.style.overflow = '';
+return;
+}
 if(el._recordsEndHandler){
 el.removeEventListener('transitionend',el._recordsEndHandler);
 el._recordsEndHandler = null;
@@ -262,6 +295,10 @@ inner.style.transform='none';
 void el.offsetHeight;
 },
 recordsLeave(el,done){
+if(this.store.listView === 'grid'){
+done();
+return;
+}
 const startHeight = el.getBoundingClientRect().height;
 const inner = el.querySelector('.records-panel-inner');
 if(startHeight <= 1){
@@ -293,6 +330,13 @@ inner.style.transform='translateY(-2px)';
 });
 },
 afterRecordsLeave(el){
+if(this.store.listView === 'grid'){
+el.style.transition = '';
+el.style.willChange = '';
+el.style.height = '';
+el.style.overflow = '';
+return;
+}
 const inner = el.querySelector('.records-panel-inner');
 el.style.transition='';
 el.style.willChange='';
