@@ -3,7 +3,7 @@ import { store } from "../main.js";
 import { getThumbnailFromId, getYoutubeIdFromUrl } from "../util.js";
 import { score } from "../score.js";
 import { fetchEditors, fetchList, fetchNewTags } from "../content.js";
-import Spinner from "../components/Spinner.js";
+import Spinner from "../components/spinner.js";
 import listTemplate from "./List.template.js";
 
 export default {
@@ -430,5 +430,6 @@ iconFor(role){
 }
 }
 };
+
 
 
