@@ -20,7 +20,6 @@ template:`
 v-for="([level],i) in list"
 class="level-card"
 :class="{ 'grid-records-open': store.listView === 'grid' && (isOpen(i) || gridRecordAnimating[i] === true) }"
-:style="levelCardStyle(level)"
 >
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
@@ -207,13 +206,6 @@ methods:{
 thumbnailFor(video){
 const id = getYoutubeIdFromUrl(video);
 return id ? getThumbnailFromId(id) : "e.png";
-},
-levelCardStyle(level){
-const cover = this.thumbnailFor(level?.verification);
-if(!cover) return {};
-return {
-'--level-cover-image': `url("${cover}")`
-};
 },
 score,
 clearEndHandler(el){
