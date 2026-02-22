@@ -1,3 +1,4 @@
+
 import { store } from "../main.js";
 import { getThumbnailFromId, getYoutubeIdFromUrl } from "../util.js";
 import { score } from "../score.js";
@@ -16,7 +17,7 @@ template:`
 <div class="central-container" :class="'view-mode-' + (store.listView || 'list')">
 
 <div
-v-for="([level,err],i) in list"
+v-for="([level],i) in list"
 class="level-card"
 :class="{ 'grid-records-open': store.listView === 'grid' && (isOpen(i) || gridRecordAnimating[i] === true) }"
 >
@@ -186,6 +187,31 @@ const id = getYoutubeIdFromUrl(video);
 return id ? getThumbnailFromId(id) : "e.png";
 },
 score,
+clearEndHandler(el){
+if(!el._recordsEndHandler) return;
+el.removeEventListener('transitionend',el._recordsEndHandler);
+el._recordsEndHandler = null;
+},
+attachTransitionEnd(el,propertyName,done){
+const onEnd = (e)=>{
+if(e.target!==el || e.propertyName!==propertyName) return;
+el.removeEventListener('transitionend',onEnd);
+el._recordsEndHandler = null;
+done();
+};
+el._recordsEndHandler = onEnd;
+el.addEventListener('transitionend',onEnd);
+},
+setGridAnimating(index,isAnimating){
+if(Number.isNaN(index)) return;
+const next = {...this.gridRecordAnimating};
+if(isAnimating){
+next[index] = true;
+}else{
+delete next[index];
+}
+this.gridRecordAnimating = next;
+},
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){this.toggledRecords={[i]:!this.toggledRecords[i]}},
 isLevelNew(level){
@@ -212,10 +238,7 @@ el.style.overflow = 'hidden';
 void el.offsetHeight;
 return;
 }
-if(el._recordsEndHandler){
-el.removeEventListener('transitionend',el._recordsEndHandler);
-el._recordsEndHandler = null;
-}
+this.clearEndHandler(el);
 const inner = el.querySelector('.records-panel-inner');
 el.style.transition='none';
 el.style.height='0px';
@@ -231,19 +254,10 @@ recordsEnter(el,done){
 if(this.store.listView === 'grid'){
 const index = Number(el.dataset.index);
 if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
-const next = {...this.gridRecordAnimating};
-delete next[index];
-this.gridRecordAnimating = next;
+this.setGridAnimating(index,false);
 }
 el.style.transition = 'opacity .24s ease, transform .28s cubic-bezier(.22,1,.36,1), filter .24s ease';
-const onEnd = (e)=>{
-if(e.target!==el || e.propertyName!=='opacity') return;
-el.removeEventListener('transitionend',onEnd);
-el._recordsEndHandler = null;
-done();
-};
-el._recordsEndHandler = onEnd;
-el.addEventListener('transitionend',onEnd);
+this.attachTransitionEnd(el,'opacity',done);
 requestAnimationFrame(()=>{
 el.style.opacity = '1';
 el.style.transform = 'translateY(0) scale(1)';
@@ -259,14 +273,7 @@ if(inner){
 inner.style.willChange='opacity,transform';
 inner.style.transition='opacity .18s ease-out, transform .22s cubic-bezier(.22,1,.36,1)';
 }
-const onEnd = (e)=>{
-if(e.target!==el || e.propertyName!=='height') return;
-el.removeEventListener('transitionend',onEnd);
-el._recordsEndHandler = null;
-done();
-};
-el._recordsEndHandler = onEnd;
-el.addEventListener('transitionend',onEnd);
+this.attachTransitionEnd(el,'height',done);
 requestAnimationFrame(()=>{
 el.style.height=targetHeight;
 if(inner){
@@ -300,10 +307,7 @@ inner.style.transform='none';
 },
 beforeRecordsLeave(el){
 if(this.store.listView === 'grid'){
-if(el._recordsEndHandler){
-el.removeEventListener('transitionend',el._recordsEndHandler);
-el._recordsEndHandler = null;
-}
+this.clearEndHandler(el);
 el.style.transition = 'none';
 el.style.willChange = 'opacity, transform, filter';
 el.style.opacity = '1';
@@ -313,10 +317,7 @@ el.style.overflow = 'hidden';
 void el.offsetHeight;
 return;
 }
-if(el._recordsEndHandler){
-el.removeEventListener('transitionend',el._recordsEndHandler);
-el._recordsEndHandler = null;
-}
+this.clearEndHandler(el);
 const inner = el.querySelector('.records-panel-inner');
 el.style.transition='none';
 el.style.height=`${el.getBoundingClientRect().height}px`;
@@ -332,20 +333,10 @@ recordsLeave(el,done){
 if(this.store.listView === 'grid'){
 const index = Number(el.dataset.index);
 if(!Number.isNaN(index)){
-this.gridRecordAnimating = {
-...this.gridRecordAnimating,
-[index]:true
-};
+this.setGridAnimating(index,true);
 }
 el.style.transition = 'opacity .2s ease, transform .22s cubic-bezier(.4,0,.2,1), filter .2s ease';
-const onEnd = (e)=>{
-if(e.target!==el || e.propertyName!=='opacity') return;
-el.removeEventListener('transitionend',onEnd);
-el._recordsEndHandler = null;
-done();
-};
-el._recordsEndHandler = onEnd;
-el.addEventListener('transitionend',onEnd);
+this.attachTransitionEnd(el,'opacity',done);
 requestAnimationFrame(()=>{
 el.style.opacity = '0';
 el.style.transform = 'translateY(8px) scale(.985)';
@@ -367,14 +358,7 @@ const fadeDuration = Math.max(110, Math.min(180, Math.round(duration * 0.7)));
 inner.style.willChange='opacity,transform';
 inner.style.transition=`opacity ${fadeDuration}ms ease-out, transform ${fadeDuration}ms ease-out`;
 }
-const onEnd = (e)=>{
-if(e.target!==el || e.propertyName!=='height') return;
-el.removeEventListener('transitionend',onEnd);
-el._recordsEndHandler = null;
-done();
-};
-el._recordsEndHandler = onEnd;
-el.addEventListener('transitionend',onEnd);
+this.attachTransitionEnd(el,'height',done);
 requestAnimationFrame(()=>{
 el.style.height='0px';
 if(inner){
@@ -387,9 +371,7 @@ afterRecordsLeave(el){
 if(this.store.listView === 'grid'){
 const index = Number(el.dataset.index);
 if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
-const next = {...this.gridRecordAnimating};
-delete next[index];
-this.gridRecordAnimating = next;
+this.setGridAnimating(index,false);
 }
 el.style.transition = '';
 el.style.willChange = '';
@@ -462,4 +444,3 @@ iconFor(role){
 }
 }
 };
-
