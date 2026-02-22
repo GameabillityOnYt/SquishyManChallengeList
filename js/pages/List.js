@@ -266,11 +266,31 @@ if(!playerIframe || !playerIframe.isConnected){
 return false;
 }
 if(playerIframe && playerIframe !== activeIframe){
-player.pauseVideo();
+this.resetClosedPlayer(player, playerIframe);
+return false;
 }
 }catch{}
 return true;
 });
+},
+resetClosedPlayer(player, playerIframe){
+const parent = playerIframe?.parentElement;
+const src = playerIframe?.src || playerIframe?.dataset?.src;
+try{
+player.destroy();
+}catch{}
+if(!parent || !src){
+return;
+}
+parent.innerHTML = `
+<iframe src="${src}"
+allowfullscreen
+loading="lazy"
+frameborder="0">
+</iframe>
+`;
+const freshIframe = parent.querySelector("iframe");
+this.attachYoutubePlayer(freshIframe);
 },
 attachYoutubePlayer(iframe){
 if(!iframe || iframe.dataset.youtubeBound === '1'){
