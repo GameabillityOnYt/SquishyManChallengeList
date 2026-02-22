@@ -6,6 +6,20 @@
     padding: 1rem;
 }
 
+/* Desktop: keep only the levels scrollbar and lock page-level scrolling */
+@media screen and (min-width: 1201px) {
+    html:has(.page-roulette),
+    body:has(.page-roulette) {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .page-roulette {
+        height: calc(100vh - 4rem);
+        overflow: hidden;
+    }
+}
+
 .page-roulette .sidebar {
     padding: 0;
     display: flex;
