@@ -19,7 +19,7 @@ will-change:transform;
 }
 
 .level-card::after{
-content:"😤";
+content:"ðŸ˜¤";
 position:absolute;
 left:8px;
 bottom: 14px;
@@ -488,4 +488,5 @@ height:100%;
 display:block;
 object-fit:cover;
 }
+
 
