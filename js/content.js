@@ -46,6 +46,16 @@ export async function fetchEditors() {
     }
 }
 
+export async function fetchNewTags() {
+    try {
+        const tagsResult = await fetch(`${dir}/NEWtag.json`);
+        const tags = await tagsResult.json();
+        return tags && typeof tags === 'object' ? tags : {};
+    } catch {
+        return {};
+    }
+}
+
 export async function fetchLeaderboard() {
     const list = await fetchList();
 
