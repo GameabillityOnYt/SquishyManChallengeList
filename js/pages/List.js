@@ -4,7 +4,7 @@ import { getThumbnailFromId, getYoutubeIdFromUrl } from "../util.js";
 import { score } from "../score.js";
 import { fetchEditors, fetchList, fetchNewTags } from "../content.js";
 import Spinner from "../components/spinner.js";
-import listTemplate from "./List.template.js";
+import listTemplate from "./ListTemplate.js";
 
 export default {
 components:{Spinner},
@@ -430,6 +430,7 @@ iconFor(role){
 }
 }
 };
+
 
 
 
