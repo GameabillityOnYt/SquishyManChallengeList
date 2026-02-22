@@ -29,6 +29,15 @@ color:var(--color-on-background);
 
 /* ================= SPINNER ================= */
 
+.spinner-overlay{
+position:fixed !important;
+inset:0 !important;
+display:grid !important;
+place-items:center !important;
+z-index:9999 !important;
+pointer-events:none !important;
+}
+
 .spinner-wrap{
 position:fixed;
 top:50vh;
