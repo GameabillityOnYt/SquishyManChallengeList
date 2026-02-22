@@ -278,13 +278,13 @@ text-shadow:0 1px 0 rgba(0,0,0,0.35);
 display:inline-block;
 padding:4px 8px;
 border-radius:6px;
-background: rgba(39, 180, 75, 0.6);
+background:rgba(28,210,86,0.7);
 color:#ffffff;
 font-size:.72rem;
 font-weight:800;
 text-transform:uppercase;
 line-height:1.1;
-border:2px solid #138c35;
+border:2px solid #0a6a28;
 opacity:1;
 text-shadow:0 1px 0 rgba(0,0,0,0.35);
 }
