@@ -246,14 +246,20 @@ margin-top:2px;
 
 .level-title-info{
 position:relative;
-padding-right:140px;
+padding-right:250px;
 min-height:28px;
 }
 
-.former-top-1-tag{
+.level-badges{
 position:absolute;
 top:0;
 right:0;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.former-top-1-tag{
 display:inline-block;
 padding:4px 8px;
 border-radius:6px;
@@ -264,6 +270,21 @@ font-weight:800;
 text-transform:uppercase;
 line-height:1.1;
 border:2px solid #0047AB;
+opacity:1;
+text-shadow:0 1px 0 rgba(0,0,0,0.35);
+}
+
+.decorated-tag{
+display:inline-block;
+padding:4px 8px;
+border-radius:6px;
+background:#27b44b;
+color:#ffffff;
+font-size:.72rem;
+font-weight:800;
+text-transform:uppercase;
+line-height:1.1;
+border:2px solid #138c35;
 opacity:1;
 text-shadow:0 1px 0 rgba(0,0,0,0.35);
 }
@@ -615,14 +636,7 @@ height:124px;
 }
 
 .level-title-info{
-padding-right:136px;
-}
-
-.former-top-1-tag{
-position:absolute;
-top:0;
-right:0;
-margin-left:0;
+padding-right:250px;
 }
 
 .stats-middle-grid{
