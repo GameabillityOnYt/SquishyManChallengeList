@@ -90,7 +90,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 
 <button class="show-records-btn" @click="toggleRecords(i)">
-{{isOpen(i)?'Hide Records':'Show Records'}}
+{{isOpen(i)?'Hide Records':'Show Records'}}<span v-if="level.records && level.records.length"> ({{level.records.length}})</span>
 </button>
 
 <transition
