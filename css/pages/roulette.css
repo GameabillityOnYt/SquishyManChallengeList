@@ -134,7 +134,7 @@
 
 .page-roulette .levels {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    grid-template-columns: 1fr;
     padding-block: 0.2rem 1.25rem;
     gap: 1rem;
     align-items: start;
@@ -188,13 +188,14 @@
 .page-roulette .levels .level .actions input[type="number"] {
     border: none;
     border-radius: 0.5rem;
-    padding: 0.8rem;
+    padding: 0.9rem 1rem;
     background-color: #4d6288;
     flex: 1;
     color: white;
     font-size: 1rem;
     font-weight: 700;
     min-width: 8rem;
+    min-height: 3.35rem;
     -moz-appearance: textfield;
 }
 .page-roulette .levels .level .actions input[type="number"]::placeholder {
@@ -203,13 +204,30 @@
 .page-roulette .levels .level .actions input[type="number"]::-webkit-outer-spin-button,
 .page-roulette .levels .level .actions input[type="number"]::-webkit-inner-spin-button {
     opacity: 1;
-    width: 1.35rem;
-    height: 1.65rem;
+    width: 1.9rem;
+    height: 2.25rem;
+    transform: scale(1.25);
+    transform-origin: right center;
     filter: invert(1) brightness(1.35) contrast(1.15);
     cursor: pointer;
 }
 .page-roulette .levels .level .actions .btn {
     min-width: 6.2rem;
+}
+
+/* Lighter action strip in light mode (dark mode keeps the blue style) */
+html:not(.dark) .page-roulette .levels .level .actions {
+    background: #e8edf5;
+    border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+html:not(.dark) .page-roulette .levels .level .actions input[type="number"] {
+    background: #cfd8e7;
+    color: #1b2738;
+}
+
+html:not(.dark) .page-roulette .levels .level .actions input[type="number"]::placeholder {
+    color: #5f6f89;
 }
 .page-roulette .levels .results {
     display: flex;
