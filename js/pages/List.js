@@ -60,7 +60,7 @@ template:`
 <span class="stat-label">ID</span>
 <div class="id-copy-box">
 <span class="stat-value">{{level.id}}</span>
-<button class="copy-id" @click="copyID(level.id,$event)">
+<button class="copy-id" @click="copyID(level.id)">
 <svg viewBox="0 0 24 24">
 <path fill="currentColor"
 d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
@@ -143,16 +143,6 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 
 </div>
-<div v-if="copyPopup.visible" ref="copyPopupEl" class="copy-popup">
-<svg viewBox="0 0 24 24" aria-hidden="true">
-<path fill="currentColor"
-d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
-5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19
-C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
-5ZM19 21H8V7H19V21Z"/>
-</svg>
-<span>Copied!</span>
-</div>
 `,
 data:()=>({
 
@@ -162,15 +152,6 @@ loading:true,
 toggledRecords:{},
 observer:null,
 store
-,
-copyToastTimer:null,
-pointerMoveHandler:null,
-lastMouseX:0,
-lastMouseY:0,
-popupRaf:null,
-copyPopup:{
-visible:false
-}
 }),
 async mounted(){
 const fetchedList = await fetchList();
@@ -179,8 +160,6 @@ this.list = Array.isArray(fetchedList)
 : [];
 this.editors=(await fetchEditors())||[];
 this.loading=false;
-this.pointerMoveHandler = (e)=>this.onPointerMove(e);
-window.addEventListener("pointermove",this.pointerMoveHandler,{ passive:true });
 
 this.$nextTick(()=>{
 
@@ -223,18 +202,6 @@ this.observer.observe(el);
 beforeUnmount(){
 if(this.observer){
 this.observer.disconnect();
-}
-if(this.copyToastTimer){
-clearTimeout(this.copyToastTimer);
-this.copyToastTimer = null;
-}
-if(this.pointerMoveHandler){
-window.removeEventListener("pointermove",this.pointerMoveHandler);
-this.pointerMoveHandler = null;
-}
-if(this.popupRaf){
-cancelAnimationFrame(this.popupRaf);
-this.popupRaf = null;
 }
 },
 methods:{
@@ -356,51 +323,18 @@ inner.style.opacity='';
 inner.style.transform='';
 }
 },
-copyID(id,evt){
+copyID(id){
 const text = id.toString();
-const copied = ()=>{
-this.showCopyPopup(evt);
-if(this.copyToastTimer){
-clearTimeout(this.copyToastTimer);
-}
-this.copyToastTimer = setTimeout(()=>{
-this.copyPopup.visible = false;
-this.copyToastTimer = null;
-},1100);
-};
-
 if(navigator.clipboard?.writeText){
-navigator.clipboard.writeText(text).then(copied).catch(()=>{
-this.fallbackCopy(text,copied);
+navigator.clipboard.writeText(text).catch(()=>{
+this.fallbackCopy(text);
 });
 return;
 }
 
-this.fallbackCopy(text,copied);
+this.fallbackCopy(text);
 },
-onPointerMove(evt){
-this.lastMouseX = evt.clientX;
-this.lastMouseY = evt.clientY;
-if(!this.copyPopup.visible) return;
-if(this.popupRaf) return;
-this.popupRaf = requestAnimationFrame(()=>{
-this.popupRaf = null;
-this.moveCopyPopup(this.lastMouseX,this.lastMouseY);
-});
-},
-showCopyPopup(evt){
-const x = evt?.clientX ?? this.lastMouseX;
-const y = evt?.clientY ?? this.lastMouseY;
-this.copyPopup.visible = true;
-this.$nextTick(()=>this.moveCopyPopup(x,y));
-},
-moveCopyPopup(x,y){
-const popup = this.$refs.copyPopupEl;
-if(!popup) return;
-popup.style.left = `${x + 16}px`;
-popup.style.top = `${y - 10}px`;
-},
-fallbackCopy(text,onSuccess){
+fallbackCopy(text){
 const ta = document.createElement("textarea");
 ta.value = text;
 ta.setAttribute("readonly","");
@@ -412,7 +346,6 @@ ta.focus();
 ta.select();
 try{
 document.execCommand("copy");
-onSuccess();
 }catch{}
 document.body.removeChild(ta);
 },
