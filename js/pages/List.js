@@ -114,10 +114,6 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 >
 <div v-if="isOpen(i)" class="records-panel">
 <div class="records-panel-inner">
-<div class="records-overlay-header">
-<strong>#{{i+1}} {{level.name}}</strong>
-<button class="records-close-btn" @click="toggleRecords(i)">Back</button>
-</div>
 <div class="records-scroll-area">
 <table v-if="level.records && level.records.length > 0" class="records">
 <tr v-for="record in level.records">
@@ -203,9 +199,11 @@ return days >= 0 && days < 7;
 },
 beforeRecordsEnter(el){
 if(this.store.listView === 'grid'){
-el.style.height = '';
-el.style.transition = '';
+el.style.transition = 'none';
+el.style.opacity = '0';
+el.style.transform = 'translateY(6px) scale(.985)';
 el.style.overflow = 'hidden';
+void el.offsetHeight;
 return;
 }
 if(el._recordsEndHandler){
@@ -225,7 +223,19 @@ void el.offsetHeight;
 },
 recordsEnter(el,done){
 if(this.store.listView === 'grid'){
+el.style.transition = 'opacity .18s ease, transform .22s cubic-bezier(.22,1,.36,1)';
+const onEnd = (e)=>{
+if(e.target!==el || e.propertyName!=='opacity') return;
+el.removeEventListener('transitionend',onEnd);
+el._recordsEndHandler = null;
 done();
+};
+el._recordsEndHandler = onEnd;
+el.addEventListener('transitionend',onEnd);
+requestAnimationFrame(()=>{
+el.style.opacity = '1';
+el.style.transform = 'translateY(0) scale(1)';
+});
 return;
 }
 const targetHeight = `${el.scrollHeight}px`;
@@ -258,6 +268,8 @@ el.style.height = '';
 el.style.transition = '';
 el.style.willChange = '';
 el.style.overflow = 'hidden';
+el.style.opacity = '';
+el.style.transform = '';
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
@@ -274,9 +286,15 @@ inner.style.transform='none';
 },
 beforeRecordsLeave(el){
 if(this.store.listView === 'grid'){
-el.style.height = '';
-el.style.transition = '';
-el.style.overflow = '';
+if(el._recordsEndHandler){
+el.removeEventListener('transitionend',el._recordsEndHandler);
+el._recordsEndHandler = null;
+}
+el.style.transition = 'none';
+el.style.opacity = '1';
+el.style.transform = 'translateY(0) scale(1)';
+el.style.overflow = 'hidden';
+void el.offsetHeight;
 return;
 }
 if(el._recordsEndHandler){
@@ -296,7 +314,19 @@ void el.offsetHeight;
 },
 recordsLeave(el,done){
 if(this.store.listView === 'grid'){
+el.style.transition = 'opacity .14s ease, transform .18s ease';
+const onEnd = (e)=>{
+if(e.target!==el || e.propertyName!=='opacity') return;
+el.removeEventListener('transitionend',onEnd);
+el._recordsEndHandler = null;
 done();
+};
+el._recordsEndHandler = onEnd;
+el.addEventListener('transitionend',onEnd);
+requestAnimationFrame(()=>{
+el.style.opacity = '0';
+el.style.transform = 'translateY(4px) scale(.99)';
+});
 return;
 }
 const startHeight = el.getBoundingClientRect().height;
@@ -335,6 +365,8 @@ el.style.transition = '';
 el.style.willChange = '';
 el.style.height = '';
 el.style.overflow = '';
+el.style.opacity = '';
+el.style.transform = '';
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
