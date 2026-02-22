@@ -516,13 +516,17 @@ border:none;
 
 @media screen and (max-width:1024px){
 .page-list-custom{
-grid-template-columns:minmax(0,1fr);
-gap:1.25rem;
-padding:1rem;
+grid-template-columns:minmax(0,1fr) clamp(180px,32vw,260px);
+gap:.85rem;
+padding:.85rem;
 }
 
 .meta-container{
-order:2;
+position:sticky;
+top:4.75rem;
+max-height:calc(100vh - 5.5rem);
+overflow:auto;
+padding-right:.2rem;
 }
 
 .level-card{
@@ -569,6 +573,12 @@ word-break:break-word;
 }
 
 @media screen and (max-width:700px){
+.page-list-custom{
+grid-template-columns:minmax(0,1fr) 170px;
+gap:.55rem;
+padding:.55rem;
+}
+
 .level-card{
 flex-direction:column;
 }
@@ -593,7 +603,7 @@ gap:.75rem 1rem;
 }
 
 .authors-box div{
-min-width:calc(50% - .5rem);
+min-width:100%;
 }
 
 .stat-label{
@@ -606,5 +616,25 @@ font-size:.9rem;
 
 .show-records-btn{
 width:100%;
+}
+
+.stats-middle-grid{
+grid-template-columns:1fr;
+}
+
+.meta h3{
+font-size:1.02rem;
+margin-top:.85rem;
+margin-bottom:.55rem;
+}
+
+.meta p{
+font-size:.78rem;
+line-height:1.35;
+margin-bottom:.75rem;
+}
+
+.editors li{
+font-size:.9rem;
 }
 }
