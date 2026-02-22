@@ -409,10 +409,11 @@ gap:1rem;
 
 .meta{
 background:var(--color-background-hover);
-border:1.5px solid rgba(242,182,58,0.45);
+border:1.5px solid rgba(242,182,58,0.62);
 border-radius:12px;
 padding:1rem;
 box-shadow:0 8px 20px rgba(0,0,0,0.12);
+overflow:hidden;
 }
 
 .meta h3{
