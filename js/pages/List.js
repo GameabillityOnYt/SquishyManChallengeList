@@ -60,7 +60,7 @@ template:`
 <span class="stat-label">ID</span>
 <div class="id-copy-box">
 <span class="stat-value">{{level.id}}</span>
-<button class="copy-id" :class="{ 'is-copied': copiedId===level.id }" @click="copyID(level.id)">
+<button class="copy-id" @click="copyID(level.id,$event)">
 <svg viewBox="0 0 24 24">
 <path fill="currentColor"
 d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
@@ -68,7 +68,6 @@ d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
 C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 5ZM19 21H8V7H19V21Z"/>
 </svg>
-<span class="copy-id-text" v-if="copiedId===level.id">Copied!</span>
 </button>
 </div>
 </div>
@@ -144,6 +143,16 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 
 </div>
+<div v-if="copyPopup.visible" class="copy-popup" :style="{ left: copyPopup.x + 'px', top: copyPopup.y + 'px' }">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path fill="currentColor"
+d="M16 1H4C2.9 1 2 1.9 2 3V15H4V3H16V1ZM19
+5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19
+C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
+5ZM19 21H8V7H19V21Z"/>
+</svg>
+<span>Copied!</span>
+</div>
 `,
 data:()=>({
 
@@ -154,8 +163,15 @@ toggledRecords:{},
 observer:null,
 store
 ,
-copiedId:null,
-copyToastTimer:null
+copyToastTimer:null,
+mouseMoveHandler:null,
+lastMouseX:0,
+lastMouseY:0,
+copyPopup:{
+visible:false,
+x:0,
+y:0
+}
 }),
 async mounted(){
 const fetchedList = await fetchList();
@@ -164,6 +180,8 @@ this.list = Array.isArray(fetchedList)
 : [];
 this.editors=(await fetchEditors())||[];
 this.loading=false;
+this.mouseMoveHandler = (e)=>this.onMouseMove(e);
+window.addEventListener("mousemove",this.mouseMoveHandler);
 
 this.$nextTick(()=>{
 
@@ -210,6 +228,10 @@ this.observer.disconnect();
 if(this.copyToastTimer){
 clearTimeout(this.copyToastTimer);
 this.copyToastTimer = null;
+}
+if(this.mouseMoveHandler){
+window.removeEventListener("mousemove",this.mouseMoveHandler);
+this.mouseMoveHandler = null;
 }
 },
 methods:{
@@ -331,15 +353,15 @@ inner.style.opacity='';
 inner.style.transform='';
 }
 },
-copyID(id){
+copyID(id,evt){
 const text = id.toString();
 const copied = ()=>{
-this.copiedId = id;
+this.showCopyPopup(evt);
 if(this.copyToastTimer){
 clearTimeout(this.copyToastTimer);
 }
 this.copyToastTimer = setTimeout(()=>{
-this.copiedId = null;
+this.copyPopup.visible = false;
 this.copyToastTimer = null;
 },1100);
 };
@@ -352,6 +374,20 @@ return;
 }
 
 this.fallbackCopy(text,copied);
+},
+onMouseMove(evt){
+this.lastMouseX = evt.clientX;
+this.lastMouseY = evt.clientY;
+if(!this.copyPopup.visible) return;
+this.copyPopup.x = this.lastMouseX + 16;
+this.copyPopup.y = this.lastMouseY - 10;
+},
+showCopyPopup(evt){
+const x = evt?.clientX ?? this.lastMouseX;
+const y = evt?.clientY ?? this.lastMouseY;
+this.copyPopup.x = x + 16;
+this.copyPopup.y = y - 10;
+this.copyPopup.visible = true;
 },
 fallbackCopy(text,onSuccess){
 const ta = document.createElement("textarea");
@@ -369,7 +405,6 @@ onSuccess();
 }catch{}
 document.body.removeChild(ta);
 },
-
 iconFor(role){
 	const map = {
 		owner: 'crown',
