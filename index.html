@@ -42,6 +42,24 @@
             <header :class="{ dark: store.dark }">
                 <div class="logo">
                     <h2>SMLL</h2>
+                    <div v-if="$route.path === '/'" class="view-mode-switch" role="group" aria-label="Level list view mode">
+                        <button
+                            class="view-mode-btn"
+                            :class="{ active: store.listView === 'list' }"
+                            @click="store.setListView('list')"
+                            type="button"
+                        >
+                            List
+                        </button>
+                        <button
+                            class="view-mode-btn"
+                            :class="{ active: store.listView === 'grid' }"
+                            @click="store.setListView('grid')"
+                            type="button"
+                        >
+                            Grid
+                        </button>
+                    </div>
                 </div>
                 <nav class="nav">
                     <router-link class="nav__tab" to="/">
