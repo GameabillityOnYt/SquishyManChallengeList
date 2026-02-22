@@ -1,10 +1,10 @@
 {
-  "_note": "HOW TO USE: add the lvl name of a new verificaiton and date YYYY-MM-DD as value. the -NEW- tag stays for 7 days after disappearing alone.",
+  "_note": "HOW TO USE: add the lvl name of a new verification and date YYYY-MM-DD as value. the -NEW- tag stays for 7 days after disappearing alone.",
   "_example": {
-
     "levelsquish12": "2026-02-22",
     "levelsquish575": "2026-02-24"
-  }
-}
+  },
 
-"hardestpinecone": "2026-02-22"
+
+  "hardestpinecone": "2026-02-22"
+}
