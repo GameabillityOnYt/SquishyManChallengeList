@@ -27,21 +27,6 @@ background-color:var(--color-background);
 color:var(--color-on-background);
 }
 
-/* Subtle ambient background (lightweight, no images) */
-body{
-background-image:
-radial-gradient(1200px 700px at 8% -10%, rgba(255,165,0,0.15), transparent 58%),
-radial-gradient(1100px 680px at 92% 110%, rgba(135,206,250,0.16), transparent 58%),
-linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
-}
-
-html.dark body{
-background-image:
-radial-gradient(1300px 760px at 10% -12%, rgba(255,165,0,0.19), transparent 57%),
-radial-gradient(1200px 740px at 90% 112%, rgba(135,206,250,0.2), transparent 57%),
-linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
-}
-
 /* ================= HEADER ================= */
 
 header{
