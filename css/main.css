@@ -545,12 +545,14 @@ height:124px;
 }
 
 .level-title-info{
-padding-right:0;
+padding-right:136px;
 }
 
 .former-top-1-tag{
-position:static;
-margin-left:auto;
+position:absolute;
+top:0;
+right:0;
+margin-left:0;
 }
 
 .stats-middle-grid{
@@ -569,6 +571,16 @@ gap:4px;
 font-size:.9rem;
 overflow-wrap:anywhere;
 word-break:break-word;
+}
+}
+
+@media screen and (max-width:1024px) and (orientation:landscape){
+.meta-container{
+position:static;
+top:auto;
+max-height:none;
+overflow:visible;
+padding-right:0;
 }
 }
 
