@@ -107,6 +107,29 @@ filter:grayscale(1) saturate(0) contrast(1.08) brightness(0.95);
 mix-blend-mode:soft-light;
 }
 
+.new-corner-tag{
+position:absolute;
+left:6px;
+bottom:10px;
+width:86px;
+height:52px;
+display:flex;
+align-items:flex-end;
+justify-content:flex-start;
+padding:0 0 7px 8px;
+font-size:.68rem;
+font-weight:900;
+letter-spacing:.03em;
+text-transform:uppercase;
+color:#08334d;
+background:rgba(135,206,250,0.92);
+border-left:2px solid var(--color-border-blue);
+border-bottom:2px solid var(--color-border-blue);
+clip-path:polygon(0 0, 100% 100%, 0 100%);
+z-index:2;
+pointer-events:none;
+}
+
 html.dark .level-card::after{
 opacity:.28;
 color:rgba(210,210,210,0.9);
@@ -116,6 +139,11 @@ text-shadow:
 0 2px 3px rgba(0,0,0,0.35);
 filter:grayscale(1) saturate(0) contrast(1.12) brightness(1.06);
 mix-blend-mode:overlay;
+}
+
+html.dark .new-corner-tag{
+color:#ffffff;
+background:rgba(135,206,250,0.78);
 }
 
 .level-video-side{
