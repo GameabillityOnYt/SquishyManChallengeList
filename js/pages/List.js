@@ -192,6 +192,36 @@ if(!el._recordsEndHandler) return;
 el.removeEventListener('transitionend',el._recordsEndHandler);
 el._recordsEndHandler = null;
 },
+clearGridAnimation(el){
+if(!el._recordsAnim) return;
+try{
+el._recordsAnim.cancel();
+}catch{}
+el._recordsAnim = null;
+},
+runGridAnimation(el,keyframes,options,done){
+this.clearGridAnimation(el);
+if(typeof el.animate !== 'function'){
+const finalFrame = keyframes[keyframes.length-1] || {};
+Object.keys(finalFrame).forEach((prop)=>{
+el.style[prop] = finalFrame[prop];
+});
+done();
+return;
+}
+const anim = el.animate(keyframes,options);
+el._recordsAnim = anim;
+anim.onfinish = ()=>{
+if(el._recordsAnim !== anim) return;
+el._recordsAnim = null;
+done();
+};
+anim.oncancel = ()=>{
+if(el._recordsAnim === anim){
+el._recordsAnim = null;
+}
+};
+},
 attachTransitionEnd(el,propertyName,done){
 const onEnd = (e)=>{
 if(e.target!==el || e.propertyName!==propertyName) return;
@@ -235,10 +265,11 @@ return days >= 0 && days < 7;
 },
 beforeRecordsEnter(el){
 if(this.store.listView === 'grid'){
+this.clearGridAnimation(el);
 el.style.transition = 'none';
 el.style.willChange = 'opacity, transform';
 el.style.opacity = '0';
-el.style.transform = 'translateY(6px) scale(.992)';
+el.style.transform = 'translateY(10px) scale(.99)';
 el.style.overflow = 'hidden';
 void el.offsetHeight;
 return;
@@ -261,12 +292,22 @@ const index = Number(el.dataset.index);
 if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
 this.setGridAnimating(index,false);
 }
-el.style.transition = 'opacity .28s ease, transform .34s cubic-bezier(.16,1,.3,1)';
-this.attachTransitionEnd(el,'opacity',done);
-requestAnimationFrame(()=>{
-el.style.opacity = '1';
-el.style.transform = 'translateY(0) scale(1)';
-});
+el.style.transition = 'none';
+el.style.overflow = 'hidden';
+el.style.willChange = 'opacity, transform';
+this.runGridAnimation(
+el,
+[
+{ opacity:'0', transform:'translateY(10px) scale(.99)' },
+{ opacity:'1', transform:'translateY(0) scale(1)' }
+],
+{
+duration:280,
+easing:'cubic-bezier(.22,.61,.36,1)',
+fill:'forwards'
+},
+done
+);
 return;
 }
 const targetHeight = `${el.scrollHeight}px`;
@@ -288,6 +329,7 @@ inner.style.transform='translateY(0)';
 },
 afterRecordsEnter(el){
 if(this.store.listView === 'grid'){
+this.clearGridAnimation(el);
 el.style.height = '';
 el.style.transition = '';
 el.style.willChange = '';
@@ -310,6 +352,7 @@ inner.style.transform='none';
 },
 beforeRecordsLeave(el){
 if(this.store.listView === 'grid'){
+this.clearGridAnimation(el);
 this.clearEndHandler(el);
 el.style.transition = 'none';
 el.style.willChange = 'opacity, transform';
@@ -337,12 +380,22 @@ const index = Number(el.dataset.index);
 if(!Number.isNaN(index) && !this.gridRecordAnimating[index]){
 this.setGridAnimating(index,true);
 }
-el.style.transition = 'opacity .24s ease, transform .28s cubic-bezier(.4,0,.2,1)';
-this.attachTransitionEnd(el,'opacity',done);
-requestAnimationFrame(()=>{
-el.style.opacity = '0';
-el.style.transform = 'translateY(6px) scale(.992)';
-});
+el.style.transition = 'none';
+el.style.overflow = 'hidden';
+el.style.willChange = 'opacity, transform';
+this.runGridAnimation(
+el,
+[
+{ opacity:'1', transform:'translateY(0) scale(1)' },
+{ opacity:'.0', transform:'translateY(12px) scale(.985)' }
+],
+{
+duration:220,
+easing:'cubic-bezier(.4,0,.2,1)',
+fill:'forwards'
+},
+done
+);
 return;
 }
 const startHeight = el.getBoundingClientRect().height;
@@ -370,6 +423,7 @@ inner.style.transform='translateY(-2px)';
 },
 afterRecordsLeave(el){
 if(this.store.listView === 'grid'){
+this.clearGridAnimation(el);
 const index = Number(el.dataset.index);
 if(!Number.isNaN(index) && this.gridRecordAnimating[index]){
 this.setGridAnimating(index,false);
