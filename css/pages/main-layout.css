@@ -1,1 +1,380 @@
+/* ================= MAIN GRID ================= */
+
+.page-list-custom{
+display:grid;
+grid-template-columns:minmax(0,1fr) 300px;
+gap:3rem;
+padding:2rem;
+max-width:1400px;
+margin:0 auto;
+align-items:start;
+}
+
+.central-container{
+min-width:0;
+overflow:visible;
+max-height:none;
+}
+
+.central-container.view-mode-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:1rem;
+align-items:stretch;
+grid-auto-rows:560px;
+}
+
+.central-container.view-mode-grid .level-card{
+margin-bottom:0;
+flex-direction:column;
+gap:.65rem;
+height:100%;
+min-height:0;
+max-height:100%;
+padding:.8rem 1rem;
+}
+
+.central-container.view-mode-grid .level-video-side{
+flex:0 0 auto;
+width:100%;
+height:auto;
+}
+
+.central-container.view-mode-grid .lazy-video{
+height:118px;
+aspect-ratio:auto;
+}
+
+.central-container.view-mode-grid .level-title-info{
+padding-right:0;
+min-height:88px;
+display:flex;
+flex-direction:column;
+justify-content:flex-start;
+}
+
+.central-container.view-mode-grid .level-badges{
+min-height:28px;
+position:static;
+justify-content:flex-start;
+margin-bottom:.35rem;
+}
+
+.central-container.view-mode-grid .level-badges.is-empty{
+visibility:hidden;
+}
+
+.central-container.view-mode-grid .stats-middle-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:8px;
+margin-top:6px;
+}
+
+.central-container.view-mode-grid .show-records-btn{
+width:100%;
+margin-top:auto;
+flex:0 0 auto;
+}
+
+.central-container.view-mode-grid .records td{
+padding:.45rem 0!important;
+}
+
+.central-container.view-mode-grid .level-card::after{
+display:none;
+}
+
+.central-container.view-mode-grid .new-corner-tag{
+top:-1px;
+left:-1px;
+bottom:auto;
+width:84px;
+height:64px;
+align-items:flex-start;
+justify-content:flex-start;
+padding:8px 0 0 8px;
+clip-path:polygon(0 0, 100% 0, 0 100%);
+}
+
+.central-container.view-mode-grid .level-card.grid-records-open{
+overflow:hidden;
+}
+
+.central-container.view-mode-grid .level-card.grid-records-open .level-video-side,
+.central-container.view-mode-grid .level-card.grid-records-open .authors-box,
+.central-container.view-mode-grid .level-card.grid-records-open .stats-middle-grid,
+.central-container.view-mode-grid .level-card.grid-records-open .new-corner-tag{
+display:none;
+}
+
+.central-container.view-mode-grid .level-card.grid-records-open .show-records-btn{
+position:absolute;
+left:.85rem;
+right:.85rem;
+width:auto;
+margin-left:0;
+margin-right:0;
+transform:none;
+bottom:.85rem;
+margin-top:0;
+z-index:6;
+}
+
+.central-container.view-mode-grid .level-card.grid-records-open .level-details-side{
+height:100%;
+min-height:0;
+}
+
+.central-container.view-mode-grid .level-details-side{
+display:flex;
+flex-direction:column;
+height:100%;
+min-height:0;
+justify-content:flex-start;
+}
+
+.central-container.view-mode-grid .level-card.grid-records-open .records-panel{
+position:absolute;
+inset:0 0 52px 0;
+margin:0;
+padding:.85rem;
+border-radius:inherit;
+background:var(--color-background-hover);
+z-index:4;
+display:flex;
+}
+
+.central-container.view-mode-grid .level-card.grid-records-open .records-panel-inner{
+display:flex;
+flex-direction:column;
+gap:.35rem;
+width:100%;
+height:100%;
+min-height:0;
+}
+
+.central-container.view-mode-grid .level-card.grid-records-open .records-scroll-area{
+flex:1;
+overflow:auto;
+padding-right:.35rem;
+}
+
+.central-container.view-mode-grid .level-title-info h2{
+font-size:1.12rem;
+line-height:1.2;
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden;
+}
+
+.central-container.view-mode-grid .authors-box{
+margin-top:0;
+min-height:84px;
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+align-content:flex-start;
+align-items:start;
+gap:.55rem .75rem;
+}
+
+.central-container.view-mode-grid .authors-box div{
+min-width:0;
+}
+
+.central-container.view-mode-grid .authors-box span:first-child{
+white-space:nowrap;
+}
+
+.central-container.view-mode-grid .authors-box span:last-child{
+display:block;
+white-space:normal;
+overflow-wrap:anywhere;
+word-break:break-word;
+line-height:1.15;
+}
+
+.central-container.view-mode-grid .stat-card{
+min-height:72px;
+}
+
+.meta-container{
+display:flex;
+flex-direction:column;
+min-width:0;
+align-self:start;
+height:auto!important;
+overflow:visible!important;
+max-height:none;
+gap:1rem;
+}
+
+
+@media screen and (max-width:1024px){
+.logo{
+gap:.5rem;
+}
+
+.view-mode-switch{
+gap:.2rem;
+padding:2px;
+}
+
+.view-mode-btn{
+width:40px;
+height:32px;
+}
+
+.view-mode-btn svg{
+width:18px;
+height:18px;
+}
+
+.page-list-custom{
+grid-template-columns:minmax(0,1fr) clamp(180px,32vw,260px);
+gap:.85rem;
+padding:.85rem;
+}
+
+.central-container.view-mode-grid{
+grid-template-columns:1fr;
+}
+
+.meta-container{
+position:sticky;
+top:.75rem;
+max-height:calc(100vh - 5.5rem);
+overflow:auto;
+padding-right:.2rem;
+}
+
+.level-card{
+padding:.9rem;
+gap:.9rem;
+}
+
+.level-video-side{
+flex:0 0 220px;
+height:124px;
+}
+
+.level-video-side iframe,
+.lazy-video{
+height:124px;
+}
+
+.level-title-info{
+padding-right:250px;
+}
+
+.stats-middle-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.stat-card{
+min-width:0;
+}
+
+.id-copy-box{
+gap:4px;
+}
+
+.id-copy-box .stat-value{
+font-size:.9rem;
+overflow-wrap:anywhere;
+word-break:break-word;
+}
+}
+
+@media screen and (max-width:1024px) and (orientation:landscape){
+.meta-container{
+position:static;
+top:auto;
+max-height:none;
+overflow:visible;
+padding-right:0;
+}
+}
+
+@media screen and (max-width:700px){
+.logo{
+flex-direction:column;
+align-items:flex-start;
+gap:.2rem;
+}
+
+.view-mode-switch{
+align-self:flex-start;
+margin-left:0;
+}
+
+.page-list-custom{
+grid-template-columns:minmax(0,1fr) 170px;
+gap:.55rem;
+padding:.55rem;
+}
+
+.central-container.view-mode-grid .stats-middle-grid{
+grid-template-columns:1fr;
+}
+
+.level-card{
+flex-direction:column;
+}
+
+.level-video-side{
+width:100%;
+flex:0 0 auto;
+height:auto;
+}
+
+.lazy-video{
+height:auto;
+aspect-ratio:16/9;
+}
+
+.level-video-side iframe{
+height:100%;
+}
+
+.authors-box{
+gap:.75rem 1rem;
+}
+
+.authors-box div{
+min-width:100%;
+}
+
+.stat-label{
+font-size:.76rem;
+}
+
+.stat-value{
+font-size:.9rem;
+}
+
+.show-records-btn{
+width:100%;
+}
+
+.stats-middle-grid{
+grid-template-columns:1fr;
+}
+
+.meta h3{
+font-size:1.02rem;
+margin-top:.85rem;
+margin-bottom:.55rem;
+}
+
+.meta p{
+font-size:.78rem;
+line-height:1.35;
+margin-bottom:.75rem;
+}
+
+.editors li{
+font-size:.9rem;
+}
+}
 
