@@ -592,12 +592,14 @@ margin-top:0;
   font-weight:700;
   text-transform:uppercase;
   font-size:0.85rem;
+  transition:transform .16s ease, background .16s ease, border-color .16s ease, color .16s ease;
 }
 
 .show-records-btn:hover{
   background:linear-gradient(90deg,#f4be3b 0%, #f08b18 50%, #f4be3b 100%);
   border-color:#f0b12d;
   color:#ffffff;
+  transform:scale(1.04);
 }
 
 
