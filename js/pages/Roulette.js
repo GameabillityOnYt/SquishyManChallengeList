@@ -12,10 +12,13 @@ export default {
         </main>
         <main v-else class="page-roulette">
             <div class="sidebar">
-                <p class="type-label-md" style="color: #aaa">
-                    Shameless copy of the Extreme Demon Roulette by <a href="https://matcool.github.io/extreme-demon-roulette/" target="_blank">matcool</a>.
-                </p>
-                <form class="options">
+                <div class="sidebar-panel sidebar-intro">
+                    <p class="type-label-md roulette-note">
+                        Shameless copy of the Extreme Demon Roulette by <a href="https://matcool.github.io/extreme-demon-roulette/" target="_blank">matcool</a>.
+                    </p>
+                </div>
+                <form class="options sidebar-panel">
+                    <h3>Roulette Setup</h3>
                     <div class="check">
                         <input type="checkbox" id="main" value="Main List" v-model="useMainList">
                         <label for="main">Main List</label>
@@ -26,11 +29,13 @@ export default {
                     </div>
                     <Btn @click.native.prevent="onStart">{{ levels.length === 0 ? 'Start' : 'Restart'}}</Btn>
                 </form>
-                <p class="type-label-md" style="color: #aaa">
-                    The roulette saves automatically.
-                </p>
-                <form class="save">
-                    <p>Manual Load/Save</p>
+                <div class="sidebar-panel sidebar-autosave">
+                    <p class="type-label-md roulette-note">
+                        The roulette saves automatically.
+                    </p>
+                </div>
+                <form class="save sidebar-panel">
+                    <h3>Manual Load/Save</h3>
                     <div class="btns">
                         <Btn @click.native.prevent="onImport">Import</Btn>
                         <Btn :disabled="!isActive" @click.native.prevent="onExport">Export</Btn>
