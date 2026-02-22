@@ -3,7 +3,7 @@
     grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
     gap: 1.25rem;
     align-items: start;
-    padding: 0.35rem 1rem 1rem;
+    padding: 0 1rem 1rem;
 }
 
 /* Desktop: keep only the levels scrollbar and lock page-level scrolling */
@@ -28,7 +28,7 @@
     align-items: flex-start;
     width: 100%;
     position: sticky;
-    top: 4.2rem;
+    top: 0.25rem;
 }
 .page-roulette .sidebar a {
     text-decoration: underline;
