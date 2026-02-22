@@ -463,7 +463,7 @@ margin-top:0;
 .show-records-btn{
   margin-top:10px;
   background:transparent;
-  border:1.5px solid var(--color-border-yellow);
+  border:2px solid var(--color-border-yellow);
   color:var(--color-on-background);
   padding:0.6rem 1rem;
   border-radius:6px;
