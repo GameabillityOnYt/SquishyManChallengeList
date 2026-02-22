@@ -215,6 +215,15 @@ aspect-ratio:16/9;
 
 .central-container.view-mode-grid .level-title-info{
 padding-right:0;
+min-height:64px;
+}
+
+.central-container.view-mode-grid .level-badges{
+min-height:28px;
+}
+
+.central-container.view-mode-grid .level-badges.is-empty{
+visibility:hidden;
 }
 
 .central-container.view-mode-grid .level-badges{
@@ -267,6 +276,10 @@ display:none;
 position:absolute;
 left:.85rem;
 right:.85rem;
+width:auto;
+margin-left:0;
+margin-right:0;
+transform:none;
 bottom:.85rem;
 margin-top:0;
 z-index:6;
