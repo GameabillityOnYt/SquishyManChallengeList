@@ -53,13 +53,18 @@ align-items:start;
 
 .central-container{
 min-width:0;
+overflow:visible;
+max-height:none;
 }
 
 .meta-container{
+display:flex;
+flex-direction:column;
 min-width:0;
 align-self:start;
 height:auto!important;
 overflow:visible!important;
+max-height:none;
 }
 
 /* ================= LEVEL CARD ================= */
@@ -290,23 +295,10 @@ gap:8px;
 }
 
 .id-copy-box .stat-value{
+flex:0 0 auto;
 font-variant-numeric: tabular-nums;
+text-align:center;
 }
-
-.copy-id{
-margin-top:0;
-}
-
-.id-copy-box .stat-value{
-	flex:0 0 auto;
-	font-variant-numeric: tabular-nums;
-	text-align:center;
-}
-.copy-id{
-	flex:0 0 auto;
-	margin-top:4px;
-}
-
 .stat-label{
 font-size:.82rem;
 font-weight:700;
@@ -345,13 +337,6 @@ display:flex!important;
 align-items:center!important;
 gap:6px;
 white-space:nowrap;
-}
-
-.editors img{
-width:20px;
-height:20px;
-display:inline-block;
-vertical-align:middle;
 }
 
 /* ================= RECORDS ================= */
@@ -402,6 +387,8 @@ background:none;
 border:none;
 cursor:pointer;
 padding:4px;
+flex:0 0 auto;
+margin-top:4px;
 display:flex;
 align-items:center;
 opacity:.7;
@@ -418,29 +405,6 @@ width:18px;
 height:18px;
 }
 /* ================= LIST PAGE ================= */
-
-.page-list-custom{
-display:grid;
-grid-template-columns:minmax(0,1fr) 300px;
-gap:2rem;
-padding:2rem;
-align-items:start;
-}
-
-.central-container{
-min-width:0;
-overflow:visible;
-max-height:none;
-}
-
-.meta-container{
-display:flex;
-flex-direction:column;
-min-width:0;
-align-self:start;
-overflow:visible;
-max-height:none;
-}
 /* Ensure editors list items align icons + names correctly */
 .editors li{
 	display:flex;
