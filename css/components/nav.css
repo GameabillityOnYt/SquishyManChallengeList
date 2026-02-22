@@ -1,18 +1,15 @@
 .nav {
     display: flex;
-    align-items: center;
-    flex: 1;
-    min-width: 0;
-    margin-left: 1.5rem;
-    column-gap: 0.75rem;
+    column-gap: 2rem;
 }
 
 .nav .nav__tab {
-    padding: 0.65rem 0.9rem;
-    border-bottom: 3px solid transparent;
-    border-radius: 0.6rem 0.6rem 0 0;
+    padding-top: 4px;
+    border-bottom: 4px solid transparent;
+    border-radius: 0;
     display: flex;
     align-items: center;
+    padding-inline: 0.5rem;
     opacity: 0.92;
     transition: border-color 140ms ease, background-color 140ms ease, transform 140ms ease,
         opacity 140ms ease;
@@ -45,8 +42,8 @@
 }
 
 .nav .nav__actions .nav__icon {
-    height: 2.8rem;
-    width: 2.8rem;
+    height: 3rem;
+    width: 3rem;
     border: none;
     background-color: transparent;
     border-radius: 50%;
@@ -72,7 +69,7 @@
 }
 
 .nav .nav__actions .nav__cta {
-    margin-left: 0.65rem;
+    margin-left: 1rem;
     padding: 0.9rem 1.2rem;
     background-color: var(--color-on-primary);
     color: #cc8400;
