@@ -109,8 +109,8 @@ mix-blend-mode:soft-light;
 
 .new-corner-tag{
 position:absolute;
-left:0;
-bottom:0;
+left:-1px;
+bottom:-1px;
 width:76px;
 height:74px;
 display:flex;
