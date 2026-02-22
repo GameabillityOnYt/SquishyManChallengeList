@@ -263,14 +263,13 @@ gap:8px;
 display:inline-block;
 padding:4px 8px;
 border-radius:6px;
-background:rgba(135,206,250,0.6);
+background:rgba(135,206,250,0.45);
 color:#08334d;
 font-size:.72rem;
 font-weight:800;
 text-transform:uppercase;
 line-height:1.1;
 border:2px solid #0047AB;
-opacity:1;
 text-shadow:0 1px 0 rgba(0,0,0,0.35);
 }
 
@@ -278,14 +277,13 @@ text-shadow:0 1px 0 rgba(0,0,0,0.35);
 display:inline-block;
 padding:4px 8px;
 border-radius:6px;
-background:rgba(28,210,86,0.6);
+background:rgba(28,210,86,0.45);
 color:#ffffff;
 font-size:.72rem;
 font-weight:800;
 text-transform:uppercase;
 line-height:1.1;
 border:2px solid #0a6a28;
-opacity:1;
 text-shadow:0 1px 0 rgba(0,0,0,0.35);
 }
 
