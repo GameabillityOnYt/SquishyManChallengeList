@@ -42,13 +42,37 @@ pointer-events:none;
 }
 
 .spinner{
+position:relative;
 width:68px;
 height:68px;
+display:block;
 border-radius:50%;
-border:6px solid rgba(160,160,160,0.25);
-border-top-color:#d6d6d6;
-border-right-color:rgba(95,95,95,0.32);
-animation:spin .95s linear infinite;
+/* hard-hide any legacy "Loading..." text if old markup is cached */
+font-size:0;
+line-height:0;
+color:transparent;
+text-indent:-9999px;
+overflow:hidden;
+white-space:nowrap;
+}
+
+.spinner::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:50%;
+background:conic-gradient(
+from 0deg,
+rgba(230,230,230,0.98) 0deg,
+rgba(210,210,210,0.9) 40deg,
+rgba(160,160,160,0.5) 125deg,
+rgba(130,130,130,0.2) 220deg,
+rgba(115,115,115,0) 330deg
+);
+/* ring mask for classic spinner look */
+-webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+mask:radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
+animation:spin .9s linear infinite;
 }
 
 @keyframes spin{
