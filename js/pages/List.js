@@ -180,6 +180,27 @@ this.list = Array.isArray(fetchedList)
 this.editors=(await fetchEditors())||[];
 this.newTags=(await fetchNewTags())||{};
 this.loading=false;
+this._authorFitResizeHandler = ()=>this.queueAuthorNameFit();
+window.addEventListener('resize',this._authorFitResizeHandler,{passive:true});
+this.$nextTick(()=>this.queueAuthorNameFit());
+},
+beforeUnmount(){
+if(this._authorFitResizeHandler){
+window.removeEventListener('resize',this._authorFitResizeHandler);
+this._authorFitResizeHandler = null;
+}
+if(this._authorFitRaf){
+cancelAnimationFrame(this._authorFitRaf);
+this._authorFitRaf = null;
+}
+},
+watch:{
+'store.listView'(){
+this.$nextTick(()=>this.queueAuthorNameFit());
+},
+list(){
+this.$nextTick(()=>this.queueAuthorNameFit());
+}
 },
 methods:{
 thumbnailFor(video){
@@ -242,6 +263,69 @@ delete next[index];
 }
 this.gridRecordAnimating = next;
 },
+queueAuthorNameFit(){
+if(this._authorFitRaf){
+cancelAnimationFrame(this._authorFitRaf);
+}
+this._authorFitRaf = requestAnimationFrame(()=>{
+this._authorFitRaf = null;
+this.fitAuthorNames();
+});
+},
+getLastLineCharCount(el){
+const firstNode = el.firstChild;
+if(!firstNode || firstNode.nodeType !== Node.TEXT_NODE) return 0;
+const text = firstNode.textContent || '';
+if(!text) return 0;
+const range = document.createRange();
+let lastTop = null;
+let count = 0;
+for(let i=1;i<=text.length;i++){
+range.setStart(firstNode,i-1);
+range.setEnd(firstNode,i);
+const rects = range.getClientRects();
+if(!rects.length) continue;
+const top = Math.round(rects[0].top);
+if(lastTop === null){
+lastTop = top;
+count = 1;
+continue;
+}
+if(Math.abs(top-lastTop) <= 1){
+count += 1;
+continue;
+}
+lastTop = top;
+count = 1;
+}
+return count;
+},
+fitAuthorNames(){
+if(!this.$el) return;
+const labels = this.$el.querySelectorAll('.authors-box span:last-child');
+labels.forEach((el)=>{
+el.style.fontSize = '';
+if(this.store.listView !== 'grid') return;
+const text = (el.textContent || '').trim();
+if(!text) return;
+const styles = window.getComputedStyle(el);
+const lineHeight = parseFloat(styles.lineHeight);
+const baseSize = parseFloat(styles.fontSize);
+if(Number.isNaN(lineHeight) || Number.isNaN(baseSize) || lineHeight <= 0) return;
+const wraps = el.scrollHeight > (lineHeight * 1.35);
+if(!wraps) return;
+const tailChars = this.getLastLineCharCount(el);
+if(tailChars < 1 || tailChars > 3) return;
+const minSize = Math.max(10,baseSize * 0.82);
+let nextSize = baseSize;
+let attempts = 0;
+while(el.scrollHeight > (lineHeight * 1.35) && nextSize > minSize && attempts < 8){
+nextSize -= 0.6;
+el.style.fontSize = `${nextSize}px`;
+attempts += 1;
+}
+});
+},
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){
 const wasOpen = this.toggledRecords[i]===true;
@@ -249,6 +333,7 @@ if(this.store.listView === 'grid' && wasOpen){
 this.setGridAnimating(i,true);
 }
 this.toggledRecords = {[i]:!wasOpen};
+this.$nextTick(()=>this.queueAuthorNameFit());
 },
 isLevelNew(level){
 const path = String(level?.path||'').toLowerCase();
