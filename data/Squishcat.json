@@ -5,6 +5,7 @@
     "creators": ["16Billion"],
     "verifier": "16Billion",
     "verification": "https://youtu.be/gBHicNzbtgU",
+    "decorated": true,
     "percentToQualify": "100",
     "password": "open",
     "records": [
