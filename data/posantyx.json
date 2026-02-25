@@ -49,6 +49,12 @@
             "link": "https://www.twitch.tv/videos/2532626329",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "1st3y1",
+            "link": "https://youtu.be/ygi7VUB-nNE",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
