@@ -322,17 +322,24 @@ this.toggledRecords = {[i]:!wasOpen};
 this.$nextTick(()=>this.queueAuthorNameFit());
 },
 isLevelNew(level){
-const path = String(level?.path||'').toLowerCase();
+const path = String(level?.path||'');
 if(!path) return false;
-const keyWithExt = `${path}.json`;
-const raw = this.newTags[path] ?? this.newTags[keyWithExt];
+
+const tagKey = Object.keys(this.newTags)
+.find(k => k.toLowerCase() === path.toLowerCase());
+
+if(!tagKey) return false;
+
+const raw = this.newTags[tagKey];
 if(!raw || typeof raw!=='string') return false;
-const addedAt = new Date(`${raw}T00:00:00`);
+
+const addedAt = new Date(raw + "T00:00:00Z");
 if(Number.isNaN(addedAt.getTime())) return false;
+
 const now = new Date();
 const diff = now.getTime() - addedAt.getTime();
-const days = diff / 86400000;
-return days >= 0 && days < 7;
+
+return diff >= 0 && diff < 7 * 86400000;
 },
 beforeRecordsEnter(el){
 if(this.store.listView === 'grid'){
