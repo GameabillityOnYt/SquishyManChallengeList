@@ -61,25 +61,6 @@ class="level-badges"
 <h2>{{level.name}}</h2>
 </div>
 </div>
-
-<transition name="legacy-dropdown">
-<div v-if="activeListMode === 'legacy'" class="legacy-dropdown">
-<p class="legacy-dropdown-title">Legacy List (151+)</p>
-<div class="legacy-dropdown-grid-wrap">
-<div class="legacy-dropdown-grid">
-<button
-v-for="([legacyLevel, legacyRank]) in legacyList"
-class="legacy-entry-btn"
-type="button"
-@click="openLegacyLevel(legacyRank)"
->
-<span class="legacy-entry-rank">#{{ legacyRank }}</span>
-<span class="legacy-entry-name">{{ legacyLevel.name }}</span>
-</button>
-</div>
-</div>
-</div>
-</transition>
 </div>
 
 <div class="authors-box centered-authors">
@@ -162,6 +143,25 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 
 </div>
 </div>
+
+<transition name="legacy-dropdown">
+<div v-if="activeListMode === 'legacy'" class="legacy-dropdown">
+<p class="legacy-dropdown-title">Legacy List (151+)</p>
+<div class="legacy-dropdown-grid-wrap">
+<div class="legacy-dropdown-grid">
+<button
+v-for="([legacyLevel, legacyRank]) in legacyList"
+class="legacy-entry-btn"
+type="button"
+@click="openLegacyLevel(legacyRank)"
+>
+<span class="legacy-entry-rank">#{{ legacyRank }}</span>
+<span class="legacy-entry-name">{{ legacyLevel.name }}</span>
+</button>
+</div>
+</div>
+</div>
+</transition>
 </div>
 
 <div class="meta-container">
