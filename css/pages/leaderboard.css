@@ -52,6 +52,12 @@
     padding-inline: 1rem;
     padding-block: 2rem;
 }
+.page-leaderboard .top-players-label {
+    margin: 0 0 0.8rem;
+    color: var(--color-primary);
+    font-weight: 800;
+    text-transform: uppercase;
+}
 .page-leaderboard .board {
     table-layout: auto;
     display: block;
