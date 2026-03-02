@@ -13,7 +13,7 @@ template:`
 <div v-else class="page-list-scroll-shell">
 <div class="page-list-custom">
 
-<div class="central-container" :class="'view-mode-' + (store.listView || 'list')">
+<div class="central-container" :class="'view-mode-' + effectiveListView">
 <div class="list-mode-switch" role="group" aria-label="Main and legacy list toggle">
 <button class="list-mode-btn" :class="{ active: activeListMode === 'main' }" @click="showMainList" type="button">
 Main List
@@ -26,7 +26,7 @@ Legacy List
 <div
 v-for="([level, absoluteRank],i) in visibleList"
 class="level-card"
-:class="{ 'grid-records-open': store.listView === 'grid' && isOpen(absoluteRank) }"
+:class="{ 'grid-records-open': effectiveListView === 'grid' && isOpen(absoluteRank) }"
 >
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
@@ -238,6 +238,12 @@ this.$nextTick(()=>this.queueAuthorNameFit());
 }
 },
 computed:{
+effectiveListView(){
+if(this.activeListMode === 'legacy'){
+return 'list';
+}
+return this.store.listView || 'list';
+},
 mainList(){
 return this.list.slice(0,150);
 },
@@ -280,13 +286,11 @@ this.toggledRecords = {};
 openLegacyLevel(rank){
 this.selectedLegacyRank = rank;
 this.toggledRecords = {};
-this.$nextTick(()=>this.scrollToSelectedLegacyCard());
+this.$nextTick(()=>this.scrollLegacyTop());
 },
-scrollToSelectedLegacyCard(){
-if(!this.$el) return;
-const selectedCard = this.$el.querySelector('.central-container .level-card');
-if(selectedCard && typeof selectedCard.scrollIntoView === 'function'){
-selectedCard.scrollIntoView({ behavior:'smooth', block:'start' });
+scrollLegacyTop(){
+if(!this.$el || typeof this.$el.scrollTo !== 'function') return;
+this.$el.scrollTo({ top: 0, behavior: 'smooth' });
 }
 },
 clearEndHandler(el){
@@ -376,7 +380,7 @@ if(!this.$el) return;
 const labels = this.$el.querySelectorAll('.authors-box span:last-child');
 labels.forEach((el)=>{
 el.style.fontSize = '';
-if(this.store.listView !== 'grid') return;
+if(this.effectiveListView !== 'grid') return;
 const text = (el.textContent || '').trim();
 if(!text) return;
 const styles = window.getComputedStyle(el);
@@ -424,7 +428,7 @@ const diff = now.getTime() - addedAt.getTime();
 return diff >= 0 && diff < 7 * 86400000;
 },
 beforeRecordsEnter(el){
-if(this.store.listView === 'grid'){
+if(this.effectiveListView === 'grid'){
 this.clearGridAnimation(el);
 el.style.transition = 'none';
 el.style.willChange = 'opacity, transform';
@@ -447,7 +451,7 @@ inner.style.transform='translateY(-3px)';
 void el.offsetHeight;
 },
 recordsEnter(el,done){
-if(this.store.listView === 'grid'){
+if(this.effectiveListView === 'grid'){
 el.style.transition = 'none';
 el.style.overflow = 'hidden';
 el.style.willChange = 'opacity, transform';
@@ -484,7 +488,7 @@ inner.style.transform='translateY(0)';
 });
 },
 afterRecordsEnter(el){
-if(this.store.listView === 'grid'){
+if(this.effectiveListView === 'grid'){
 this.clearGridAnimation(el);
 el.style.height = '';
 el.style.transition = '';
@@ -507,7 +511,7 @@ inner.style.transform='none';
 }
 },
 beforeRecordsLeave(el){
-if(this.store.listView === 'grid'){
+if(this.effectiveListView === 'grid'){
 return;
 }
 this.clearEndHandler(el);
@@ -523,7 +527,7 @@ inner.style.transform='none';
 void el.offsetHeight;
 },
 recordsLeave(el,done){
-if(this.store.listView === 'grid'){
+if(this.effectiveListView === 'grid'){
 done();
 return;
 }
@@ -551,7 +555,7 @@ inner.style.transform='translateY(-2px)';
 });
 },
 afterRecordsLeave(el){
-if(this.store.listView === 'grid'){
+if(this.effectiveListView === 'grid'){
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
@@ -615,4 +619,3 @@ iconFor(role){
 	return `/assets/${name}${this.store.dark?'-dark':''}.svg`;
 }
 }
-};
