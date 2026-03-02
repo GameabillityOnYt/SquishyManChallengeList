@@ -25,8 +25,9 @@ export default {
                     </p>
                 </div>
                 <div class="board-container">
+                    <p class="top-players-label type-label-lg">Top 100 players</p>
                     <table class="board">
-                        <tr v-for="(ientry, i) in leaderboard">
+                        <tr v-for="(ientry, i) in visibleLeaderboard">
                             <td class="rank">
                                 <p class="type-label-lg">#{{ i + 1 }}</p>
                             </td>
@@ -105,18 +106,29 @@ export default {
         </main>
     `,
     computed: {
+        visibleLeaderboard() {
+            return this.leaderboard.slice(0, 100);
+        },
         entry() {
-            return this.leaderboard[this.selected];
+            return this.visibleLeaderboard[this.selected] ?? {
+                user: '',
+                total: 0,
+                verified: [],
+                completed: [],
+                progressed: [],
+            };
         },
     },
     async mounted() {
         const [leaderboard, err] = await fetchLeaderboard();
         this.leaderboard = leaderboard;
         this.err = err;
+        if (this.selected >= this.visibleLeaderboard.length) {
+            this.selected = 0;
+        }
         this.loading = false;
     },
     methods: {
         localize,
     },
 };
-
