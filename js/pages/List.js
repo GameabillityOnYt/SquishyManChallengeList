@@ -14,11 +14,40 @@ template:`
 <div class="page-list-custom">
 
 <div class="central-container" :class="'view-mode-' + (store.listView || 'list')">
+<div class="list-mode-switch" role="group" aria-label="Main and legacy list toggle">
+<button class="list-mode-btn" :class="{ active: activeListMode === 'main' }" @click="showMainList" type="button">
+Main List
+</button>
+<button class="list-mode-btn" :class="{ active: activeListMode === 'legacy' }" @click="toggleLegacyList" type="button">
+{{ legacyOpen ? 'Hide Legacy List' : 'Legacy List' }}
+</button>
+</div>
+
+<transition name="legacy-dropdown">
+<div v-if="legacyOpen" class="legacy-dropdown">
+<p class="legacy-dropdown-title">Legacy List (151+)</p>
+<div class="legacy-dropdown-grid">
+<button
+v-for="([legacyLevel, legacyRank]) in legacyList"
+class="legacy-entry-btn"
+type="button"
+@click="openLegacyLevel(legacyRank)"
+>
+<span class="legacy-entry-rank">#{{ legacyRank }}</span>
+<span class="legacy-entry-name">{{ legacyLevel.name }}</span>
+</button>
+</div>
+</div>
+</transition>
+
+<p v-if="activeListMode === 'legacy' && selectedLegacyRank === null" class="legacy-select-hint">
+Select a level from Legacy List to open full details.
+</p>
 
 <div
-v-for="([level],i) in list"
+v-for="([level, absoluteRank],i) in visibleList"
 class="level-card"
-:class="{ 'grid-records-open': store.listView === 'grid' && isOpen(i) }"
+:class="{ 'grid-records-open': store.listView === 'grid' && isOpen(absoluteRank) }"
 >
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
@@ -43,8 +72,8 @@ class="level-badges"
 </div>
 <div class="title-left">
 <div class="rank-row">
-<span class="level-rank">#{{i+1}}</span>
-<span v-if="i+1>150" class="legacy-rank-label">legacy</span>
+<span class="level-rank">#{{absoluteRank}}</span>
+<span v-if="absoluteRank>150" class="legacy-rank-label">legacy</span>
 </div>
 
 <div class="level-name-row">
@@ -88,7 +117,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 
 <div class="stat-card">
 <span class="stat-label">Points</span>
-<span class="stat-value">{{score(i+1,100,level.percentToQualify)}}</span>
+<span class="stat-value">{{score(absoluteRank,100,level.percentToQualify)}}</span>
 </div>
 
 <div class="stat-card">
@@ -103,8 +132,8 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 
 </div>
 
-<button class="show-records-btn" @click="toggleRecords(i)">
-{{isOpen(i)?'Hide Records':'Show Records'}}<span v-if="level.records && level.records.length"> ({{level.records.length}})</span>
+<button class="show-records-btn" @click="toggleRecords(absoluteRank)">
+{{isOpen(absoluteRank)?'Hide Records':'Show Records'}}<span v-if="level.records && level.records.length"> ({{level.records.length}})</span>
 </button>
 
 <transition
@@ -115,7 +144,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 @leave="recordsLeave"
 @after-leave="afterRecordsLeave"
 >
-<div v-if="isOpen(i)" class="records-panel" :data-index="i">
+<div v-if="isOpen(absoluteRank)" class="records-panel" :data-index="absoluteRank">
 <div class="records-panel-inner">
 <div class="records-scroll-area">
 <table v-if="level.records && level.records.length > 0" class="records">
@@ -168,12 +197,17 @@ editors:[],
 loading:true,
 toggledRecords:{},
 newTags:{},
+activeListMode:'main',
+legacyOpen:false,
+selectedLegacyRank:null,
 store
 }),
 async mounted(){
 const fetchedList = await fetchList();
 this.list = Array.isArray(fetchedList)
-? fetchedList.filter(([level])=>Boolean(level))
+? fetchedList
+    .filter(([level])=>Boolean(level))
+    .map(([level],index)=>[level,index+1])
 : [];
 this.editors=(await fetchEditors())||[];
 this.newTags=(await fetchNewTags())||{};
@@ -198,6 +232,29 @@ this.$nextTick(()=>this.queueAuthorNameFit());
 },
 list(){
 this.$nextTick(()=>this.queueAuthorNameFit());
+},
+activeListMode(){
+this.$nextTick(()=>this.queueAuthorNameFit());
+},
+selectedLegacyRank(){
+this.$nextTick(()=>this.queueAuthorNameFit());
+}
+},
+computed:{
+mainList(){
+return this.list.slice(0,150);
+},
+legacyList(){
+return this.list.slice(150);
+},
+visibleList(){
+if(this.activeListMode === 'legacy'){
+if(this.selectedLegacyRank == null){
+return [];
+}
+return this.list.filter(([,rank])=>rank === this.selectedLegacyRank);
+}
+return this.mainList;
 }
 },
 methods:{
@@ -207,6 +264,25 @@ return id ? getThumbnailFromId(id) : "e.png";
 },
 
 score,
+showMainList(){
+this.activeListMode = 'main';
+this.legacyOpen = false;
+this.selectedLegacyRank = null;
+this.toggledRecords = {};
+},
+toggleLegacyList(){
+this.activeListMode = 'legacy';
+this.legacyOpen = !this.legacyOpen;
+if(this.legacyOpen){
+this.selectedLegacyRank = null;
+}
+},
+openLegacyLevel(rank){
+this.activeListMode = 'legacy';
+this.selectedLegacyRank = rank;
+this.legacyOpen = false;
+this.toggledRecords = {};
+},
 clearEndHandler(el){
 if(!el._recordsEndHandler) return;
 el.removeEventListener('transitionend',el._recordsEndHandler);
@@ -534,4 +610,3 @@ iconFor(role){
 }
 }
 };
-
