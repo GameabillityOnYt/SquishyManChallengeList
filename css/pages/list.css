@@ -199,6 +199,19 @@ html.dark .legacy-entry-btn {
     max-height: none;
 }
 
+.central-container.view-mode-grid {
+    position: relative;
+    padding-top: 3.4rem;
+}
+
+.central-container.view-mode-grid .list-mode-switch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    z-index: 6;
+}
+
 @media screen and (max-width: 1100px) {
     .legacy-dropdown-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
