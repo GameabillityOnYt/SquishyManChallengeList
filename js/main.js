@@ -5,9 +5,6 @@ export const store = Vue.reactive({
     listView: ['list', 'grid'].includes(localStorage.getItem('listView'))
         ? localStorage.getItem('listView')
         : 'list',
-    listSection: ['main', 'legacy'].includes(localStorage.getItem('listSection'))
-        ? localStorage.getItem('listSection')
-        : 'main',
 
     toggleDark() {
         this.dark = !this.dark;
@@ -26,18 +23,6 @@ export const store = Vue.reactive({
         }
         this.listView = mode;
         localStorage.setItem('listView', mode);
-    },
-
-    setListSection(mode) {
-        if (mode !== 'main' && mode !== 'legacy') {
-            return;
-        }
-        this.listSection = mode;
-        localStorage.setItem('listSection', mode);
-    },
-
-    toggleLegacyListSection() {
-        this.setListSection(this.listSection === 'legacy' ? 'main' : 'legacy');
     },
 });
 
