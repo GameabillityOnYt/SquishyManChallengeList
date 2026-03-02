@@ -291,7 +291,6 @@ this.$nextTick(()=>this.scrollLegacyTop());
 scrollLegacyTop(){
 if(!this.$el || typeof this.$el.scrollTo !== 'function') return;
 this.$el.scrollTo({ top: 0, behavior: 'smooth' });
-}
 },
 clearEndHandler(el){
 if(!el._recordsEndHandler) return;
