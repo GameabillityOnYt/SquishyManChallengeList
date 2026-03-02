@@ -280,6 +280,14 @@ this.toggledRecords = {};
 openLegacyLevel(rank){
 this.selectedLegacyRank = rank;
 this.toggledRecords = {};
+this.$nextTick(()=>this.scrollToSelectedLegacyCard());
+},
+scrollToSelectedLegacyCard(){
+if(!this.$el) return;
+const selectedCard = this.$el.querySelector('.central-container .level-card');
+if(selectedCard && typeof selectedCard.scrollIntoView === 'function'){
+selectedCard.scrollIntoView({ behavior:'smooth', block:'start' });
+}
 },
 clearEndHandler(el){
 if(!el._recordsEndHandler) return;
