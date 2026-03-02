@@ -619,3 +619,4 @@ iconFor(role){
 	return `/assets/${name}${this.store.dark?'-dark':''}.svg`;
 }
 }
+};
