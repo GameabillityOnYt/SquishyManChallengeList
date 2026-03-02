@@ -23,8 +23,6 @@ Legacy List
 </button>
 </div>
 
-<div v-if="activeListMode === 'legacy'" class="legacy-selected-anchor" ref="legacySelectedAnchor"></div>
-
 <div
 v-for="([level, absoluteRank],i) in visibleList"
 class="level-card"
@@ -278,18 +276,10 @@ if(this.selectedLegacyRank == null && this.legacyList.length > 0){
 this.selectedLegacyRank = this.legacyList[0][1];
 }
 this.toggledRecords = {};
-this.$nextTick(()=>this.scrollLegacyDetailsIntoView());
 },
 openLegacyLevel(rank){
 this.selectedLegacyRank = rank;
 this.toggledRecords = {};
-this.$nextTick(()=>this.scrollLegacyDetailsIntoView());
-},
-scrollLegacyDetailsIntoView(){
-const anchor = this.$refs.legacySelectedAnchor;
-if(anchor && typeof anchor.scrollIntoView === 'function'){
-anchor.scrollIntoView({ behavior:'smooth', block:'start' });
-}
 },
 clearEndHandler(el){
 if(!el._recordsEndHandler) return;
