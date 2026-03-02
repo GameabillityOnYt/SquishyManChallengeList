@@ -98,10 +98,6 @@
     transform: translateY(-1px);
 }
 
-.legacy-selected-anchor {
-    height: 0;
-}
-
 .legacy-dropdown {
     margin: 0 0 1rem;
     padding: 0.95rem;
