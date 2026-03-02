@@ -14,17 +14,8 @@ template:`
 <div class="page-list-custom">
 
 <div class="central-container" :class="'view-mode-' + (store.listView || 'list')">
-<div class="list-mode-switch" role="group" aria-label="Main and legacy list toggle">
-<button class="list-mode-btn" :class="{ active: activeListMode === 'main' }" @click="showMainList" type="button">
-Main List
-</button>
-<button class="list-mode-btn" :class="{ active: activeListMode === 'legacy' }" @click="toggleLegacyList" type="button">
-{{ legacyOpen ? 'Hide Legacy List' : 'Legacy List' }}
-</button>
-</div>
-
 <transition name="legacy-dropdown">
-<div v-if="legacyOpen" class="legacy-dropdown">
+<div v-if="store.listSection === 'legacy'" class="legacy-dropdown">
 <p class="legacy-dropdown-title">Legacy List (151+)</p>
 <div class="legacy-dropdown-grid">
 <button
@@ -40,7 +31,7 @@ type="button"
 </div>
 </transition>
 
-<p v-if="activeListMode === 'legacy' && selectedLegacyRank === null" class="legacy-select-hint">
+<p v-if="store.listSection === 'legacy' && selectedLegacyRank === null" class="legacy-select-hint">
 Select a level from Legacy List to open full details.
 </p>
 
@@ -197,8 +188,6 @@ editors:[],
 loading:true,
 toggledRecords:{},
 newTags:{},
-activeListMode:'main',
-legacyOpen:false,
 selectedLegacyRank:null,
 store
 }),
@@ -230,10 +219,16 @@ watch:{
 'store.listView'(){
 this.$nextTick(()=>this.queueAuthorNameFit());
 },
-list(){
+'store.listSection'(mode){
+if(mode === 'main'){
+this.selectedLegacyRank = null;
+}
+if(mode === 'legacy'){
+this.selectedLegacyRank = null;
+}
 this.$nextTick(()=>this.queueAuthorNameFit());
 },
-activeListMode(){
+list(){
 this.$nextTick(()=>this.queueAuthorNameFit());
 },
 selectedLegacyRank(){
@@ -248,7 +243,7 @@ legacyList(){
 return this.list.slice(150);
 },
 visibleList(){
-if(this.activeListMode === 'legacy'){
+if(this.store.listSection === 'legacy'){
 if(this.selectedLegacyRank == null){
 return [];
 }
@@ -264,23 +259,8 @@ return id ? getThumbnailFromId(id) : "e.png";
 },
 
 score,
-showMainList(){
-this.activeListMode = 'main';
-this.legacyOpen = false;
-this.selectedLegacyRank = null;
-this.toggledRecords = {};
-},
-toggleLegacyList(){
-this.activeListMode = 'legacy';
-this.legacyOpen = !this.legacyOpen;
-if(this.legacyOpen){
-this.selectedLegacyRank = null;
-}
-},
 openLegacyLevel(rank){
-this.activeListMode = 'legacy';
 this.selectedLegacyRank = rank;
-this.legacyOpen = false;
 this.toggledRecords = {};
 },
 clearEndHandler(el){
