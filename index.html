@@ -83,18 +83,9 @@
                 </div>
                 <nav class="nav">
                     <div class="nav__tabs">
-                        <router-link class="nav__tab" to="/" @click="store.setListSection('main')">
+                        <router-link class="nav__tab" to="/">
                             <span class="type-label-lg">Po's List</span>
                         </router-link>
-                        <button
-                            v-if="$route.path === '/'"
-                            class="nav__legacy-toggle"
-                            :class="{ active: store.listSection === 'legacy' }"
-                            type="button"
-                            @click="store.toggleLegacyListSection()"
-                        >
-                            <span class="type-label-lg">Legacy List</span>
-                        </button>
                         <router-link class="nav__tab" to="/leaderboard">
                             <span class="type-label-lg">Leaderboard</span>
                         </router-link>
