@@ -66,8 +66,44 @@
     overflow-x: hidden;
 }
 
+.list-mode-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.9rem;
+    padding: 0.28rem;
+    border-radius: 999px;
+    background: rgba(255, 165, 0, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(255, 165, 0, 0.3);
+}
+
+.list-mode-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 0.55rem 0.9rem;
+    background: transparent;
+    color: var(--color-on-background);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.list-mode-btn.active {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.list-mode-btn:hover {
+    transform: translateY(-1px);
+}
+
+.legacy-selected-anchor {
+    height: 0;
+}
+
 .legacy-dropdown {
-    margin-bottom: 1rem;
+    margin: 0 0 1rem;
     padding: 0.95rem;
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.74);
@@ -94,6 +130,12 @@ html.dark .legacy-dropdown {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.55rem;
+}
+
+.legacy-dropdown-grid-wrap {
+    max-height: 18rem;
+    overflow: auto;
+    padding-right: 0.2rem;
 }
 
 .legacy-entry-btn {
@@ -129,13 +171,6 @@ html.dark .legacy-entry-btn {
     overflow-wrap: anywhere;
 }
 
-.legacy-select-hint {
-    margin: 0 0 1rem;
-    font-weight: 700;
-    color: var(--color-on-background);
-    opacity: 0.82;
-}
-
 .legacy-dropdown-enter-active,
 .legacy-dropdown-leave-active {
     transition: opacity 220ms ease, transform 220ms ease, max-height 220ms ease;
@@ -155,8 +190,8 @@ html.dark .legacy-entry-btn {
     max-height: 70vh;
 }
 
-.central-container.view-mode-grid .legacy-dropdown,
-.central-container.view-mode-grid .legacy-select-hint {
+.central-container.view-mode-grid .list-mode-switch,
+.central-container.view-mode-grid .legacy-dropdown {
     grid-column: 1 / -1;
 }
 
@@ -167,6 +202,16 @@ html.dark .legacy-entry-btn {
 }
 
 @media screen and (max-width: 700px) {
+    .list-mode-switch {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .list-mode-btn {
+        flex: 1;
+        text-align: center;
+    }
+
     .legacy-dropdown-grid {
         grid-template-columns: 1fr;
     }
