@@ -14,26 +14,16 @@ template:`
 <div class="page-list-custom">
 
 <div class="central-container" :class="'view-mode-' + (store.listView || 'list')">
-<transition name="legacy-dropdown">
-<div v-if="store.listSection === 'legacy'" class="legacy-dropdown">
-<p class="legacy-dropdown-title">Legacy List (151+)</p>
-<div class="legacy-dropdown-grid">
-<button
-v-for="([legacyLevel, legacyRank]) in legacyList"
-class="legacy-entry-btn"
-type="button"
-@click="openLegacyLevel(legacyRank)"
->
-<span class="legacy-entry-rank">#{{ legacyRank }}</span>
-<span class="legacy-entry-name">{{ legacyLevel.name }}</span>
+<div class="list-mode-switch" role="group" aria-label="Main and legacy list toggle">
+<button class="list-mode-btn" :class="{ active: activeListMode === 'main' }" @click="showMainList" type="button">
+Main List
+</button>
+<button class="list-mode-btn" :class="{ active: activeListMode === 'legacy' }" @click="showLegacyList" type="button">
+Legacy List
 </button>
 </div>
-</div>
-</transition>
 
-<p v-if="store.listSection === 'legacy' && selectedLegacyRank === null" class="legacy-select-hint">
-Select a level from Legacy List to open full details.
-</p>
+<div v-if="activeListMode === 'legacy'" class="legacy-selected-anchor" ref="legacySelectedAnchor"></div>
 
 <div
 v-for="([level, absoluteRank],i) in visibleList"
@@ -71,6 +61,25 @@ class="level-badges"
 <h2>{{level.name}}</h2>
 </div>
 </div>
+
+<transition name="legacy-dropdown">
+<div v-if="activeListMode === 'legacy'" class="legacy-dropdown">
+<p class="legacy-dropdown-title">Legacy List (151+)</p>
+<div class="legacy-dropdown-grid-wrap">
+<div class="legacy-dropdown-grid">
+<button
+v-for="([legacyLevel, legacyRank]) in legacyList"
+class="legacy-entry-btn"
+type="button"
+@click="openLegacyLevel(legacyRank)"
+>
+<span class="legacy-entry-rank">#{{ legacyRank }}</span>
+<span class="legacy-entry-name">{{ legacyLevel.name }}</span>
+</button>
+</div>
+</div>
+</div>
+</transition>
 </div>
 
 <div class="authors-box centered-authors">
@@ -188,6 +197,7 @@ editors:[],
 loading:true,
 toggledRecords:{},
 newTags:{},
+activeListMode:'main',
 selectedLegacyRank:null,
 store
 }),
@@ -219,13 +229,7 @@ watch:{
 'store.listView'(){
 this.$nextTick(()=>this.queueAuthorNameFit());
 },
-'store.listSection'(mode){
-if(mode === 'main'){
-this.selectedLegacyRank = null;
-}
-if(mode === 'legacy'){
-this.selectedLegacyRank = null;
-}
+activeListMode(){
 this.$nextTick(()=>this.queueAuthorNameFit());
 },
 list(){
@@ -243,11 +247,15 @@ legacyList(){
 return this.list.slice(150);
 },
 visibleList(){
-if(this.store.listSection === 'legacy'){
-if(this.selectedLegacyRank == null){
-return [];
-}
+if(this.activeListMode === 'legacy'){
+if(this.selectedLegacyRank != null){
 return this.list.filter(([,rank])=>rank === this.selectedLegacyRank);
+}
+if(this.legacyList.length > 0){
+const firstLegacyRank = this.legacyList[0][1];
+return this.list.filter(([,rank])=>rank === firstLegacyRank);
+}
+return [];
 }
 return this.mainList;
 }
@@ -259,9 +267,29 @@ return id ? getThumbnailFromId(id) : "e.png";
 },
 
 score,
+showMainList(){
+this.activeListMode = 'main';
+this.selectedLegacyRank = null;
+this.toggledRecords = {};
+},
+showLegacyList(){
+this.activeListMode = 'legacy';
+if(this.selectedLegacyRank == null && this.legacyList.length > 0){
+this.selectedLegacyRank = this.legacyList[0][1];
+}
+this.toggledRecords = {};
+this.$nextTick(()=>this.scrollLegacyDetailsIntoView());
+},
 openLegacyLevel(rank){
 this.selectedLegacyRank = rank;
 this.toggledRecords = {};
+this.$nextTick(()=>this.scrollLegacyDetailsIntoView());
+},
+scrollLegacyDetailsIntoView(){
+const anchor = this.$refs.legacySelectedAnchor;
+if(anchor && typeof anchor.scrollIntoView === 'function'){
+anchor.scrollIntoView({ behavior:'smooth', block:'start' });
+}
 },
 clearEndHandler(el){
 if(!el._recordsEndHandler) return;
