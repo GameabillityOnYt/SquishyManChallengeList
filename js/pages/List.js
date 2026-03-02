@@ -255,10 +255,6 @@ if(this.activeListMode === 'legacy'){
 if(this.selectedLegacyRank != null){
 return this.list.filter(([,rank])=>rank === this.selectedLegacyRank);
 }
-if(this.legacyList.length > 0){
-const firstLegacyRank = this.legacyList[0][1];
-return this.list.filter(([,rank])=>rank === firstLegacyRank);
-}
 return [];
 }
 return this.mainList;
@@ -278,9 +274,7 @@ this.toggledRecords = {};
 },
 showLegacyList(){
 this.activeListMode = 'legacy';
-if(this.selectedLegacyRank == null && this.legacyList.length > 0){
-this.selectedLegacyRank = this.legacyList[0][1];
-}
+this.selectedLegacyRank = null;
 this.toggledRecords = {};
 },
 openLegacyLevel(rank){
