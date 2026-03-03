@@ -111,11 +111,17 @@
             "percent": 100,
             "hz": 360
         },
-         {
+        {
             "user": "Tuskon",
             "link": "https://youtu.be/q9H9NuIYs_M",
             "percent": 100,
             "hz": 165
+        },
+        {
+            "user": "FJKR",
+            "link": "https://medal.tv/games/geometry-dash/clips/m4ojHl1tC6A489mJ0",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
