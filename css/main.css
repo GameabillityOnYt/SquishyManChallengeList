@@ -173,9 +173,9 @@ flex:0 0 auto;
 .page-list-custom{
 display:grid;
 grid-template-columns:minmax(0,1fr) 300px;
-gap:3rem;
+gap:2.35rem;
 padding:2rem;
-max-width:1400px;
+max-width:1500px;
 margin:0 auto;
 align-items:start;
 }
