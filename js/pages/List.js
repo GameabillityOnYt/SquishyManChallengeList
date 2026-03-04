@@ -63,7 +63,7 @@ class="level-badges"
 
 <div class="authors-box centered-authors">
 <div>
-<span>CREATOR</span>
+<span>{{creatorLabel(level.creators)}}</span>
 <span class="author-value" :title="formatCreators(level.creators)">{{formatCreators(level.creators)}}</span>
 </div>
 <div>
@@ -212,33 +212,6 @@ this.list = Array.isArray(fetchedList)
 this.editors=(await fetchEditors())||[];
 this.newTags=(await fetchNewTags())||{};
 this.loading=false;
-this._authorFitResizeHandler = ()=>this.queueAuthorNameFit();
-window.addEventListener('resize',this._authorFitResizeHandler,{passive:true});
-this.$nextTick(()=>this.queueAuthorNameFit());
-},
-beforeUnmount(){
-if(this._authorFitResizeHandler){
-window.removeEventListener('resize',this._authorFitResizeHandler);
-this._authorFitResizeHandler = null;
-}
-if(this._authorFitRaf){
-cancelAnimationFrame(this._authorFitRaf);
-this._authorFitRaf = null;
-}
-},
-watch:{
-'store.listView'(){
-this.$nextTick(()=>this.queueAuthorNameFit());
-},
-activeListMode(){
-this.$nextTick(()=>this.queueAuthorNameFit());
-},
-list(){
-this.$nextTick(()=>this.queueAuthorNameFit());
-},
-selectedLegacyRank(){
-this.$nextTick(()=>this.queueAuthorNameFit());
-}
 },
 computed:{
 effectiveListView(){
@@ -334,62 +307,17 @@ done();
 el._recordsEndHandler = onEnd;
 el.addEventListener('transitionend',onEnd);
 },
-queueAuthorNameFit(){
-if(this._authorFitRaf){
-cancelAnimationFrame(this._authorFitRaf);
-}
-this._authorFitRaf = requestAnimationFrame(()=>{
-this._authorFitRaf = null;
-this.fitAuthorNames();
-});
-},
-getLastLineCharCount(el){
-const firstNode = el.firstChild;
-if(!firstNode || firstNode.nodeType !== Node.TEXT_NODE) return 0;
-const text = firstNode.textContent || '';
-if(!text) return 0;
-const range = document.createRange();
-let lastTop = null;
-let count = 0;
-for(let i=1;i<=text.length;i++){
-range.setStart(firstNode,i-1);
-range.setEnd(firstNode,i);
-const rects = range.getClientRects();
-if(!rects.length) continue;
-const top = Math.round(rects[0].top);
-if(lastTop === null){
-lastTop = top;
-count = 1;
-continue;
-}
-if(Math.abs(top-lastTop) <= 1){
-count += 1;
-continue;
-}
-lastTop = top;
-count = 1;
-}
-return count;
-},
-fitAuthorNames(){
-if(!this.$el) return;
-const labels = this.$el.querySelectorAll('.authors-box span:last-child');
-labels.forEach((el)=>{
-el.style.fontSize = '';
-});
-},
 isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){
 const wasOpen = this.toggledRecords[i]===true;
 this.toggledRecords = {[i]:!wasOpen};
-this.$nextTick(()=>this.queueAuthorNameFit());
 },
 hasManyRecords(level){
 return Array.isArray(level?.records) && level.records.length > 5;
 },
-formatCreators(creators){
+creatorNames(creators){
 const source = Array.isArray(creators) ? creators : [creators];
-const normalized = source
+return source
 .flatMap((value)=>String(value ?? '')
 .replace(/\u00A0/g,' ')
 .split(','))
@@ -400,8 +328,12 @@ const normalized = source
 .replace(/\s*,+$/,'')
 .trim())
 .filter(Boolean);
-
-return normalized.join(', ');
+},
+creatorLabel(creators){
+return this.creatorNames(creators).length > 1 ? 'CREATORS' : 'CREATOR';
+},
+formatCreators(creators){
+return this.creatorNames(creators).join(', ');
 },
 formatPerson(value){
 return String(value ?? '')
