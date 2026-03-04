@@ -191,7 +191,7 @@ display:grid;
 grid-template-columns:repeat(3,minmax(0,1fr));
 gap:1rem;
 align-items:stretch;
-grid-auto-rows:560px;
+grid-auto-rows:540px;
 }
 
 .central-container.view-mode-grid .level-card{
