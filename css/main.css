@@ -381,14 +381,6 @@ word-break:normal;
 line-height:1.15;
 }
 
-.central-container.view-mode-grid .authors-box .author-value{
-display:block;
-overflow:hidden;
-text-overflow:ellipsis;
-font-size:.95rem;
-line-height:1.15;
-}
-
 .central-container.view-mode-grid .stat-card{
 min-height:72px;
 }
@@ -963,7 +955,6 @@ flex:0 0 220px;
 height:124px;
 }
 
-.level-video-side iframe,
 .lazy-video{
 height:124px;
 }
@@ -1038,10 +1029,6 @@ height:auto;
 aspect-ratio:16/9;
 }
 
-.level-video-side iframe{
-height:100%;
-}
-
 .authors-box{
 gap:.75rem 1rem;
 }
@@ -1087,6 +1074,8 @@ font-size:.9rem;
 .central-container.view-mode-grid .authors-box .author-value{
 display:block;
 max-width:100%;
+font-size:.95rem;
+line-height:1.15;
 white-space:nowrap !important;
 overflow:hidden !important;
 text-overflow:ellipsis !important;
