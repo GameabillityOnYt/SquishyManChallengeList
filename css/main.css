@@ -373,8 +373,8 @@ white-space:nowrap;
 .central-container.view-mode-grid .authors-box span:last-child{
 display:block;
 white-space:normal;
-overflow-wrap:anywhere;
-word-break:break-word;
+overflow-wrap:break-word;
+word-break:normal;
 line-height:1.15;
 }
 
@@ -747,6 +747,12 @@ min-height:0;
 
 .records-scroll-area{
 min-height:0;
+}
+
+.central-container.view-mode-list .records-scroll-area.records-scroll-limited{
+max-height:13.5rem;
+overflow-y:auto;
+padding-right:.35rem;
 }
 
 .records td{
