@@ -64,7 +64,7 @@ class="level-badges"
 <div class="authors-box centered-authors">
 <div>
 <span>CREATOR</span>
-<span>{{level.creators.join(', ')}}</span>
+<span>{{formatCreators(level.creators)}}</span>
 </div>
 <div>
 <span>VERIFIER</span>
@@ -405,6 +405,24 @@ this.$nextTick(()=>this.queueAuthorNameFit());
 },
 hasManyRecords(level){
 return Array.isArray(level?.records) && level.records.length > 5;
+},
+formatCreators(creators){
+if(Array.isArray(creators)){
+return creators
+.map((name)=>String(name ?? '')
+// normalize accidental leading/trailing commas from source data
+.replace(/^,+\s*/,'')
+.replace(/\s*,+$/,'')
+.trim())
+.filter(Boolean)
+.join(', ');
+}
+
+return String(creators ?? '')
+.replace(/\s*,\s*/g,', ')
+.replace(/^,\s*/,'')
+.replace(/\s*,\s*$/,'')
+.trim();
 },
 isLevelNew(level){
 const path = String(level?.path||'');
