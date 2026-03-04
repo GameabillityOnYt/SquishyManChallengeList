@@ -173,9 +173,9 @@ flex:0 0 auto;
 .page-list-custom{
 display:grid;
 grid-template-columns:minmax(0,1fr) 300px;
-gap:3rem;
+gap:2.35rem;
 padding:2rem;
-max-width:1400px;
+max-width:1500px;
 margin:0 auto;
 align-items:start;
 }
@@ -249,7 +249,7 @@ margin-top:6px;
 
 .central-container.view-mode-grid .show-records-btn{
 width:100%;
-margin-top:auto;
+margin-top:10px;
 flex:0 0 auto;
 }
 
@@ -354,12 +354,12 @@ overflow:hidden;
 
 .central-container.view-mode-grid .authors-box{
 margin-top:0;
-min-height:84px;
+min-height:58px;
 display:grid;
 grid-template-columns:repeat(3,minmax(0,1fr));
 align-content:flex-start;
 align-items:start;
-gap:.55rem .75rem;
+gap:.4rem .6rem;
 }
 
 .central-container.view-mode-grid .authors-box div{
@@ -372,9 +372,19 @@ white-space:nowrap;
 
 .central-container.view-mode-grid .authors-box span:last-child{
 display:block;
-white-space:normal;
-overflow-wrap:break-word;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+overflow-wrap:normal;
 word-break:normal;
+line-height:1.15;
+}
+
+.central-container.view-mode-grid .authors-box .author-value{
+display:block;
+overflow:hidden;
+text-overflow:ellipsis;
+font-size:.95rem;
 line-height:1.15;
 }
 
@@ -1070,4 +1080,13 @@ margin-bottom:.75rem;
 .editors li{
 font-size:.9rem;
 }
+}
+
+/* Keep single-line ellipsis for names in grid cards */
+.central-container.view-mode-grid .authors-box .author-value{
+display:block;
+max-width:100%;
+white-space:nowrap !important;
+overflow:hidden !important;
+text-overflow:ellipsis !important;
 }
