@@ -275,6 +275,8 @@ clip-path:polygon(0 0, 100% 0, 0 100%);
 
 .central-container.view-mode-grid .level-card.grid-records-open{
 overflow:hidden;
+height:560px;
+min-height:560px;
 }
 
 .central-container.view-mode-grid .level-card.grid-records-open .level-video-side,
