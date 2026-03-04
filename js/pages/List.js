@@ -125,7 +125,10 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 >
 <div v-if="isOpen(absoluteRank)" class="records-panel" :data-index="absoluteRank">
 <div class="records-panel-inner">
-<div class="records-scroll-area">
+<div
+class="records-scroll-area"
+:class="{ 'records-scroll-limited': effectiveListView === 'list' && hasManyRecords(level) }"
+>
 <table v-if="level.records && level.records.length > 0" class="records">
 <tr v-for="record in level.records">
 <td>{{record.percent}}%</td>
@@ -399,6 +402,9 @@ toggleRecords(i){
 const wasOpen = this.toggledRecords[i]===true;
 this.toggledRecords = {[i]:!wasOpen};
 this.$nextTick(()=>this.queueAuthorNameFit());
+},
+hasManyRecords(level){
+return Array.isArray(level?.records) && level.records.length > 5;
 },
 isLevelNew(level){
 const path = String(level?.path||'');
