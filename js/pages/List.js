@@ -64,15 +64,15 @@ class="level-badges"
 <div class="authors-box centered-authors">
 <div>
 <span>CREATOR</span>
-<span>{{formatCreators(level.creators)}}</span>
+<span class="author-value" :title="formatCreators(level.creators)">{{formatCreators(level.creators)}}</span>
 </div>
 <div>
 <span>VERIFIER</span>
-<span>{{level.verifier}}</span>
+<span class="author-value" :title="formatPerson(level.verifier)">{{formatPerson(level.verifier)}}</span>
 </div>
 <div>
 <span>PUBLISHER</span>
-<span>{{level.publisher||level.author}}</span>
+<span class="author-value" :title="formatPerson(level.publisher||level.author)">{{formatPerson(level.publisher||level.author)}}</span>
 </div>
 </div>
 
@@ -376,25 +376,6 @@ if(!this.$el) return;
 const labels = this.$el.querySelectorAll('.authors-box span:last-child');
 labels.forEach((el)=>{
 el.style.fontSize = '';
-if(this.effectiveListView !== 'grid') return;
-const text = (el.textContent || '').trim();
-if(!text) return;
-const styles = window.getComputedStyle(el);
-const lineHeight = parseFloat(styles.lineHeight);
-const baseSize = parseFloat(styles.fontSize);
-if(Number.isNaN(lineHeight) || Number.isNaN(baseSize) || lineHeight <= 0) return;
-const wraps = el.scrollHeight > (lineHeight * 1.35);
-if(!wraps) return;
-const tailChars = this.getLastLineCharCount(el);
-if(tailChars < 1 || tailChars > 3) return;
-const minSize = Math.max(10,baseSize * 0.82);
-let nextSize = baseSize;
-let attempts = 0;
-while(el.scrollHeight > (lineHeight * 1.35) && nextSize > minSize && attempts < 8){
-nextSize -= 0.6;
-el.style.fontSize = `${nextSize}px`;
-attempts += 1;
-}
 });
 },
 isOpen(i){return this.toggledRecords[i]===true},
@@ -421,6 +402,12 @@ const normalized = source
 .filter(Boolean);
 
 return normalized.join(', ');
+},
+formatPerson(value){
+return String(value ?? '')
+.replace(/\u00A0/g,' ')
+.replace(/\s+/g,' ')
+.trim();
 },
 isLevelNew(level){
 const path = String(level?.path||'');
