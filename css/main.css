@@ -190,8 +190,8 @@ max-height:none;
 display:grid;
 grid-template-columns:repeat(3,minmax(0,1fr));
 gap:1rem;
-align-items:stretch;
-grid-auto-rows:560px;
+align-items:start;
+grid-auto-rows:auto;
 }
 
 .central-container.view-mode-grid .level-card{
@@ -199,9 +199,9 @@ margin-bottom:0;
 flex-direction:column;
 align-items:stretch;
 gap:.65rem;
-height:100%;
+height:auto;
 min-height:0;
-max-height:100%;
+max-height:none;
 padding:.8rem 1rem;
 }
 
@@ -347,6 +347,7 @@ padding-right:.35rem;
 font-size:1.12rem;
 line-height:1.2;
 display:-webkit-box;
+line-clamp:2;
 -webkit-line-clamp:2;
 -webkit-box-orient:vertical;
 overflow:hidden;
