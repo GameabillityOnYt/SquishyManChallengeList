@@ -412,7 +412,12 @@ const normalized = source
 .flatMap((value)=>String(value ?? '')
 .replace(/\u00A0/g,' ')
 .split(','))
-.map((part)=>part.replace(/\s+/g,' ').trim())
+.map((part)=>part
+.replace(/\s+/g,' ')
+.trim()
+.replace(/^,+\s*/,'')
+.replace(/\s*,+$/,'')
+.trim())
 .filter(Boolean);
 
 return normalized.join(', ');
