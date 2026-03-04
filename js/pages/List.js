@@ -407,22 +407,15 @@ hasManyRecords(level){
 return Array.isArray(level?.records) && level.records.length > 5;
 },
 formatCreators(creators){
-if(Array.isArray(creators)){
-return creators
-.map((name)=>String(name ?? '')
-// normalize accidental leading/trailing commas from source data
-.replace(/^,+\s*/,'')
-.replace(/\s*,+$/,'')
-.trim())
-.filter(Boolean)
-.join(', ');
-}
+const source = Array.isArray(creators) ? creators : [creators];
+const normalized = source
+.flatMap((value)=>String(value ?? '')
+.replace(/\u00A0/g,' ')
+.split(','))
+.map((part)=>part.replace(/\s+/g,' ').trim())
+.filter(Boolean);
 
-return String(creators ?? '')
-.replace(/\s*,\s*/g,', ')
-.replace(/^,\s*/,'')
-.replace(/\s*,\s*$/,'')
-.trim();
+return normalized.join(', ');
 },
 isLevelNew(level){
 const path = String(level?.path||'');
