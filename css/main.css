@@ -80,7 +80,7 @@ rgba(160,160,160,0.5) 125deg,
 rgba(130,130,130,0.2) 220deg,
 rgba(115,115,115,0) 330deg
 );
-/* ring mask for classic spinner look */
+
 -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
 mask:radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
 animation:spin .9s linear infinite;
