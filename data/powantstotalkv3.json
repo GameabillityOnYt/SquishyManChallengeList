@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/WkB3i9uxLAo",
     "percentToQualify": "52",
     "length": "7s",
-    "records": []
+    "records": [
+                {
+            "user": "GamerAJG2012",
+            "link": "https://youtu.be/_I6sW4pgSzo",
+            "percent": 100,
+            "hz": 144
+        }
+    ]
 }
