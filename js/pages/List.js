@@ -133,7 +133,7 @@ class="records-scroll-area"
 <tr v-for="record in level.records">
 <td>{{record.percent}}%</td>
 <td><a :href="record.link" target="_blank">{{record.user}}</a></td>
-<td>{{record.hz}}Hz</td>
+<td>{{formatHz(record.hz)}}</td>
 </tr>
 </table>
 <p v-if="!level.records || level.records.length===0" class="no-records-message">No records on this level yet.</p>
@@ -340,6 +340,14 @@ return String(value ?? '')
 .replace(/\u00A0/g,' ')
 .replace(/\s+/g,' ')
 .trim();
+},
+formatHz(value){
+const normalized = String(value ?? '').trim();
+if(!normalized) return '';
+if(normalized.toLowerCase() === 'cbf'){
+return 'CBF';
+}
+return `${normalized}Hz`;
 },
 isLevelNew(level){
 const path = String(level?.path||'');
