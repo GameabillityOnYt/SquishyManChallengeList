@@ -9,5 +9,12 @@
     "decorated": true,
     "percentToQualify": "100",
     "Length": "Time",
-    "records": []
+    "records": [
+        {
+            "user": "mwagma",
+            "link": "https://medal.tv/fr/games/geometry-dash/clips/mg9RapuvCyFaAeC4N?invite=cr-MSxUS24sNDI4NTgxODM4&v=16",
+            "percent": 100,
+            "hz": 120
+        }
+    ]
 }
