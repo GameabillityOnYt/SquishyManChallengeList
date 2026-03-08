@@ -35,7 +35,7 @@ const app = Vue.createApp({
 });
 
 const router = VueRouter.createRouter({
-    history: VueRouter.createWebHashHistory(),
+    history: VueRouter.createWebHistory(),
     routes,
 });
 
