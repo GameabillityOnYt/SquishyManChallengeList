@@ -55,6 +55,12 @@
             "link": "https://www.youtube.com/watch?si=xX_PMG-foMy5p51n&v=1DhRPCxqRt8&feature=youtu.be",
             "percent": 100,
             "hz": 144
+        },
+        {
+            "user": "CrocoMayo",
+            "link": "https://www.youtube.com/watch?v=X7cutBODUi8",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
