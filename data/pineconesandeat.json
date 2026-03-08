@@ -126,7 +126,13 @@
             "user": "totallyriver",
             "link": "https://medal.tv/games/geometry-dash/clips/mdXZrDLyiPK7JQhho?invite=cr-MSwzR1csNDY2MzcyMTU2&v=36",
             "percent": 100,
-            "hz": "CBF"
+            "hz": 144
+        },
+        {
+            "user": "mwagma",
+            "link": "https://medal.tv/fr/games/geometry-dash/clips/mg98MaPcUjTpBLBbP?invite=cr-MSxNSEksNDI4NTgxODM4&v=35",
+            "percent": 100,
+            "hz": 120
         }
     ]
 }
