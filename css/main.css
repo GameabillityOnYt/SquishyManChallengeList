@@ -1080,3 +1080,8 @@ white-space:nowrap !important;
 overflow:hidden !important;
 text-overflow:ellipsis !important;
 }
+
+h1 {
+  position: absolute;
+  left: -9999px;
+}
