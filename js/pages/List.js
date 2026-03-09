@@ -127,7 +127,6 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 <div class="records-panel-inner">
 <div
 class="records-scroll-area"
-:class="{ 'records-scroll-limited': effectiveListView === 'list' && hasManyRecords(level) }"
 >
 <table v-if="level.records && level.records.length > 0" class="records">
 <tr v-for="record in level.records">
@@ -311,9 +310,6 @@ isOpen(i){return this.toggledRecords[i]===true},
 toggleRecords(i){
 const wasOpen = this.toggledRecords[i]===true;
 this.toggledRecords = {[i]:!wasOpen};
-},
-hasManyRecords(level){
-return Array.isArray(level?.records) && level.records.length > 5;
 },
 creatorNames(creators){
 const source = Array.isArray(creators) ? creators : [creators];
