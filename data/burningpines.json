@@ -8,5 +8,12 @@
     "decorated": "true",
     "percentToQualify": "66",
     "length": "10s",
-    "records": []
+    "records": [
+         {
+            "user": "0cta",
+            "link": "https://youtu.be/DphPwr-JRSI",
+            "percent": 100,
+            "hz": 180
+        }
+    ]
 }
