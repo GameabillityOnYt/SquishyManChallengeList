@@ -436,9 +436,13 @@ filter:grayscale(1) saturate(0) contrast(1.08) brightness(0.95);
 mix-blend-mode:soft-light;
 }
 
-/* Main list cards: tighter layout and no corner emoji */
+/* Main list cards: tighter layout and smaller corner emoji */
 .level-card:not(.legacy-card)::after{
-display:none;
+display:block;
+font-size:2.2rem;
+left:10px;
+bottom:10px;
+opacity:.18;
 }
 
 .level-card:not(.legacy-card){
