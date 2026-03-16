@@ -26,7 +26,10 @@ Legacy List
 <div
 v-for="([level, absoluteRank],i) in visibleList"
 class="level-card"
-:class="{ 'grid-records-open': effectiveListView === 'grid' && isOpen(absoluteRank) }"
+:class="{
+'grid-records-open': effectiveListView === 'grid' && isOpen(absoluteRank),
+'legacy-card': absoluteRank > 150
+}"
 >
 <span v-if="isLevelNew(level)" class="new-corner-tag">NEW</span>
 
