@@ -439,10 +439,11 @@ mix-blend-mode:soft-light;
 /* Main list cards: tighter layout and smaller corner emoji */
 .level-card:not(.legacy-card)::after{
 display:block;
-font-size:2.2rem;
+font-size:2.8rem;
 left:10px;
 bottom:10px;
-opacity:.18;
+opacity:.3;
+z-index:1;
 }
 
 .level-card:not(.legacy-card){
