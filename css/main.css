@@ -436,6 +436,26 @@ filter:grayscale(1) saturate(0) contrast(1.08) brightness(0.95);
 mix-blend-mode:soft-light;
 }
 
+/* Main list cards: tighter layout and no corner emoji */
+.level-card:not(.legacy-card)::after{
+display:none;
+}
+
+.level-card:not(.legacy-card){
+padding:.85rem 1.25rem;
+}
+
+.level-card:not(.legacy-card) .title-left{
+display:flex;
+align-items:center;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.level-card:not(.legacy-card) .level-name-row{
+margin-top:0;
+}
+
 .new-corner-tag{
 position:absolute;
 left:-1px;
