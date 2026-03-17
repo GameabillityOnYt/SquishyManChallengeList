@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/WErXxyPfFqQ",
     "percentToQualify": "54",
     "length": "13s",
-    "records": []
+    "records": [
+          {
+            "user": "panda",
+            "link": "https://youtu.be/hfaObSIDwFU",
+            "percent": 100,
+            "hz": 180
+        }
+    ]
 }
