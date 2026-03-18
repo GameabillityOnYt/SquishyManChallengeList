@@ -6,7 +6,7 @@
     "verifier": "Atheon",
     "verification": "https://www.youtube.com/watch?v=ZiIGtUWVBwo",
     "percentToQualify": "100",
-    "password": "open",
+    "length": "6s",
     "records": [
         {
             "user": "GamerAJG2012",
@@ -67,6 +67,12 @@
             "link": "https://youtu.be/IygNgPaBS6I?si=2WWT_QBx6nOEXxQc",
             "percent": 100,
             "hz": 360
+        },
+        {
+            "user": "NpestaFanpro123",
+            "link": "https://medal.tv/games/geometry-dash/clips/mjn7yPh6y_20bhsN4?invite=cr-MSx0T1QsMjI3NjEyNDY0&v=27",
+            "percent": 100,
+            "hz": 170
         }
     ]
 }
