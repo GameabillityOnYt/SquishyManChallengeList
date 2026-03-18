@@ -1,1 +1,201 @@
-/* Players page uses the exact same layout classes as leaderboard. */
+.page-players-container {
+    display: block;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.page-players {
+    display: grid;
+    grid-template-columns: minmax(18rem, 1fr) minmax(22rem, 2fr);
+    grid-template-rows: max-content 1fr;
+    gap: 2rem;
+    max-width: 90rem;
+    margin: 0 auto;
+    height: 100%;
+    align-items: start;
+    padding: 2rem 1.5rem;
+    overflow: hidden;
+}
+
+.page-players .error-container {
+    grid-column: 1 / span 2;
+}
+
+.page-players .error-container .error {
+    padding: 1rem;
+    background-color: var(--color-error);
+    color: var(--color-on-error);
+}
+
+.players-grid-panel {
+    background: rgba(24, 24, 28, 0.9);
+    border-radius: 18px;
+    padding: 1.25rem;
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    height: calc(100vh - 9rem);
+}
+
+.players-grid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.players-label {
+    margin: 0;
+    color: var(--color-on-background);
+    font-weight: 800;
+    font-size: 1.9rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.players-subtitle {
+    margin: 0.35rem 0 0;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: 0.7rem;
+    max-height: calc(100vh - 14rem);
+    overflow: auto;
+    padding-right: 0.35rem;
+}
+
+.player-card {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 0.75rem 0.85rem;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-on-background);
+    cursor: pointer;
+    transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.player-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 165, 0, 0.5);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.player-card.active {
+    border-color: rgba(255, 165, 0, 0.9);
+    background: rgba(255, 165, 0, 0.15);
+}
+
+.player-card-rank {
+    font-weight: 800;
+    color: #ffa500;
+}
+
+.player-card-name {
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.player-card-total {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.player-drawer {
+    background: rgba(24, 24, 28, 0.95);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 165, 0, 0.25);
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.25);
+    height: calc(100vh - 9rem);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-drawer-inner {
+    overflow: auto;
+    padding: 1.5rem 2rem 2rem;
+}
+
+.player-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.player-drawer-rank {
+    margin: 0;
+    color: rgba(255, 165, 0, 0.9);
+    font-weight: 800;
+}
+
+.player-drawer-name {
+    margin: 0.15rem 0 0;
+    font-size: 2rem;
+}
+
+.player-drawer-total {
+    margin: 0;
+    font-weight: 800;
+}
+
+.player-drawer .table {
+    table-layout: fixed;
+}
+
+.player-drawer .table tr td:not(:last-child) {
+    padding-right: 2rem;
+}
+
+.player-drawer .table p,
+.player-drawer .table a {
+    padding-block: 0.35rem;
+}
+
+.player-drawer .table .rank p,
+.player-drawer .table .score p {
+    text-align: end;
+}
+
+.player-drawer .table .rank p {
+    color: var(--color-border-blue);
+    font-weight: 800;
+    text-shadow: 0 0 5px rgba(135, 206, 250, 0.45), 0 0 9px rgba(135, 206, 250, 0.25);
+}
+
+.player-drawer .table .level {
+    width: 100%;
+}
+
+.player-drawer .table a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1100px) {
+    .page-players {
+        grid-template-columns: 1fr;
+    }
+
+    .players-grid-panel,
+    .player-drawer {
+        height: auto;
+        max-height: none;
+    }
+}
+
+html:has(.page-players-container),
+body:has(.page-players-container) {
+    overflow: hidden;
+    height: 100vh;
+}
