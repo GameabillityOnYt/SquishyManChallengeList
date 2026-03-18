@@ -17,44 +17,35 @@ export default {
         <main v-if="loading">
             <Spinner></Spinner>
         </main>
-        <main v-else class="page-players-container">
-            <div class="page-players">
+        <main v-else class="page-leaderboard-container">
+            <div class="page-leaderboard">
                 <div class="error-container">
                     <p class="error" v-if="err.length > 0">
                         Player list may be incomplete, as the following levels could not be loaded: {{ err.join(', ') }}
                     </p>
                 </div>
-
-                <section class="players-grid-panel">
-                    <header class="players-grid-header">
-                        <div>
-                            <p class="players-label type-label-lg">View Players</p>
-                            <p class="players-subtitle">{{ filteredPlayers.length }} players</p>
-                        </div>
-                    </header>
-                    <div class="players-grid">
-                        <button
-                            v-for="player in filteredPlayers"
-                            class="player-card"
-                            :class="{ active: entry.user.toLowerCase() === player.user.toLowerCase() }"
-                            @click="selectedUser = player.user"
-                        >
-                            <span class="player-card-rank">#{{ player.rank }}</span>
-                            <span class="player-card-name type-label-lg">{{ player.user }}</span>
-                            <span class="player-card-total">{{ localize(player.total) }}</span>
-                        </button>
-                    </div>
-                </section>
-
-                <aside class="player-drawer" :class="{ open: entry.user !== '' }">
-                    <div class="player-drawer-inner">
-                        <div class="player-drawer-header">
-                            <div>
-                                <p class="player-drawer-rank type-label-lg">#{{ entry.rank }}</p>
-                                <h1 class="player-drawer-name">{{ entry.user }}</h1>
-                            </div>
-                            <p class="player-drawer-total type-label-lg">{{ localize(entry.total) }}</p>
-                        </div>
+                <div class="board-container">
+                    <p class="top-players-label type-label-lg">All Players</p>
+                    <table class="board">
+                        <tr v-for="player in filteredPlayers">
+                            <td class="rank">
+                                <p class="type-label-lg">#{{ player.rank }}</p>
+                            </td>
+                            <td class="total">
+                                <p class="type-label-lg">{{ localize(player.total) }}</p>
+                            </td>
+                            <td class="user" :class="{ 'active': entry.user.toLowerCase() === player.user.toLowerCase() }">
+                                <button @click="selectedUser = player.user">
+                                    <span class="type-label-lg">{{ player.user }}</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="player-container">
+                    <div class="player">
+                        <h1>#{{ entry.rank }} {{ entry.user }}</h1>
+                        <h3>{{ localize(entry.total) }}</h3>
 
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
                         <table class="table">
@@ -116,7 +107,7 @@ export default {
                             </tr>
                         </table>
                     </div>
-                </aside>
+                </div>
             </div>
         </main>
     `,
