@@ -27,7 +27,7 @@ export default {
                 </div>
                 <div class="list-container">
                     <div class="players-header">
-                        <p class="players-label type-label-lg">View Players</p>
+                        <p class="players-label type-label-lg">All Players</p>
                         <p class="players-subtitle">{{ filteredPlayers.length }} players</p>
                         <input
                             v-model="query"
@@ -36,18 +36,21 @@ export default {
                             placeholder="Search player..."
                         />
                     </div>
-                    <div class="players-grid">
-                        <button
-                            v-for="player in filteredPlayers"
-                            class="player-entry-btn"
-                            :class="{ active: entry.user.toLowerCase() === player.user.toLowerCase() }"
-                            @click="selectedUser = player.user"
-                        >
-                            <span class="player-entry-rank">#{{ player.rank }}</span>
-                            <span class="player-entry-name type-label-lg">{{ player.user }}</span>
-                            <span class="player-entry-score">{{ localize(player.total) }}</span>
-                        </button>
-                    </div>
+                    <table class="board">
+                        <tr v-for="player in filteredPlayers">
+                            <td class="rank">
+                                <p class="type-label-lg">#{{ player.rank }}</p>
+                            </td>
+                            <td class="total">
+                                <p class="type-label-lg">{{ localize(player.total) }}</p>
+                            </td>
+                            <td class="user" :class="{ 'active': entry.user.toLowerCase() === player.user.toLowerCase() }">
+                                <button @click="selectedUser = player.user">
+                                    <span class="type-label-lg">{{ player.user }}</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="detail-container">
                     <div class="player">
