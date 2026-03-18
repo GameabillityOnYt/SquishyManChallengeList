@@ -55,7 +55,7 @@ export default {
                         </table>
                     </div>
                 </div>
-                <div class="players-detail-container">
+                <div class="players-detail-container" v-if="hasResults">
                     <div class="players-scroll players-detail-scroll players-detail">
                         <h1>#{{ entry.rank }} {{ entry.user }}</h1>
                         <h3>{{ localize(entry.total) }}</h3>
@@ -133,6 +133,9 @@ export default {
             return this.players.filter((player) =>
                 player.user.toLowerCase().includes(query),
             );
+        },
+        hasResults() {
+            return this.filteredPlayers.length > 0;
         },
         entry() {
             const list = this.filteredPlayers;
