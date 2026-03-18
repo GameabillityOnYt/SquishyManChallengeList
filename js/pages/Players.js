@@ -10,7 +10,8 @@ export default {
     data: () => ({
         players: [],
         loading: true,
-        selected: 0,
+        selectedUser: '',
+        query: '',
         err: [],
     }),
     template: `
@@ -25,22 +26,32 @@ export default {
                     </p>
                 </div>
                 <div class="list-container">
-                    <p class="players-label type-label-lg">View Players</p>
+                    <div class="players-header">
+                        <p class="players-label type-label-lg">View Players</p>
+                        <p class="players-subtitle">{{ filteredPlayers.length }} players</p>
+                        <input
+                            v-model="query"
+                            class="players-search"
+                            type="search"
+                            placeholder="Search player..."
+                        />
+                    </div>
                     <div class="players-grid">
                         <button
-                            v-for="(player, i) in players"
+                            v-for="player in filteredPlayers"
                             class="player-entry-btn"
-                            :class="{ active: selected === i }"
-                            @click="selected = i"
+                            :class="{ active: entry.user.toLowerCase() === player.user.toLowerCase() }"
+                            @click="selectedUser = player.user"
                         >
-                            <span class="player-entry-rank">#{{ i + 1 }}</span>
+                            <span class="player-entry-rank">#{{ player.rank }}</span>
                             <span class="player-entry-name type-label-lg">{{ player.user }}</span>
+                            <span class="player-entry-score">{{ localize(player.total) }}</span>
                         </button>
                     </div>
                 </div>
                 <div class="detail-container">
                     <div class="player">
-                        <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
+                        <h1>#{{ entry.rank }} {{ entry.user }}</h1>
                         <h3>{{ localize(entry.total) }}</h3>
 
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
@@ -108,9 +119,36 @@ export default {
         </main>
     `,
     computed: {
+        filteredPlayers() {
+            const q = this.query.trim().toLowerCase();
+            if (!q) {
+                return this.players;
+            }
+            return this.players.filter((player) =>
+                player.user.toLowerCase().includes(q),
+            );
+        },
         entry() {
-            return this.players[this.selected] ?? {
+            const list = this.filteredPlayers;
+            if (list.length === 0) {
+                return {
+                    user: 'No results',
+                    rank: '-',
+                    total: 0,
+                    verified: [],
+                    completed: [],
+                    created: [],
+                    progressed: [],
+                };
+            }
+            const selected = list.find(
+                (player) =>
+                    this.selectedUser &&
+                    player.user.toLowerCase() === this.selectedUser.toLowerCase(),
+            );
+            return selected ?? list[0] ?? {
                 user: '',
+                rank: '-',
                 total: 0,
                 verified: [],
                 completed: [],
@@ -121,10 +159,13 @@ export default {
     },
     async mounted() {
         const [leaderboard, err] = await fetchLeaderboard();
-        this.players = leaderboard;
+        this.players = leaderboard.map((player, index) => ({
+            ...player,
+            rank: index + 1,
+        }));
         this.err = err;
-        if (this.selected >= this.players.length) {
-            this.selected = 0;
+        if (this.players.length > 0) {
+            this.selectedUser = this.players[0].user;
         }
         this.loading = false;
     },
