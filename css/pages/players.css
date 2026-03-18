@@ -158,6 +158,5 @@ html.dark .page-players .player-entry-btn {
 html:has(.page-players-container),
 body:has(.page-players-container) {
     overflow: hidden;
-    height: 100vh;
-    
+    height: 100vh;  
 }
