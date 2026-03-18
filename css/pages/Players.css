@@ -52,7 +52,7 @@
 }
 
 .page-players .players-label {
-    margin: -1.25rem 0 1.15rem -0.9rem;
+    margin: 0;
     color: var(--color-on-background);
     font-weight: 800;
     font-size: 1.9rem;
@@ -61,16 +61,53 @@
     text-transform: uppercase;
 }
 
+.page-players .players-header {
+    display: grid;
+    gap: 0.55rem;
+    margin: -1.25rem 0 1.15rem -0.9rem;
+    padding: 0.5rem 0 0.4rem 0.9rem;
+    position: sticky;
+    top: 0;
+    background: var(--color-background);
+    z-index: 2;
+}
+
+.page-players .players-subtitle {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.page-players .players-search {
+    width: 100%;
+    border: 1px solid rgba(255, 165, 0, 0.25);
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--color-on-background);
+    font-weight: 600;
+}
+
+html.dark .page-players .players-search {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.page-players .players-search::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
 .page-players .players-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.55rem;
+    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    gap: 0.6rem;
+    align-content: start;
 }
 
 .page-players .player-entry-btn {
     border: none;
     border-radius: 10px;
-    padding: 0.75rem 0.8rem;
+    padding: 0.75rem 0.85rem;
     text-align: left;
     background: rgba(0, 0, 0, 0.06);
     color: var(--color-on-background);
@@ -78,6 +115,10 @@
     transition: background-color 160ms ease, transform 160ms ease;
     word-break: normal;
     overflow-wrap: anywhere;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-height: 3.6rem;
 }
 
 html.dark .page-players .player-entry-btn {
@@ -106,8 +147,12 @@ html.dark .page-players .player-entry-btn {
 
 .page-players .player-entry-name {
     display: block;
-    margin-top: 0.15rem;
     font-weight: 700;
+}
+
+.page-players .player-entry-score {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .page-players .player {
@@ -150,8 +195,17 @@ html.dark .page-players .player-entry-btn {
 }
 
 @media screen and (max-width: 1100px) {
-    .page-players .players-grid {
+    .page-players {
         grid-template-columns: 1fr;
+    }
+
+    .page-players .list-container,
+    .page-players .detail-container {
+        max-height: none;
+    }
+
+    .page-players .players-grid {
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
     }
 }
 
@@ -159,5 +213,4 @@ html:has(.page-players-container),
 body:has(.page-players-container) {
     overflow: hidden;
     height: 100vh;
-    
 }
