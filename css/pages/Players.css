@@ -6,7 +6,7 @@
 
 .page-players {
     display: grid;
-    grid-template-columns: minmax(24rem, 2fr) 3fr;
+    grid-template-columns: minmax(20rem, 28rem) minmax(0, 1fr);
     grid-template-rows: max-content 1fr;
     column-gap: 2rem;
     max-width: 80rem;
@@ -39,6 +39,7 @@
     max-height: calc(100vh - 6rem);
     padding-inline: 1rem;
     padding-block: 2rem;
+    border-radius: 16px;
 }
 
 .page-players .detail-container {
@@ -49,6 +50,7 @@
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
     overflow-y: auto;
     max-height: calc(100vh - 6rem);
+    border-radius: 16px;
 }
 
 .page-players .players-label {
@@ -99,60 +101,73 @@ html.dark .page-players .players-search {
 
 .page-players .players-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-    gap: 0.6rem;
-    align-content: start;
 }
 
-.page-players .player-entry-btn {
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem 0.85rem;
-    text-align: left;
-    background: rgba(0, 0, 0, 0.06);
+/* Table list style same as leaderboard */
+.page-players .board {
+    table-layout: auto;
+    display: block;
+    width: 100%;
+}
+
+.page-players .board .rank {
+    padding-block: 1rem;
+    text-align: end;
+    color: #FFA500;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.page-players .board .total {
+    padding: 1rem;
+    text-align: end;
+}
+
+.page-players .board .user {
+    width: 100%;
+}
+
+.page-players .board .user button {
+    background-color: var(--color-background);
     color: var(--color-on-background);
-    cursor: pointer;
-    transition: background-color 160ms ease, transform 160ms ease;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: start;
     word-break: normal;
     overflow-wrap: anywhere;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    min-height: 3.6rem;
+    white-space: normal;
+    width: 100%;
 }
 
-html.dark .page-players .player-entry-btn {
-    background: rgba(255, 255, 255, 0.08);
+.page-players .board .user button:hover {
+    background-color: var(--color-background-hover);
+    color: var(--color-on-background);
+    cursor: pointer;
 }
 
-.page-players .player-entry-btn:hover {
-    background: rgba(255, 165, 0, 0.2);
-    transform: translateY(-1px);
-}
-
-.page-players .player-entry-btn.active {
-    background: var(--color-primary);
+.page-players .board .user.active button {
+    background-color: var(--color-primary);
     color: var(--color-on-primary);
 }
 
-.page-players .player-entry-rank {
-    display: block;
-    font-weight: 800;
-    color: var(--color-primary);
+.page-players .board tr {
+    position: relative;
+    border: none;
 }
 
-.page-players .player-entry-btn.active .player-entry-rank {
-    color: var(--color-on-primary);
+.page-players .board tr::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgba(128, 128, 128, 0.3), transparent);
 }
 
-.page-players .player-entry-name {
-    display: block;
-    font-weight: 700;
-}
-
-.page-players .player-entry-score {
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.7);
+.page-players .board tr:last-child::after {
+    display: none;
 }
 
 .page-players .player {
@@ -194,7 +209,7 @@ html.dark .page-players .player-entry-btn {
     text-decoration: underline;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 900px) {
     .page-players {
         grid-template-columns: 1fr;
     }
@@ -202,10 +217,6 @@ html.dark .page-players .player-entry-btn {
     .page-players .list-container,
     .page-players .detail-container {
         max-height: none;
-    }
-
-    .page-players .players-grid {
-        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
     }
 }
 
