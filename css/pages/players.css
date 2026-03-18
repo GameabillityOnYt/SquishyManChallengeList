@@ -1,4 +1,5 @@
-.page-leaderboard-container {
+/* Players page custom layout (independent from leaderboard). */
+.page-players-container {
     display:block;
     min-height:100vh;
     overflow:hidden;
@@ -6,7 +7,8 @@
         radial-gradient(800px 400px at 10% 0%, rgba(255, 165, 0, 0.16), transparent 60%),
         radial-gradient(600px 320px at 100% 15%, rgba(135, 206, 250, 0.18), transparent 55%);
 }
-.page-leaderboard {
+
+.page-players {
     display:grid;
     grid-template-columns:minmax(24rem,2fr) 3fr;
     grid-template-rows:max-content 1fr;
@@ -20,7 +22,7 @@
     overflow:hidden;
 }
 
-.page-leaderboard .board-container{
+.players-board-container{
     grid-row:2;
     min-width:0;
     background: rgba(255, 255, 255, 0.78);
@@ -34,7 +36,7 @@
     -webkit-backdrop-filter: blur(10px);
 }
 
-.page-leaderboard .player-container{
+.players-detail-container{
     grid-row:2;
     min-width:0;
     background: rgba(255, 255, 255, 0.78);
@@ -48,16 +50,18 @@
     -webkit-backdrop-filter: blur(10px);
 }
 
-.page-leaderboard .error-container {
+.players-error {
     grid-row: 1;
     grid-column: 1 / span 2;
 }
-.page-leaderboard .error-container .error {
+
+.players-error .error {
     padding: 1rem;
     background-color: var(--color-error);
     color: var(--color-on-error);
 }
-.page-leaderboard .top-players-label {
+
+.players-title {
     margin: -0.4rem 0 1rem 0.1rem;
     color: var(--color-primary);
     font-weight: 900;
@@ -66,23 +70,28 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
-.page-leaderboard .board {
+
+.players-board {
     display: grid;
     grid-auto-rows: minmax(0, auto);
     gap: 0.45rem;
     width: 100%;
 }
-.page-leaderboard .board .rank {
+
+.players-rank {
     text-align: end;
     font-weight: 800;
 }
-.page-leaderboard .board .total {
+
+.players-total {
     text-align: end;
 }
-.page-leaderboard .board .user {
+
+.players-user {
     width: 100%;
 }
-.page-leaderboard .board .user button {
+
+.players-user button {
     width: 100%;
     background-color: transparent;
     color: var(--color-on-background);
@@ -92,115 +101,60 @@
     text-align: start;
     word-break: normal;
     overflow-wrap: anywhere;
-    white-space: normal; /* prevent forced single-line clipping */
+    white-space: normal;
 }
-.page-leaderboard .board .user button:hover {
+
+.players-user button:hover {
     background-color: rgba(255, 165, 0, 0.18);
     color: var(--color-on-background);
     cursor: pointer;
 }
-.page-leaderboard .board .user.active button {
+
+.players-user.active button {
     background-color: var(--color-primary);
     color: var(--color-on-primary);
     box-shadow: 0 8px 18px rgba(255, 165, 0, 0.35);
 }
-.page-leaderboard .player {
+
+.players-detail {
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
 }
-.page-leaderboard .player .table {
+
+.players-table {
     table-layout: fixed;
 }
-.page-leaderboard .player .table tr td:not(:last-child) {
+
+.players-table tr td:not(:last-child) {
     padding-right: 2rem;
 }
-.page-leaderboard .player .table p,
-.page-leaderboard .player .table a {
-    padding-block: 1rem;
+
+.players-table p,
+.players-table a {
+    padding-block: 0.55rem;
 }
-.page-leaderboard .player .table .rank p,
-.page-leaderboard .player .table .score p {
+
+.players-table .players-rank p,
+.players-table .players-score p {
     text-align: end;
 }
-.page-leaderboard .player .table .rank p {
+
+.players-table .players-rank p {
     color: var(--color-border-blue);
     font-weight: 800;
     text-shadow: 0 0 5px rgba(135, 206, 250, 0.45), 0 0 9px rgba(135, 206, 250, 0.25);
 }
-.page-leaderboard .player .table .level {
+
+.players-level {
     width: 100%;
 }
-.page-leaderboard .player .table a:hover {
+
+.players-table a:hover {
     text-decoration: underline;
 }
-.special-text {
-    background-color: DeepSkyBlue;
-    color: black;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.5rem;
-    display: inline-block; 
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 10px rgba(0, 191, 255,0.6);
-    width: fit-content;
-    max-width: 100%;
-    word-wrap: break-word;
-}
-.champion-text { 
-    background-color: rgba(255, 0, 0, 1);
-    color: black;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.5rem;
-    display: inline-block; 
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
-    width: fit-content;
-    max-width: 100%;
-    word-wrap: break-word;
-}
-.CCWinner1-text { 
-    background-color: rgba(255, 220, 0, 1);
-    color: black;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.5rem;
-    display: inline-block; 
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 10 0 10px rgba(255, 220, 0, 0.6);
-    width: fit-content;
-    max-width: 100%;
-    word-wrap: break-word;
-}
 
-@keyframes pulse {
-    0% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.6); }
-    50% { box-shadow: 0 0 20px rgba(0, 191, 255, 1); }
-    100% { box-shadow: 0 0 10px rgba(0, 191, 255, 0.6); }
-}
-@keyframes pulse-red {
-    0% { box-shadow: 0 0 10px rgba(130, 0, 0, 0.5); }
-    50% { box-shadow: 0 0 20px rgba(130, 0, 130, 1); }
-    100% { box-shadow: 0 0 10px rgba(130, 0, 0, 0.5); }
-}
-@keyframes pulse-CC1 { 
-    0% { box-shadow: 10 0 10px rgba(255, 255, 0, 0.5); }
-    50% { box-shadow: 10 0 20px rgba(255, 255, 130, 1); }
-    100% { box-shadow: 10 0 10px rgba(255, 255, 0, 0.5); }
-}
-
-.special-text { animation: pulse 2s infinite; }
-.very-special-text { animation: pulse-red 1s infinite; }
-.CCWinner1-text { animation: pulse-CC1 2s infinite; }
-
-.page-leaderboard .board tr {
+.players-board tr {
     display: grid;
     grid-template-columns: 4.5rem 5.6rem 1fr;
     align-items: center;
@@ -211,63 +165,50 @@
     transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 
-.page-leaderboard .board tr::after {
-    display: none;
-}
-
-.page-leaderboard .board tr:hover {
+.players-board tr:hover {
     background: rgba(255, 165, 0, 0.16);
     transform: translateY(-1px);
 }
 
-.page-leaderboard .board .rank p {
+.players-board .players-rank p {
     color: var(--color-primary);
     text-shadow: 0 0 8px rgba(255, 165, 0, 0.35);
 }
 
-.page-leaderboard .board .total p {
+.players-board .players-total p {
     font-weight: 700;
     opacity: 0.9;
 }
 
-.page-leaderboard .board tr:has(.user.active) {
+.players-board tr:has(.players-user.active) {
     background: rgba(255, 165, 0, 0.22);
     box-shadow: inset 0 0 0 1px rgba(255, 165, 0, 0.2);
 }
 
-.page-leaderboard .player{
-gap:1.2rem!important;
-}
-
-.page-leaderboard .player .table p,
-.page-leaderboard .player .table a{
-padding-block:.55rem!important;
-}
-
-html:has(.page-leaderboard-container),
-body:has(.page-leaderboard-container){
+html:has(.page-players-container),
+body:has(.page-players-container){
     overflow:hidden;
     height:100vh;
 }
 
-html.dark .page-leaderboard-container {
+html.dark .page-players-container {
     background:
         radial-gradient(800px 400px at 10% 0%, rgba(255, 165, 0, 0.2), transparent 60%),
         radial-gradient(600px 320px at 100% 15%, rgba(135, 206, 250, 0.22), transparent 55%);
 }
 
-html.dark .page-leaderboard .board-container,
-html.dark .page-leaderboard .player-container {
+html.dark .players-board-container,
+html.dark .players-detail-container {
     background: rgba(28, 27, 31, 0.74);
     border-color: rgba(255, 165, 0, 0.36);
 }
 
-html.dark .page-leaderboard .board tr {
+html.dark .players-board tr {
     background: rgba(255, 255, 255, 0.06);
 }
 
 @media screen and (max-width: 1050px) {
-    .page-leaderboard {
+    .page-players {
         grid-template-columns: 1fr;
         grid-template-rows: max-content max-content 1fr;
         row-gap: 1.2rem;
@@ -275,16 +216,15 @@ html.dark .page-leaderboard .board tr {
         overflow: visible;
     }
 
-    .page-leaderboard .board-container,
-    .page-leaderboard .player-container {
+    .players-board-container,
+    .players-detail-container {
         max-height: none;
         height: auto;
     }
 }
 
 @media screen and (max-width: 700px) {
-    .page-leaderboard .board tr {
+    .players-board tr {
         grid-template-columns: 3.6rem 4.6rem 1fr;
     }
 }
-
