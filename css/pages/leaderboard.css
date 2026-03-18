@@ -53,6 +53,7 @@
     padding-block: 2rem;
 }
 .page-leaderboard .top-players-label {
+    margin: -0.65rem 0 1rem -0.25rem;
     margin: -1.25rem 0 1.15rem -0.9rem;
     color: var(--color-on-background);
     font-weight: 800;
@@ -217,12 +218,12 @@
 }
 
 .page-leaderboard .player{
-gap:.5rem!important;
+    gap:.5rem!important;
 }
 
 .page-leaderboard .player .table p,
 .page-leaderboard .player .table a{
-padding-block:.35rem!important;
+    padding-block:.35rem!important;
 }
 
 html:has(.page-leaderboard-container),
