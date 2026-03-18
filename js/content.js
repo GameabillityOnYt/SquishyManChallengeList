@@ -103,6 +103,19 @@ export async function fetchLeaderboard() {
 
         const scoreMap = {};
         const errs = [];
+        const findUserKey = (user) =>
+            Object.keys(scoreMap).find((u) => u.toLowerCase() === user.toLowerCase()) ||
+            user;
+        const ensureUser = (user) => {
+            const key = findUserKey(user);
+            scoreMap[key] ??= {
+                verified: [],
+                completed: [],
+                progressed: [],
+                created: [],
+            };
+            return scoreMap[key];
+        };
         list.forEach(([level, err], rank) => {
             if (err) {
                 errs.push(err);
@@ -110,15 +123,7 @@ export async function fetchLeaderboard() {
             }
 
             // Verification
-            const verifier = Object.keys(scoreMap).find(
-                (u) => u.toLowerCase() === level.verifier.toLowerCase(),
-            ) || level.verifier;
-            scoreMap[verifier] ??= {
-                verified: [],
-                completed: [],
-                progressed: [],
-            };
-            const { verified } = scoreMap[verifier];
+            const { verified } = ensureUser(level.verifier);
             verified.push({
                 rank: rank + 1,
                 level: level.name,
@@ -128,15 +133,7 @@ export async function fetchLeaderboard() {
 
             // Records
             level.records.forEach((record) => {
-                const user = Object.keys(scoreMap).find(
-                    (u) => u.toLowerCase() === record.user.toLowerCase(),
-                ) || record.user;
-                scoreMap[user] ??= {
-                    verified: [],
-                    completed: [],
-                    progressed: [],
-                };
-                const { completed, progressed } = scoreMap[user];
+                const { completed, progressed } = ensureUser(record.user);
                 if (record.percent === 100) {
                     completed.push({
                         rank: rank + 1,
@@ -153,6 +150,26 @@ export async function fetchLeaderboard() {
                     percent: record.percent,
                     score: score(rank + 1, record.percent, level.percentToQualify),
                     link: record.link,
+                });
+            });
+
+            // Creators
+            const creators = Array.isArray(level.creators) ? level.creators : [];
+            creators.forEach((creatorEntry) => {
+                if (!creatorEntry) {
+                    return;
+                }
+                const creatorNames = creatorEntry
+                    .split(',')
+                    .map((name) => name.trim())
+                    .filter(Boolean);
+                creatorNames.forEach((creator) => {
+                    const { created } = ensureUser(creator);
+                    created.push({
+                        rank: rank + 1,
+                        level: level.name,
+                        link: level.verification,
+                    });
                 });
             });
         });
