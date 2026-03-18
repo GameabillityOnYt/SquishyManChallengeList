@@ -159,5 +159,4 @@ html:has(.page-players-container),
 body:has(.page-players-container) {
     overflow: hidden;
     height: 100vh;  
-    
 }
