@@ -58,8 +58,6 @@ export default {
                 <div class="players-detail-container" v-if="hasResults">
                     <div class="players-scroll players-detail-scroll players-detail">
                         <h1>#{{ entry.rank }} {{ entry.user }}</h1>
-                        <h3>{{ localize(entry.total) }}</h3>
-
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
                         <table class="players-table">
                             <tr v-for="score in entry.verified">
