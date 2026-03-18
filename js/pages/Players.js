@@ -82,9 +82,6 @@ export default {
                                 <td class="players-level">
                                     <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
                                 </td>
-                                <td class="players-score">
-                                    <p>-</p>
-                                </td>
                             </tr>
                         </table>
 
