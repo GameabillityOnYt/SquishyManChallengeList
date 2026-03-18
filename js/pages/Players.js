@@ -11,31 +11,21 @@ export default {
         players: [],
         loading: true,
         selectedUser: '',
-        query: '',
         err: [],
     }),
     template: `
         <main v-if="loading">
             <Spinner></Spinner>
         </main>
-        <main v-else class="page-players-container">
-            <div class="page-players">
+        <main v-else class="page-leaderboard-container">
+            <div class="page-leaderboard">
                 <div class="error-container">
                     <p class="error" v-if="err.length > 0">
                         Player list may be incomplete, as the following levels could not be loaded: {{ err.join(', ') }}
                     </p>
                 </div>
-                <div class="list-container">
-                    <div class="players-header">
-                        <p class="players-label type-label-lg">All Players</p>
-                        <p class="players-subtitle">{{ filteredPlayers.length }} players</p>
-                        <input
-                            v-model="query"
-                            class="players-search"
-                            type="search"
-                            placeholder="Search player..."
-                        />
-                    </div>
+                <div class="board-container">
+                    <p class="top-players-label type-label-lg">All Players</p>
                     <table class="board">
                         <tr v-for="player in filteredPlayers">
                             <td class="rank">
@@ -52,7 +42,7 @@ export default {
                         </tr>
                     </table>
                 </div>
-                <div class="detail-container">
+                <div class="player-container">
                     <div class="player">
                         <h1>#{{ entry.rank }} {{ entry.user }}</h1>
                         <h3>{{ localize(entry.total) }}</h3>
@@ -123,13 +113,7 @@ export default {
     `,
     computed: {
         filteredPlayers() {
-            const q = this.query.trim().toLowerCase();
-            if (!q) {
-                return this.players;
-            }
-            return this.players.filter((player) =>
-                player.user.toLowerCase().includes(q),
-            );
+            return this.players;
         },
         entry() {
             const list = this.filteredPlayers;
