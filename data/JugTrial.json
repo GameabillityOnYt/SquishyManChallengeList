@@ -6,7 +6,7 @@
     "verifier": "Wisetree2939",
     "verification": "https://www.youtube.com/watch?v=0Nc8Kulig60",
     "percentToQualify": "100",
-    "password": "Open",
+    "length": "5s",
     "records": [
         {
             "user": "Ant_Gam3r",
@@ -73,6 +73,12 @@
             "link": "https://youtu.be/5frjSmu3XMo?si=Z4v86wFUpuTUtyvC",
             "percent": 100,
             "hz": 360
+        },
+        {
+            "user": "Platus70",
+            "link": "https://youtu.be/KXfcBwebdnI",
+            "percent": 100,
+            "hz": 144
         }
     ]
 }
