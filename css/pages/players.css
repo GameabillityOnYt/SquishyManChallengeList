@@ -276,11 +276,36 @@ html.dark .players-board tr {
 
     .players-scroll {
         max-height: none;
+        overflow: visible;
+    }
+
+    html:has(.page-players-container),
+    body:has(.page-players-container) {
+        overflow: auto;
+        height: auto;
     }
 }
 
 @media screen and (max-width: 700px) {
     .players-board tr {
         grid-template-columns: 3.6rem 4.6rem 1fr;
+    }
+
+    .players-detail {
+        gap: 1rem;
+    }
+
+    .players-table tr td:not(:last-child) {
+        padding-right: 1.2rem;
+    }
+
+    .players-table p,
+    .players-table a {
+        padding-block: 0.35rem;
+    }
+
+    .players-table .type-label-lg {
+        font-size: 15px;
+        line-height: 18px;
     }
 }
