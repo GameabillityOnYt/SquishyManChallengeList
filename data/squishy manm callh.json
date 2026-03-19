@@ -6,7 +6,7 @@
     "verifier": "sizzers",
     "verification": "https://youtu.be/oVmZJlpHHKA?si=ozhoD_n-fxKeCLfp",
     "percentToQualify": "100",
-    "password": "Open",
+    "length": "10s",
     "records": [
         {
             "user": "SplitAlloy97",
@@ -96,6 +96,12 @@
         {
             "user": "Pijeon",
             "link": "https://medal.tv/games/geometry-dash/clips/m4tNyRn033qj7iEgl?invite=cr-MSxGNDYsMzIzNTg1ODYw&v=40",
+            "percent": 100,
+            "hz": 144
+        },
+         {
+            "user": "Platus70",
+            "link": "https://youtu.be/ZGbbQBGjnzg ",
             "percent": 100,
             "hz": 144
         }
