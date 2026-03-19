@@ -1,3 +1,4 @@
+/* Players page custom layout (independent from leaderboard). */
 .page-players-container {
     display:block;
     min-height:100vh;
@@ -28,31 +29,38 @@
     border: 1px solid rgba(255, 165, 0, 0.28);
     border-radius: 18px;
     box-shadow:0 12px 28px rgba(0,0,0,0.12);
-    overflow-y:auto;
-    max-height:calc(100vh - 6rem);
-    padding:1.35rem 1rem;
     overflow:hidden;
     padding:0;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
-@@ -43,9 +42,8 @@
+
+.players-detail-container{
+    grid-row:2;
+    min-width:0;
+    background: rgba(255, 255, 255, 0.78);
     border: 1px solid rgba(255, 165, 0, 0.28);
     border-radius: 18px;
     box-shadow:0 12px 28px rgba(0,0,0,0.12);
-    overflow-y:auto;
-    max-height:calc(100vh - 6rem);
-    padding: 1.6rem;
     overflow:hidden;
     padding: 0;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
-@@ -63,14 +61,58 @@
+
+.players-error {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+}
+
+.players-error .error {
+    padding: 1rem;
+    background-color: var(--color-error);
+    color: var(--color-on-error);
+}
 
 .players-title {
     margin: -0.4rem 0 1rem 0.1rem;
-    color: var(--color-primary);
     color: #111;
     font-weight: 900;
     font-size: 1.6rem;
@@ -108,7 +116,132 @@
 .players-board {
     display: grid;
     grid-auto-rows: minmax(0, auto);
-@@ -203,6 +245,16 @@
+    gap: 0.45rem;
+    width: 100%;
+}
+
+.players-rank {
+    text-align: end;
+    font-weight: 800;
+}
+
+.players-total {
+    text-align: end;
+}
+
+.players-user {
+    width: 100%;
+}
+
+.players-user button {
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-on-background);
+    border: none;
+    border-radius: 0.7rem;
+    padding: 0.65rem 0.85rem;
+    text-align: start;
+    word-break: normal;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.players-user button:hover {
+    background-color: rgba(255, 165, 0, 0.18);
+    color: var(--color-on-background);
+    cursor: pointer;
+}
+
+.players-user.active button {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    box-shadow: 0 8px 18px rgba(255, 165, 0, 0.35);
+}
+
+.players-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.players-table {
+    table-layout: fixed;
+}
+
+.players-table tr td:not(:last-child) {
+    padding-right: 2rem;
+}
+
+.players-table p,
+.players-table a {
+    padding-block: 0.55rem;
+}
+
+.players-table .players-rank p,
+.players-table .players-score p {
+    text-align: end;
+}
+
+.players-table .players-rank p {
+    color: var(--color-border-blue);
+    font-weight: 800;
+    text-shadow: 0 0 5px rgba(135, 206, 250, 0.45), 0 0 9px rgba(135, 206, 250, 0.25);
+}
+
+.players-level {
+    width: 100%;
+}
+
+.players-table a:hover {
+    text-decoration: underline;
+}
+
+.players-board tr {
+    display: grid;
+    grid-template-columns: 4.5rem 5.6rem 1fr;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.15rem 0.25rem;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.05);
+    transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.players-board tr:hover {
+    background: rgba(255, 165, 0, 0.16);
+    transform: translateY(-1px);
+}
+
+.players-board .players-rank p {
+    color: var(--color-primary);
+    text-shadow: 0 0 8px rgba(255, 165, 0, 0.35);
+}
+
+.players-board .players-total p {
+    font-weight: 700;
+    opacity: 0.9;
+}
+
+.players-board tr:has(.players-user.active) {
+    background: rgba(255, 165, 0, 0.22);
+    box-shadow: inset 0 0 0 1px rgba(255, 165, 0, 0.2);
+}
+
+html:has(.page-players-container),
+body:has(.page-players-container){
+    overflow:hidden;
+    height:100vh;
+}
+
+html.dark .page-players-container {
+    background:
+        radial-gradient(800px 400px at 10% 0%, rgba(255, 165, 0, 0.2), transparent 60%),
+        radial-gradient(600px 320px at 100% 15%, rgba(135, 206, 250, 0.22), transparent 55%);
+}
+
+html.dark .players-board-container,
+html.dark .players-detail-container {
+    background: rgba(28, 27, 31, 0.74);
     border-color: rgba(255, 165, 0, 0.36);
 }
 
@@ -125,7 +258,18 @@ html.dark .players-search input {
 html.dark .players-board tr {
     background: rgba(255, 255, 255, 0.06);
 }
-@@ -221,10 +273,14 @@
+
+@media screen and (max-width: 1050px) {
+    .page-players {
+        grid-template-columns: 1fr;
+        grid-template-rows: max-content max-content 1fr;
+        row-gap: 1.2rem;
+        height: auto;
+        overflow: visible;
+    }
+
+    .players-board-container,
+    .players-detail-container {
         max-height: none;
         height: auto;
     }
