@@ -789,7 +789,7 @@ box-shadow:inset 0 0 0 999px rgba(255,255,255,0.02);
 /* Desktop-only hover motion to avoid touch quirks on mobile */
 @media (hover:hover) and (pointer:fine){
 .central-container .level-card:hover{
-transform:translateY(-2px) scale(1.006);
+transform:translateY(-2px);
 box-shadow:0 12px 28px rgba(0,0,0,0.18);
 }
 
