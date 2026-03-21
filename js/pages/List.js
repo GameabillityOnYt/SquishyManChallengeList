@@ -102,7 +102,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 
 <div class="stat-card">
 <span class="stat-label">Points</span>
-<span class="stat-value">{{score(absoluteRank,100,level.percentToQualify)}}</span>
+<span class="stat-value">{{activeListMode === 'unverified' ? '-' : score(absoluteRank,100,level.percentToQualify)}}</span>
 </div>
 
 <div class="stat-card">
