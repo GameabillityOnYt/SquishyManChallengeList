@@ -133,6 +133,11 @@ html.dark.list-unverified .view-mode-btn{
 color:#d5d5d5;
 }
 
+html.list-unverified .view-mode-btn.active{
+background:#FFA500;
+color:#ffffff;
+}
+
 .logo{
 display:flex;
 align-items:center;
