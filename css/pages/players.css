@@ -164,6 +164,77 @@
     gap: 1.4rem;
 }
 
+.players-profile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 1.2rem 1.3rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.18), rgba(135, 206, 250, 0.15));
+    border: 1px solid rgba(255, 165, 0, 0.22);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.players-profile-main {
+    min-width: 12rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.players-profile-rank {
+    color: var(--color-border-blue);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.players-profile-name {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-on-background);
+}
+
+.players-profile-total {
+    margin: 0;
+    font-weight: 700;
+    color: var(--color-on-background);
+    opacity: 0.8;
+}
+
+.players-profile-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem 1rem;
+    flex: 1 1 14rem;
+}
+
+.players-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.players-stat-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-on-background);
+    opacity: 0.7;
+}
+
+.players-stat-value {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--color-on-background);
+}
+
 .players-table {
     table-layout: fixed;
 }
@@ -245,6 +316,23 @@ html.dark .players-detail-container {
     border-color: rgba(255, 165, 0, 0.36);
 }
 
+html.dark .players-profile {
+    background: linear-gradient(135deg, rgba(255, 165, 0, 0.22), rgba(135, 206, 250, 0.2));
+    border-color: rgba(255, 165, 0, 0.28);
+}
+
+html.dark .players-profile-name,
+html.dark .players-profile-total,
+html.dark .players-stat-label,
+html.dark .players-stat-value {
+    color: #fff;
+}
+
+html.dark .players-stat {
+    background: rgba(18, 18, 20, 0.72);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
 html.dark .players-title {
     color: #fff;
 }
@@ -282,5 +370,13 @@ html.dark .players-board tr {
 @media screen and (max-width: 700px) {
     .players-board tr {
         grid-template-columns: 3.6rem 4.6rem 1fr;
+    }
+
+    .players-profile {
+        padding: 1rem;
+    }
+
+    .players-profile-stats {
+        grid-template-columns: 1fr;
     }
 }
