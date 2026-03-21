@@ -64,6 +64,8 @@
     height: calc(100dvh - 4rem);
     overflow-y: auto;
     overflow-x: hidden;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
 }
 
 .list-mode-switch {
