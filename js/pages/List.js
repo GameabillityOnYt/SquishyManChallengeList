@@ -1,7 +1,7 @@
 import { store } from "../main.js";
 import { getThumbnailFromId, getYoutubeIdFromUrl } from "../util.js";
 import { score } from "../score.js";
-import { fetchEditors, fetchList, fetchNewTags } from "../content.js";
+import { fetchEditors, fetchList, fetchNewTags, fetchUnbeatenList } from "../content.js";
 import Spinner from "../components/Spinner.js";
 
 export default {
@@ -11,15 +11,18 @@ template:`
 <main v-if="loading"><Spinner/></main>
 
 <div v-else class="page-list-scroll-shell">
-<div class="page-list-custom">
+<div class="page-list-custom" :class="{ 'unverified-mode': activeListMode === 'unverified' }">
 
 <div class="central-container" :class="'view-mode-' + effectiveListView">
-<div class="list-mode-switch" role="group" aria-label="Main and legacy list toggle">
+<div class="list-mode-switch" role="group" aria-label="Main list, legacy list, and unverified list toggle">
 <button class="list-mode-btn" :class="{ active: activeListMode === 'main' }" @click="showMainList" type="button">
 Main List
 </button>
 <button class="list-mode-btn" :class="{ active: activeListMode === 'legacy' }" @click="showLegacyList" type="button">
 Legacy List
+</button>
+<button class="list-mode-btn" :class="{ active: activeListMode === 'unverified' }" @click="showUnverifiedList" type="button">
+Unverified Levels
 </button>
 </div>
 
@@ -196,6 +199,7 @@ type="button"
 data:()=>({
 
 list:[],
+unverifiedList:[],
 editors:[],
 loading:true,
 toggledRecords:{},
@@ -211,9 +215,19 @@ this.list = Array.isArray(fetchedList)
     .filter(([level])=>Boolean(level))
     .map(([level],index)=>[level,index+1])
 : [];
+const fetchedUnverified = await fetchUnbeatenList();
+this.unverifiedList = Array.isArray(fetchedUnverified)
+? fetchedUnverified
+    .filter(([level])=>Boolean(level))
+    .map(([level],index)=>[level,index+1])
+: [];
 this.editors=(await fetchEditors())||[];
 this.newTags=(await fetchNewTags())||{};
 this.loading=false;
+this.syncUnverifiedTheme();
+},
+unmounted(){
+this.clearUnverifiedTheme();
 },
 computed:{
 effectiveListView(){
@@ -235,6 +249,9 @@ return this.list.filter(([,rank])=>rank === this.selectedLegacyRank);
 }
 return [];
 }
+if(this.activeListMode === 'unverified'){
+return this.unverifiedList;
+}
 return this.mainList;
 }
 },
@@ -249,11 +266,19 @@ showMainList(){
 this.activeListMode = 'main';
 this.selectedLegacyRank = null;
 this.toggledRecords = {};
+this.syncUnverifiedTheme();
 },
 showLegacyList(){
 this.activeListMode = 'legacy';
 this.selectedLegacyRank = null;
 this.toggledRecords = {};
+this.syncUnverifiedTheme();
+},
+showUnverifiedList(){
+this.activeListMode = 'unverified';
+this.selectedLegacyRank = null;
+this.toggledRecords = {};
+this.syncUnverifiedTheme();
 },
 openLegacyLevel(rank){
 this.selectedLegacyRank = rank;
@@ -561,6 +586,16 @@ iconFor(role){
 	};
 	const name = map[role] || 'user-gear';
 	return `/assets/${name}${this.store.dark?'-dark':''}.svg`;
+},
+syncUnverifiedTheme(){
+const root = document.documentElement;
+if(!root) return;
+root.classList.toggle('list-unverified', this.activeListMode === 'unverified');
+},
+clearUnverifiedTheme(){
+const root = document.documentElement;
+if(!root) return;
+root.classList.remove('list-unverified');
 }
 }
 };
