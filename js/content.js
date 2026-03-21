@@ -7,6 +7,7 @@ const dir = '/data';
 
 const cache = {
     list: { data: null, promise: null },
+    unbeatenList: { data: null, promise: null },
     editors: { data: null, promise: null },
     newTags: { data: null, promise: null },
     leaderboard: { data: null, promise: null },
@@ -37,9 +38,9 @@ async function getCached(key, loader, shouldPersist = (value) => value != null) 
     return entry.promise;
 }
 
-export async function fetchList() {
-    return getCached('list', async () => {
-        const listResult = await fetch(`${dir}/_list.json`);
+async function fetchLevelList(fileName, cacheKey) {
+    return getCached(cacheKey, async () => {
+        const listResult = await fetch(`${dir}/${fileName}`);
         try {
             const list = await listResult.json();
             return await Promise.all(
@@ -68,6 +69,14 @@ export async function fetchList() {
             return null;
         }
     });
+}
+
+export async function fetchList() {
+    return fetchLevelList('_list.json', 'list');
+}
+
+export async function fetchUnbeatenList() {
+    return fetchLevelList('_unbeatenlist.json', 'unbeatenList');
 }
 
 export async function fetchEditors() {
