@@ -44,11 +44,6 @@
     padding-top: 0;
 }
 
-.page-list-custom{
-    padding-bottom: 2.25rem;
-    box-sizing: border-box;
-}
-
 .page-list-custom .meta {
     display: flex;
     flex-direction: column;
@@ -69,8 +64,6 @@
     height: calc(100dvh - 4rem);
     overflow-y: auto;
     overflow-x: hidden;
-    padding-bottom: 2.5rem;
-    scroll-padding-bottom: 2.5rem;
     box-sizing: border-box;
 }
 
