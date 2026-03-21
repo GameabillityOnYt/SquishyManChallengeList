@@ -951,7 +951,6 @@ margin-top:0;
 /* Combine editors and requirements under single scrollbar */
 .editors-panel{
 	padding-bottom:.5rem;
-	border-bottom:none;
 	margin-bottom:0;
 }
 
