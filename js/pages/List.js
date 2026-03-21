@@ -118,7 +118,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 
 <button class="show-records-btn" @click="toggleRecords(absoluteRank)">
-{{isOpen(absoluteRank)?'Hide Progress':'Show Progress'}}<span v-if="level.records && level.records.length"> ({{level.records.length}})</span>
+{{isOpen(absoluteRank)?(activeListMode==='unverified'?'Hide Progress':'Hide Records'):(activeListMode==='unverified'?'Show Progress':'Show Records')}}<span v-if="level.records && level.records.length"> ({{level.records.length}})</span>
 </button>
 
 <transition
@@ -142,7 +142,7 @@ class="records-scroll-area"
 <td>{{formatHz(record.hz)}}</td>
 </tr>
 </table>
-<p v-if="!level.records || level.records.length===0" class="no-records-message">No progress on this level yet.</p>
+<p v-if="!level.records || level.records.length===0" class="no-records-message">{{activeListMode==='unverified'?'No progress on this level yet.':'No records on this level yet.'}}</p>
 </div>
 </div>
 </div>
