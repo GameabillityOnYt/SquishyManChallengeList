@@ -57,7 +57,32 @@ export default {
                 </div>
                 <div class="players-detail-container" v-if="hasResults">
                     <div class="players-scroll players-detail-scroll players-detail">
-                        <h1>#{{ entry.rank }} {{ entry.user }}</h1>
+                        <div class="players-profile">
+                            <div class="players-profile-main">
+                                <p class="players-profile-rank type-label-lg">#{{ entry.rank }}</p>
+                                <h1 class="players-profile-name">{{ entry.user }}</h1>
+                                <p class="players-profile-total">Score {{ localize(entry.total) }}</p>
+                            </div>
+                            <div class="players-profile-stats">
+                                <div class="players-stat">
+                                    <span class="players-stat-label">Verified</span>
+                                    <span class="players-stat-value">{{ entry.verified.length }}</span>
+                                </div>
+                                <div class="players-stat">
+                                    <span class="players-stat-label">Created</span>
+                                    <span class="players-stat-value">{{ entry.created.length }}</span>
+                                </div>
+                                <div class="players-stat">
+                                    <span class="players-stat-label">Completed</span>
+                                    <span class="players-stat-value">{{ entry.completed.length }}</span>
+                                </div>
+                                <div class="players-stat">
+                                    <span class="players-stat-label">Progressed</span>
+                                    <span class="players-stat-value">{{ entry.progressed.length }}</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
                         <table class="players-table">
                             <tr v-for="score in entry.verified">
