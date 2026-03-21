@@ -44,6 +44,11 @@
     padding-top: 0;
 }
 
+.page-list-custom{
+    padding-bottom: 1.5rem;
+    box-sizing: border-box;
+}
+
 .page-list-custom .meta {
     display: flex;
     flex-direction: column;
