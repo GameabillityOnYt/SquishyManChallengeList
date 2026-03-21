@@ -102,6 +102,37 @@ color:var(--color-on-primary);
 align-items:center;
 }
 
+html.list-unverified{
+--color-primary:#6f6f6f;
+--color-on-primary:#f1f1f1;
+--color-border-blue:#8a8a8a;
+--color-border-yellow:#9a9a9a;
+}
+
+html.list-unverified header{
+background-color:#4b4b4b;
+color:#f1f1f1;
+box-shadow:inset 0 -1px 0 rgba(255,255,255,0.08);
+}
+
+html.list-unverified .view-mode-switch{
+background:#e9e9e9;
+box-shadow:inset 0 0 0 2px rgba(255,255,255,.5), 0 1px 4px rgba(0,0,0,.2);
+}
+
+html.dark.list-unverified .view-mode-switch{
+background:#2f2f2f;
+box-shadow:inset 0 0 0 2px rgba(255,255,255,.08), 0 1px 4px rgba(0,0,0,.4);
+}
+
+html.list-unverified .view-mode-btn{
+color:#5a5a5a;
+}
+
+html.dark.list-unverified .view-mode-btn{
+color:#d5d5d5;
+}
+
 .logo{
 display:flex;
 align-items:center;
@@ -913,6 +944,16 @@ margin-top:0;
   border-color:#f0b12d;
   color:#ffffff;
   transform:scale(1.04);
+}
+
+.page-list-custom.unverified-mode .show-records-btn{
+  border-color:#8d8d8d;
+}
+
+.page-list-custom.unverified-mode .show-records-btn:hover{
+  background:linear-gradient(90deg,#6e6e6e 0%, #4f4f4f 50%, #6e6e6e 100%);
+  border-color:#808080;
+  color:#f4f4f4;
 }
 
 
