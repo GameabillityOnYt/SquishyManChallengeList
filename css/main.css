@@ -109,6 +109,13 @@ html.list-unverified{
 --color-border-yellow:#9a9a9a;
 }
 
+html.list-unverified:not(.dark){
+--color-background:#d9d9d9;
+--color-on-background:#111111;
+--color-background-hover:#e3e3e3;
+--color-on-background-hover:#111111;
+}
+
 html.list-unverified header{
 background-color:#4b4b4b;
 color:#f1f1f1;
@@ -953,6 +960,10 @@ margin-top:0;
 
 .page-list-custom.unverified-mode .show-records-btn{
   border-color:#f1f1f1;
+}
+
+html:not(.dark) .page-list-custom.unverified-mode .show-records-btn{
+  border-color:#3a3a3a;
 }
 
 .page-list-custom.unverified-mode .show-records-btn:hover{
