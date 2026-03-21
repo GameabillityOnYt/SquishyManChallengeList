@@ -150,6 +150,16 @@
     box-shadow:0 2px 10px rgba(255,255,255,0.18);
 }
 
+html:not(.dark) .page-list-custom.unverified-mode .level-card{
+    border-color:#3a3a3a;
+    box-shadow:0 10px 24px rgba(0,0,0,0.16);
+}
+
+html:not(.dark) .page-list-custom.unverified-mode .stat-card{
+    border-color:#3a3a3a;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
+}
+
 html.dark .legacy-dropdown {
     background: rgba(28, 27, 31, 0.72);
     border-color: rgba(255, 165, 0, 0.34);
