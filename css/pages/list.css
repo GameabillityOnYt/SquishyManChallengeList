@@ -45,7 +45,7 @@
 }
 
 .page-list-custom{
-    padding-bottom: 1.5rem;
+    padding-bottom: 2.25rem;
     box-sizing: border-box;
 }
 
@@ -69,7 +69,8 @@
     height: calc(100dvh - 4rem);
     overflow-y: auto;
     overflow-x: hidden;
-    padding-bottom: 1rem;
+    padding-bottom: 2.5rem;
+    scroll-padding-bottom: 2.5rem;
     box-sizing: border-box;
 }
 
