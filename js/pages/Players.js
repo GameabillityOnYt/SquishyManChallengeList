@@ -94,12 +94,8 @@ export default {
                             </a>
                         </div>
 
-                        <h2 v-if="levels.length > 0">Completed ({{ entry.completed.length }})</h2>
-                        <p class="players-section-meta" v-if="levels.length > 0">
-                            {{ entry.completed.length }} / {{ levels.length }}
-                        </p>
+                        <h2 v-if="levels.length > 0">Completed ({{ entry.completed.length }} / {{ levels.length }})</h2>
                         <div class="players-demonlist" v-if="levels.length > 0">
-                            <p class="players-demonlist-title">Demonlist stats</p>
                             <p class="players-demonlist-line">
                                 {{ demonlistStats.main }} Main,
                                 {{ demonlistStats.extended }} Extended,
