@@ -165,9 +165,31 @@
     text-align: center;
 }
 
+.players-demonlist {
+    margin-top: -0.2rem;
+}
+
+.players-demonlist-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-on-background);
+    opacity: 0.85;
+}
+
+.players-demonlist-line {
+    margin: 0.15rem 0 0;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--color-on-background);
+    opacity: 0.7;
+}
+
 .players-section-meta {
-    margin: -0.6rem 0 0.2rem 0;
-    font-size: 0.95rem;
+    margin: -0.45rem 0 0.5rem 0;
+    font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
