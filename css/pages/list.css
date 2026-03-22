@@ -84,12 +84,15 @@
     gap:0.6rem;
     margin-bottom:0.9rem;
     position:relative;
+    width:100%;
+    justify-content:space-between;
 }
 
 .tag-help{
     position:relative;
     display:inline-flex;
     align-items:center;
+    margin-left:auto;
 }
 
 .tag-help-btn{
@@ -131,9 +134,10 @@
 }
 
 .tag-help-panel p{
-    display:flex;
+    display:grid;
+    grid-template-columns: 120px 1fr;
     align-items:center;
-    gap:0.55rem;
+    column-gap:0.6rem;
     margin:0 0 0.6rem 0;
     font-size:0.88rem;
     line-height:1.25;
@@ -148,7 +152,7 @@
     align-items:center;
     justify-content:center;
     white-space:nowrap;
-    margin-right:0.15rem;
+    justify-self:start;
 }
 
 .tag-help-close{
@@ -391,6 +395,11 @@ html.dark .legacy-entry-btn {
         width:min(90vw, 320px);
         right:auto;
         left:0;
+    }
+
+    .tag-help-panel p{
+        grid-template-columns: 1fr;
+        row-gap:0.35rem;
     }
 
     .legacy-dropdown-grid {
