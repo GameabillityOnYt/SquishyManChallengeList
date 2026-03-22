@@ -1,4 +1,4 @@
-import { fetchLeaderboard } from '../content.js';
+import { fetchLeaderboard, fetchList } from '../content.js';
 import { localize } from '../util.js';
 
 import Spinner from '../components/Spinner.js';
@@ -12,6 +12,8 @@ export default {
         loading: true,
         selectedUser: '',
         searchQuery: '',
+        err: [],
+        levels: [],
     }),
     template: `
         <main v-if="loading">
@@ -56,36 +58,11 @@ export default {
                 </div>
                 <div class="players-detail-container" v-if="hasResults">
                     <div class="players-scroll players-detail-scroll players-detail">
-                        <div class="players-profile">
-                            <div class="players-profile-main">
-                                <p class="players-profile-rank type-label-lg">Rank {{ entry.rank }}</p>
-                                <h1 class="players-profile-name">{{ entry.user }}</h1>
-                                <p class="players-profile-total">Score {{ localize(entry.total) }}</p>
-                            </div>
-                            <div class="players-profile-stats">
-                                <div class="players-stat">
-                                    <span class="players-stat-label">Verified</span>
-                                    <span class="players-stat-value">{{ entry.verified.length }}</span>
-                                </div>
-                                <div class="players-stat">
-                                    <span class="players-stat-label">Created</span>
-                                    <span class="players-stat-value">{{ entry.created.length }}</span>
-                                </div>
-                                <div class="players-stat">
-                                    <span class="players-stat-label">Completed</span>
-                                    <span class="players-stat-value">{{ entry.completed.length }}</span>
-                                </div>
-                                <div class="players-stat">
-                                    <span class="players-stat-label">Progressed</span>
-                                    <span class="players-stat-value">{{ entry.progressed.length }}</span>
-                                </div>
-                            </div>
-                        </div>
-
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length }})</h2>
                         <div class="players-levels" v-if="entry.verified.length > 0">
                             <a
                                 v-for="level in entry.verified"
+                                :key="'verified-' + level.rank + '-' + level.level"
                                 class="players-level-pill type-label-lg"
                                 :class="{ 'is-top75': level.rank <= 75, 'is-bottom': level.rank > 75 }"
                                 target="_blank"
@@ -99,6 +76,7 @@ export default {
                         <div class="players-levels" v-if="entry.created.length > 0">
                             <a
                                 v-for="level in entry.created"
+                                :key="'created-' + level.rank + '-' + level.level"
                                 class="players-level-pill type-label-lg"
                                 :class="{ 'is-top75': level.rank <= 75, 'is-bottom': level.rank > 75 }"
                                 target="_blank"
@@ -108,16 +86,21 @@ export default {
                             </a>
                         </div>
 
-                        <h2 v-if="entry.completed.length > 0">Completed ({{ entry.completed.length }})</h2>
-                        <div class="players-levels" v-if="entry.completed.length > 0">
+                        <h2 v-if="levels.length > 0">Completed ({{ entry.completed.length }})</h2>
+                        <div class="players-levels" v-if="levels.length > 0">
                             <a
-                                v-for="level in entry.completed"
+                                v-for="level in levels"
+                                :key="'completed-' + level.rank + '-' + level.name"
                                 class="players-level-pill type-label-lg"
-                                :class="{ 'is-top75': level.rank <= 75, 'is-bottom': level.rank > 75 }"
+                                :class="{
+                                    'is-top75': level.rank <= 75,
+                                    'is-bottom': level.rank > 75,
+                                    'is-unbeaten': !completedLookup[level.name.toLowerCase()],
+                                }"
                                 target="_blank"
                                 :href="level.link"
                             >
-                                {{ level.level }}
+                                {{ level.name }}
                             </a>
                         </div>
                     </div>
@@ -166,13 +149,34 @@ export default {
                 progressed: [],
             };
         },
+        completedLookup() {
+            const lookup = {};
+            this.entry.completed.forEach((score) => {
+                lookup[score.level.toLowerCase()] = true;
+            });
+            return lookup;
+        },
     },
     async mounted() {
         const [leaderboard, err] = await fetchLeaderboard();
+        const list = await fetchList();
         this.players = leaderboard.map((player, index) => ({
             ...player,
             rank: index + 1,
         }));
+        if (Array.isArray(list)) {
+            this.levels = list
+                .map(([level], index) =>
+                    level
+                        ? {
+                              name: level.name,
+                              link: level.verification,
+                              rank: index + 1,
+                          }
+                        : null,
+                )
+                .filter(Boolean);
+        }
         this.err = err;
         if (this.players.length > 0) {
             this.selectedUser = this.players[0].user;
