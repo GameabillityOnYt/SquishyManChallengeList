@@ -112,6 +112,10 @@
     transition:transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
+.tag-help:hover .tag-help-btn{
+    background:rgba(255,165,0,0.28);
+}
+
 .tag-help-btn:hover{
     transform:translateY(-1px);
     box-shadow:0 6px 14px rgba(0,0,0,0.18);
@@ -120,7 +124,7 @@
 .tag-help-panel{
     position:absolute;
     top:calc(100% + 8px);
-    right:0;
+    left:calc(100% + 8px);
     width:320px;
     background:rgba(255,255,255,0.95);
     color:#111;
@@ -131,6 +135,16 @@
     z-index:20;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(-4px);
+    transition:opacity 140ms ease, transform 140ms ease;
+}
+
+.tag-help:hover .tag-help-panel{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateY(0);
 }
 
 .tag-help-panel p{
@@ -141,6 +155,11 @@
     margin:0 0 0.6rem 0;
     font-size:0.88rem;
     line-height:1.25;
+}
+
+.tag-help-panel p + p{
+    border-top:1px solid rgba(0,0,0,0.12);
+    padding-top:0.6rem;
 }
 
 .tag-help-panel p:last-child{
@@ -155,18 +174,6 @@
     justify-self:start;
 }
 
-.tag-help-close{
-    position:absolute;
-    top:6px;
-    right:8px;
-    border:none;
-    background:transparent;
-    color:#333;
-    font-size:1.1rem;
-    cursor:pointer;
-    line-height:1;
-}
-
 .page-list-custom.unverified-mode .tag-help-btn{
     border-color:#f0b12d;
     background:rgba(255,165,0,0.24);
@@ -178,8 +185,8 @@ html.dark .tag-help-panel{
     border-color:rgba(255,255,255,0.12);
 }
 
-html.dark .tag-help-close{
-    color:#f2f2f2;
+html.dark .tag-help-panel p + p{
+    border-top-color:rgba(255,255,255,0.12);
 }
 
 .page-list-custom.unverified-mode .list-mode-switch{
