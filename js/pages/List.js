@@ -26,13 +26,12 @@ Legacy List
 Unverified Levels
 </button>
 </div>
-<div class="tag-help">
-<button class="tag-help-btn" type="button" @click="toggleTagHelp" :aria-expanded="showTagHelp ? 'true' : 'false'" aria-controls="tag-help-panel">
+<div class="tag-help" aria-label="Tag explanations">
+<button class="tag-help-btn" type="button" aria-controls="tag-help-panel">
 !
 </button>
-<div v-if="showTagHelp" id="tag-help-panel" class="tag-help-panel" role="dialog" aria-label="Tag explanations">
-<button class="tag-help-close" type="button" @click="showTagHelp = false" aria-label="Close">X</button>
-<p><span class="tag-help-label decorated-tag">Decorated</span> For levels recognized for exceptional decoration or visuals.</p>
+<div id="tag-help-panel" class="tag-help-panel" role="dialog" aria-label="Tag explanations">
+<p><span class="tag-help-label decorated-tag">Decorated</span> Used for levels that have a well executed theme/decoration.</p>
 <p><span class="tag-help-label former-top-1-tag">Former Top 1</span> For every level that was once #1 but got dethroned by a new one.</p>
 <p><span class="tag-help-label demise-tag">Demise</span> Used for the top 3 on the Unverified Levels tab (the hardest levels on the SMLL).</p>
 </div>
@@ -220,7 +219,6 @@ toggledRecords:{},
 newTags:{},
 activeListMode:'main',
 selectedLegacyRank:null,
-showTagHelp:false,
 store
 }),
 async mounted(){
@@ -614,9 +612,6 @@ clearUnverifiedTheme(){
 const root = document.documentElement;
 if(!root) return;
 root.classList.remove('list-unverified');
-},
-toggleTagHelp(){
-this.showTagHelp = !this.showTagHelp;
 }
 }
 };
