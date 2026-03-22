@@ -95,6 +95,9 @@ export default {
                         </div>
 
                         <h2 v-if="levels.length > 0">Completed ({{ entry.completed.length }})</h2>
+                        <p class="players-section-meta" v-if="levels.length > 0">
+                            {{ entry.completed.length }} / {{ levels.length }}
+                        </p>
                         <div class="players-levels" v-if="levels.length > 0">
                             <a
                                 v-for="level in levels"
