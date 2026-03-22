@@ -1,4 +1,4 @@
-import { fetchLeaderboard, fetchList } from '../content.js';
+import { fetchLeaderboard } from '../content.js';
 import { localize } from '../util.js';
 
 import Spinner from '../components/Spinner.js';
@@ -13,7 +13,6 @@ export default {
         selectedUser: '',
         searchQuery: '',
         err: [],
-        levels: [],
     }),
     template: `
         <main v-if="loading">
@@ -84,16 +83,42 @@ export default {
                             </div>
                         </div>
 
-                        <h2 v-if="levels.length > 0">All Levels</h2>
-                        <div class="players-levels" v-if="levels.length > 0">
+                        <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length }})</h2>
+                        <div class="players-levels" v-if="entry.verified.length > 0">
                             <a
-                                v-for="level in levels"
+                                v-for="level in entry.verified"
                                 class="players-level-pill type-label-lg"
-                                :class="{ 'is-completed': completedLookup[level.name.toLowerCase()] }"
+                                :class="{ 'is-top75': level.rank <= 75, 'is-bottom': level.rank > 75 }"
                                 target="_blank"
                                 :href="level.link"
                             >
-                                {{ level.name }}
+                                {{ level.level }}
+                            </a>
+                        </div>
+
+                        <h2 v-if="entry.created.length > 0">Created ({{ entry.created.length }})</h2>
+                        <div class="players-levels" v-if="entry.created.length > 0">
+                            <a
+                                v-for="level in entry.created"
+                                class="players-level-pill type-label-lg"
+                                :class="{ 'is-top75': level.rank <= 75, 'is-bottom': level.rank > 75 }"
+                                target="_blank"
+                                :href="level.link"
+                            >
+                                {{ level.level }}
+                            </a>
+                        </div>
+
+                        <h2 v-if="entry.completed.length > 0">Completed ({{ entry.completed.length }})</h2>
+                        <div class="players-levels" v-if="entry.completed.length > 0">
+                            <a
+                                v-for="level in entry.completed"
+                                class="players-level-pill type-label-lg"
+                                :class="{ 'is-top75': level.rank <= 75, 'is-bottom': level.rank > 75 }"
+                                target="_blank"
+                                :href="level.link"
+                            >
+                                {{ level.level }}
                             </a>
                         </div>
                     </div>
@@ -142,34 +167,13 @@ export default {
                 progressed: [],
             };
         },
-        completedLookup() {
-            const lookup = {};
-            this.entry.completed.forEach((score) => {
-                lookup[score.level.toLowerCase()] = true;
-            });
-            return lookup;
-        },
     },
     async mounted() {
         const [leaderboard, err] = await fetchLeaderboard();
-        const list = await fetchList();
         this.players = leaderboard.map((player, index) => ({
             ...player,
             rank: index + 1,
         }));
-        if (Array.isArray(list)) {
-            this.levels = list
-                .map(([level], index) =>
-                    level
-                        ? {
-                              name: level.name,
-                              link: level.verification,
-                              rank: index + 1,
-                          }
-                        : null,
-                )
-                .filter(Boolean);
-        }
         this.err = err;
         if (this.players.length > 0) {
             this.selectedUser = this.players[0].user;
