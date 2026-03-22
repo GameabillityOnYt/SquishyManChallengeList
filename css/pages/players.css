@@ -191,23 +191,23 @@
 }
 
 .players-level-pill.is-top75 {
-    background: rgba(120, 190, 255, 0.3);
-    border-color: rgba(120, 190, 255, 0.6);
-    box-shadow: 0 6px 16px rgba(120, 190, 255, 0.28);
+    background: rgba(95, 165, 235, 0.3);
+    border-color: rgba(95, 165, 235, 0.55);
+    box-shadow: 0 4px 10px rgba(95, 165, 235, 0.18);
     font-weight: 800;
 }
 
 .players-level-pill.is-bottom {
-    background: rgba(60, 120, 200, 0.3);
-    border-color: rgba(60, 120, 200, 0.55);
-    box-shadow: 0 6px 16px rgba(60, 120, 200, 0.22);
+    background: rgba(45, 95, 170, 0.32);
+    border-color: rgba(45, 95, 170, 0.55);
+    box-shadow: 0 4px 10px rgba(45, 95, 170, 0.18);
     font-weight: 800;
 }
 
 .players-level-pill.is-legacy {
-    background: rgba(45, 90, 160, 0.32);
-    border-color: rgba(45, 90, 160, 0.6);
-    box-shadow: 0 6px 16px rgba(45, 90, 160, 0.22);
+    background: rgba(30, 70, 130, 0.34);
+    border-color: rgba(30, 70, 130, 0.6);
+    box-shadow: 0 4px 10px rgba(30, 70, 130, 0.18);
     font-weight: 800;
 }
 
@@ -305,21 +305,21 @@ html.dark .players-level-pill {
 }
 
 html.dark .players-level-pill.is-top75 {
-    background: rgba(120, 190, 255, 0.3);
-    border-color: rgba(120, 190, 255, 0.6);
-    box-shadow: 0 6px 16px rgba(120, 190, 255, 0.28);
+    background: rgba(95, 165, 235, 0.3);
+    border-color: rgba(95, 165, 235, 0.55);
+    box-shadow: 0 4px 10px rgba(95, 165, 235, 0.18);
 }
 
 html.dark .players-level-pill.is-bottom {
-    background: rgba(60, 120, 200, 0.3);
-    border-color: rgba(60, 120, 200, 0.55);
-    box-shadow: 0 6px 16px rgba(60, 120, 200, 0.22);
+    background: rgba(45, 95, 170, 0.32);
+    border-color: rgba(45, 95, 170, 0.55);
+    box-shadow: 0 4px 10px rgba(45, 95, 170, 0.18);
 }
 
 html.dark .players-level-pill.is-legacy {
-    background: rgba(45, 90, 160, 0.32);
-    border-color: rgba(45, 90, 160, 0.6);
-    box-shadow: 0 6px 16px rgba(45, 90, 160, 0.22);
+    background: rgba(30, 70, 130, 0.34);
+    border-color: rgba(30, 70, 130, 0.6);
+    box-shadow: 0 4px 10px rgba(30, 70, 130, 0.18);
 }
 
 html.dark .players-level-pill.is-unbeaten {
