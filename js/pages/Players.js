@@ -94,7 +94,7 @@ export default {
                             </a>
                         </div>
 
-                        <h2 v-if="levels.length > 0">Completed ({{ entry.completed.length }} / {{ levels.length }})</h2>
+                        <h2 v-if="levels.length > 0">Completed ({{ entry.completed.length }})</h2>
                         <div class="players-demonlist" v-if="levels.length > 0">
                             <p class="players-demonlist-line">
                                 {{ demonlistStats.main }} Main,
