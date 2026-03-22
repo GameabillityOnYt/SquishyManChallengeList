@@ -64,7 +64,11 @@ export default {
                                 v-for="level in entry.verified"
                                 :key="'verified-' + level.rank + '-' + level.level"
                                 class="players-level-pill type-label-lg"
-                                :class="{ 'is-top75': level.rank <= 75, 'is-bottom': level.rank > 75 }"
+                                :class="{
+                                    'is-top75': level.rank <= 75,
+                                    'is-bottom': level.rank > 75,
+                                    'is-legacy': level.rank > 150,
+                                }"
                                 target="_blank"
                                 :href="level.link"
                             >
@@ -78,7 +82,11 @@ export default {
                                 v-for="level in entry.created"
                                 :key="'created-' + level.rank + '-' + level.level"
                                 class="players-level-pill type-label-lg"
-                                :class="{ 'is-top75': level.rank <= 75, 'is-bottom': level.rank > 75 }"
+                                :class="{
+                                    'is-top75': level.rank <= 75,
+                                    'is-bottom': level.rank > 75,
+                                    'is-legacy': level.rank > 150,
+                                }"
                                 target="_blank"
                                 :href="level.link"
                             >
@@ -96,6 +104,7 @@ export default {
                                     'is-top75': level.rank <= 75,
                                     'is-bottom': level.rank > 75,
                                     'is-unbeaten': !completedLookup[level.name.toLowerCase()],
+                                    'is-legacy': level.rank > 150,
                                 }"
                                 target="_blank"
                                 :href="level.link"
@@ -152,6 +161,9 @@ export default {
         completedLookup() {
             const lookup = {};
             this.entry.completed.forEach((score) => {
+                lookup[score.level.toLowerCase()] = true;
+            });
+            this.entry.verified.forEach((score) => {
                 lookup[score.level.toLowerCase()] = true;
             });
             return lookup;
