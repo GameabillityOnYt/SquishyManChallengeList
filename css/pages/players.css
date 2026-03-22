@@ -235,6 +235,39 @@
     color: var(--color-on-background);
 }
 
+.players-levels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.65rem;
+    align-items: center;
+}
+
+.players-level-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: var(--color-on-background);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+    white-space: nowrap;
+}
+
+.players-level-pill:hover {
+    background: rgba(255, 165, 0, 0.16);
+    transform: translateY(-1px);
+}
+
+.players-level-pill.is-completed {
+    background: rgba(135, 206, 250, 0.35);
+    border-color: rgba(135, 206, 250, 0.6);
+    box-shadow: 0 6px 16px rgba(135, 206, 250, 0.35);
+    font-weight: 800;
+}
+
 .players-table {
     table-layout: fixed;
 }
@@ -326,6 +359,18 @@ html.dark .players-profile-total,
 html.dark .players-stat-label,
 html.dark .players-stat-value {
     color: #fff;
+}
+
+html.dark .players-level-pill {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+html.dark .players-level-pill.is-completed {
+    background: rgba(135, 206, 250, 0.32);
+    border-color: rgba(135, 206, 250, 0.55);
+    box-shadow: 0 6px 16px rgba(135, 206, 250, 0.28);
 }
 
 html.dark .players-stat {
