@@ -275,6 +275,12 @@
     font-weight: 800;
 }
 
+.players-level-pill.is-unbeaten {
+    opacity: 0.45;
+    filter: saturate(0.8);
+    box-shadow: none;
+}
+
 .players-table {
     table-layout: fixed;
 }
@@ -384,6 +390,12 @@ html.dark .players-level-pill.is-bottom {
     background: rgba(255, 210, 90, 0.32);
     border-color: rgba(255, 210, 90, 0.6);
     box-shadow: 0 6px 16px rgba(255, 210, 90, 0.22);
+}
+
+html.dark .players-level-pill.is-unbeaten {
+    opacity: 0.45;
+    filter: saturate(0.8);
+    box-shadow: none;
 }
 
 html.dark .players-stat {
