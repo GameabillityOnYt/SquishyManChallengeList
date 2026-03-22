@@ -12,7 +12,6 @@ export default {
         loading: true,
         selectedUser: '',
         searchQuery: '',
-        err: [],
     }),
     template: `
         <main v-if="loading">
