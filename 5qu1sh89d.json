@@ -5,8 +5,8 @@
     "creators": ["mwagma"],
     "verifier": "-",
     "verification": "https://youtu.be/BAXv9BfQBX4",
+    "decorated": "true",
     "percentToQualify": "100",
-    "decorated":"true",
     "length": "12s",
     "records": []
 }
