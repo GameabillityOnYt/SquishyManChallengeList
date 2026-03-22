@@ -50,10 +50,11 @@ class="level-card"
 <div class="level-title-info">
 <div
 class="level-badges"
-:class="{ 'is-empty': !(isLevelDecorated(level) || level.formerTop1) }"
+:class="{ 'is-empty': !(isLevelDecorated(level) || level.formerTop1 || showDemiseTag(absoluteRank)) }"
 >
 <span v-if="isLevelDecorated(level)" class="decorated-tag">Decorated</span>
 <span v-if="level.formerTop1" class="former-top-1-tag">Former Top 1</span>
+<span v-if="showDemiseTag(absoluteRank)" class="demise-tag">Demise</span>
 </div>
 <div class="title-left">
 <div class="rank-row">
@@ -576,6 +577,9 @@ const normalized = value.trim().toLowerCase();
 return normalized === 'true' || normalized === 'yes' || normalized === '1' || normalized === 'decorated';
 }
 return value === true || value === 1;
+},
+showDemiseTag(rank){
+return this.activeListMode === 'unverified' && rank <= 3;
 },
 iconFor(role){
 	const map = {
