@@ -33,7 +33,7 @@ Unverified Levels
 <div id="tag-help-panel" class="tag-help-panel" role="dialog" aria-label="Tag explanations">
 <p><span class="tag-help-label decorated-tag">Decorated</span> Used for levels that have a well executed theme/decoration.</p>
 <p><span class="tag-help-label former-top-1-tag">Former Top 1</span> For every level that was once #1 but got dethroned by a new one.</p>
-<p><span class="tag-help-label demise-tag">Demise</span> Used for the top 3 in "Unverified Levels" (hardest SMLL levels), this tag also transfers if a level that as it gets verified.</p>
+<p><span class="tag-help-label demise-tag">Demise</span> Used for the top 3 in "Unverified Levels" tab (the hardest SMLL levels), this tag also transfers if a level that as it gets verified.</p>
 </div>
 </div>
 </div>
