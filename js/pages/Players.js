@@ -58,14 +58,6 @@ export default {
                 </div>
                 <div class="players-detail-container" v-if="hasResults">
                     <div class="players-scroll players-detail-scroll players-detail">
-                        <div class="players-demonlist" v-if="levels.length > 0">
-                            <p class="players-demonlist-title">Demonlist stats</p>
-                            <p class="players-demonlist-line">
-                                {{ demonlistStats.main }} Main,
-                                {{ demonlistStats.extended }} Extended,
-                                {{ demonlistStats.legacy }} Legacy
-                            </p>
-                        </div>
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length }})</h2>
                         <div class="players-levels" v-if="entry.verified.length > 0">
                             <a
@@ -106,6 +98,14 @@ export default {
                         <p class="players-section-meta" v-if="levels.length > 0">
                             {{ entry.completed.length }} / {{ levels.length }}
                         </p>
+                        <div class="players-demonlist" v-if="levels.length > 0">
+                            <p class="players-demonlist-title">Demonlist stats</p>
+                            <p class="players-demonlist-line">
+                                {{ demonlistStats.main }} Main,
+                                {{ demonlistStats.extended }} Extended,
+                                {{ demonlistStats.legacy }} Legacy
+                            </p>
+                        </div>
                         <div class="players-levels" v-if="levels.length > 0">
                             <a
                                 v-for="level in levels"
