@@ -378,6 +378,24 @@ html.dark .legacy-entry-btn {
 }
 
 @media screen and (max-width: 700px) {
+    .page-list-scroll-shell{
+        overflow-x: visible;
+    }
+
+    .page-list-custom{
+        grid-template-columns: 1fr;
+    }
+
+    .central-container.view-mode-grid{
+        position: static;
+        padding-top: 0;
+    }
+
+    .central-container.view-mode-grid .list-mode-switch-row{
+        position: static;
+        margin-bottom: 0.85rem;
+    }
+
     .list-mode-switch-row{
         flex-direction:column;
         align-items:stretch;
