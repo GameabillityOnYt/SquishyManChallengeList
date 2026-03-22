@@ -58,6 +58,14 @@ export default {
                 </div>
                 <div class="players-detail-container" v-if="hasResults">
                     <div class="players-scroll players-detail-scroll players-detail">
+                        <div class="players-demonlist" v-if="levels.length > 0">
+                            <p class="players-demonlist-title">Demonlist stats</p>
+                            <p class="players-demonlist-line">
+                                {{ demonlistStats.main }} Main,
+                                {{ demonlistStats.extended }} Extended,
+                                {{ demonlistStats.legacy }} Legacy
+                            </p>
+                        </div>
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length }})</h2>
                         <div class="players-levels" v-if="entry.verified.length > 0">
                             <a
@@ -170,6 +178,26 @@ export default {
                 lookup[score.level.toLowerCase()] = true;
             });
             return lookup;
+        },
+        demonlistStats() {
+            let main = 0;
+            let extended = 0;
+            let legacy = 0;
+            this.levels.forEach((level) => {
+                if (!this.completedLookup[level.name.toLowerCase()]) {
+                    return;
+                }
+                if (level.rank <= 75) {
+                    main += 1;
+                    return;
+                }
+                if (level.rank <= 150) {
+                    extended += 1;
+                    return;
+                }
+                legacy += 1;
+            });
+            return { main, extended, legacy };
         },
     },
     async mounted() {
