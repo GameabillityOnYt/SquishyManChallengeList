@@ -191,16 +191,23 @@
 }
 
 .players-level-pill.is-top75 {
-    background: rgba(80, 160, 255, 0.28);
-    border-color: rgba(80, 160, 255, 0.55);
-    box-shadow: 0 6px 16px rgba(80, 160, 255, 0.25);
+    background: rgba(120, 190, 255, 0.3);
+    border-color: rgba(120, 190, 255, 0.6);
+    box-shadow: 0 6px 16px rgba(120, 190, 255, 0.28);
     font-weight: 800;
 }
 
 .players-level-pill.is-bottom {
-    background: rgba(255, 210, 90, 0.32);
-    border-color: rgba(255, 210, 90, 0.65);
-    box-shadow: 0 6px 16px rgba(255, 210, 90, 0.25);
+    background: rgba(60, 120, 200, 0.3);
+    border-color: rgba(60, 120, 200, 0.55);
+    box-shadow: 0 6px 16px rgba(60, 120, 200, 0.22);
+    font-weight: 800;
+}
+
+.players-level-pill.is-legacy {
+    background: rgba(45, 90, 160, 0.32);
+    border-color: rgba(45, 90, 160, 0.6);
+    box-shadow: 0 6px 16px rgba(45, 90, 160, 0.22);
     font-weight: 800;
 }
 
@@ -298,15 +305,21 @@ html.dark .players-level-pill {
 }
 
 html.dark .players-level-pill.is-top75 {
-    background: rgba(80, 160, 255, 0.28);
-    border-color: rgba(80, 160, 255, 0.55);
-    box-shadow: 0 6px 16px rgba(80, 160, 255, 0.25);
+    background: rgba(120, 190, 255, 0.3);
+    border-color: rgba(120, 190, 255, 0.6);
+    box-shadow: 0 6px 16px rgba(120, 190, 255, 0.28);
 }
 
 html.dark .players-level-pill.is-bottom {
-    background: rgba(255, 210, 90, 0.32);
-    border-color: rgba(255, 210, 90, 0.6);
-    box-shadow: 0 6px 16px rgba(255, 210, 90, 0.22);
+    background: rgba(60, 120, 200, 0.3);
+    border-color: rgba(60, 120, 200, 0.55);
+    box-shadow: 0 6px 16px rgba(60, 120, 200, 0.22);
+}
+
+html.dark .players-level-pill.is-legacy {
+    background: rgba(45, 90, 160, 0.32);
+    border-color: rgba(45, 90, 160, 0.6);
+    box-shadow: 0 6px 16px rgba(45, 90, 160, 0.22);
 }
 
 html.dark .players-level-pill.is-unbeaten {
