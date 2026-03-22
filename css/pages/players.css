@@ -176,12 +176,12 @@
 .players-level-pill {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 0.7rem;
+    padding: 0.45rem 0.9rem;
     border-radius: 999px;
     background: rgba(0, 0, 0, 0.06);
     border: 1px solid rgba(0, 0, 0, 0.08);
     color: var(--color-on-background);
-    font-size: 0.95rem;
+    font-size: 1.02rem;
     font-weight: 600;
     transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
     white-space: nowrap;
@@ -195,21 +195,21 @@
 .players-level-pill.is-top75 {
     background: rgba(95, 165, 235, 0.3);
     border-color: rgba(95, 165, 235, 0.55);
-    box-shadow: 0 2px 6px rgba(95, 165, 235, 0.12);
+    box-shadow: 0 3px 8px rgba(95, 165, 235, 0.16);
     font-weight: 800;
 }
 
 .players-level-pill.is-bottom {
     background: rgba(50, 105, 185, 0.34);
     border-color: rgba(50, 105, 185, 0.58);
-    box-shadow: 0 2px 6px rgba(50, 105, 185, 0.12);
+    box-shadow: 0 3px 8px rgba(50, 105, 185, 0.16);
     font-weight: 800;
 }
 
 .players-level-pill.is-legacy {
     background: rgba(20, 55, 110, 0.38);
     border-color: rgba(20, 55, 110, 0.68);
-    box-shadow: 0 2px 6px rgba(20, 55, 110, 0.12);
+    box-shadow: 0 3px 8px rgba(20, 55, 110, 0.16);
     font-weight: 800;
 }
 
@@ -309,19 +309,19 @@ html.dark .players-level-pill {
 html.dark .players-level-pill.is-top75 {
     background: rgba(95, 165, 235, 0.3);
     border-color: rgba(95, 165, 235, 0.55);
-    box-shadow: 0 2px 6px rgba(95, 165, 235, 0.12);
+    box-shadow: 0 3px 8px rgba(95, 165, 235, 0.16);
 }
 
 html.dark .players-level-pill.is-bottom {
     background: rgba(50, 105, 185, 0.34);
     border-color: rgba(50, 105, 185, 0.58);
-    box-shadow: 0 2px 6px rgba(50, 105, 185, 0.12);
+    box-shadow: 0 3px 8px rgba(50, 105, 185, 0.16);
 }
 
 html.dark .players-level-pill.is-legacy {
     background: rgba(20, 55, 110, 0.38);
     border-color: rgba(20, 55, 110, 0.68);
-    box-shadow: 0 2px 6px rgba(20, 55, 110, 0.12);
+    box-shadow: 0 3px 8px rgba(20, 55, 110, 0.16);
 }
 
 html.dark .players-level-pill.is-unbeaten {
