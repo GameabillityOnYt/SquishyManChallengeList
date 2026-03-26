@@ -454,7 +454,7 @@ html.dark .legacy-entry-btn {
 
     .central-container.view-mode-grid{
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        grid-auto-rows: 540px;
+        grid-auto-rows: auto;
         gap: 1rem;
     }
 
@@ -483,5 +483,26 @@ html.dark .legacy-entry-btn {
 
     .page-list-custom .meta{
         overflow: visible;
+    }
+
+    .authors-box{
+        display:grid;
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:.5rem .8rem;
+    }
+
+    .authors-box div{
+        min-width:0;
+    }
+
+    .authors-box span:first-child{
+        white-space:nowrap;
+    }
+
+    .authors-box span:last-child{
+        display:block;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
     }
 }
