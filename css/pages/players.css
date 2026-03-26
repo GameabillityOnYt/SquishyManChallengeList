@@ -404,6 +404,15 @@ html.dark .players-board tr {
         height:100%;
     }
 
+    .players-error{
+        grid-column: 1 / span 2;
+    }
+
+    .players-board-container,
+    .players-detail-container{
+        grid-row:2;
+    }
+
     .players-board tr {
         grid-template-columns: 3.6rem 4.6rem 1fr;
     }
