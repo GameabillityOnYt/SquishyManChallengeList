@@ -231,3 +231,26 @@ body:has(.page-leaderboard-container){
     overflow:hidden;
     height:100vh;
 }
+
+@media screen and (max-width: 700px) {
+    html:has(.page-leaderboard-container),
+    body:has(.page-leaderboard-container){
+        overflow:auto;
+        height:auto;
+    }
+
+    .page-leaderboard-container{
+        overflow-x:auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .page-leaderboard{
+        grid-template-columns:minmax(24rem,2fr) 3fr;
+        grid-template-rows:max-content 1fr;
+        column-gap:2rem;
+        max-width:none;
+        min-width:1024px;
+        margin:0;
+        height:100%;
+    }
+}
