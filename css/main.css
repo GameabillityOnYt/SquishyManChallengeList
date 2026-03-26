@@ -1137,7 +1137,10 @@ min-height:100%;
 transform:none;
 }
 
-#app:has(.page-list-scroll-shell){
+#app:has(.page-list-scroll-shell),
+#app:has(.page-leaderboard-container),
+#app:has(.page-players-container),
+#app:has(.page-roulette){
 --mobile-scale:0.7;
 transform:scale(var(--mobile-scale));
 transform-origin:top left;
