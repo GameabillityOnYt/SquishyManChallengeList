@@ -123,4 +123,11 @@
         width: 100%;
         justify-content: flex-start;
     }
+
+    .nav .nav__actions .nav__cta {
+        margin-left: 0.4rem;
+        padding: 0.55rem 0.75rem;
+        font-size: 0.88rem;
+        white-space: nowrap;
+    }
 }
