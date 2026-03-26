@@ -1143,6 +1143,10 @@ justify-content:space-between;
 gap:.5rem;
 }
 
+.logo h2{
+font-size:1.45rem;
+}
+
 .view-mode-switch{
 align-self:center;
 margin-left:auto;
