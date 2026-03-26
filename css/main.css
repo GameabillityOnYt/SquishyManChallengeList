@@ -1128,10 +1128,16 @@ padding-right:0;
 
 @media screen and (max-width:700px){
 body{
-overflow-x:auto;
+overflow-x:hidden;
 }
 
 #app{
+width:100%;
+min-height:100%;
+transform:none;
+}
+
+#app:has(.page-list-scroll-shell){
 --mobile-scale:0.7;
 transform:scale(var(--mobile-scale));
 transform-origin:top left;
