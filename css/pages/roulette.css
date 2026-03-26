@@ -299,20 +299,21 @@
 
 @media screen and (max-width: 700px) {
     .page-roulette {
-        grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
-        gap: 1.25rem;
-        padding: 0 1rem 1rem;
-        min-width: 1024px;
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+        padding: 0.7rem;
+        min-width: 0;
     }
 
     .page-roulette .sidebar {
-        position: sticky;
-        top: 0.25rem;
+        position: static;
+        top: auto;
     }
 
     .page-roulette .levels-container {
-        max-height: calc(100vh - 5.25rem);
-        overflow-y: auto;
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
     }
 
     .page-roulette .levels {
@@ -332,7 +333,7 @@
     }
 
     .page-roulette .levels .level {
-        grid-template-columns: 11rem 1fr;
+        grid-template-columns: minmax(7.4rem, 38vw) minmax(0, 1fr);
     }
 
     .page-roulette .levels .level .video {
@@ -340,15 +341,18 @@
     }
 
     .page-roulette .levels .level .actions {
-        flex-wrap: nowrap;
-        gap: 1rem;
-    }
-
-    .page-roulette .levels .level .actions .btn {
-        flex: 0 0 auto;
+        flex-wrap: wrap;
+        gap: 0.7rem;
     }
 
     .page-roulette .levels .level .actions input[type="number"] {
-        width: auto;
+        flex: 1 1 100%;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .page-roulette .levels .level .actions .btn {
+        flex: 1 1 calc(50% - 0.35rem);
+        min-width: 0;
     }
 }
