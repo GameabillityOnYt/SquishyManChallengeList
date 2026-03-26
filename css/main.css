@@ -334,18 +334,24 @@ padding:8px 0 0 8px;
 clip-path:polygon(0 0, 100% 0, 0 100%);
 }
 
-.central-container.view-mode-grid .level-card.grid-records-open{
+.central-container.view-mode-grid .level-card.grid-records-open,
+.central-container.view-mode-grid .level-card:has(.records-panel){
 overflow:hidden;
 }
 
 .central-container.view-mode-grid .level-card.grid-records-open .level-video-side,
 .central-container.view-mode-grid .level-card.grid-records-open .authors-box,
 .central-container.view-mode-grid .level-card.grid-records-open .stats-middle-grid,
-.central-container.view-mode-grid .level-card.grid-records-open .new-corner-tag{
+.central-container.view-mode-grid .level-card.grid-records-open .new-corner-tag,
+.central-container.view-mode-grid .level-card:has(.records-panel) .level-video-side,
+.central-container.view-mode-grid .level-card:has(.records-panel) .authors-box,
+.central-container.view-mode-grid .level-card:has(.records-panel) .stats-middle-grid,
+.central-container.view-mode-grid .level-card:has(.records-panel) .new-corner-tag{
 display:none;
 }
 
-.central-container.view-mode-grid .level-card.grid-records-open .show-records-btn{
+.central-container.view-mode-grid .level-card.grid-records-open .show-records-btn,
+.central-container.view-mode-grid .level-card:has(.records-panel) .show-records-btn{
 position:absolute;
 left:.85rem;
 right:.85rem;
@@ -358,7 +364,8 @@ margin-top:0;
 z-index:6;
 }
 
-.central-container.view-mode-grid .level-card.grid-records-open .level-details-side{
+.central-container.view-mode-grid .level-card.grid-records-open .level-details-side,
+.central-container.view-mode-grid .level-card:has(.records-panel) .level-details-side{
 height:100%;
 min-height:0;
 }
@@ -378,7 +385,8 @@ justify-content:flex-start;
 width:100%;
 }
 
-.central-container.view-mode-grid .level-card.grid-records-open .records-panel{
+.central-container.view-mode-grid .level-card.grid-records-open .records-panel,
+.central-container.view-mode-grid .level-card:has(.records-panel) .records-panel{
 position:absolute;
 inset:0 0 52px 0;
 margin:0;
@@ -389,7 +397,8 @@ z-index:4;
 display:flex;
 }
 
-.central-container.view-mode-grid .level-card.grid-records-open .records-panel-inner{
+.central-container.view-mode-grid .level-card.grid-records-open .records-panel-inner,
+.central-container.view-mode-grid .level-card:has(.records-panel) .records-panel-inner{
 display:flex;
 flex-direction:column;
 gap:.35rem;
@@ -398,7 +407,8 @@ height:100%;
 min-height:0;
 }
 
-.central-container.view-mode-grid .level-card.grid-records-open .records-scroll-area{
+.central-container.view-mode-grid .level-card.grid-records-open .records-scroll-area,
+.central-container.view-mode-grid .level-card:has(.records-panel) .records-scroll-area{
 flex:1;
 overflow:auto;
 padding-right:.35rem;
@@ -475,10 +485,8 @@ position:relative;
 overflow:hidden;
 transition:transform .18s ease, box-shadow .22s ease, border-color .22s ease;
 will-change:transform;
- transform-origin:center;
- backface-visibility:hidden;
- -webkit-font-smoothing:antialiased;
- text-rendering:optimizeLegibility;
+transform-origin:center;
+backface-visibility:hidden;
 }
 
 .level-card::after{
@@ -842,7 +850,7 @@ box-shadow:inset 0 0 0 999px rgba(255,255,255,0.02);
 /* Desktop-only hover motion to avoid touch quirks on mobile */
 @media (hover:hover) and (pointer:fine){
 .central-container .level-card:hover{
-transform:translate3d(0,-2px,0) scale(1.006);
+transform:translateY(-2px) scale(1.004);
 box-shadow:0 12px 28px rgba(0,0,0,0.18);
 }
 
