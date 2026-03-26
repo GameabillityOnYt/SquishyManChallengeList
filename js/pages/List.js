@@ -115,7 +115,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 
 <div class="stat-card">
 <span class="stat-label">Points</span>
-<span class="stat-value">{{activeListMode === 'unverified' ? '-' : score(absoluteRank,100,level.percentToQualify)}}</span>
+<span class="stat-value">{{activeListMode === 'unverified' ? '-' : score(absoluteRank,100,effectiveRequirement(absoluteRank,level))}}</span>
 </div>
 
 <div class="stat-card">
@@ -125,7 +125,7 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 
 <div class="stat-card">
 <span class="stat-label">Requirement</span>
-<span class="stat-value">{{ Number(level.percentToQualify) === 100 ? '100%' : (level.percentToQualify + '%+') }}</span>
+<span class="stat-value">{{formatRequirement(absoluteRank,level)}}</span>
 </div>
 
 </div>
@@ -315,6 +315,11 @@ el._recordsAnim.cancel();
 }catch{}
 el._recordsAnim = null;
 },
+setGridCardTransitioning(el,isActive){
+const card = el?.closest?.('.level-card');
+if(!card) return;
+card.classList.toggle('records-transitioning',isActive);
+},
 runGridAnimation(el,keyframes,options,done){
 this.clearGridAnimation(el);
 if(typeof el.animate !== 'function'){
@@ -390,6 +395,20 @@ return 'CBF';
 }
 return `${normalized}Hz`;
 },
+effectiveRequirement(rank,level){
+if(Number(rank) > 75){
+return 100;
+}
+const parsed = Number(level?.percentToQualify);
+if(Number.isFinite(parsed)){
+return parsed;
+}
+return 100;
+},
+formatRequirement(rank,level){
+const req = this.effectiveRequirement(rank,level);
+return req === 100 ? '100%' : `${req}%+`;
+},
 isLevelNew(level){
 const path = String(level?.path||'');
 if(!path) return false;
@@ -412,6 +431,7 @@ return diff >= 0 && diff < 7 * 86400000;
 },
 beforeRecordsEnter(el){
 if(this.effectiveListView === 'grid'){
+this.setGridCardTransitioning(el,true);
 this.clearGridAnimation(el);
 el.style.transition = 'none';
 el.style.willChange = 'opacity, transform';
@@ -423,9 +443,16 @@ return;
 }
 this.clearEndHandler(el);
 const inner = el.querySelector('.records-panel-inner');
+const computed = window.getComputedStyle(el);
+el._recordsOpenMarginTop = computed.marginTop;
+el._recordsOpenPaddingTop = computed.paddingTop;
+el._recordsOpenPaddingBottom = computed.paddingBottom;
 el.style.transition='none';
 el.style.height='0px';
 el.style.overflow='hidden';
+el.style.marginTop='0px';
+el.style.paddingTop='0px';
+el.style.paddingBottom='0px';
 if(inner){
 inner.style.transition='none';
 inner.style.opacity='0';
@@ -453,10 +480,22 @@ done
 );
 return;
 }
-const targetHeight = `${el.scrollHeight}px`;
 const inner = el.querySelector('.records-panel-inner');
-el.style.willChange='height';
-el.style.transition='height .26s cubic-bezier(.22,1,.36,1)';
+const openMarginTop = el._recordsOpenMarginTop || '0px';
+const openPaddingTop = el._recordsOpenPaddingTop || '0px';
+const openPaddingBottom = el._recordsOpenPaddingBottom || '0px';
+el.style.height='auto';
+el.style.marginTop=openMarginTop;
+el.style.paddingTop=openPaddingTop;
+el.style.paddingBottom=openPaddingBottom;
+const targetHeight = `${el.getBoundingClientRect().height}px`;
+el.style.height='0px';
+el.style.marginTop='0px';
+el.style.paddingTop='0px';
+el.style.paddingBottom='0px';
+void el.offsetHeight;
+el.style.willChange='height,margin-top,padding-top,padding-bottom';
+el.style.transition='height .26s cubic-bezier(.22,1,.36,1), margin-top .26s cubic-bezier(.22,1,.36,1), padding-top .26s cubic-bezier(.22,1,.36,1), padding-bottom .26s cubic-bezier(.22,1,.36,1)';
 if(inner){
 inner.style.willChange='opacity,transform';
 inner.style.transition='opacity .18s ease-out, transform .22s cubic-bezier(.22,1,.36,1)';
@@ -464,6 +503,9 @@ inner.style.transition='opacity .18s ease-out, transform .22s cubic-bezier(.22,1
 this.attachTransitionEnd(el,'height',done);
 requestAnimationFrame(()=>{
 el.style.height=targetHeight;
+el.style.marginTop=openMarginTop;
+el.style.paddingTop=openPaddingTop;
+el.style.paddingBottom=openPaddingBottom;
 if(inner){
 inner.style.opacity='1';
 inner.style.transform='translateY(0)';
@@ -473,6 +515,7 @@ inner.style.transform='translateY(0)';
 afterRecordsEnter(el){
 if(this.effectiveListView === 'grid'){
 this.clearGridAnimation(el);
+this.setGridCardTransitioning(el,false);
 el.style.height = '';
 el.style.transition = '';
 el.style.willChange = '';
@@ -486,6 +529,12 @@ el.style.height='auto';
 el.style.transition='';
 el.style.willChange='';
 el.style.overflow='hidden';
+el.style.marginTop='';
+el.style.paddingTop='';
+el.style.paddingBottom='';
+el._recordsOpenMarginTop = null;
+el._recordsOpenPaddingTop = null;
+el._recordsOpenPaddingBottom = null;
 if(inner){
 inner.style.transition='';
 inner.style.willChange='';
@@ -495,6 +544,7 @@ inner.style.transform='none';
 },
 beforeRecordsLeave(el){
 if(this.effectiveListView === 'grid'){
+this.setGridCardTransitioning(el,true);
 this.clearGridAnimation(el);
 el.style.transition = 'none';
 el.style.willChange = 'opacity, transform';
@@ -506,9 +556,13 @@ return;
 }
 this.clearEndHandler(el);
 const inner = el.querySelector('.records-panel-inner');
+const computed = window.getComputedStyle(el);
 el.style.transition='none';
 el.style.height=`${el.getBoundingClientRect().height}px`;
 el.style.overflow='hidden';
+el.style.marginTop=computed.marginTop;
+el.style.paddingTop=computed.paddingTop;
+el.style.paddingBottom=computed.paddingBottom;
 if(inner){
 inner.style.transition='none';
 inner.style.opacity='1';
@@ -543,8 +597,8 @@ done();
 return;
 }
 const duration = Math.max(160, Math.min(280, Math.round(startHeight * 1.55)));
-el.style.willChange='height';
-el.style.transition=`height ${duration}ms cubic-bezier(.4,0,.2,1)`;
+el.style.willChange='height,margin-top,padding-top,padding-bottom';
+el.style.transition=`height ${duration}ms cubic-bezier(.4,0,.2,1), margin-top ${duration}ms cubic-bezier(.4,0,.2,1), padding-top ${duration}ms cubic-bezier(.4,0,.2,1), padding-bottom ${duration}ms cubic-bezier(.4,0,.2,1)`;
 if(inner){
 const fadeDuration = Math.max(120, Math.min(210, Math.round(duration * 0.82)));
 inner.style.willChange='opacity,transform';
@@ -553,6 +607,9 @@ inner.style.transition=`opacity ${fadeDuration}ms cubic-bezier(.4,0,.2,1), trans
 this.attachTransitionEnd(el,'height',done);
 requestAnimationFrame(()=>{
 el.style.height='0px';
+el.style.marginTop='0px';
+el.style.paddingTop='0px';
+el.style.paddingBottom='0px';
 if(inner){
 inner.style.opacity='0';
 inner.style.transform='translateY(-1px)';
@@ -562,6 +619,7 @@ inner.style.transform='translateY(-1px)';
 afterRecordsLeave(el){
 if(this.effectiveListView === 'grid'){
 this.clearGridAnimation(el);
+this.setGridCardTransitioning(el,false);
 el.style.height = '';
 el.style.transition = '';
 el.style.willChange = '';
@@ -575,6 +633,12 @@ el.style.transition='';
 el.style.willChange='';
 el.style.height='';
 el.style.overflow='';
+el.style.marginTop='';
+el.style.paddingTop='';
+el.style.paddingBottom='';
+el._recordsOpenMarginTop = null;
+el._recordsOpenPaddingTop = null;
+el._recordsOpenPaddingBottom = null;
 if(inner){
 inner.style.transition='';
 inner.style.willChange='';
