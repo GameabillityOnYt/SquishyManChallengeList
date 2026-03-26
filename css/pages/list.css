@@ -379,6 +379,9 @@ html.dark .legacy-entry-btn {
 
 @media screen and (max-width: 700px) {
     .page-list-scroll-shell{
+        height: auto;
+        min-height: calc(100dvh - 4rem);
+        overflow-y: visible;
         overflow-x: visible;
     }
 
