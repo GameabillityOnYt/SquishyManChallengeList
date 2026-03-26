@@ -332,23 +332,23 @@
     }
 
     .page-roulette .levels .level {
-        grid-template-columns: 1fr;
+        grid-template-columns: 11rem 1fr;
     }
 
     .page-roulette .levels .level .video {
-        aspect-ratio: 16 / 9;
+        aspect-ratio: auto;
     }
 
     .page-roulette .levels .level .actions {
-        flex-wrap: wrap;
-        gap: 0.7rem;
+        flex-wrap: nowrap;
+        gap: 1rem;
     }
 
     .page-roulette .levels .level .actions .btn {
-        flex: 1 1 8rem;
+        flex: 0 0 auto;
     }
 
     .page-roulette .levels .level .actions input[type="number"] {
-        width: 100%;
+        width: auto;
     }
 }
