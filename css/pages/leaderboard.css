@@ -242,40 +242,43 @@ body:has(.page-leaderboard-container){
     .page-leaderboard-container{
         min-height:calc(100dvh - 4rem);
         height:auto;
-        overflow:visible;
-        padding:0.75rem;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding:0.65rem;
+        -webkit-overflow-scrolling:touch;
     }
 
     .page-leaderboard{
-        grid-template-columns:1fr;
-        grid-template-rows:auto;
-        row-gap:0.85rem;
-        column-gap:0;
+        grid-template-columns:minmax(24rem,2fr) minmax(32rem,3fr);
+        grid-template-rows:max-content minmax(0,1fr);
+        row-gap:0;
+        column-gap:1rem;
         max-width:none;
-        min-width:0;
+        min-width:1024px;
         margin:0;
-        height:auto;
-        padding:0;
+        height:calc(100dvh - 5.35rem);
+        padding:0.35rem;
     }
 
     .page-leaderboard .error-container{
-        grid-column:1;
-        grid-row:auto;
+        grid-column:1 / span 2;
+        grid-row:1;
     }
 
     .page-leaderboard .board-container,
     .page-leaderboard .player-container{
-        grid-row:auto;
-        max-height:none;
-        overflow:visible;
+        grid-row:2;
+        max-height:100%;
+        overflow-y:auto;
+        align-self:start;
     }
 
     .page-leaderboard .board-container{
-        padding:1rem 0.75rem;
+        padding:1rem 0.85rem;
     }
 
     .page-leaderboard .player{
-        padding-right:0;
+        padding-right:0.65rem;
     }
 
     .page-leaderboard .player .table tr td:not(:last-child){
