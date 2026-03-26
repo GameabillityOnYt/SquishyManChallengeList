@@ -367,6 +367,12 @@ html.dark .players-board tr {
 
     .players-board-container,
     .players-detail-container {
+        grid-row: auto;
+        grid-column: 1;
+    }
+
+    .players-board-container,
+    .players-detail-container {
         max-height: none;
         height: auto;
     }
