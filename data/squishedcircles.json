@@ -8,5 +8,12 @@
     "decorated": "true",
     "percentToQualify": "100",
     "length": "20s",
-    "records": []
+    "records": [
+        {
+            "user": "Liquidman6776",
+            "link": "https://medal.tv/games/geometry-dash/clips/mmc8Gk8YMauJ7hmar?invite=cr-MSx1MVAsNDExNTgzNjMy&v=36",
+            "percent": 100,
+            "hz": 360
+        }
+    ]
 }
