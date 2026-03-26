@@ -1132,7 +1132,7 @@ overflow-x:auto;
 }
 
 #app{
---mobile-scale:0.8;
+--mobile-scale:0.7;
 transform:scale(var(--mobile-scale));
 transform-origin:top left;
 width:calc(100% / var(--mobile-scale));
