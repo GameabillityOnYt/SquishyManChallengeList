@@ -416,7 +416,7 @@ this.clearGridAnimation(el);
 el.style.transition = 'none';
 el.style.willChange = 'opacity, transform';
 el.style.opacity = '0';
-el.style.transform = 'translateY(10px) scale(.99)';
+el.style.transform = 'translateY(8px) scale(.995)';
 el.style.overflow = 'hidden';
 void el.offsetHeight;
 return;
@@ -441,11 +441,11 @@ el.style.willChange = 'opacity, transform';
 this.runGridAnimation(
 el,
 [
-{ opacity:'0', transform:'translateY(10px) scale(.99)' },
+{ opacity:'0', transform:'translateY(8px) scale(.995)' },
 { opacity:'1', transform:'translateY(0) scale(1)' }
 ],
 {
-duration:280,
+duration:240,
 easing:'cubic-bezier(.22,.61,.36,1)',
 fill:'forwards'
 },
@@ -495,6 +495,13 @@ inner.style.transform='none';
 },
 beforeRecordsLeave(el){
 if(this.effectiveListView === 'grid'){
+this.clearGridAnimation(el);
+el.style.transition = 'none';
+el.style.willChange = 'opacity, transform';
+el.style.opacity = '1';
+el.style.transform = 'translateY(0) scale(1)';
+el.style.overflow = 'hidden';
+void el.offsetHeight;
 return;
 }
 this.clearEndHandler(el);
@@ -511,7 +518,22 @@ void el.offsetHeight;
 },
 recordsLeave(el,done){
 if(this.effectiveListView === 'grid'){
-done();
+el.style.transition = 'none';
+el.style.overflow = 'hidden';
+el.style.willChange = 'opacity, transform';
+this.runGridAnimation(
+el,
+[
+{ opacity:'1', transform:'translateY(0) scale(1)' },
+{ opacity:'0', transform:'translateY(8px) scale(.995)' }
+],
+{
+duration:220,
+easing:'cubic-bezier(.4,0,.2,1)',
+fill:'forwards'
+},
+done
+);
 return;
 }
 const startHeight = el.getBoundingClientRect().height;
@@ -520,25 +542,32 @@ if(startHeight <= 1){
 done();
 return;
 }
-const duration = Math.max(140, Math.min(260, Math.round(startHeight * 1.8)));
+const duration = Math.max(160, Math.min(280, Math.round(startHeight * 1.55)));
 el.style.willChange='height';
-el.style.transition=`height ${duration}ms linear`;
+el.style.transition=`height ${duration}ms cubic-bezier(.4,0,.2,1)`;
 if(inner){
-const fadeDuration = Math.max(110, Math.min(180, Math.round(duration * 0.7)));
+const fadeDuration = Math.max(120, Math.min(210, Math.round(duration * 0.82)));
 inner.style.willChange='opacity,transform';
-inner.style.transition=`opacity ${fadeDuration}ms ease-out, transform ${fadeDuration}ms ease-out`;
+inner.style.transition=`opacity ${fadeDuration}ms cubic-bezier(.4,0,.2,1), transform ${fadeDuration}ms cubic-bezier(.4,0,.2,1)`;
 }
 this.attachTransitionEnd(el,'height',done);
 requestAnimationFrame(()=>{
 el.style.height='0px';
 if(inner){
 inner.style.opacity='0';
-inner.style.transform='translateY(-2px)';
+inner.style.transform='translateY(-1px)';
 }
 });
 },
 afterRecordsLeave(el){
 if(this.effectiveListView === 'grid'){
+this.clearGridAnimation(el);
+el.style.height = '';
+el.style.transition = '';
+el.style.willChange = '';
+el.style.overflow = '';
+el.style.opacity = '';
+el.style.transform = '';
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
