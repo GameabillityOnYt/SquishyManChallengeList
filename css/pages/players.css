@@ -383,6 +383,27 @@ html.dark .players-board tr {
 }
 
 @media screen and (max-width: 700px) {
+    html:has(.page-players-container),
+    body:has(.page-players-container){
+        overflow:auto;
+        height:auto;
+    }
+
+    .page-players-container{
+        overflow-x:auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .page-players{
+        grid-template-columns:minmax(24rem,2fr) 3fr;
+        grid-template-rows:max-content 1fr;
+        column-gap:2rem;
+        max-width:none;
+        min-width:1024px;
+        margin:0;
+        height:100%;
+    }
+
     .players-board tr {
         grid-template-columns: 3.6rem 4.6rem 1fr;
     }
