@@ -1128,8 +1128,15 @@ padding-right:0;
 
 @media screen and (max-width:700px){
 body{
-font-size:13.5px;
 overflow-x:auto;
+}
+
+#app{
+--mobile-scale:0.8;
+transform:scale(var(--mobile-scale));
+transform-origin:top left;
+width:calc(100% / var(--mobile-scale));
+min-height:calc(100% / var(--mobile-scale));
 }
 
 header{
