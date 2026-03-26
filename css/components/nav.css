@@ -101,10 +101,10 @@
 
 @media screen and (max-width: 700px) {
     .nav {
-        flex-direction: column;
-        align-items: stretch;
-        flex-wrap: wrap;
-        gap: 0.6rem;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 0.4rem;
     }
 
     .nav .nav__tabs {
@@ -112,33 +112,34 @@
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
-        width: 100%;
-        padding: 0.22rem;
+        width: auto;
+        flex: 1 1 auto;
+        padding: 0.18rem;
     }
 
     .nav .nav__tab {
         flex: 0 0 auto;
-        padding: 0.42rem 0.7rem;
-        font-size: 0.86rem;
+        padding: 0.38rem 0.6rem;
+        font-size: 0.82rem;
     }
 
     .nav .nav__actions {
         margin-left: 0;
-        width: 100%;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 0.45rem;
+        width: auto;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        gap: 0.35rem;
     }
 
     .nav .nav__actions .nav__cta {
         margin-left: 0;
-        padding: 0.5rem 0.7rem;
-        font-size: 0.85rem;
+        padding: 0.38rem 0.55rem;
+        font-size: 0.78rem;
         white-space: nowrap;
     }
 
     .nav .nav__actions .nav__icon {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.2rem;
+        height: 2.2rem;
     }
 }
