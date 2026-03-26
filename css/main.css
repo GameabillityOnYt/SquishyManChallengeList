@@ -1128,32 +1128,33 @@ padding-right:0;
 
 @media screen and (max-width:700px){
 body{
-font-size:15px;
+font-size:14px;
 }
 
 header{
 height:auto;
-padding:0.6rem 0.75rem;
+padding:0.5rem 0.65rem;
 align-items:stretch;
-flex-direction:column;
-gap:0.55rem;
+flex-direction:row;
+flex-wrap:nowrap;
+gap:0.45rem;
+overflow-x:auto;
 }
 
 .logo{
-width:100%;
 flex-direction:row;
 align-items:center;
-justify-content:space-between;
-gap:.5rem;
+gap:.4rem;
+flex:0 0 auto;
 }
 
 .logo h2{
-font-size:1.45rem;
+font-size:1.3rem;
 }
 
 .view-mode-switch{
 align-self:center;
-margin-left:auto;
+margin-left:0.35rem;
 }
 
 .page-list-custom{
