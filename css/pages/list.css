@@ -381,31 +381,26 @@ html.dark .legacy-entry-btn {
     .page-list-scroll-shell{
         height: auto;
         min-height: calc(100dvh - 4rem);
-        overflow-y: auto;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-y: visible;
+        overflow-x: hidden;
     }
 
     .page-list-custom{
-        grid-template-columns: minmax(0, 1fr) 300px;
-        width: max-content;
-        min-width: 1024px;
-        padding: 1.25rem;
-        gap: 2rem;
-        font-size: 0.92rem;
+        grid-template-columns: 1fr;
+        padding: 0.75rem;
+        gap: 0.9rem;
     }
 
     .central-container{
-        order: 0;
+        order: 1;
     }
 
     .meta-container{
-        order: 0;
-        position: sticky;
-        top: 0.75rem;
-        max-height: calc(100vh - 5.5rem);
-        overflow: auto;
-        width: 300px;
+        order: 2;
+        position: static;
+        max-height: none;
+        overflow: visible;
+        width: 100%;
     }
 
     .central-container.view-mode-grid{
@@ -419,23 +414,23 @@ html.dark .legacy-entry-btn {
     }
 
     .list-mode-switch-row{
-        flex-direction:row;
-        align-items:center;
-        gap:0.6rem;
+        flex-direction:column;
+        align-items:stretch;
+        gap:0.5rem;
     }
 
     .list-mode-switch {
-        width: auto;
-        justify-content: flex-start;
+        width: 100%;
+        justify-content: space-between;
     }
 
     .list-mode-btn {
-        flex: 0 0 auto;
+        flex: 1;
         text-align: center;
     }
 
     .tag-help{
-        align-self:center;
+        align-self:flex-start;
     }
 
     .tag-help-panel{
@@ -454,7 +449,9 @@ html.dark .legacy-entry-btn {
     }
 
     .central-container.view-mode-grid {
-        grid-auto-rows: auto;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-rows: 1fr;
+        gap: 0.65rem;
     }
 
     .central-container.view-mode-grid .level-card {
@@ -462,27 +459,7 @@ html.dark .legacy-entry-btn {
         max-height: none;
     }
 
-    .page-list-custom .level-card{
-        flex-direction: row;
-        gap: 1rem;
-        padding: 0.85rem 1.1rem;
-    }
-
-    .page-list-custom .level-video-side{
-        flex: 0 0 clamp(150px, 42vw, 230px);
-        height: auto;
-    }
-
-    .page-list-custom .lazy-video{
-        height: 100%;
-        aspect-ratio: 16 / 9;
-    }
-
-    .page-list-custom .stats-middle-grid{
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .page-list-custom .level-title-info{
-        padding-right: 160px;
+    .page-list-custom .meta{
+        overflow: visible;
     }
 }
