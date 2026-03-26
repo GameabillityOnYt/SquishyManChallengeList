@@ -381,24 +381,31 @@ html.dark .legacy-entry-btn {
     .page-list-scroll-shell{
         height: auto;
         min-height: calc(100dvh - 4rem);
-        overflow-y: visible;
-        overflow-x: hidden;
+        overflow-y: auto;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .page-list-custom{
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) 300px;
+        width: max-content;
+        min-width: 1024px;
+        padding: 1.25rem;
+        gap: 2rem;
+        font-size: 0.92rem;
     }
 
     .central-container{
-        order: 1;
+        order: 0;
     }
 
     .meta-container{
-        order: 2;
-        position: static;
-        max-height: none;
-        overflow: visible;
-        width: 100%;
+        order: 0;
+        position: sticky;
+        top: 0.75rem;
+        max-height: calc(100vh - 5.5rem);
+        overflow: auto;
+        width: 300px;
     }
 
     .central-container.view-mode-grid{
@@ -412,23 +419,23 @@ html.dark .legacy-entry-btn {
     }
 
     .list-mode-switch-row{
-        flex-direction:column;
-        align-items:stretch;
-        gap:0.5rem;
+        flex-direction:row;
+        align-items:center;
+        gap:0.6rem;
     }
 
     .list-mode-switch {
-        width: 100%;
-        justify-content: space-between;
+        width: auto;
+        justify-content: flex-start;
     }
 
     .list-mode-btn {
-        flex: 1;
+        flex: 0 0 auto;
         text-align: center;
     }
 
     .tag-help{
-        align-self:flex-start;
+        align-self:center;
     }
 
     .tag-help-panel{
