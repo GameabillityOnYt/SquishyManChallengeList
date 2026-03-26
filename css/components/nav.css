@@ -113,12 +113,13 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: thin;
         width: 100%;
+        padding: 0.22rem;
     }
 
     .nav .nav__tab {
         flex: 0 0 auto;
-        padding: 0.5rem 0.8rem;
-        font-size: 0.92rem;
+        padding: 0.42rem 0.7rem;
+        font-size: 0.86rem;
     }
 
     .nav .nav__actions {
