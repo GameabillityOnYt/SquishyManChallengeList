@@ -430,4 +430,39 @@ html.dark .legacy-entry-btn {
     .legacy-dropdown-grid {
         grid-template-columns: 1fr;
     }
+
+    .central-container.view-mode-grid {
+        grid-auto-rows: auto;
+    }
+
+    .central-container.view-mode-grid .level-card {
+        height: auto;
+        max-height: none;
+    }
+
+    .page-list-custom .level-title-info {
+        padding-right: 0;
+    }
+
+    .page-list-custom .level-badges {
+        position: static;
+        margin-bottom: 0.35rem;
+        flex-wrap: wrap;
+    }
+
+    .page-list-custom .level-title-info h2 {
+        font-size: 1.15rem;
+        line-height: 1.2;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .page-list-custom .level-card::after,
+    .page-list-custom .level-card:not(.legacy-card)::after{
+        font-size: 2.1rem;
+        left: 8px;
+        bottom: 8px;
+    }
 }
