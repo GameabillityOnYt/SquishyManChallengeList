@@ -452,6 +452,35 @@ html.dark .legacy-entry-btn {
         grid-template-columns: 1fr;
     }
 
+    .central-container.view-mode-grid{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-rows: 540px;
+        gap: 1rem;
+    }
+
+    .page-list-custom .level-card{
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+
+    .page-list-custom .level-video-side{
+        flex: 0 0 260px;
+        height: 146px;
+    }
+
+    .page-list-custom .lazy-video{
+        height: 146px;
+        aspect-ratio: auto;
+    }
+
+    .page-list-custom .stats-middle-grid{
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .page-list-custom .level-title-info{
+        padding-right: 250px;
+    }
+
     .page-list-custom .meta{
         overflow: visible;
     }
