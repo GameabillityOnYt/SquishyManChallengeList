@@ -298,6 +298,27 @@
 }
 
 @media screen and (max-width: 700px) {
+    .page-roulette {
+        grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+        gap: 1.25rem;
+        padding: 0 1rem 1rem;
+        min-width: 1024px;
+    }
+
+    .page-roulette .sidebar {
+        position: sticky;
+        top: 0.25rem;
+    }
+
+    .page-roulette .levels-container {
+        max-height: calc(100vh - 5.25rem);
+        overflow-y: auto;
+    }
+
+    .page-roulette .levels {
+        grid-template-columns: 1fr;
+    }
+
     .page-roulette .sidebar .sidebar-panel {
         padding: 0.75rem 0.8rem 0.85rem;
     }
