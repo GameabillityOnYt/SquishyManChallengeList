@@ -196,6 +196,12 @@ type="button"
 </div>
 <div class="meta requirements-panel">
 <h3>Submission Requirements</h3>
+<template v-if="activeListMode === 'unverified'">
+<p>To be on the "unverified levels", the level needs to be at least around top 20 difficulty of the current list.</p>
+<p>A level to be accepted needs to be somewhat possible, with a chance to be verified one day by someone on the list (with nerfs/balancing allowed if the creator is okay with changes), so totally impossible levels or levels that are incredibly hard will not be accepted.</p>
+<p>We have standards. Levels that look like poo will not be placed (this applies on the normal list too).</p>
+</template>
+<template v-else>
 <p>Achieved the record without using hacks (however, FPS bypass is allowed, up to 360fps)</p>
 <p>Achieved the record on the level that is listed on the site - please check the level ID before you submit a record</p>
 <p>Once a level falls into legacy records for that level will no longer be accepted</p>
@@ -204,6 +210,7 @@ type="button"
 <p>The recording must also show the player hit the endwall, or the completion will be invalidated.</p>
 <p>Do not use secret routes or bug routes</p>
 <p>Do not use easy modes, only a record of the unmodified level qualifies</p>
+</template>
 </div>
 </div>
 
