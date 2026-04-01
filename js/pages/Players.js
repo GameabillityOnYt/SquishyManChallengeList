@@ -114,7 +114,7 @@ export default {
                                     'is-legacy': level.rank > 150,
                                 }"
                                 target="_blank"
-                                :href="level.link"
+                                :href="resolvedCompletedLevelLink(level)"
                             >
                                 {{ level.name }}
                             </a>
@@ -175,6 +175,22 @@ export default {
             });
             return lookup;
         },
+        completedVideoLookup() {
+            const lookup = {};
+            this.entry.verified.forEach((score) => {
+                const key = score.level.toLowerCase();
+                if (score.link) {
+                    lookup[key] = score.link;
+                }
+            });
+            this.entry.completed.forEach((score) => {
+                const key = score.level.toLowerCase();
+                if (score.link) {
+                    lookup[key] = score.link;
+                }
+            });
+            return lookup;
+        },
         demonlistStats() {
             let main = 0;
             let extended = 0;
@@ -224,5 +240,9 @@ export default {
     },
     methods: {
         localize,
+        resolvedCompletedLevelLink(level) {
+            const key = level.name.toLowerCase();
+            return this.completedVideoLookup[key] || level.link;
+        },
     },
 };
