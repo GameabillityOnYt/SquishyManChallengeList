@@ -107,7 +107,13 @@
             "link": "https://www.youtube.com/watch?v=uUX5hufgcKQ&ab_channel=nicknotpixel",
             "percent": 100,
             "hz": 240
-        }
+        },
+        {
+             "user": "Marbelous Gaming",
+             "link": "https://youtu.be/vK4H_036mV0?si=6AuuYrrmJFLQPBny",
+             "percent": 100,
+             "hz": 240
+         }
      ]
  }
 
