@@ -9,5 +9,12 @@
     "decorated": true,
     "percentToQualify": "100",
     "Length": "6s",
-    "records": []
+    "records": [
+        {
+            "user": "GamerAJG2012",
+            "link": "https://youtu.be/C9s-rOOhxCg?si=I7CiwT-620FiYD7I",
+            "percent": 100,
+            "hz": 144 
+        }
+    ]
 }
