@@ -62,11 +62,17 @@
             "percent": 100,
             "hz": 120
         },
-          {
+        {
             "user": "Platus70",
             "link": "https://youtu.be/5_advDIHHLY",
             "percent": 100,
             "hz": 165
+        },
+        {
+            "user": "Marbelous Gaming",
+            "link": "https://youtu.be/l4ZkOKHV6dE?si=4hVNCE7l5lgKQeGk",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
