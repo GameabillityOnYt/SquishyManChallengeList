@@ -4,6 +4,11 @@
         "name": "Gameabillity",
         "link": "https://www.youtube.com/@GameabillityDev"
     },
+      {
+        "role": "developer",
+        "name": "Pijeon",
+        "link": "https://www.youtube.com/@pijeongd"
+    },
     {
         "role": "helper",
         "name": "WiseTree2939",
@@ -29,11 +34,5 @@
         "role": "helper",
         "name": "LiquidMan6776",
         "link": "https://www.youtube.com/@LiquidMan6776"
-    },
-    {
-        "role": "helper",
-        "name": "Pijeon",
-        "link": "https://www.youtube.com/@pijeongd"
     }
-    
 ]
