@@ -44,8 +44,35 @@ async function fetchLevelList(fileName, cacheKey) {
         return Number.isFinite(normalized) ? normalized : 0;
     };
 
-    const sortRecordsByPercentDesc = (records) =>
-        [...records].sort((a, b) => parsePercent(b?.percent) - parsePercent(a?.percent));
+    // Display rule:
+    // - 100% runs stay in original submit order.
+    // - Below 100%, higher percent appears first.
+    const sortRecordsForDisplay = (records) =>
+        [...records]
+            .map((record, index) => ({
+                record,
+                index,
+                percent: parsePercent(record?.percent),
+            }))
+            .sort((a, b) => {
+                const aIsComplete = a.percent >= 100;
+                const bIsComplete = b.percent >= 100;
+
+                if (aIsComplete && bIsComplete) {
+                    return a.index - b.index;
+                }
+
+                if (aIsComplete !== bIsComplete) {
+                    return aIsComplete ? -1 : 1;
+                }
+
+                if (a.percent !== b.percent) {
+                    return b.percent - a.percent;
+                }
+
+                return a.index - b.index;
+            })
+            .map(({ record }) => record);
 
     return getCached(cacheKey, async () => {
         const listResult = await fetch(`${dir}/${fileName}`);
@@ -60,7 +87,7 @@ async function fetchLevelList(fileName, cacheKey) {
                             {
                                 ...level,
                                 path,
-                                records: sortRecordsByPercentDesc(
+                                records: sortRecordsForDisplay(
                                     Array.isArray(level?.records) ? level.records : [],
                                 ),
                             },
