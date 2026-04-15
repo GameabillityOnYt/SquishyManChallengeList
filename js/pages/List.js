@@ -444,7 +444,8 @@ el.style.transform = 'translateY(100%)';
 el.style.overflow = 'hidden';
 if(inner){
 inner.style.transition = 'none';
-inner.style.willChange = 'transform';
+inner.style.willChange = 'opacity';
+inner.style.opacity = '0';
 inner.style.transform = 'translateY(0)';
 }
 void el.offsetHeight;
@@ -477,11 +478,15 @@ el.style.transition = 'transform 360ms cubic-bezier(.22,1,.36,1)';
 el.style.overflow = 'hidden';
 el.style.willChange = 'transform';
 if(inner){
-inner.style.transition = 'none';
+inner.style.transition = 'opacity 170ms ease-out 95ms';
+inner.style.opacity = '0';
 }
 this.attachTransitionEnd(el,'transform',done);
 el._recordsRaf = requestAnimationFrame(()=>{
 el.style.transform = 'translateY(0)';
+if(inner){
+inner.style.opacity = '1';
+}
 });
 return;
 }
@@ -522,6 +527,7 @@ el.style.transform = '';
 if(inner){
 inner.style.transition = '';
 inner.style.willChange = '';
+inner.style.opacity = '';
 inner.style.transform = '';
 }
 return;
@@ -553,7 +559,8 @@ el.style.transform = 'translateY(0)';
 el.style.overflow = 'hidden';
 if(inner){
 inner.style.transition = 'none';
-inner.style.willChange = 'transform';
+inner.style.willChange = 'opacity';
+inner.style.opacity = '1';
 inner.style.transform = 'translateY(0)';
 }
 void el.offsetHeight;
@@ -585,10 +592,14 @@ el.style.transition = 'transform 300ms cubic-bezier(.4,0,.2,1)';
 el.style.overflow = 'hidden';
 el.style.willChange = 'transform';
 if(inner){
-inner.style.transition = 'none';
+inner.style.transition = 'opacity 140ms ease-in';
+inner.style.opacity = '1';
 }
 this.attachTransitionEnd(el,'transform',done);
 el._recordsRaf = requestAnimationFrame(()=>{
+if(inner){
+inner.style.opacity = '0';
+}
 el.style.transform = 'translateY(100%)';
 });
 return;
@@ -629,6 +640,7 @@ el.style.transform = '';
 if(inner){
 inner.style.transition = '';
 inner.style.willChange = '';
+inner.style.opacity = '';
 inner.style.transform = '';
 }
 return;
