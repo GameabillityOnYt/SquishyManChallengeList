@@ -3,10 +3,15 @@
     display: none;
 }
 
-.page-list-custom .records-panel {
+.central-container.view-mode-list .records-panel {
     margin-top: 1rem;
     background: rgba(0, 0, 0, 0.05);
     border-radius: 10px;
+    padding: 0;
+    contain: layout paint;
+}
+
+.central-container.view-mode-list .records-panel-inner {
     padding: 1rem;
 }
 
