@@ -7,5 +7,12 @@
     "verification": "https://www.youtube.com/watch?v=pG0F821aJI8",
     "percentToQualify": "100",
     "length": "25s",
-    "records": []
+    "records": [
+        {
+            "user": "Pijeon",
+            "link": "https://medal.tv/games/geometry-dash/clips/mwbyn8u3Dk3AnToWO?invite=cr-MSxxMzQsMzIzNTg1ODYw",
+            "percent": 48,
+            "hz": 144
+        }
+    ]
 }
