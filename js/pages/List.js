@@ -315,12 +315,21 @@ if(!el._recordsEndHandler) return;
 el.removeEventListener('transitionend',el._recordsEndHandler);
 el._recordsEndHandler = null;
 },
+clearRecordsRaf(el){
+if(!el || !el._recordsRaf) return;
+cancelAnimationFrame(el._recordsRaf);
+el._recordsRaf = null;
+},
 clearGridAnimation(el){
 if(!el._recordsAnim) return;
 try{
 el._recordsAnim.cancel();
 }catch{}
 el._recordsAnim = null;
+},
+getRecordsTransitionDuration(height){
+const normalized = Number(height) || 0;
+return Math.max(170,Math.min(310,Math.round(normalized * 0.42 + 145)));
 },
 setGridCardTransitioning(el,isActive){
 const card = el?.closest?.('.level-card');
@@ -472,21 +481,20 @@ void el.offsetHeight;
 return;
 }
 this.clearEndHandler(el);
+this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
 const computed = window.getComputedStyle(el);
-el._recordsOpenMarginTop = computed.marginTop;
-el._recordsOpenPaddingTop = computed.paddingTop;
-el._recordsOpenPaddingBottom = computed.paddingBottom;
+el._recordsOpenMarginTop = computed.marginTop || '0px';
 el.style.transition='none';
 el.style.height='0px';
 el.style.overflow='hidden';
 el.style.marginTop='0px';
-el.style.paddingTop='0px';
-el.style.paddingBottom='0px';
+el.style.willChange='height,margin-top';
 if(inner){
 inner.style.transition='none';
 inner.style.opacity='0';
-inner.style.transform='translateY(-3px)';
+inner.style.transform='translateY(-4px)';
+inner.style.willChange='opacity,transform';
 }
 void el.offsetHeight;
 },
@@ -512,30 +520,22 @@ return;
 }
 const inner = el.querySelector('.records-panel-inner');
 const openMarginTop = el._recordsOpenMarginTop || '0px';
-const openPaddingTop = el._recordsOpenPaddingTop || '0px';
-const openPaddingBottom = el._recordsOpenPaddingBottom || '0px';
-el.style.height='auto';
-el.style.marginTop=openMarginTop;
-el.style.paddingTop=openPaddingTop;
-el.style.paddingBottom=openPaddingBottom;
-const targetHeight = `${el.getBoundingClientRect().height}px`;
-el.style.height='0px';
-el.style.marginTop='0px';
-el.style.paddingTop='0px';
-el.style.paddingBottom='0px';
-void el.offsetHeight;
-el.style.willChange='height,margin-top,padding-top,padding-bottom';
-el.style.transition='height .26s cubic-bezier(.22,1,.36,1), margin-top .26s cubic-bezier(.22,1,.36,1), padding-top .26s cubic-bezier(.22,1,.36,1), padding-bottom .26s cubic-bezier(.22,1,.36,1)';
+const targetHeight = el.scrollHeight;
+if(targetHeight <= 0){
+done();
+return;
+}
+const duration = this.getRecordsTransitionDuration(targetHeight);
+el.style.transition=`height ${duration}ms cubic-bezier(.22,1,.36,1), margin-top ${duration}ms cubic-bezier(.22,1,.36,1)`;
 if(inner){
-inner.style.willChange='opacity,transform';
-inner.style.transition='opacity .18s ease-out, transform .22s cubic-bezier(.22,1,.36,1)';
+const fadeDuration = Math.max(130,Math.min(220,Math.round(duration * 0.72)));
+inner.style.transition=`opacity ${fadeDuration}ms ease-out, transform ${duration}ms cubic-bezier(.22,1,.36,1)`;
 }
 this.attachTransitionEnd(el,'height',done);
-requestAnimationFrame(()=>{
-el.style.height=targetHeight;
+this.clearRecordsRaf(el);
+el._recordsRaf = requestAnimationFrame(()=>{
+el.style.height=`${targetHeight}px`;
 el.style.marginTop=openMarginTop;
-el.style.paddingTop=openPaddingTop;
-el.style.paddingBottom=openPaddingBottom;
 if(inner){
 inner.style.opacity='1';
 inner.style.transform='translateY(0)';
@@ -554,17 +554,15 @@ el.style.opacity = '';
 el.style.transform = '';
 return;
 }
+this.clearEndHandler(el);
+this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
 el.style.height='auto';
 el.style.transition='';
 el.style.willChange='';
 el.style.overflow='hidden';
 el.style.marginTop='';
-el.style.paddingTop='';
-el.style.paddingBottom='';
 el._recordsOpenMarginTop = null;
-el._recordsOpenPaddingTop = null;
-el._recordsOpenPaddingBottom = null;
 if(inner){
 inner.style.transition='';
 inner.style.willChange='';
@@ -585,18 +583,19 @@ void el.offsetHeight;
 return;
 }
 this.clearEndHandler(el);
+this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
 const computed = window.getComputedStyle(el);
 el.style.transition='none';
-el.style.height=`${el.getBoundingClientRect().height}px`;
+el.style.height=`${Math.ceil(el.getBoundingClientRect().height)}px`;
 el.style.overflow='hidden';
 el.style.marginTop=computed.marginTop;
-el.style.paddingTop=computed.paddingTop;
-el.style.paddingBottom=computed.paddingBottom;
+el.style.willChange='height,margin-top';
 if(inner){
 inner.style.transition='none';
 inner.style.opacity='1';
 inner.style.transform='none';
+inner.style.willChange='opacity,transform';
 }
 void el.offsetHeight;
 },
@@ -626,20 +625,17 @@ if(startHeight <= 1){
 done();
 return;
 }
-const duration = Math.max(160, Math.min(280, Math.round(startHeight * 1.55)));
-el.style.willChange='height,margin-top,padding-top,padding-bottom';
-el.style.transition=`height ${duration}ms cubic-bezier(.4,0,.2,1), margin-top ${duration}ms cubic-bezier(.4,0,.2,1), padding-top ${duration}ms cubic-bezier(.4,0,.2,1), padding-bottom ${duration}ms cubic-bezier(.4,0,.2,1)`;
+const duration = this.getRecordsTransitionDuration(startHeight);
+el.style.transition=`height ${duration}ms cubic-bezier(.4,0,.2,1), margin-top ${duration}ms cubic-bezier(.4,0,.2,1)`;
 if(inner){
 const fadeDuration = Math.max(120, Math.min(210, Math.round(duration * 0.82)));
-inner.style.willChange='opacity,transform';
 inner.style.transition=`opacity ${fadeDuration}ms cubic-bezier(.4,0,.2,1), transform ${fadeDuration}ms cubic-bezier(.4,0,.2,1)`;
 }
 this.attachTransitionEnd(el,'height',done);
-requestAnimationFrame(()=>{
+this.clearRecordsRaf(el);
+el._recordsRaf = requestAnimationFrame(()=>{
 el.style.height='0px';
 el.style.marginTop='0px';
-el.style.paddingTop='0px';
-el.style.paddingBottom='0px';
 if(inner){
 inner.style.opacity='0';
 inner.style.transform='translateY(-1px)';
@@ -658,17 +654,15 @@ el.style.opacity = '';
 el.style.transform = '';
 return;
 }
+this.clearEndHandler(el);
+this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
 el.style.transition='';
 el.style.willChange='';
 el.style.height='';
 el.style.overflow='';
 el.style.marginTop='';
-el.style.paddingTop='';
-el.style.paddingBottom='';
 el._recordsOpenMarginTop = null;
-el._recordsOpenPaddingTop = null;
-el._recordsOpenPaddingBottom = null;
 if(inner){
 inner.style.transition='';
 inner.style.willChange='';
