@@ -320,44 +320,9 @@ if(!el || !el._recordsRaf) return;
 cancelAnimationFrame(el._recordsRaf);
 el._recordsRaf = null;
 },
-clearGridAnimation(el){
-if(!el._recordsAnim) return;
-try{
-el._recordsAnim.cancel();
-}catch{}
-el._recordsAnim = null;
-},
 getRecordsTransitionDuration(height){
 const normalized = Number(height) || 0;
 return Math.max(170,Math.min(310,Math.round(normalized * 0.42 + 145)));
-},
-setGridCardTransitioning(el,isActive){
-const card = el?.closest?.('.level-card');
-if(!card) return;
-card.classList.toggle('records-transitioning',isActive);
-},
-runGridAnimation(el,keyframes,options,done){
-this.clearGridAnimation(el);
-if(typeof el.animate !== 'function'){
-const finalFrame = keyframes[keyframes.length-1] || {};
-Object.keys(finalFrame).forEach((prop)=>{
-el.style[prop] = finalFrame[prop];
-});
-done();
-return;
-}
-const anim = el.animate(keyframes,options);
-el._recordsAnim = anim;
-anim.onfinish = ()=>{
-if(el._recordsAnim !== anim) return;
-el._recordsAnim = null;
-done();
-};
-anim.oncancel = ()=>{
-if(el._recordsAnim === anim){
-el._recordsAnim = null;
-}
-};
 },
 attachTransitionEnd(el,propertyName,done){
 const onEnd = (e)=>{
@@ -470,13 +435,20 @@ return diff >= 0 && diff < 7 * 86400000;
 },
 beforeRecordsEnter(el){
 if(this.effectiveListView === 'grid'){
-this.setGridCardTransitioning(el,true);
-this.clearGridAnimation(el);
+this.clearEndHandler(el);
+this.clearRecordsRaf(el);
+const inner = el.querySelector('.records-panel-inner');
 el.style.transition = 'none';
-el.style.willChange = 'opacity, transform';
+el.style.willChange = 'transform, opacity';
 el.style.opacity = '0';
-el.style.transform = 'translateY(8px) scale(.995)';
+el.style.transform = 'translateY(28px)';
 el.style.overflow = 'hidden';
+if(inner){
+inner.style.transition = 'none';
+inner.style.willChange = 'transform, opacity';
+inner.style.opacity = '0';
+inner.style.transform = 'translateY(10px)';
+}
 void el.offsetHeight;
 return;
 }
@@ -500,22 +472,24 @@ void el.offsetHeight;
 },
 recordsEnter(el,done){
 if(this.effectiveListView === 'grid'){
-el.style.transition = 'none';
+this.clearEndHandler(el);
+this.clearRecordsRaf(el);
+const inner = el.querySelector('.records-panel-inner');
+el.style.transition = 'transform 310ms cubic-bezier(.16,1,.3,1), opacity 220ms ease-out';
 el.style.overflow = 'hidden';
-el.style.willChange = 'opacity, transform';
-this.runGridAnimation(
-el,
-[
-{ opacity:'0', transform:'translateY(8px) scale(.995)' },
-{ opacity:'1', transform:'translateY(0) scale(1)' }
-],
-{
-duration:240,
-easing:'cubic-bezier(.22,.61,.36,1)',
-fill:'forwards'
-},
-done
-);
+el.style.willChange = 'transform, opacity';
+if(inner){
+inner.style.transition = 'transform 320ms cubic-bezier(.16,1,.3,1), opacity 240ms ease-out';
+}
+this.attachTransitionEnd(el,'transform',done);
+el._recordsRaf = requestAnimationFrame(()=>{
+el.style.opacity = '1';
+el.style.transform = 'translateY(0)';
+if(inner){
+inner.style.opacity = '1';
+inner.style.transform = 'translateY(0)';
+}
+});
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
@@ -544,14 +518,21 @@ inner.style.transform='translateY(0)';
 },
 afterRecordsEnter(el){
 if(this.effectiveListView === 'grid'){
-this.clearGridAnimation(el);
-this.setGridCardTransitioning(el,false);
+this.clearEndHandler(el);
+this.clearRecordsRaf(el);
+const inner = el.querySelector('.records-panel-inner');
 el.style.height = '';
 el.style.transition = '';
 el.style.willChange = '';
 el.style.overflow = 'hidden';
 el.style.opacity = '';
 el.style.transform = '';
+if(inner){
+inner.style.transition = '';
+inner.style.willChange = '';
+inner.style.opacity = '';
+inner.style.transform = '';
+}
 return;
 }
 this.clearEndHandler(el);
@@ -572,13 +553,20 @@ inner.style.transform='none';
 },
 beforeRecordsLeave(el){
 if(this.effectiveListView === 'grid'){
-this.setGridCardTransitioning(el,true);
-this.clearGridAnimation(el);
+this.clearEndHandler(el);
+this.clearRecordsRaf(el);
+const inner = el.querySelector('.records-panel-inner');
 el.style.transition = 'none';
-el.style.willChange = 'opacity, transform';
+el.style.willChange = 'transform, opacity';
 el.style.opacity = '1';
-el.style.transform = 'translateY(0) scale(1)';
+el.style.transform = 'translateY(0)';
 el.style.overflow = 'hidden';
+if(inner){
+inner.style.transition = 'none';
+inner.style.willChange = 'transform, opacity';
+inner.style.opacity = '1';
+inner.style.transform = 'translateY(0)';
+}
 void el.offsetHeight;
 return;
 }
@@ -601,22 +589,24 @@ void el.offsetHeight;
 },
 recordsLeave(el,done){
 if(this.effectiveListView === 'grid'){
-el.style.transition = 'none';
+this.clearEndHandler(el);
+this.clearRecordsRaf(el);
+const inner = el.querySelector('.records-panel-inner');
+el.style.transition = 'transform 260ms cubic-bezier(.4,0,.2,1), opacity 190ms ease-in';
 el.style.overflow = 'hidden';
-el.style.willChange = 'opacity, transform';
-this.runGridAnimation(
-el,
-[
-{ opacity:'1', transform:'translateY(0) scale(1)' },
-{ opacity:'0', transform:'translateY(8px) scale(.995)' }
-],
-{
-duration:220,
-easing:'cubic-bezier(.4,0,.2,1)',
-fill:'forwards'
-},
-done
-);
+el.style.willChange = 'transform, opacity';
+if(inner){
+inner.style.transition = 'transform 250ms cubic-bezier(.4,0,.2,1), opacity 170ms ease-in';
+}
+this.attachTransitionEnd(el,'transform',done);
+el._recordsRaf = requestAnimationFrame(()=>{
+el.style.opacity = '0';
+el.style.transform = 'translateY(30px)';
+if(inner){
+inner.style.opacity = '0';
+inner.style.transform = 'translateY(12px)';
+}
+});
 return;
 }
 const startHeight = el.getBoundingClientRect().height;
@@ -644,14 +634,21 @@ inner.style.transform='translateY(-1px)';
 },
 afterRecordsLeave(el){
 if(this.effectiveListView === 'grid'){
-this.clearGridAnimation(el);
-this.setGridCardTransitioning(el,false);
+this.clearEndHandler(el);
+this.clearRecordsRaf(el);
+const inner = el.querySelector('.records-panel-inner');
 el.style.height = '';
 el.style.transition = '';
 el.style.willChange = '';
 el.style.overflow = '';
 el.style.opacity = '';
 el.style.transform = '';
+if(inner){
+inner.style.transition = '';
+inner.style.willChange = '';
+inner.style.opacity = '';
+inner.style.transform = '';
+}
 return;
 }
 this.clearEndHandler(el);
