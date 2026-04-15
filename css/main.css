@@ -361,11 +361,15 @@ inset:0 0 56px 0;
 margin:0;
 padding:.85rem;
 border-radius:inherit;
-background:var(--color-background-hover);
+border:2px solid transparent;
+background:
+linear-gradient(var(--color-background-hover),var(--color-background-hover)) padding-box,
+linear-gradient(90deg,var(--color-border-blue) 0%,var(--color-border-blue) 42%,#bfd6a6 50%,var(--color-border-yellow) 58%,var(--color-border-yellow) 100%) border-box;
 z-index:4;
 display:flex;
 overflow:hidden;
 pointer-events:auto;
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .central-container.view-mode-grid .level-card .records-panel-inner{
