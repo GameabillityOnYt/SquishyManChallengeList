@@ -439,15 +439,13 @@ this.clearEndHandler(el);
 this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
 el.style.transition = 'none';
-el.style.willChange = 'transform, opacity';
-el.style.opacity = '0';
-el.style.transform = 'translateY(28px)';
+el.style.willChange = 'transform';
+el.style.transform = 'translateY(100%)';
 el.style.overflow = 'hidden';
 if(inner){
 inner.style.transition = 'none';
-inner.style.willChange = 'transform, opacity';
-inner.style.opacity = '0';
-inner.style.transform = 'translateY(10px)';
+inner.style.willChange = 'transform';
+inner.style.transform = 'translateY(0)';
 }
 void el.offsetHeight;
 return;
@@ -475,20 +473,15 @@ if(this.effectiveListView === 'grid'){
 this.clearEndHandler(el);
 this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
-el.style.transition = 'transform 310ms cubic-bezier(.16,1,.3,1), opacity 220ms ease-out';
+el.style.transition = 'transform 360ms cubic-bezier(.22,1,.36,1)';
 el.style.overflow = 'hidden';
-el.style.willChange = 'transform, opacity';
+el.style.willChange = 'transform';
 if(inner){
-inner.style.transition = 'transform 320ms cubic-bezier(.16,1,.3,1), opacity 240ms ease-out';
+inner.style.transition = 'none';
 }
 this.attachTransitionEnd(el,'transform',done);
 el._recordsRaf = requestAnimationFrame(()=>{
-el.style.opacity = '1';
 el.style.transform = 'translateY(0)';
-if(inner){
-inner.style.opacity = '1';
-inner.style.transform = 'translateY(0)';
-}
 });
 return;
 }
@@ -525,12 +518,10 @@ el.style.height = '';
 el.style.transition = '';
 el.style.willChange = '';
 el.style.overflow = 'hidden';
-el.style.opacity = '';
 el.style.transform = '';
 if(inner){
 inner.style.transition = '';
 inner.style.willChange = '';
-inner.style.opacity = '';
 inner.style.transform = '';
 }
 return;
@@ -557,14 +548,12 @@ this.clearEndHandler(el);
 this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
 el.style.transition = 'none';
-el.style.willChange = 'transform, opacity';
-el.style.opacity = '1';
+el.style.willChange = 'transform';
 el.style.transform = 'translateY(0)';
 el.style.overflow = 'hidden';
 if(inner){
 inner.style.transition = 'none';
-inner.style.willChange = 'transform, opacity';
-inner.style.opacity = '1';
+inner.style.willChange = 'transform';
 inner.style.transform = 'translateY(0)';
 }
 void el.offsetHeight;
@@ -592,20 +581,15 @@ if(this.effectiveListView === 'grid'){
 this.clearEndHandler(el);
 this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
-el.style.transition = 'transform 260ms cubic-bezier(.4,0,.2,1), opacity 190ms ease-in';
+el.style.transition = 'transform 300ms cubic-bezier(.4,0,.2,1)';
 el.style.overflow = 'hidden';
-el.style.willChange = 'transform, opacity';
+el.style.willChange = 'transform';
 if(inner){
-inner.style.transition = 'transform 250ms cubic-bezier(.4,0,.2,1), opacity 170ms ease-in';
+inner.style.transition = 'none';
 }
 this.attachTransitionEnd(el,'transform',done);
 el._recordsRaf = requestAnimationFrame(()=>{
-el.style.opacity = '0';
-el.style.transform = 'translateY(30px)';
-if(inner){
-inner.style.opacity = '0';
-inner.style.transform = 'translateY(12px)';
-}
+el.style.transform = 'translateY(100%)';
 });
 return;
 }
@@ -641,12 +625,10 @@ el.style.height = '';
 el.style.transition = '';
 el.style.willChange = '';
 el.style.overflow = '';
-el.style.opacity = '';
 el.style.transform = '';
 if(inner){
 inner.style.transition = '';
 inner.style.willChange = '';
-inner.style.opacity = '';
 inner.style.transform = '';
 }
 return;
