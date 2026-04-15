@@ -484,11 +484,12 @@ this.clearEndHandler(el);
 this.clearRecordsRaf(el);
 const inner = el.querySelector('.records-panel-inner');
 const computed = window.getComputedStyle(el);
+el._recordsOpenMarginTop = computed.marginTop || '0px';
 el.style.transition='none';
 el.style.height='0px';
 el.style.overflow='hidden';
-el.style.marginTop=computed.marginTop || '0px';
-el.style.willChange='height';
+el.style.marginTop='0px';
+el.style.willChange='height,margin-top';
 if(inner){
 inner.style.transition='none';
 inner.style.opacity='0';
@@ -518,13 +519,14 @@ done
 return;
 }
 const inner = el.querySelector('.records-panel-inner');
+const openMarginTop = el._recordsOpenMarginTop || '0px';
 const targetHeight = el.scrollHeight;
 if(targetHeight <= 0){
 done();
 return;
 }
 const duration = this.getRecordsTransitionDuration(targetHeight);
-el.style.transition=`height ${duration}ms cubic-bezier(.22,1,.36,1)`;
+el.style.transition=`height ${duration}ms cubic-bezier(.22,1,.36,1), margin-top ${duration}ms cubic-bezier(.22,1,.36,1)`;
 if(inner){
 const fadeDuration = Math.max(130,Math.min(220,Math.round(duration * 0.72)));
 inner.style.transition=`opacity ${fadeDuration}ms ease-out, transform ${duration}ms cubic-bezier(.22,1,.36,1)`;
@@ -533,6 +535,7 @@ this.attachTransitionEnd(el,'height',done);
 this.clearRecordsRaf(el);
 el._recordsRaf = requestAnimationFrame(()=>{
 el.style.height=`${targetHeight}px`;
+el.style.marginTop=openMarginTop;
 if(inner){
 inner.style.opacity='1';
 inner.style.transform='translateY(0)';
@@ -559,6 +562,7 @@ el.style.transition='';
 el.style.willChange='';
 el.style.overflow='hidden';
 el.style.marginTop='';
+el._recordsOpenMarginTop = null;
 if(inner){
 inner.style.transition='';
 inner.style.willChange='';
@@ -586,7 +590,7 @@ el.style.transition='none';
 el.style.height=`${Math.ceil(el.getBoundingClientRect().height)}px`;
 el.style.overflow='hidden';
 el.style.marginTop=computed.marginTop;
-el.style.willChange='height';
+el.style.willChange='height,margin-top';
 if(inner){
 inner.style.transition='none';
 inner.style.opacity='1';
@@ -622,7 +626,7 @@ done();
 return;
 }
 const duration = this.getRecordsTransitionDuration(startHeight);
-el.style.transition=`height ${duration}ms cubic-bezier(.4,0,.2,1)`;
+el.style.transition=`height ${duration}ms cubic-bezier(.4,0,.2,1), margin-top ${duration}ms cubic-bezier(.4,0,.2,1)`;
 if(inner){
 const fadeDuration = Math.max(120, Math.min(210, Math.round(duration * 0.82)));
 inner.style.transition=`opacity ${fadeDuration}ms cubic-bezier(.4,0,.2,1), transform ${fadeDuration}ms cubic-bezier(.4,0,.2,1)`;
@@ -631,6 +635,7 @@ this.attachTransitionEnd(el,'height',done);
 this.clearRecordsRaf(el);
 el._recordsRaf = requestAnimationFrame(()=>{
 el.style.height='0px';
+el.style.marginTop='0px';
 if(inner){
 inner.style.opacity='0';
 inner.style.transform='translateY(-1px)';
@@ -657,6 +662,7 @@ el.style.willChange='';
 el.style.height='';
 el.style.overflow='';
 el.style.marginTop='';
+el._recordsOpenMarginTop = null;
 if(inner){
 inner.style.transition='';
 inner.style.willChange='';
