@@ -39,6 +39,14 @@ async function getCached(key, loader, shouldPersist = (value) => value != null) 
 }
 
 async function fetchLevelList(fileName, cacheKey) {
+    const parsePercent = (value) => {
+        const normalized = Number(String(value ?? '').replace('%', '').trim());
+        return Number.isFinite(normalized) ? normalized : 0;
+    };
+
+    const sortRecordsByPercentDesc = (records) =>
+        [...records].sort((a, b) => parsePercent(b?.percent) - parsePercent(a?.percent));
+
     return getCached(cacheKey, async () => {
         const listResult = await fetch(`${dir}/${fileName}`);
         try {
@@ -52,8 +60,8 @@ async function fetchLevelList(fileName, cacheKey) {
                             {
                                 ...level,
                                 path,
-                                records: level.records.sort(
-                                    (a, b) => b.percent - a.percent,
+                                records: sortRecordsByPercentDesc(
+                                    Array.isArray(level?.records) ? level.records : [],
                                 ),
                             },
                             null,
