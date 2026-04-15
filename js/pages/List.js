@@ -114,8 +114,8 @@ C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19
 </div>
 
 <div class="stat-card">
-<span class="stat-label">Points</span>
-<span class="stat-value">{{activeListMode === 'unverified' ? '-' : score(absoluteRank,100,effectiveRequirement(absoluteRank,level))}}</span>
+<span class="stat-label">{{activeListMode === 'unverified' ? 'World Record' : 'Points'}}</span>
+<span class="stat-value">{{activeListMode === 'unverified' ? formatWorldRecord(level) : score(absoluteRank,100,effectiveRequirement(absoluteRank,level))}}</span>
 </div>
 
 <div class="stat-card">
@@ -401,6 +401,29 @@ if(normalized.toLowerCase() === 'cbf'){
 return 'CBF';
 }
 return `${normalized}Hz`;
+},
+parsePercent(value){
+const parsed = Number(String(value ?? '').replace('%','').trim());
+return Number.isFinite(parsed) ? parsed : null;
+},
+formatPercent(value){
+if(!Number.isFinite(value)) return '-';
+if(Number.isInteger(value)) return `${value}%`;
+return `${value.toFixed(2).replace(/\.?0+$/,'')}%`;
+},
+formatWorldRecord(level){
+if(!Array.isArray(level?.records) || level.records.length === 0){
+return '-';
+}
+let best = null;
+level.records.forEach((record)=>{
+const current = this.parsePercent(record?.percent);
+if(current == null) return;
+if(best == null || current > best){
+best = current;
+}
+});
+return best == null ? '-' : this.formatPercent(best);
 },
 effectiveRequirement(rank,level){
 if(Number(rank) > 75){
