@@ -15,7 +15,7 @@
             "percent": 100,
             "hz": 180
         },
-          {
+        {
             "user": "GamerAJG2012",
             "link": "https://youtu.be/nMTvdqs45g0",
             "percent": 100,
@@ -26,6 +26,12 @@
             "link": "https://medal.tv/games/geometry-dash/clips/muXPg7ZSEeUEmSCiF?invite=cr-MSxJWEMsMjU0MDc1NjI3&v=17",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "LiquidMan6776",
+            "link": "https://medal.tv/games/geometry-dash/clips/mvNlbTd5KNoSwAQVA?invite=cr-MSwyYnQsNDExNTgzNjMy&v=35",
+            "percent": 100,
+            "hz": 480
         }
     ]
 }
