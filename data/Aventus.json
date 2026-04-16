@@ -8,5 +8,12 @@
     "percentToQualify": "100",
     "decorated": "true",
     "length": "30s",
-    "records": []
+    "records": [
+        {
+            "user": "Migul el paso",
+            "link": "https://medal.tv/games/geometry-dash/clips/mwB3D9myKnoaH6ea_?invite=cr-MSxvclMsMjYyNzY3NzU1&v=30",
+            "percent": 82,
+            "hz": 240
+        }
+    ]
 }
