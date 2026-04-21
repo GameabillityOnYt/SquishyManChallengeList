@@ -7,5 +7,12 @@
     "verification": "https://youtu.be/vvaty6fW2b0",
     "percentToQualify": "100",
     "Length": "19s",
-    "records": []
+    "records": [
+         {
+            "user": "Mariocik",
+            "link": "https://medal.tv/games/geometry-dash/clips/mwQDQBZ4GQ4lmnBzz?invite=cr-MSxibFEsNTgzMjc5ODg2&v=15",
+            "percent": "44-72",
+            "hz": 240
+        }
+    ]
 }
