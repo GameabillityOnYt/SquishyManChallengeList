@@ -20,6 +20,32 @@ export function getThumbnailFromId(id) {
     return `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
 }
 
+export function parseRecordPercent(value) {
+    if (typeof value === 'number') {
+        return Number.isFinite(value) ? value : null;
+    }
+
+    const raw = String(value ?? '').trim();
+    if (!raw) {
+        return null;
+    }
+
+    const runMatch = raw.match(
+        /^(-?\d+(?:\.\d+)?)\s*(?:-|\u2013|\u2014)\s*(-?\d+(?:\.\d+)?)%?$/,
+    );
+    if (runMatch) {
+        const start = Number(runMatch[1]);
+        const end = Number(runMatch[2]);
+        if (!Number.isFinite(start) || !Number.isFinite(end)) {
+            return null;
+        }
+        return Math.max(0, end - start);
+    }
+
+    const normalized = Number(raw.replace('%', '').trim());
+    return Number.isFinite(normalized) ? normalized : null;
+}
+
 // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 export function shuffle(array) {
     let currentIndex = array.length, randomIndex;
@@ -39,4 +65,3 @@ export function shuffle(array) {
 
     return array;
 }
-
