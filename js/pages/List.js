@@ -379,6 +379,21 @@ return `${normalized}Hz`;
 parsePercent(value){
 return parseRecordPercent(value);
 },
+isRunRecord(value){
+const raw = String(value ?? '').trim();
+return /^-?\d+(?:\.\d+)?\s*(?:-|\u2013|\u2014)\s*-?\d+(?:\.\d+)?%?$/.test(raw);
+},
+formatRecordValue(value){
+const raw = String(value ?? '').trim();
+if(this.isRunRecord(raw)){
+const runMatch = raw.match(/^(-?\d+(?:\.\d+)?)\s*(?:-|\u2013|\u2014)\s*(-?\d+(?:\.\d+)?)%?$/);
+if(runMatch){
+return `${runMatch[1]}-${runMatch[2]}`;
+}
+return raw;
+}
+return this.formatPercent(this.parsePercent(value));
+},
 formatPercent(value){
 if(!Number.isFinite(value)) return '-';
 if(Number.isInteger(value)) return `${value}%`;
@@ -388,15 +403,17 @@ formatWorldRecord(level){
 if(!Array.isArray(level?.records) || level.records.length === 0){
 return '-';
 }
+let bestRecordValue = null;
 let best = null;
 level.records.forEach((record)=>{
 const current = this.parsePercent(record?.percent);
 if(current == null) return;
 if(best == null || current > best){
 best = current;
+bestRecordValue = record?.percent;
 }
 });
-return best == null ? '-' : this.formatPercent(best);
+return best == null ? '-' : this.formatRecordValue(bestRecordValue);
 },
 effectiveRequirement(rank,level){
 if(Number(rank) > 75){
