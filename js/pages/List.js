@@ -1,5 +1,5 @@
 import { store } from "../main.js";
-import { getThumbnailFromId, getYoutubeIdFromUrl } from "../util.js";
+import { getThumbnailFromId, getYoutubeIdFromUrl, parseRecordPercent } from "../util.js";
 import { score } from "../score.js";
 import { fetchEditors, fetchList, fetchNewTags, fetchUnbeatenList } from "../content.js";
 import Spinner from "../components/Spinner.js";
@@ -377,8 +377,7 @@ return 'CBF';
 return `${normalized}Hz`;
 },
 parsePercent(value){
-const parsed = Number(String(value ?? '').replace('%','').trim());
-return Number.isFinite(parsed) ? parsed : null;
+return parseRecordPercent(value);
 },
 formatPercent(value){
 if(!Number.isFinite(value)) return '-';
