@@ -1,4 +1,5 @@
 import { round, score } from './score.js';
+import { parseRecordPercent } from './util.js';
 
 /**
  * Path to directory containing `_list.json` and all levels
@@ -40,13 +41,9 @@ async function getCached(key, loader, shouldPersist = (value) => value != null) 
 
 async function fetchLevelList(fileName, cacheKey) {
     const parsePercent = (value) => {
-        const normalized = Number(String(value ?? '').replace('%', '').trim());
-        return Number.isFinite(normalized) ? normalized : 0;
+        return parseRecordPercent(value) ?? 0;
     };
 
-    // Display rule:
-    // - 100% runs stay in original submit order.
-    // - Below 100%, higher percent appears first.
     const sortRecordsForDisplay = (records) =>
         [...records]
             .map((record, index) => ({
@@ -166,7 +163,6 @@ export async function fetchLeaderboard() {
                 return;
             }
 
-            // Verification
             const { verified } = ensureUser(level.verifier);
             verified.push({
                 rank: rank + 1,
@@ -175,10 +171,10 @@ export async function fetchLeaderboard() {
                 link: level.verification,
             });
 
-            // Records
             level.records.forEach((record) => {
                 const { completed, progressed } = ensureUser(record.user);
-                if (record.percent === 100) {
+                const recordPercent = parseRecordPercent(record.percent) ?? 0;
+                if (recordPercent >= 100) {
                     completed.push({
                         rank: rank + 1,
                         level: level.name,
@@ -192,12 +188,12 @@ export async function fetchLeaderboard() {
                     rank: rank + 1,
                     level: level.name,
                     percent: record.percent,
-                    score: score(rank + 1, record.percent, level.percentToQualify),
+                    score: score(rank + 1, recordPercent, level.percentToQualify),
                     link: record.link,
                 });
             });
 
-            // Creators
+
             const creators = Array.isArray(level.creators) ? level.creators : [];
             creators.forEach((creatorEntry) => {
                 if (!creatorEntry) {
@@ -218,7 +214,7 @@ export async function fetchLeaderboard() {
             });
         });
 
-        // Wrap in extra Object containing the user and total score
+
         const res = Object.entries(scoreMap).map(([user, scores]) => {
             const { verified, completed, progressed } = scores;
             const total = [verified, completed, progressed]
@@ -232,7 +228,7 @@ export async function fetchLeaderboard() {
             };
         });
 
-        // Sort by total score
+
         return [res.sort((a, b) => b.total - a.total), errs];
     });
 }
