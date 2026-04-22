@@ -279,7 +279,7 @@ return this.mainList;
 methods:{
 thumbnailFor(video){
 const id = getYoutubeIdFromUrl(video);
-return id ? getThumbnailFromId(id) : "e.png";
+return id ? getThumbnailFromId(id) : "/e.png";
 },
 
 score,
