@@ -1,1 +1,9 @@
+/js/* /js/:splat 200
+/css/* /css/:splat 200
+/data/* /data/:splat 200
+/assets/* /assets/:splat 200
+/e.png /e.png 200
+/list_icon.png /list_icon.png 200
+/robots.txt /robots.txt 200
+/sitemap.xml /sitemap.xml 200
 /* /index.html 200
