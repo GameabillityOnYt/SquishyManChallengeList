@@ -1,3 +1,5 @@
+
+
 :root{
 --color-background:#ffffff;
 --color-on-background:#000000;
@@ -26,8 +28,6 @@ font-family:'Lexend Deca',sans-serif;
 background-color:var(--color-background);
 color:var(--color-on-background);
 }
-
-/* ================= SPINNER ================= */
 
 .spinner-overlay{
 position:fixed !important;
@@ -58,7 +58,7 @@ width:68px;
 height:68px;
 display:block;
 border-radius:50%;
-/* hard-hide any legacy "Loading..." text if old markup is cached */
+
 font-size:0;
 line-height:0;
 color:transparent;
@@ -80,7 +80,7 @@ rgba(160,160,160,0.5) 125deg,
 rgba(130,130,130,0.2) 220deg,
 rgba(115,115,115,0) 330deg
 );
-/* ring mask for classic spinner look */
+
 -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
 mask:radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 7px));
 animation:spin .9s linear infinite;
@@ -89,8 +89,6 @@ animation:spin .9s linear infinite;
 @keyframes spin{
 to{transform:rotate(360deg);}
 }
-
-/* ================= HEADER ================= */
 
 header{
 display:flex;
@@ -145,7 +143,6 @@ background:#FFA500;
 color:#ffffff;
 }
 
-/* Unverified list: make badges white */
 .page-list-custom.unverified-mode .former-top-1-tag,
 .page-list-custom.unverified-mode .decorated-tag{
 background:rgba(255,255,255,0.72);
@@ -228,8 +225,6 @@ stroke-linecap:round;
 stroke-linejoin:round;
 flex:0 0 auto;
 }
-
-/* ================= MAIN GRID ================= */
 
 .page-list-custom{
 display:grid;
@@ -441,8 +436,6 @@ max-height:none;
 gap:1rem;
 }
 
-/* ================= LEVEL CARD ================= */
-
 .level-card{
 background-color:var(--color-background-hover);
 border:2px solid transparent;
@@ -483,7 +476,6 @@ filter:grayscale(1) saturate(0) contrast(1.08) brightness(0.95);
 mix-blend-mode:soft-light;
 }
 
-/* Main list cards: tighter layout and smaller corner emoji */
 .level-card:not(.legacy-card)::after{
 display:block;
 font-size:2.8rem;
@@ -566,8 +558,6 @@ flex-direction:column;
 justify-content:space-between;
 min-width:0;
 }
-
-/* ================= TITLE ================= */
 
 .level-title-info h2{
 margin:0;
@@ -705,7 +695,6 @@ text-underline-offset:3px;
 
 }
 
-/* Level rank box styling */
 .level-rank{
 background-color:var(--color-primary);
 color:var(--color-on-primary);
@@ -717,8 +706,6 @@ display:inline-block;
 width:fit-content;
 box-shadow: 0 2px 8px rgba(255,165,0,0.3);
 }
-
-/* ================= CREATORS ================= */
 
 .authors-box{
 display:flex;
@@ -743,8 +730,6 @@ color:var(--color-primary);
 font-size:.95rem;
 }
 
-/* ================= STATS ================= */
-
 .stats-middle-grid{
 display:grid;
 grid-template-columns:repeat(4,minmax(0,1fr));
@@ -766,7 +751,6 @@ justify-content:center;
 gap:4px;
 }
 
-/* Layout for ID + copy button: stack vertically so ID label is centered with number below */
 .id-copy-box{
 display:flex;
 flex-direction:row;
@@ -812,7 +796,6 @@ gap:6px;
 padding-bottom:.35rem;
 }
 
-/* Slight visual alternation for long lists */
 .central-container .level-card:nth-child(even){
 box-shadow:inset 0 0 0 999px rgba(0,0,0,0.018);
 }
@@ -821,7 +804,6 @@ html.dark .central-container .level-card:nth-child(even){
 box-shadow:inset 0 0 0 999px rgba(255,255,255,0.02);
 }
 
-/* Desktop-only hover motion to avoid touch quirks on mobile */
 @media (hover:hover) and (pointer:fine){
 .central-container .level-card:hover{
 transform:translateY(-2px) scale(1.004);
@@ -840,8 +822,6 @@ html.dark .central-container .level-card:nth-child(even):hover{
 box-shadow:inset 0 0 0 999px rgba(255,255,255,0.02), 0 14px 30px rgba(0,0,0,0.36);
 }
 }
-
-/* ================= RECORDS ================= */
 
 .records-panel{
 overflow:hidden;
@@ -877,8 +857,6 @@ color:var(--color-primary);
 text-decoration:underline;
 }
 
-/* ================= LEADERBOARD SPACING ================= */
-
 .page-leaderboard .player .table tr{
 height:48px!important;
 }
@@ -891,8 +869,6 @@ gap:1.4rem!important;
 .page-leaderboard .player .table a{
 padding-block:.8rem!important;
 }
-
-/* ================= COPY ID ================= */
 
 .copy-id{
 background:none;
@@ -916,8 +892,6 @@ transform:scale(1.15);
 width:18px;
 height:18px;
 }
-/* ================= LIST PAGE ================= */
-/* Ensure editors list items align icons + names correctly */
 
 .meta{
 background:var(--color-background-hover);
@@ -959,7 +933,6 @@ margin-top:0;
 	display:inline-block;
 }
 
-/* Combine editors and requirements under single scrollbar */
 .editors-panel{
 	padding-bottom:.5rem;
 	margin-bottom:0;
@@ -968,8 +941,6 @@ margin-top:0;
 .requirements-panel{
 	padding-top:0;
 }
-
-/* SHOW RECORDS BACK TO ORIGINAL */
 
 .show-records-btn{
   margin-top:10px;
@@ -1005,7 +976,6 @@ html:not(.dark) .page-list-custom.unverified-mode .show-records-btn{
   border-color:#808080;
   color:#f4f4f4;
 }
-
 
 .lazy-video{
 width:100%;
@@ -1222,7 +1192,6 @@ font-size:.9rem;
 }
 }
 
-/* Keep single-line ellipsis for names in grid cards */
 .central-container.view-mode-grid .authors-box .author-value{
 display:block;
 max-width:100%;
