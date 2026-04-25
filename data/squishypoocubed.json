@@ -7,5 +7,30 @@
     "verification": "https://www.youtube.com/watch?v=e1neURupcZ4",
     "percentToQualify": "100",
     "Length": "9s",
-    "records": []
+    "records": [
+           {
+            "user": "Pijeon",
+            "link": "https://medal.tv/games/geometry-dash/clips/myCaaZjDGoI1k45AR?invite=cr-MSx0ZzgsMzIzNTg1ODYw",
+            "percent": 100,
+            "hz": 144
+        },
+         {
+            "user": "Oreogd",
+            "link": "https://youtu.be/gB6B1VGeopI?si=-wf2fpX6jIcMIo7h",
+            "percent": 100,
+            "hz": "CBF"
+        },
+           {
+            "user": "MrBudiman",
+            "link": "https://youtu.be/gB6B1VGeopI?si=-wf2fpX6jIcMIo7hhttps://youtu.be/hH_xgaspVdo",
+            "percent": 100,
+            "hz": 60
+        },
+        {
+            "user": "GamerAJG2012",
+            "link": "https://youtu.be/zBZE4gF1epU",
+            "percent": 100,
+            "hz": 144
+        }
+    ]
 }
