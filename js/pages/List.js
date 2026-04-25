@@ -32,6 +32,7 @@ Unverified Levels
 </button>
 <div id="tag-help-panel" class="tag-help-panel" role="dialog" aria-label="Tag explanations">
 <p><span class="tag-help-label decorated-tag">Decorated</span> Used for levels that have a well executed theme/decoration.</p>
+<p><span class="tag-help-label mythic-tag">Mythic</span> levels with the best looking deco and a really well theme execution</p>
 <p><span class="tag-help-label former-top-1-tag">Former Top 1</span> For every level that was once #1 but got dethroned by a new one.</p>
 <p><span class="tag-help-label demise-tag">Demise</span> Used for the top 3 in "Unverified Levels" tab (the hardest SMLL levels), this tag also transfers if a level that as it gets verified.</p>
 </div>
@@ -62,9 +63,10 @@ class="level-card"
 <div class="level-title-info">
 <div
 class="level-badges"
-:class="{ 'is-empty': !(isLevelDecorated(level) || level.formerTop1 || showDemiseTag(absoluteRank)) }"
+:class="{ 'is-empty': !(isLevelDecorated(level) || isLevelMythic(level) || level.formerTop1 || showDemiseTag(absoluteRank)) }"
 >
 <span v-if="isLevelDecorated(level)" class="decorated-tag">Decorated</span>
+<span v-if="isLevelMythic(level)" class="mythic-tag">Mythic</span>
 <span v-if="level.formerTop1" class="former-top-1-tag">Former Top 1</span>
 <span v-if="showDemiseTag(absoluteRank)" class="demise-tag">Demise</span>
 </div>
@@ -712,6 +714,17 @@ level?.decoratedTag;
 if(typeof value === 'string'){
 const normalized = value.trim().toLowerCase();
 return normalized === 'true' || normalized === 'yes' || normalized === '1' || normalized === 'decorated';
+}
+return value === true || value === 1;
+},
+isLevelMythic(level){
+const value =
+level?.mythic ??
+level?.isMythic ??
+level?.mythicTag;
+if(typeof value === 'string'){
+const normalized = value.trim().toLowerCase();
+return normalized === 'true' || normalized === 'yes' || normalized === '1' || normalized === 'mythic';
 }
 return value === true || value === 1;
 },
