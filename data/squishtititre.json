@@ -58,9 +58,15 @@
         },
         {
             "user": "MrBudiman",
-            "link": " https://youtu.be/F45AOhNHDbI",
+            "link": "https://youtu.be/F45AOhNHDbI",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "Marbelous Gaming",
+            "link": "https://youtu.be/37fcyjtVjnY",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
