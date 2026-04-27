@@ -165,6 +165,36 @@
     text-align: center;
 }
 
+.players-detail-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.players-selected-name {
+    margin: 0;
+    font-size: 1.7rem;
+    line-height: 1.15;
+    text-align: center;
+    word-break: break-word;
+}
+
+.players-champion-tag {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    background: rgba(255, 0, 0, 0.92);
+    color: #1a0b0b;
+    box-shadow: 0 6px 14px rgba(255, 0, 0, 0.3);
+}
+
 .players-demonlist {
     margin-top: -0.2rem;
 }
@@ -340,6 +370,11 @@ html.dark .players-level-pill.is-unbeaten {
     opacity: 0.45;
     filter: saturate(0.8);
     box-shadow: none;
+}
+
+html.dark .players-champion-tag {
+    color: #1b0d0d;
+    box-shadow: 0 6px 14px rgba(255, 0, 0, 0.36);
 }
 
 html.dark .players-title {
