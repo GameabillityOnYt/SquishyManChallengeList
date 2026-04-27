@@ -1,12 +1,12 @@
 .page-leaderboard-container {
     display: block;
     min-height: 100vh;
-    padding: 1.7rem 1.4rem;
+    padding: 1.4rem 1.2rem;
 }
 
 .page-leaderboard {
     display: block;
-    max-width: 94rem;
+    max-width: 96rem;
     margin: 0 auto;
 }
 
@@ -25,16 +25,16 @@
     background: var(--color-background);
     box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
     border-radius: 0.8rem;
-    padding: 1.5rem 1.3rem 0.7rem 1.2rem;
+    padding: 1.35rem 1.15rem 0.7rem 1rem;
     overflow: auto;
-    max-height: calc(100vh - 6.3rem);
+    max-height: calc(100vh - 6rem);
 }
 
 .page-leaderboard .top-players-label {
     margin: 0 0 1.2rem;
     color: var(--color-on-background);
     font-weight: 800;
-    font-size: 2.45rem;
+    font-size: 2.1rem;
     line-height: 1;
     text-transform: uppercase;
 }
@@ -55,12 +55,12 @@
 }
 
 .page-leaderboard .board td {
-    padding: 0.68rem 0.62rem;
+    padding: 0.84rem 0.55rem;
     vertical-align: middle;
 }
 
 .page-leaderboard .board .rank {
-    width: 8.7rem;
+    width: 7.4rem;
     text-align: center;
 }
 
@@ -68,11 +68,11 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 5.25rem;
-    min-height: 3rem;
-    padding: 0.55rem 0.95rem;
+    min-width: 4.8rem;
+    min-height: 3.15rem;
+    padding: 0.56rem 0.82rem;
     border-radius: 999px;
-    font-size: 1.22rem;
+    font-size: 1.06rem;
     font-weight: 800;
     line-height: 1;
     color: var(--color-on-background);
@@ -80,58 +80,43 @@
     background: rgba(255, 255, 255, 0.05);
 }
 
-.page-leaderboard .rank-badge .badge-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.35rem;
-    margin-right: 0.45rem;
-    font-size: 0.95em;
-    opacity: 0.95;
-}
-
 .page-leaderboard .rank-badge .badge-rank {
     letter-spacing: 0;
 }
 
 .page-leaderboard .badge-elite {
-    min-width: 5.7rem;
-    padding-inline: 1.05rem;
+    min-width: 5.15rem;
+    min-height: 3.3rem;
+    padding-inline: 0.95rem;
     border-width: 2px;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 8px 20px rgba(0, 0, 0, 0.25);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04));
 }
 
 .page-leaderboard .badge-strong {
-    min-width: 5.2rem;
+    min-width: 4.95rem;
+    min-height: 3.15rem;
     border-width: 2px;
 }
 
 .page-leaderboard .badge-solid {
-    min-width: 4.8rem;
+    min-width: 4.6rem;
+    min-height: 3.05rem;
 }
 
 .page-leaderboard .badge-basic {
-    min-width: 4.4rem;
-    padding-inline: 0.74rem;
-}
-
-.page-leaderboard .badge-basic .badge-icon {
-    opacity: 0.75;
+    min-width: 4.2rem;
+    min-height: 2.95rem;
+    padding-inline: 0.7rem;
 }
 
 .page-leaderboard .badge-minimal {
-    min-width: 3.35rem;
-    padding: 0.45rem 0.62rem;
+    min-width: 3.45rem;
+    min-height: 2.75rem;
+    padding: 0.44rem 0.6rem;
     border-radius: 0.4rem;
-    font-size: 1rem;
+    font-size: 0.92rem;
     border-color: rgba(255, 255, 255, 0.14);
-}
-
-.page-leaderboard .badge-minimal .badge-icon {
-    width: 0.65rem;
-    margin-right: 0.28rem;
-    opacity: 0.6;
 }
 
 .page-leaderboard .board .user {
@@ -141,11 +126,11 @@
 .page-leaderboard .name-pill {
     position: relative;
     overflow: hidden;
-    border-radius: 0.78rem;
-    min-height: 3.1rem;
+    border-radius: 0.84rem;
+    min-height: 3.7rem;
     display: flex;
     align-items: center;
-    padding: 0.68rem 1.05rem;
+    padding: 0.86rem 1.1rem;
     isolation: isolate;
 }
 
@@ -168,14 +153,14 @@
     z-index: 1;
     color: var(--color-on-background);
     font-weight: 700;
-    font-size: 1.56rem;
-    line-height: 1.15;
+    font-size: 1.36rem;
+    line-height: 1.2;
     overflow-wrap: anywhere;
 }
 
 .page-leaderboard .board .points,
 .page-leaderboard .board .levels {
-    width: 9.5rem;
+    width: 8.7rem;
     text-align: right;
     white-space: nowrap;
 }
@@ -183,18 +168,18 @@
 .page-leaderboard .board .points p,
 .page-leaderboard .board .levels p {
     color: var(--color-on-background);
-    font-size: 1.52rem;
-    line-height: 1.15;
+    font-size: 1.28rem;
+    line-height: 1.2;
     font-weight: 700;
 }
 
 .page-leaderboard .board .points {
-    padding-right: 1.4rem;
+    padding-right: 0.85rem;
 }
 
 .page-leaderboard .board .levels {
-    width: 10.3rem;
-    padding-right: 2rem;
+    width: 9.25rem;
+    padding-right: 1.1rem;
 }
 
 .page-leaderboard .board .board-row.tier-gold {
@@ -235,39 +220,39 @@
     }
 
     .page-leaderboard .top-players-label {
-        font-size: 1.85rem;
+        font-size: 1.7rem;
     }
 
     .page-leaderboard .board .rank {
-        width: 6.2rem;
+        width: 5.3rem;
     }
 
     .page-leaderboard .board .points,
     .page-leaderboard .board .levels {
-        width: 7.2rem;
+        width: 6.45rem;
     }
 
     .page-leaderboard .rank-badge {
-        min-width: 3.8rem;
-        min-height: 2.35rem;
-        font-size: 0.94rem;
+        min-width: 3.25rem;
+        min-height: 2.3rem;
+        font-size: 0.86rem;
     }
 
     .page-leaderboard .badge-minimal {
-        min-width: 2.6rem;
+        min-width: 2.4rem;
     }
 
     .page-leaderboard .name-pill {
-        min-height: 2.5rem;
-        padding: 0.5rem 0.7rem;
+        min-height: 2.85rem;
+        padding: 0.58rem 0.72rem;
     }
 
     .page-leaderboard .name-pill .type-label-lg {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .page-leaderboard .board .points p,
     .page-leaderboard .board .levels p {
-        font-size: 1.02rem;
+        font-size: 0.94rem;
     }
 }
