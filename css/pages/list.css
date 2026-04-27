@@ -335,25 +335,6 @@ html.dark .legacy-entry-btn {
     overflow-wrap: anywhere;
 }
 
-.legacy-dropdown-enter-active,
-.legacy-dropdown-leave-active {
-    transition: opacity 220ms ease, transform 220ms ease, max-height 220ms ease;
-}
-
-.legacy-dropdown-enter-from,
-.legacy-dropdown-leave-to {
-    opacity: 0;
-    transform: translateY(-10px);
-    max-height: 0;
-}
-
-.legacy-dropdown-enter-to,
-.legacy-dropdown-leave-from {
-    opacity: 1;
-    transform: translateY(0);
-    max-height: 70vh;
-}
-
 .central-container.view-mode-grid .list-mode-switch-row,
 .central-container.view-mode-grid .legacy-dropdown {
     grid-column: 1 / -1;
