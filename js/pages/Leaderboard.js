@@ -33,9 +33,9 @@ export default {
                     <span class="rank">#{{ i + 1 }}</span>
                     <div class="player-info">
                         <span class="player-name">{{ ientry.user }}</span>
-                        <span class="player-levels">{{ getTotalLevels(ientry) }} livelli</span>
+                        <span class="player-levels">{{ getTotalLevels(ientry) }} levels</span>
                     </div>
-                    <span class="player-score">{{ localize(ientry.total) }} punti</span>
+                    <span class="player-score">{{ localize(ientry.total) }} points</span>
                 </div>
             </div>
         </main>
