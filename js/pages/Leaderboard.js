@@ -24,18 +24,84 @@ export default {
                         Leaderboard may be incorrect, as the following levels could not be loaded: {{ err.join(', ') }}
                     </p>
                 </div>
-                <h1 class="title">Top 100 Players</h1>
-                <div class="player-card"
-                     v-for="(ientry, i) in visibleLeaderboard"
-                     :key="i"
-                     :class="{ 'active': selected == i, 'rank-1': i === 0, 'rank-2': i === 1, 'rank-3': i === 2 }"
-                     @click="selected = i">
-                    <span class="rank">#{{ i + 1 }}</span>
-                    <div class="player-info">
-                        <span class="player-name">{{ ientry.user }}</span>
-                        <span class="player-levels">{{ getTotalLevels(ientry) }} levels</span>
+                <div class="board-container">
+                    <p class="top-players-label type-label-lg">Top 100 players</p>
+                    <table class="board">
+                        <tr v-for="(ientry, i) in visibleLeaderboard">
+                            <td class="rank">
+                                <p class="type-label-lg">#{{ i + 1 }}</p>
+                            </td>
+                            <td class="total">
+                                <p class="type-label-lg">{{ localize(ientry.total) }}</p>
+                            </td>
+                            <td class="user" :class="{ 'active': selected == i }">
+                                <button @click="selected = i">
+                                    <span class="type-label-lg">{{ ientry.user }}</span>
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="player-container">
+                    <div class="player">
+                        <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
+                        <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
+                        <table class="table">
+                            <tr v-for="score in entry.verified">
+                                <td class="rank">
+                                    <p>#{{ score.rank }}</p>
+                                </td>
+                                <td class="level">
+                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
+                                </td>
+                                <td class="score">
+                                    <p>+{{ localize(score.score) }}</p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h2 v-if="entry.created.length > 0">Levels Created ({{ entry.created.length }})</h2>
+                        <table class="table">
+                            <tr v-for="score in entry.created">
+                                <td class="rank">
+                                    <p>#{{ score.rank }}</p>
+                                </td>
+                                <td class="level">
+                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h2 v-if="entry.completed.length > 0">Completed ({{ entry.completed.length }})</h2>
+                        <table class="table">
+                            <tr v-for="score in entry.completed">
+                                <td class="rank">
+                                    <p>#{{ score.rank }}</p>
+                                </td>
+                                <td class="level">
+                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
+                                </td>
+                                <td class="score">
+                                    <p>+{{ localize(score.score) }}</p>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h2 v-if="entry.progressed.length > 0">Progressed ({{ entry.progressed.length }})</h2>
+                        <table class="table">
+                            <tr v-for="score in entry.progressed">
+                                <td class="rank">
+                                    <p>#{{ score.rank }}</p>
+                                </td>
+                                <td class="level">
+                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.percent }}% {{ score.level }}</a>
+                                </td>
+                                <td class="score">
+                                    <p>+{{ localize(score.score) }}</p>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <span class="player-score">{{ localize(ientry.total) }} points</span>
                 </div>
             </div>
         </main>
@@ -44,19 +110,27 @@ export default {
         visibleLeaderboard() {
             return this.leaderboard.slice(0, 100);
         },
+        entry() {
+            return this.visibleLeaderboard[this.selected] ?? {
+                user: '',
+                total: 0,
+                verified: [],
+                completed: [],
+                created: [],
+                progressed: [],
+            };
+        },
     },
     async mounted() {
         const [leaderboard, err] = await fetchLeaderboard();
         this.leaderboard = leaderboard;
         this.err = err;
+        if (this.selected >= this.visibleLeaderboard.length) {
+            this.selected = 0;
+        }
         this.loading = false;
     },
     methods: {
         localize,
-        getTotalLevels(entry) {
-            const verified = entry.verified?.length || 0;
-            const completed = entry.completed?.length || 0;
-            return verified + completed;
-        },
     },
 };
