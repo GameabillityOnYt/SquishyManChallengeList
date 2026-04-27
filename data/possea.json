@@ -67,6 +67,12 @@
             "link": "https://www.youtube.com/watch?v=J0UG_5iDsR0",
             "percent": 100,
             "hz": 240
+        },
+         {
+            "user": "Oreogd",
+            "link": "https://youtu.be/kAjLy5KNmtM?si=DfK_rS8LX1Zs4ma9",
+            "percent": 100,
+            "hz": "CBF"
         }
     ]
 }
