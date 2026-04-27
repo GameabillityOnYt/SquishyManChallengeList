@@ -147,21 +147,6 @@
     max-width: 100%;
     word-wrap: break-word;
 }
-.champion-text { 
-    background-color: rgba(255, 0, 0, 1);
-    color: black;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.5rem;
-    display: inline-block; 
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
-    width: fit-content;
-    max-width: 100%;
-    word-wrap: break-word;
-}
 .CCWinner1-text { 
     background-color: rgba(255, 220, 0, 1);
     color: black;
