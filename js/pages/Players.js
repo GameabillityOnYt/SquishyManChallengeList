@@ -3,6 +3,21 @@ import { localize } from '../util.js';
 
 import Spinner from '../components/Spinner.js';
 
+const CHAMPION_USERS = new Set(
+    [
+        'Ant_Gam3R',
+        'Migul el paso',
+        'BLuuTemp',
+        'GD Bean',
+        'Liquidman6776',
+        'GamerAJG2012',
+        'Sdrawkcab',
+        'Pijeon',
+        'Panda',
+        '0cta',
+    ].map((user) => user.toLowerCase()),
+);
+
 export default {
     components: {
         Spinner,
@@ -58,6 +73,11 @@ export default {
                 </div>
                 <div class="players-detail-container" v-if="hasResults">
                     <div class="players-scroll players-detail-scroll players-detail">
+                        <div class="players-detail-header">
+                            <h1 class="players-selected-name type-label-lg">#{{ entry.rank }} {{ entry.user }}</h1>
+                            <p v-if="isChampion(entry.user)" class="players-champion-tag type-label-sm">Champion</p>
+                        </div>
+
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length }})</h2>
                         <div class="players-levels" v-if="entry.verified.length > 0">
                             <a
@@ -240,6 +260,12 @@ export default {
     },
     methods: {
         localize,
+        isChampion(user) {
+            if (!user) {
+                return false;
+            }
+            return CHAMPION_USERS.has(user.toLowerCase());
+        },
         resolvedCompletedLevelLink(level) {
             const key = level.name.toLowerCase();
             return this.completedVideoLookup[key] || level.link;
