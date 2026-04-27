@@ -73,10 +73,7 @@ export default {
                 </div>
                 <div class="players-detail-container" v-if="hasResults">
                     <div class="players-scroll players-detail-scroll players-detail">
-                        <div class="players-detail-header">
-                            <h1 class="players-selected-name type-label-lg">#{{ entry.rank }} {{ entry.user }}</h1>
-                            <p v-if="isChampion(entry.user)" class="players-champion-tag type-label-sm">Champion</p>
-                        </div>
+                        <p v-if="isChampion(entry.user)" class="players-champion-tag">Champion</p>
 
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length }})</h2>
                         <div class="players-levels" v-if="entry.verified.length > 0">
