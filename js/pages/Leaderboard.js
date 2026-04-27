@@ -10,7 +10,6 @@ export default {
     data: () => ({
         leaderboard: [],
         loading: true,
-        selected: 0,
         err: [],
     }),
     template: `
@@ -27,81 +26,23 @@ export default {
                 <div class="board-container">
                     <p class="top-players-label type-label-lg">Top 100 players</p>
                     <table class="board">
-                        <tr v-for="(ientry, i) in visibleLeaderboard">
+                        <tr v-for="(ientry, i) in visibleLeaderboard" :class="['board-row', rankTierClass(i + 1)]">
                             <td class="rank">
-                                <p class="type-label-lg">#{{ i + 1 }}</p>
+                                <span :class="['rank-badge', rankBadgeClass(i + 1)]">#{{ i + 1 }}</span>
                             </td>
-                            <td class="total">
-                                <p class="type-label-lg">{{ localize(ientry.total) }}</p>
-                            </td>
-                            <td class="user" :class="{ 'active': selected == i }">
-                                <button @click="selected = i">
+                            <td class="user">
+                                <div :class="['name-pill', rankTierClass(i + 1)]">
                                     <span class="type-label-lg">{{ ientry.user }}</span>
-                                </button>
+                                </div>
+                            </td>
+                            <td class="points">
+                                <p class="type-label-lg">P {{ localize(ientry.total) }}</p>
+                            </td>
+                            <td class="levels">
+                                <p class="type-label-lg">lvl/s {{ entryLevelCount(ientry) }}/150</p>
                             </td>
                         </tr>
                     </table>
-                </div>
-                <div class="player-container">
-                    <div class="player">
-                        <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
-                        <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.verified">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <h2 v-if="entry.created.length > 0">Levels Created ({{ entry.created.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.created">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <h2 v-if="entry.completed.length > 0">Completed ({{ entry.completed.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.completed">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <h2 v-if="entry.progressed.length > 0">Progressed ({{ entry.progressed.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.progressed">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.percent }}% {{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
                 </div>
             </div>
         </main>
@@ -110,27 +51,42 @@ export default {
         visibleLeaderboard() {
             return this.leaderboard.slice(0, 100);
         },
-        entry() {
-            return this.visibleLeaderboard[this.selected] ?? {
-                user: '',
-                total: 0,
-                verified: [],
-                completed: [],
-                created: [],
-                progressed: [],
-            };
-        },
     },
     async mounted() {
         const [leaderboard, err] = await fetchLeaderboard();
         this.leaderboard = leaderboard;
         this.err = err;
-        if (this.selected >= this.visibleLeaderboard.length) {
-            this.selected = 0;
-        }
         this.loading = false;
     },
     methods: {
         localize,
+        rankTierClass(rank) {
+            if (rank === 1) return 'tier-gold';
+            if (rank === 2) return 'tier-silver';
+            if (rank === 3) return 'tier-bronze';
+            if (rank <= 10) return 'tier-veteran';
+            if (rank <= 25) return 'tier-cyan';
+            if (rank <= 50) return 'tier-military';
+            return 'tier-grey';
+        },
+        rankBadgeClass(rank) {
+            if (rank <= 3) return 'badge-elite';
+            if (rank <= 10) return 'badge-strong';
+            if (rank <= 25) return 'badge-solid';
+            if (rank <= 50) return 'badge-basic';
+            return 'badge-minimal';
+        },
+        entryLevelCount(entry) {
+            const rankSet = new Set();
+            ['verified', 'completed', 'progressed', 'created'].forEach((key) => {
+                (entry[key] ?? []).forEach((item) => {
+                    if (item?.rank != null) {
+                        rankSet.add(item.rank);
+                    }
+                });
+            });
+
+            return Math.min(rankSet.size, 150);
+        },
     },
 };
