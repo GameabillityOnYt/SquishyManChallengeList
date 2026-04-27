@@ -45,16 +45,6 @@ export default {
                 <div class="player-container">
                     <div class="player">
                         <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
-                        <p v-if="entry.user === 'Ant_Gam3R'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Migul el paso'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'BLuuTemp'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'GD Bean'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Liquidman6776'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'GamerAJG2012'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Sdrawkcab'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Pijeon'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Panda'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === '0cta'" class="champion-text">Champion</p>
                         <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
                         <table class="table">
                             <tr v-for="score in entry.verified">
