@@ -7,5 +7,12 @@
     "verification": "https://www.youtube.com/watch?v=k_Rj3ZyR2mA",
     "percentToQualify": "100",
     "length": "12s",
-    "records": []
+    "records": [
+          {
+            "user": "Oreogd",
+            "link": "https://youtu.be/xJ_sGt_SnRU?si=tR9MXCJKTQgGLChM",
+            "percent": 45,
+            "hz": "CBF"
+        }
+    ]
 }
