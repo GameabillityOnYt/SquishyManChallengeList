@@ -166,7 +166,6 @@ class="records-scroll-area"
 </div>
 </div>
 
-<transition name="legacy-dropdown">
 <div v-if="activeListMode === 'legacy'" class="legacy-dropdown">
 <p class="legacy-dropdown-title">Legacy List (151+)</p>
 <div class="legacy-dropdown-grid-wrap">
@@ -183,7 +182,6 @@ type="button"
 </div>
 </div>
 </div>
-</transition>
 </div>
 
 <div class="meta-container">
