@@ -163,22 +163,7 @@
     flex-direction: column;
     gap: 1.4rem;
     text-align: center;
-}
-
-.players-detail-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    align-items: center;
-    justify-content: center;
-}
-
-.players-selected-name {
-    margin: 0;
-    font-size: 1.7rem;
-    line-height: 1.15;
-    text-align: center;
-    word-break: break-word;
+    position: relative;
 }
 
 .players-champion-tag {
@@ -186,13 +171,19 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 999px;
-    padding: 0.35rem 0.85rem;
+    border-radius: 0.5rem;
+    padding: 0.4rem 0.8rem;
     font-weight: 800;
     letter-spacing: 0.01em;
-    background: rgba(255, 0, 0, 0.92);
-    color: #1a0b0b;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    background: rgba(255, 0, 0, 1);
+    color: #000;
     box-shadow: 0 6px 14px rgba(255, 0, 0, 0.3);
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    z-index: 2;
 }
 
 .players-demonlist {
@@ -373,7 +364,7 @@ html.dark .players-level-pill.is-unbeaten {
 }
 
 html.dark .players-champion-tag {
-    color: #1b0d0d;
+    color: #000;
     box-shadow: 0 6px 14px rgba(255, 0, 0, 0.36);
 }
 
@@ -461,6 +452,11 @@ html.dark .players-board tr {
     .players-board-scroll,
     .players-detail-scroll{
         padding:1rem 0.85rem;
+    }
+
+    .players-champion-tag{
+        top:0.25rem;
+        right:0.25rem;
     }
 
     .players-scroll{
