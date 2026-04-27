@@ -29,7 +29,6 @@ export default {
                         <tr v-for="(ientry, i) in visibleLeaderboard" :class="['board-row', rankTierClass(i + 1)]">
                             <td class="rank">
                                 <span :class="['rank-badge', rankBadgeClass(i + 1)]">
-                                    <span class="badge-icon">{{ rankBadgeIcon(i + 1) }}</span>
                                     <span class="badge-rank">#{{ i + 1 }}</span>
                                 </span>
                             </td>
@@ -78,15 +77,6 @@ export default {
             if (rank <= 25) return 'badge-solid';
             if (rank <= 50) return 'badge-basic';
             return 'badge-minimal';
-        },
-        rankBadgeIcon(rank) {
-            if (rank === 1) return 'G';
-            if (rank === 2) return 'S';
-            if (rank === 3) return 'B';
-            if (rank <= 10) return 'V';
-            if (rank <= 25) return 'C';
-            if (rank <= 50) return 'R';
-            return '';
         },
         entryLevelCount(entry) {
             const rankSet = new Set();
