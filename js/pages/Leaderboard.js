@@ -10,7 +10,6 @@ export default {
     data: () => ({
         leaderboard: [],
         loading: true,
-        selected: 0,
         err: [],
     }),
     template: `
@@ -24,123 +23,130 @@ export default {
                         Leaderboard may be incorrect, as the following levels could not be loaded: {{ err.join(', ') }}
                     </p>
                 </div>
-                <div class="board-container">
-                    <p class="top-players-label type-label-lg">Top 100 players</p>
-                    <table class="board">
-                        <tr v-for="(ientry, i) in visibleLeaderboard">
-                            <td class="rank">
-                                <p class="type-label-lg">#{{ i + 1 }}</p>
-                            </td>
-                            <td class="total">
-                                <p class="type-label-lg">{{ localize(ientry.total) }}</p>
-                            </td>
-                            <td class="user" :class="{ 'active': selected == i }">
-                                <button @click="selected = i">
-                                    <span class="type-label-lg">{{ ientry.user }}</span>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="player-container">
-                    <div class="player">
-                        <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
-                        <p v-if="entry.user === 'Ant_Gam3R'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Migul el paso'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'BLuuTemp'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'GD Bean'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Liquidman6776'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'GamerAJG2012'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Sdrawkcab'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Pijeon'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === 'Panda'" class="champion-text">Champion</p>
-                        <p v-if="entry.user === '0cta'" class="champion-text">Champion</p>
-                        <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.verified">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
+                <section class="leaderboard-shell">
+                    <header class="leaderboard-header">
+                        <p class="top-players-label type-label-lg">Top 100 players</p>
+                        <p class="leaderboard-subtitle type-label-sm">Classifica generale con podio, distacco e tier.</p>
+                    </header>
 
-                        <h2 v-if="entry.created.length > 0">Levels Created ({{ entry.created.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.created">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="podium" v-if="podiumEntries.length > 0">
+                        <article
+                            v-for="entry in podiumEntries"
+                            :key="'podium-' + entry.rank + '-' + entry.user"
+                            class="podium-card"
+                            :class="'podium-rank-' + entry.rank"
+                        >
+                            <p class="podium-rank type-label-sm">#{{ entry.rank }}</p>
+                            <p class="podium-user type-label-lg">{{ entry.user }}</p>
+                            <p class="podium-total type-label-sm">{{ localize(entry.total) }} pts</p>
+                            <p v-if="entry.rank > 1" class="podium-gap type-label-sm">
+                                Gap: +{{ localize(scoreGap(entry.rank) || 0) }}
+                            </p>
+                        </article>
+                    </div>
 
-                        <h2 v-if="entry.completed.length > 0">Completed ({{ entry.completed.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.completed">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <h2 v-if="entry.progressed.length > 0">Progressed ({{ entry.progressed.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.progressed">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.percent }}% {{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
+                    <div class="board-wrapper">
+                        <table class="board">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Player</th>
+                                    <th>Points</th>
+                                    <th>Gap</th>
+                                    <th>Tier</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="entry in restEntries" :key="'row-' + entry.rank + '-' + entry.user">
+                                    <td class="rank">
+                                        <p class="type-label-lg">#{{ entry.rank }}</p>
+                                    </td>
+                                    <td class="user">
+                                        <p class="type-label-lg">{{ entry.user }}</p>
+                                    </td>
+                                    <td class="total">
+                                        <p class="type-label-lg">{{ localize(entry.total) }}</p>
+                                    </td>
+                                    <td class="gap">
+                                        <p class="type-label-lg">+{{ localize(scoreGap(entry.rank) || 0) }}</p>
+                                    </td>
+                                    <td class="tier">
+                                        <span class="tier-pill type-label-sm" :class="tierClass(entry.rank)">
+                                            {{ tierLabel(entry.rank) }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
-                </div>
+                </section>
             </div>
         </main>
     `,
     computed: {
         visibleLeaderboard() {
-            return this.leaderboard.slice(0, 100);
+            return this.leaderboard;
         },
-        entry() {
-            return this.visibleLeaderboard[this.selected] ?? {
-                user: '',
-                total: 0,
-                verified: [],
-                completed: [],
-                created: [],
-                progressed: [],
-            };
+        podiumEntries() {
+            const top = this.visibleLeaderboard.slice(0, 3);
+            if (top.length === 3) {
+                return [top[1], top[0], top[2]];
+            }
+            return top;
+        },
+        restEntries() {
+            return this.visibleLeaderboard.slice(3);
         },
     },
     async mounted() {
         const [leaderboard, err] = await fetchLeaderboard();
-        this.leaderboard = leaderboard;
+        const source = Array.isArray(leaderboard) ? leaderboard : [];
+        this.leaderboard = source.slice(0, 100).map((player, index) => ({
+            ...player,
+            rank: index + 1,
+        }));
         this.err = err;
-        if (this.selected >= this.visibleLeaderboard.length) {
-            this.selected = 0;
-        }
         this.loading = false;
     },
     methods: {
         localize,
+        scoreGap(rank) {
+            if (rank <= 1) {
+                return null;
+            }
+            const current = this.visibleLeaderboard[rank - 1];
+            const previous = this.visibleLeaderboard[rank - 2];
+            if (!current || !previous) {
+                return null;
+            }
+            const currentTotal = Number(current.total) || 0;
+            const previousTotal = Number(previous.total) || 0;
+            const gap = previousTotal - currentTotal;
+            return gap > 0 ? gap : 0;
+        },
+        tierLabel(rank) {
+            if (rank <= 10) {
+                return 'Elite';
+            }
+            if (rank <= 25) {
+                return 'Pro';
+            }
+            if (rank <= 50) {
+                return 'Advanced';
+            }
+            return 'Contender';
+        },
+        tierClass(rank) {
+            if (rank <= 10) {
+                return 'tier-elite';
+            }
+            if (rank <= 25) {
+                return 'tier-pro';
+            }
+            if (rank <= 50) {
+                return 'tier-advanced';
+            }
+            return 'tier-contender';
+        },
     },
 };
