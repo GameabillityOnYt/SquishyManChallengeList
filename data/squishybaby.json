@@ -1,4 +1,3 @@
-
 {
     "id": 116844935,
     "name": "Squishy Baby",
@@ -7,7 +6,7 @@
     "verifier": "16billion",
     "verification": "https://www.youtube.com/watch?v=2rM1Qde-pos",
     "percentToQualify": "100",
-    "password": "Open",
+    "Length": "7s",
     "records": [
         {
             "user": "eggnog1414",
@@ -117,6 +116,12 @@
             "link": "https://youtu.be/BvpXLcgs4gU",
             "percent": 100,
             "hz": "60"
+        },
+         {
+            "user": "spryox ",
+            "link": "https://www.youtube.com/watch?v=OrxUS_47GL0",
+            "percent": 100,
+            "hz": "180"
         }
     ]
 }
