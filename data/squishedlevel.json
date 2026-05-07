@@ -8,5 +8,18 @@
     "percentToQualify": "100",
     "decorated": "true",
     "Length": "7s",
-    "records": []
+    "records": [
+           {
+            "user": "Pijeon",
+            "link": "https://medal.tv/games/geometry-dash/clips/mCES0DhZ3gRtZxXUF?invite=cr-MSwxOHQsMzIzNTg1ODYw",
+            "percent": 100,
+            "hz": 144
+        },
+          {
+            "user": "MrBudiman",
+            "link": "https://youtu.be/MWZaEm6XODw",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
 }
