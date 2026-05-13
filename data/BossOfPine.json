@@ -37,6 +37,12 @@
             "link": "https://youtu.be/4vsUQycieSE?si=FsojZP-_zfZ2wwbn",
             "percent": 100,
             "hz": "CBF"
+        },
+        {
+            "user": "bitflux",
+            "link": "https://youtu.be/QtIbw0IiHQQ",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
