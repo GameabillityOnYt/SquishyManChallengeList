@@ -103,6 +103,12 @@
             "link": "https://youtu.be/HaZwBReelKA",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "bitflux",
+            "link": "https://youtu.be/NoYNUexfEhM",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
