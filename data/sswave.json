@@ -70,9 +70,15 @@
         },
         {
             "user": "MrBudiman",
-            "link": " https://youtu.be/9bTT7vOfymc",
+            "link": "https://youtu.be/9bTT7vOfymc",
             "percent": 100,
             "hz": 60
+        },
+         {
+            "user": "bitflux",
+            "link": "https://medal.tv/games/geometry-dash/clips/mHY1jX1nfHlXz-hNI?invite=cr-MSxCQnYsNDU5MTAyMDM2&v=24",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
