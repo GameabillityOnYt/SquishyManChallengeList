@@ -7,5 +7,12 @@
   "verification": "https://youtu.be/xWp7KJRboAU",
   "percentToQualify": "100",
   "length": "14s",
-  "records": []
+  "records": [
+      {
+            "user": "MrBudiman",
+            "link": "https://youtu.be/NDz6JYlxfBQ ",
+            "percent": 100,
+            "hz": 60
+        }
+  ]
 }
