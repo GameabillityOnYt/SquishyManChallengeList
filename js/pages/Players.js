@@ -6,13 +6,7 @@ import Spinner from '../components/Spinner.js';
 const CHAMPION_USERS = new Set(
     [
         'Ant_Gam3R',
-        'Migul el paso',
-        'BLuuTemp',
-        'GD Bean',
         'Liquidman6776',
-        'GamerAJG2012',
-        'Sdrawkcab',
-        'Pijeon',
         'Panda',
         '0cta',
     ].map((user) => user.toLowerCase()),
