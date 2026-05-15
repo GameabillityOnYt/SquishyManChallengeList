@@ -8,7 +8,6 @@ const CHAMPION_USERS = new Set(
         'Ant_Gam3R',
         'Liquidman6776',
         'Panda',
-        '0cta',
     ].map((user) => user.toLowerCase()),
 );
 
