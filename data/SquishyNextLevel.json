@@ -7,5 +7,13 @@
     "verification": "https://youtu.be/3fdn6dVVeJA",
     "percentToQualify": "100",
     "Length": "13s",
-    "records": []
+    "records": [
+
+         {
+            "user": "LiquidEssence8976",
+            "link": "https://youtu.be/T-zlyL41vcE?si=ithMOmLnqknKhWp6",
+            "percent": 100,
+            "hz": 360
+        }
+    ]
 }
