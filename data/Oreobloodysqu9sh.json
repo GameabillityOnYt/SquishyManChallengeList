@@ -57,7 +57,12 @@
             "link": "https://youtu.be/pC1TWGLjdM4",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "MrBudiman",
+            "link": "https://youtu.be/qmgsDd7SXSA",
+            "percent": 100,
+            "hz": 60
         }
-
     ]
 }
