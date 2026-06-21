@@ -92,6 +92,12 @@
             "link": "https://youtu.be/51sYPD3KHpc?si=EQpws-WfyOM5FMeK",
             "percent": 100,
             "hz": "CBF"
+        },
+        {
+            "user": "MrBudiman",
+            "link": "https://youtu.be/d1fKpTPSIZQ",
+            "percent": 100,
+            "hz": 60
         }
     ] 
 }
