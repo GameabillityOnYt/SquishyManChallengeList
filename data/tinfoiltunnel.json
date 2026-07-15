@@ -5,7 +5,7 @@
     "creators": ["Sdrawkcab"],
     "verifier": "-",
     "verification": "https://youtu.be/ZJVy_759ams",
-    "percentToQualify": "100",
+    "percentToQualify": "10",
     "Length": "1:03s",
     "records": [
           {
@@ -13,6 +13,12 @@
             "link": "https://medal.tv/games/geometry-dash/clips/mAxJO3LMPex486XyY?invite=cr-MSw3MnQsMzIzNTg1ODYw",
             "percent": 10,
             "hz": 144
+        },
+        {
+            "user": "yeetus327",
+            "link": "https://www.youtube.com/watch?v=VR3R0KfAvuI",
+            "percent": 22,
+            "hz": 240
         }
     ]
 }
