@@ -8,8 +8,7 @@
     "percentToQualify": "100",
     "Length": "13s",
     "records": [
-        
-{
+        {
             "user": "Marbelous Gaming",
             "link": "https://youtu.be/uHSI9hY_7v8",
             "percent": 100,
@@ -20,6 +19,12 @@
             "link": "https://medal.tv/games/geometry-dash/clips/mLijVqi1ouXnYj7U4?invite=cr-MSxIblQsNDExNTgzNjMy&v=22",
             "percent": 100,
             "hz": 360
+        },
+        {
+            "user": "Ant_Gam3R",
+            "link": "https://medal.tv/games/geometry-dash/clips/mY3HlbMFCG8S8xDUm?invite=cr-MSxCTWQsMjU0MDc1NjI3&v=20",
+            "percent": 100,
+            "hz": 240
         }
     ]
 }
