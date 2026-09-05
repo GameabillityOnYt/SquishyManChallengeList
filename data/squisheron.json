@@ -50,11 +50,17 @@
             "percent": 100,
             "hz": 240
         },
-          {
+        {
             "user": "MrBudiman",
             "link": "https://youtu.be/13ZLVD1CzXA",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "Fougy",
+            "link": "https://youtu.be/QHNF-LfsUqw",
+            "percent": 100,
+            "hz": 280
         }
     ]
 }
