@@ -116,6 +116,12 @@
             "link": "https://youtu.be/QjM8-y6hpH8",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "capybaracat23",
+            "link": "https://www.youtube.com/watch?v=fAur4j9JmIo",
+            "percent": 100,
+            "hz": "CBF"
         }
     ]
 }
