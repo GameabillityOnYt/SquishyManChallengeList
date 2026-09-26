@@ -273,6 +273,9 @@
     line-height:1.3;
     white-space:nowrap;
 }
+.page-leaderboard:has(.player-container.is-open) .board-preview {
+    display:none;
+}
 .page-leaderboard .board-preview-enter-active {
     transition:opacity 0.22s ease, transform 0.22s ease;
 }
