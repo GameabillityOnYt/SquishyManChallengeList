@@ -12,6 +12,7 @@ export default {
         loading: true,
         selected: null,
         closing: false,
+        openFolder: 'verified',
         err: [],
     }),
     template: `
@@ -56,69 +57,67 @@ export default {
                             <p class="player-total-summary">{{ localize(entry.total) }} total</p>
                         </div>
 
-                        <section v-if="entry.verified.length > 0" class="player-section">
-                            <h2>Verified ({{ entry.verified.length }})</h2>
-                            <table class="table">
-                                <tr v-for="score in entry.verified">
-                                    <td class="rank">
-                                        <p>#{{ score.rank }}</p>
-                                    </td>
-                                    <td class="level">
-                                        <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                    </td>
-                                    <td class="score">
-                                        <p>+{{ localize(score.score) }}</p>
-                                    </td>
-                                </tr>
-                            </table>
+                        <section class="player-folder" :class="{ 'is-open': openFolder === 'verified' }">
+                            <button class="player-folder-toggle" type="button" :aria-expanded="openFolder === 'verified'" @click="toggleFolder('verified')">
+                                <span>Verified levels</span>
+                                <span class="player-folder-count">{{ entry.verified.length }}</span>
+                            </button>
+                            <div v-show="openFolder === 'verified'" class="player-folder-content">
+                                <table v-if="entry.verified.length > 0" class="table">
+                                    <tr v-for="score in entry.verified">
+                                        <td class="rank"><p>#{{ score.rank }}</p></td>
+                                        <td class="level"><a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a></td>
+                                        <td class="score"><p>+{{ localize(score.score) }}</p></td>
+                                    </tr>
+                                </table>
+                                <p v-else class="player-folder-empty">No verified levels.</p>
+                            </div>
                         </section>
 
-                        <section v-if="entry.created.length > 0" class="player-section">
-                            <h2>Levels Created ({{ entry.created.length }})</h2>
-                            <table class="table">
-                                <tr v-for="score in entry.created">
-                                    <td class="rank">
-                                        <p>#{{ score.rank }}</p>
-                                    </td>
-                                    <td class="level">
-                                        <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                    </td>
-                                </tr>
-                            </table>
+                        <section class="player-folder" :class="{ 'is-open': openFolder === 'completed' }">
+                            <button class="player-folder-toggle" type="button" :aria-expanded="openFolder === 'completed'" @click="toggleFolder('completed')">
+                                <span>Completed levels</span>
+                                <span class="player-folder-count">{{ entry.completed.length }}</span>
+                            </button>
+                            <div v-show="openFolder === 'completed'" class="player-folder-content">
+                                <table v-if="entry.completed.length > 0" class="table">
+                                    <tr v-for="score in entry.completed">
+                                        <td class="rank"><p>#{{ score.rank }}</p></td>
+                                        <td class="level"><a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a></td>
+                                        <td class="score"><p>+{{ localize(score.score) }}</p></td>
+                                    </tr>
+                                </table>
+                                <p v-else class="player-folder-empty">No completed levels.</p>
+                            </div>
                         </section>
 
-                        <section v-if="entry.completed.length > 0" class="player-section">
-                            <h2>Completed ({{ entry.completed.length }})</h2>
-                            <table class="table">
-                                <tr v-for="score in entry.completed">
-                                    <td class="rank">
-                                        <p>#{{ score.rank }}</p>
-                                    </td>
-                                    <td class="level">
-                                        <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                    </td>
-                                    <td class="score">
-                                        <p>+{{ localize(score.score) }}</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </section>
-
-                        <section v-if="entry.progressed.length > 0" class="player-section">
-                            <h2>Progressed ({{ entry.progressed.length }})</h2>
-                            <table class="table">
-                                <tr v-for="score in entry.progressed">
-                                    <td class="rank">
-                                        <p>#{{ score.rank }}</p>
-                                    </td>
-                                    <td class="level">
-                                        <a class="type-label-lg" target="_blank" :href="score.link">{{ score.percent }}% {{ score.level }}</a>
-                                    </td>
-                                    <td class="score">
-                                        <p>+{{ localize(score.score) }}</p>
-                                    </td>
-                                </tr>
-                            </table>
+                        <section class="player-folder" :class="{ 'is-open': openFolder === 'other' }">
+                            <button class="player-folder-toggle" type="button" :aria-expanded="openFolder === 'other'" @click="toggleFolder('other')">
+                                <span>Other levels</span>
+                                <span class="player-folder-count">{{ entry.created.length + entry.progressed.length }}</span>
+                            </button>
+                            <div v-show="openFolder === 'other'" class="player-folder-content">
+                                <div v-if="entry.created.length > 0" class="player-subsection">
+                                    <h2>Levels created ({{ entry.created.length }})</h2>
+                                    <table class="table">
+                                        <tr v-for="score in entry.created">
+                                            <td class="rank"><p>#{{ score.rank }}</p></td>
+                                            <td class="level"><a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div v-if="entry.progressed.length > 0" class="player-subsection">
+                                    <h2>Progressed ({{ entry.progressed.length }})</h2>
+                                    <table class="table">
+                                        <tr v-for="score in entry.progressed">
+                                            <td class="rank"><p>#{{ score.rank }}</p></td>
+                                            <td class="level"><a class="type-label-lg" target="_blank" :href="score.link">{{ score.percent }}% {{ score.level }}</a></td>
+                                            <td class="score"><p>+{{ localize(score.score) }}</p></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <p v-if="entry.created.length === 0 && entry.progressed.length === 0" class="player-folder-empty">No other levels.</p>
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -162,14 +161,18 @@ export default {
         localize,
         selectPlayer(index) {
             this.closing = false;
+            this.openFolder = 'verified';
             this.selected = index;
+        },
+        toggleFolder(folder) {
+            this.openFolder = this.openFolder === folder ? null : folder;
         },
         closePlayer() {
             this.closing = true;
             setTimeout(() => {
                 this.selected = null;
                 this.closing = false;
-            }, 250);
+            }, 360);
         },
     },
 };
