@@ -273,14 +273,13 @@
     line-height:1.3;
     white-space:nowrap;
 }
-.page-leaderboard .board-preview-enter-active,
-.page-leaderboard .board-preview-leave-active {
+.page-leaderboard .board-preview-enter-active {
     transition:opacity 0.22s ease, transform 0.22s ease;
 }
 .page-leaderboard .board-preview-leave-active {
     position:absolute;
     right:0;
-    transition-duration:0.08s;
+    transition:none;
 }
 .page-leaderboard .board-preview-enter-from,
 .page-leaderboard .board-preview-leave-to {
@@ -465,7 +464,7 @@
 }
 @keyframes rank-title-glow {
     0%, 100% { text-shadow:0 0 0 transparent; }
-    50% { text-shadow:0 0 0.4rem color-mix(in srgb, var(--rank-color) 38%, transparent); }
+    50% { text-shadow:0 0 0.48rem color-mix(in srgb, var(--rank-color) 45%, transparent); }
 }
 @media (prefers-reduced-motion: reduce) {
     .page-leaderboard .player-rank-emblem,
