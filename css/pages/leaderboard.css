@@ -249,16 +249,14 @@
 }
 .page-leaderboard .board-name {
     min-width:0;
-    max-width:48%;
-    flex:0 1 auto;
+    flex:0 0 auto;
     font-weight:700;
-    overflow:hidden;
-    text-overflow:ellipsis;
     white-space:nowrap;
 }
 .page-leaderboard .board-identity {
     display:flex;
     align-items:baseline;
+    position:relative;
     gap:0.75rem;
     min-width:0;
 }
@@ -279,6 +277,10 @@
 .page-leaderboard .board-preview-leave-active {
     transition:opacity 0.22s ease, transform 0.22s ease;
 }
+.page-leaderboard .board-preview-leave-active {
+    position:absolute;
+    right:0;
+}
 .page-leaderboard .board-preview-enter-from,
 .page-leaderboard .board-preview-leave-to {
     opacity:0;
@@ -291,6 +293,7 @@
     border-right:1px solid rgba(255,255,255,0.12);
     color:var(--rank-color);
     font-weight:800;
+    animation:rank-title-glow 3.2s ease-in-out infinite;
 }
 .page-leaderboard .board-preview-stat {
     flex:0 0 auto;
@@ -459,9 +462,14 @@
     0%, 100% { filter:drop-shadow(0 0 0 transparent); }
     50% { filter:drop-shadow(0 0 0.25rem var(--rank-color)); }
 }
+@keyframes rank-title-glow {
+    0%, 100% { text-shadow:0 0 0 transparent; }
+    50% { text-shadow:0 0 0.35rem color-mix(in srgb, var(--rank-color) 32%, transparent); }
+}
 @media (prefers-reduced-motion: reduce) {
     .page-leaderboard .player-rank-emblem,
-    .page-leaderboard .board-rank {
+    .page-leaderboard .board-rank,
+    .page-leaderboard .board-preview-grade {
         animation:none;
     }
     .page-leaderboard .board-preview-enter-active,
