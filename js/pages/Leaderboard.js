@@ -172,16 +172,16 @@ export default {
         localize,
         rankTitle(rank) {
             const titles = {
-                1: 'Celestial',
-                2: 'Starguard',
-                3: 'Boneguard',
+                1: 'Unbeatable',
+                2: 'Champion',
+                3: 'Elite',
                 4: 'Crystal',
-                5: 'Katana',
+                5: 'Unfallen',
                 6: 'Verdant',
-                7: 'Grove',
-                8: 'Moss',
-                9: 'Thicket',
-                10: 'Rooted',
+                7: 'Verdant',
+                8: 'Verdant',
+                9: 'Verdant',
+                10: 'Verdant',
             };
 
             return titles[rank] ?? 'Rank';
