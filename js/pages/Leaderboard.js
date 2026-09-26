@@ -169,7 +169,7 @@ export default {
             setTimeout(() => {
                 this.selected = null;
                 this.closing = false;
-            }, 220);
+            }, 250);
         },
     },
 };
