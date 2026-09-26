@@ -176,6 +176,10 @@
     width:100%;
 }
 .page-leaderboard .board .board-row {
+    --rank-color:#ffb31a;
+    --rank-border:rgba(255,179,26,0.28);
+    --rank-surface:rgba(247,181,43,0.18);
+    --rank-shadow:rgba(247,181,43,0.14);
     display:grid;
     grid-template-columns:auto minmax(0,1fr) auto;
     align-items:center;
@@ -197,11 +201,21 @@
     transform:translateY(-1px);
 }
 .page-leaderboard .board .board-row.active {
-    background:rgba(247, 181, 43, 0.18);
-    color:#f7d98c;
-    border-color:rgba(247, 181, 43, 0.8);
-    box-shadow:0 10px 22px rgba(247, 181, 43, 0.14);
+    background:var(--rank-surface);
+    color:var(--rank-color);
+    border-color:var(--rank-color);
+    box-shadow:0 10px 22px var(--rank-shadow);
 }
+.page-leaderboard .board .board-row.rank-1 { --rank-color:#ffd35c; --rank-border:rgba(255,211,92,0.55); --rank-surface:rgba(255,179,26,0.2); --rank-shadow:rgba(255,179,26,0.2); }
+.page-leaderboard .board .board-row.rank-2 { --rank-color:#dce5ed; --rank-border:rgba(220,229,237,0.45); --rank-surface:rgba(220,229,237,0.14); --rank-shadow:rgba(220,229,237,0.12); }
+.page-leaderboard .board .board-row.rank-3 { --rank-color:#e39a5e; --rank-border:rgba(227,154,94,0.5); --rank-surface:rgba(227,154,94,0.16); --rank-shadow:rgba(227,154,94,0.12); }
+.page-leaderboard .board .board-row.rank-4 { --rank-color:#b590ff; --rank-border:rgba(181,144,255,0.5); --rank-surface:rgba(181,144,255,0.16); --rank-shadow:rgba(181,144,255,0.12); }
+.page-leaderboard .board .board-row.rank-5 { --rank-color:#f16e80; --rank-border:rgba(241,110,128,0.5); --rank-surface:rgba(241,110,128,0.16); --rank-shadow:rgba(241,110,128,0.12); }
+.page-leaderboard .board .board-row.rank-6,
+.page-leaderboard .board .board-row.rank-7,
+.page-leaderboard .board .board-row.rank-8,
+.page-leaderboard .board .board-row.rank-9,
+.page-leaderboard .board .board-row.rank-10 { --rank-color:#64ce8b; --rank-border:rgba(100,206,139,0.45); --rank-surface:rgba(100,206,139,0.14); --rank-shadow:rgba(100,206,139,0.11); }
 
 .page-leaderboard .board-rank {
     display:inline-grid;
@@ -209,33 +223,21 @@
     min-width:2.5rem;
     min-height:2.1rem;
     padding:0 0.35rem;
-    border:1px solid rgba(255,179,26,0.28);
+    border:1px solid var(--rank-border);
     border-radius:0.5rem;
-    background:rgba(255,179,26,0.08);
-    color:#ffb31a;
+    background:color-mix(in srgb, var(--rank-color) 12%, transparent);
+    color:var(--rank-color);
     font-weight:800;
     font-size:0.82rem;
     text-shadow:0 0 10px rgba(255,179,26,0.38);
 }
 .page-leaderboard .board-rank.rank-1 {
-    border-color:#ffd35c;
     border-radius:0.7rem 0.7rem 0.45rem 0.45rem;
     background:#3a2a08;
     box-shadow:inset 0 0 0 2px rgba(255,211,92,0.18), 0 3px 10px rgba(255,179,26,0.2);
-    color:#ffd35c;
-}
-.page-leaderboard .board-rank.rank-2 {
-    border-color:#dce5ed;
-    background:#25313d;
-    color:#dce5ed;
-}
-.page-leaderboard .board-rank.rank-3 {
-    border-color:#e39a5e;
-    background:#362416;
-    color:#e39a5e;
 }
 .page-leaderboard .board .board-row.active .board-rank {
-    color:#ffd773;
+    color:var(--rank-color);
     text-shadow:none;
 }
 .page-leaderboard .board-name {
@@ -244,7 +246,7 @@
     overflow-wrap:anywhere;
 }
 .page-leaderboard .board-row.active .board-name {
-    color:#fff5db;
+    color:var(--rank-color);
 }
 .page-leaderboard .board-total {
     justify-self:end;
@@ -298,9 +300,9 @@
 }
 .page-leaderboard .player-rank-emblem.rank-1 {
     --emblem-color:#ffd35c;
-    border-radius:50% 50% 0.8rem 0.8rem;
+    border-radius:0.55rem;
     background:#3a2a08;
-    box-shadow:inset 0 0 0 4px rgba(255,211,92,0.18), 0 0 0 3px rgba(255,179,26,0.18), 0 7px 15px rgba(0,0,0,0.3);
+    box-shadow:inset 0 0 0 2px rgba(255,211,92,0.18), 0 6px 14px rgba(0,0,0,0.28);
 }
 .page-leaderboard .player-rank-emblem.rank-2 {
     --emblem-color:#dce5ed;
@@ -310,9 +312,18 @@
     --emblem-color:#e39a5e;
     background:#362416;
 }
+.page-leaderboard .player-rank-emblem.rank-4 { --emblem-color:#b590ff; background:#292044; }
+.page-leaderboard .player-rank-emblem.rank-5 { --emblem-color:#f16e80; background:#421f29; }
+.page-leaderboard .player-rank-emblem.rank-6,
+.page-leaderboard .player-rank-emblem.rank-7,
+.page-leaderboard .player-rank-emblem.rank-8,
+.page-leaderboard .player-rank-emblem.rank-9,
+.page-leaderboard .player-rank-emblem.rank-10 { --emblem-color:#64ce8b; background:#183629; }
 .page-leaderboard .player-header h1 {
     margin:0;
     min-width:0;
+    position:static;
+    left:auto;
     font-size:clamp(1.8rem, 2vw, 2.5rem);
     line-height:1.1;
 }
@@ -331,10 +342,10 @@
     box-shadow:inset 3px 0 0 var(--folder-accent);
     overflow:hidden;
 }
-.page-leaderboard .player-folder:nth-of-type(3) {
+.page-leaderboard .player-folder.folder-completed {
     --folder-accent:#ffb31a;
 }
-.page-leaderboard .player-folder:nth-of-type(4) {
+.page-leaderboard .player-folder.folder-created {
     --folder-accent:#8caef4;
 }
 .page-leaderboard .player-folder.is-open {
@@ -423,47 +434,6 @@
     border:2px solid transparent;
     border-radius:999px;
     background-clip:padding-box;
-}
-.page-leaderboard .player-overview {
-    display:flex;
-    flex-direction:column;
-    gap:0.8rem;
-    padding:1rem;
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:0.65rem;
-    background:#111923;
-}
-.page-leaderboard .player-overview-label {
-    margin:0;
-    color:#b7c3ce;
-    font-size:0.78rem;
-    font-weight:800;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-}
-.page-leaderboard .player-overview-stats {
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:0.65rem;
-}
-.page-leaderboard .player-overview-stats span {
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:0.2rem;
-    min-width:0;
-    color:#b7c3ce;
-    font-size:0.8rem;
-}
-.page-leaderboard .player-overview-stats small {
-    color:#b7c3ce;
-    font-size:0.73rem;
-    font-weight:700;
-    line-height:1.2;
-}
-.page-leaderboard .player-overview-stats strong {
-    color:var(--color-on-background);
-    font-size:1.3rem;
 }
 .page-leaderboard .player-folder-empty {
     margin:0;
