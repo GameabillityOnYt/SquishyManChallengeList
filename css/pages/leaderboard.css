@@ -356,11 +356,54 @@
 .page-leaderboard .player-rank-wrap.rank-3 { --emblem-color:#e39a5e; }
 .page-leaderboard .player-rank-wrap.rank-4 { --emblem-color:#b590ff; }
 .page-leaderboard .player-rank-wrap.rank-5 { --emblem-color:#f16e80; }
+.page-leaderboard .player-rank-wrap.rank-6,
+.page-leaderboard .player-rank-wrap.rank-7,
+.page-leaderboard .player-rank-wrap.rank-8,
+.page-leaderboard .player-rank-wrap.rank-9,
+.page-leaderboard .player-rank-wrap.rank-10 { --emblem-color:#64ce8b; }
 .page-leaderboard .player-rank-emblem.rank-6,
 .page-leaderboard .player-rank-emblem.rank-7,
 .page-leaderboard .player-rank-emblem.rank-8,
 .page-leaderboard .player-rank-emblem.rank-9,
 .page-leaderboard .player-rank-emblem.rank-10 { --emblem-color:#64ce8b; background:#183629; }
+.page-leaderboard .player-rank-emblem {
+    animation:rank-emblem-float 3.2s ease-in-out infinite;
+}
+.page-leaderboard .player-rank-emblem.rank-2 { animation-delay:-0.35s; }
+.page-leaderboard .player-rank-emblem.rank-3 { animation-delay:-0.7s; }
+.page-leaderboard .player-rank-emblem.rank-4 { animation-delay:-1.05s; }
+.page-leaderboard .player-rank-emblem.rank-5 { animation-delay:-1.4s; }
+.page-leaderboard .player-rank-emblem.rank-6 { animation-delay:-1.75s; }
+.page-leaderboard .player-rank-emblem.rank-7 { animation-delay:-2.1s; }
+.page-leaderboard .player-rank-emblem.rank-8 { animation-delay:-2.45s; }
+.page-leaderboard .player-rank-emblem.rank-9 { animation-delay:-2.8s; }
+.page-leaderboard .player-rank-emblem.rank-10 { animation-delay:-3.15s; }
+.page-leaderboard .board-rank {
+    animation:rank-badge-glow 3.2s ease-in-out infinite;
+}
+.page-leaderboard .board-rank.rank-2 { animation-delay:-0.35s; }
+.page-leaderboard .board-rank.rank-3 { animation-delay:-0.7s; }
+.page-leaderboard .board-rank.rank-4 { animation-delay:-1.05s; }
+.page-leaderboard .board-rank.rank-5 { animation-delay:-1.4s; }
+.page-leaderboard .board-rank.rank-6 { animation-delay:-1.75s; }
+.page-leaderboard .board-rank.rank-7 { animation-delay:-2.1s; }
+.page-leaderboard .board-rank.rank-8 { animation-delay:-2.45s; }
+.page-leaderboard .board-rank.rank-9 { animation-delay:-2.8s; }
+.page-leaderboard .board-rank.rank-10 { animation-delay:-3.15s; }
+@keyframes rank-emblem-float {
+    0%, 100% { transform:translateY(0); filter:drop-shadow(0 0 0 transparent); }
+    50% { transform:translateY(-3px); filter:drop-shadow(0 0 0.4rem var(--emblem-color)); }
+}
+@keyframes rank-badge-glow {
+    0%, 100% { filter:drop-shadow(0 0 0 transparent); }
+    50% { filter:drop-shadow(0 0 0.25rem var(--rank-color)); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .page-leaderboard .player-rank-emblem,
+    .page-leaderboard .board-rank {
+        animation:none;
+    }
+}
 .page-leaderboard .player-header h1 {
     margin:0;
     min-width:0;
