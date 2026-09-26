@@ -53,9 +53,11 @@ export default {
                     <div class="player">
                         <div class="player-header">
                             <div class="player-name-row">
-                                <span class="player-rank-emblem" :class="'rank-' + (selected + 1)" :aria-label="'Rank ' + (selected + 1) + ' player'">
-                                    <small>{{ rankTitle(selected + 1) }}</small>
-                                    <strong>#{{ selected + 1 }}</strong>
+                                <span class="player-rank-wrap" :class="'rank-' + (selected + 1)">
+                                    <span class="player-rank-title">{{ rankTitle(selected + 1) }}</span>
+                                    <span class="player-rank-emblem" :class="'rank-' + (selected + 1)" :aria-label="'Rank ' + (selected + 1) + ' player'">
+                                        <strong>#{{ selected + 1 }}</strong>
+                                    </span>
                                 </span>
                                 <h1>{{ entry.user }}</h1>
                             </div>
