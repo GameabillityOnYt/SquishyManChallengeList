@@ -36,7 +36,7 @@ export default {
                             v-for="(ientry, i) in visibleLeaderboard"
                             :key="ientry.user"
                             class="board-row"
-                            :class="[getRowClass(i), { active: selected === i }]"
+                            :class="{ active: selected === i }"
                             type="button"
                             @click="selectPlayer(i)"
                         >
@@ -160,13 +160,6 @@ export default {
     },
     methods: {
         localize,
-        getRowClass(index) {
-            if (index === 0) return 'board-row--gold';
-            if (index === 1) return 'board-row--silver';
-            if (index === 2) return 'board-row--bronze';
-            if (index < 5) return 'board-row--elite';
-            return 'board-row--regular';
-        },
         selectPlayer(index) {
             this.closing = false;
             this.selected = index;
