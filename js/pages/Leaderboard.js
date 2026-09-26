@@ -46,12 +46,14 @@ export default {
                             </span>
                             <span class="board-identity">
                                 <span class="board-name type-label-lg">{{ ientry.user }}</span>
-                                <span v-if="selected === null" class="board-preview">
-                                    <span class="board-preview-grade">{{ rankTitle(i + 1) }}</span>
-                                    <span class="board-preview-stat"><strong>{{ ientry.completed.length }}</strong> beaten</span>
-                                    <span class="board-preview-stat"><strong>{{ ientry.created.length }}</strong> created</span>
-                                    <span class="board-preview-stat"><strong>{{ ientry.verified.length }}</strong> verified</span>
-                                </span>
+                                <transition name="board-preview">
+                                    <span v-if="selected === null" class="board-preview">
+                                        <span class="board-preview-grade">{{ rankTitle(i + 1) }}</span>
+                                        <span class="board-preview-stat"><strong>{{ ientry.completed.length }}</strong> beaten</span>
+                                        <span class="board-preview-stat"><strong>{{ ientry.created.length }}</strong> created</span>
+                                        <span class="board-preview-stat"><strong>{{ ientry.verified.length }}</strong> verified</span>
+                                    </span>
+                                </transition>
                             </span>
                             <span class="board-total">{{ localize(ientry.total) }}</span>
                         </button>
