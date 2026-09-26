@@ -11,6 +11,7 @@ export default {
         leaderboard: [],
         loading: true,
         selected: null,
+        closing: false,
         err: [],
     }),
     template: `
@@ -35,7 +36,7 @@ export default {
                             v-for="(ientry, i) in visibleLeaderboard"
                             :key="ientry.user"
                             class="board-row"
-                            :class="{ active: selected === i }"
+                            :class="[getRowClass(i), { active: selected === i }]"
                             type="button"
                             @click="selectPlayer(i)"
                         >
@@ -46,7 +47,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="player-container" :class="{ 'is-open': selected !== null }" v-if="selected !== null">
+                <div class="player-container" :class="{ 'is-open': selected !== null, 'is-closing': closing }" v-if="selected !== null || closing">
                     <button class="close-player" type="button" aria-label="Close player details" @click="closePlayer">×</button>
                     <div class="player">
                         <div class="player-header">
@@ -159,11 +160,23 @@ export default {
     },
     methods: {
         localize,
+        getRowClass(index) {
+            if (index === 0) return 'board-row--gold';
+            if (index === 1) return 'board-row--silver';
+            if (index === 2) return 'board-row--bronze';
+            if (index < 5) return 'board-row--elite';
+            return 'board-row--regular';
+        },
         selectPlayer(index) {
+            this.closing = false;
             this.selected = index;
         },
         closePlayer() {
-            this.selected = null;
+            this.closing = true;
+            setTimeout(() => {
+                this.selected = null;
+                this.closing = false;
+            }, 220);
         },
     },
 };
