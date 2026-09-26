@@ -74,15 +74,15 @@
     opacity:1;
     max-width:100%;
     pointer-events:auto;
+    animation: leaderboardSlideIn 0.25s ease;
 }
 
 .page-leaderboard .player-container.is-closing {
     opacity:0;
+    max-width:100%;
     pointer-events:none;
-}
-
-.page-leaderboard .player-container.is-closing .player {
-    animation: leaderboardSlideOut 0.22s ease forwards;
+    transform:translateX(24px);
+    animation: leaderboardSlideOut 0.25s ease forwards;
 }
 
 .page-leaderboard .close-player {
@@ -110,12 +110,14 @@
 .page-leaderboard .player-container .player {
     height:100%;
     overflow-y:auto;
+    overflow-x:hidden;
     padding:1.5rem 1.5rem 1.5rem 1.75rem;
     opacity:1;
     transform:translateX(0);
     scrollbar-width:thin;
     scrollbar-color:rgba(255,255,255,0.2) transparent;
     scrollbar-gutter:stable;
+    -ms-overflow-style:scrollbar;
 }
 
 .page-leaderboard .player-container .player::-webkit-scrollbar {
@@ -210,38 +212,6 @@
     color:#f7d98c;
     border-color:rgba(247, 181, 43, 0.8);
     box-shadow:0 10px 22px rgba(247, 181, 43, 0.14);
-}
-
-.page-leaderboard .board-row--gold {
-    background:rgba(247, 181, 43, 0.18);
-    border-color:rgba(247, 181, 43, 0.9);
-    box-shadow:0 0 0 1px rgba(247, 181, 43, 0.2) inset;
-}
-
-.page-leaderboard .board-row--silver {
-    background:rgba(180, 185, 198, 0.12);
-    border-color:rgba(180, 185, 198, 0.65);
-}
-
-.page-leaderboard .board-row--bronze {
-    background:rgba(196, 121, 63, 0.12);
-    border-color:rgba(196, 121, 63, 0.6);
-}
-
-.page-leaderboard .board-row--elite {
-    background:rgba(255,255,255,0.032);
-    border-color:rgba(255,255,255,0.12);
-}
-
-.page-leaderboard .board-row--regular {
-    background:rgba(255,255,255,0.02);
-    border-color:rgba(255,255,255,0.08);
-}
-
-.page-leaderboard .board-row--gold .board-rank,
-.page-leaderboard .board-row--silver .board-rank,
-.page-leaderboard .board-row--bronze .board-rank {
-    font-size:0.88rem;
 }
 
 .page-leaderboard .board-rank {
