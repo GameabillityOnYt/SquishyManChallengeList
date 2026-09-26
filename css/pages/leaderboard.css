@@ -238,40 +238,6 @@
     width:2.5rem;
     height:2.1rem;
 }
-.page-leaderboard .board-rank-sparks {
-    position:absolute;
-    inset:-0.45rem;
-    pointer-events:none;
-}
-.page-leaderboard .board-rank-spark {
-    position:absolute;
-    width:0.24rem;
-    height:0.24rem;
-    background:var(--rank-color);
-    box-shadow:0 0 0.18rem var(--rank-color);
-    clip-path:polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
-    opacity:0;
-    animation:rank-spark 3.2s ease-in-out infinite;
-}
-.page-leaderboard .board-rank-spark.spark-1 {
-    top:0;
-    right:0.05rem;
-    animation-delay:-0.3s;
-}
-.page-leaderboard .board-rank-spark.spark-2 {
-    bottom:0.05rem;
-    left:0;
-    width:0.18rem;
-    height:0.18rem;
-    animation-delay:-1.2s;
-}
-.page-leaderboard .board-rank-spark.spark-3 {
-    top:40%;
-    right:-0.1rem;
-    width:0.3rem;
-    height:0.3rem;
-    animation-delay:-2.1s;
-}
 .page-leaderboard .board-rank.rank-1 {
     border-radius:0.7rem 0.7rem 0.45rem 0.45rem;
     background:#3a2a08;
@@ -422,32 +388,26 @@
 .page-leaderboard .board-rank {
     animation:rank-badge-glow 3.2s ease-in-out infinite;
 }
-.page-leaderboard .board-rank.rank-2 { animation-delay:-0.35s; }
-.page-leaderboard .board-rank.rank-3 { animation-delay:-0.7s; }
-.page-leaderboard .board-rank.rank-4 { animation-delay:-1.05s; }
-.page-leaderboard .board-rank.rank-5 { animation-delay:-1.4s; }
-.page-leaderboard .board-rank.rank-6 { animation-delay:-1.75s; }
-.page-leaderboard .board-rank.rank-7 { animation-delay:-2.1s; }
-.page-leaderboard .board-rank.rank-8 { animation-delay:-2.45s; }
-.page-leaderboard .board-rank.rank-9 { animation-delay:-2.8s; }
-.page-leaderboard .board-rank.rank-10 { animation-delay:-3.15s; }
+.page-leaderboard .board-rank.rank-2 { animation-delay:-0.32s; }
+.page-leaderboard .board-rank.rank-3 { animation-delay:-0.64s; }
+.page-leaderboard .board-rank.rank-4 { animation-delay:-0.96s; }
+.page-leaderboard .board-rank.rank-5 { animation-delay:-1.28s; }
+.page-leaderboard .board-rank.rank-6 { animation-delay:-1.6s; }
+.page-leaderboard .board-rank.rank-7 { animation-delay:-1.92s; }
+.page-leaderboard .board-rank.rank-8 { animation-delay:-2.24s; }
+.page-leaderboard .board-rank.rank-9 { animation-delay:-2.56s; }
+.page-leaderboard .board-rank.rank-10 { animation-delay:-2.88s; }
 @keyframes rank-emblem-float {
     0%, 100% { transform:translateY(0); filter:drop-shadow(0 0 0 transparent); }
     50% { transform:translateY(-3px); filter:drop-shadow(0 0 0.2rem var(--emblem-color)); }
 }
 @keyframes rank-badge-glow {
     0%, 100% { filter:drop-shadow(0 0 0 transparent); }
-    50% { filter:drop-shadow(0 0 0.12rem var(--rank-color)); }
-}
-@keyframes rank-spark {
-    0%, 18%, 100% { opacity:0; transform:scale(0.45); }
-    7% { opacity:0.95; transform:scale(1); }
-    12% { opacity:0; transform:scale(0.7); }
+    50% { filter:drop-shadow(0 0 0.25rem var(--rank-color)); }
 }
 @media (prefers-reduced-motion: reduce) {
     .page-leaderboard .player-rank-emblem,
-    .page-leaderboard .board-rank,
-    .page-leaderboard .board-rank-spark {
+    .page-leaderboard .board-rank {
         animation:none;
     }
 }
