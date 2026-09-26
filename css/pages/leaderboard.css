@@ -63,25 +63,21 @@
     position:relative;
     z-index:1;
     overflow:hidden;
-    max-height:calc(100vh - 6rem);
-    opacity:0;
+    height:calc(100vh - 6rem);
     max-width:0;
     pointer-events:none;
-    transition:opacity 0.22s ease, max-width 0.28s ease, border-color 0.22s ease;
+    transition:max-width 0.25s ease, border-color 0.22s ease;
 }
 
 .page-leaderboard .player-container.is-open {
-    opacity:1;
     max-width:100%;
     pointer-events:auto;
     animation: leaderboardSlideIn 0.25s ease;
 }
 
 .page-leaderboard .player-container.is-closing {
-    opacity:0;
     max-width:100%;
     pointer-events:none;
-    transform:translateX(24px);
     animation: leaderboardSlideOut 0.25s ease forwards;
 }
 
@@ -109,7 +105,8 @@
 
 .page-leaderboard .player-container .player {
     height:100%;
-    overflow-y:auto;
+    min-height:0;
+    overflow-y:scroll;
     overflow-x:hidden;
     padding:1.5rem 1.5rem 1.5rem 1.75rem;
     opacity:1;
@@ -133,29 +130,21 @@
     border-radius:999px;
 }
 
-.page-leaderboard .player-container.is-open .player {
-    animation: leaderboardSlideIn 0.28s ease;
-}
-
 @keyframes leaderboardSlideIn {
     from {
-        opacity:0;
-        transform:translateX(18px);
+        transform:translateX(32px);
     }
     to {
-        opacity:1;
         transform:translateX(0);
     }
 }
 
 @keyframes leaderboardSlideOut {
     from {
-        opacity:1;
         transform:translateX(0);
     }
     to {
-        opacity:0;
-        transform:translateX(24px);
+        transform:translateX(32px);
     }
 }
 
