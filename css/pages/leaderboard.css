@@ -78,7 +78,6 @@
 
 .page-leaderboard .player-container.is-closing {
     opacity:0;
-    max-width:0;
     pointer-events:none;
 }
 
@@ -116,6 +115,7 @@
     transform:translateX(0);
     scrollbar-width:thin;
     scrollbar-color:rgba(255,255,255,0.2) transparent;
+    scrollbar-gutter:stable;
 }
 
 .page-leaderboard .player-container .player::-webkit-scrollbar {
@@ -153,7 +153,7 @@
     }
     to {
         opacity:0;
-        transform:translateX(18px);
+        transform:translateX(24px);
     }
 }
 
@@ -214,28 +214,36 @@
 
 .page-leaderboard .board-row--gold {
     background:rgba(247, 181, 43, 0.18);
-    border-color:rgba(247, 181, 43, 0.8);
+    border-color:rgba(247, 181, 43, 0.9);
+    box-shadow:0 0 0 1px rgba(247, 181, 43, 0.2) inset;
 }
 
 .page-leaderboard .board-row--silver {
-    background:rgba(166, 172, 186, 0.12);
-    border-color:rgba(180, 185, 198, 0.55);
+    background:rgba(180, 185, 198, 0.12);
+    border-color:rgba(180, 185, 198, 0.65);
 }
 
 .page-leaderboard .board-row--bronze {
     background:rgba(196, 121, 63, 0.12);
-    border-color:rgba(196, 121, 63, 0.55);
+    border-color:rgba(196, 121, 63, 0.6);
 }
 
 .page-leaderboard .board-row--elite {
-    background:rgba(255,255,255,0.026);
-    border-color:rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.032);
+    border-color:rgba(255,255,255,0.12);
 }
 
 .page-leaderboard .board-row--regular {
     background:rgba(255,255,255,0.02);
     border-color:rgba(255,255,255,0.08);
 }
+
+.page-leaderboard .board-row--gold .board-rank,
+.page-leaderboard .board-row--silver .board-rank,
+.page-leaderboard .board-row--bronze .board-rank {
+    font-size:0.88rem;
+}
+
 .page-leaderboard .board-rank {
     min-width:2.5rem;
     color:#ffb31a;
