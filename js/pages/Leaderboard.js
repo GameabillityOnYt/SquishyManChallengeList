@@ -41,7 +41,12 @@ export default {
                             type="button"
                             @click="selectPlayer(i)"
                         >
-                            <span class="board-rank" :class="'rank-' + (i + 1)">#{{ i + 1 }}</span>
+                            <span class="board-rank-wrap">
+                                <span class="board-rank" :class="'rank-' + (i + 1)">#{{ i + 1 }}</span>
+                                <span class="board-rank-sparks" aria-hidden="true">
+                                    <span v-for="spark in sparkCount(i + 1)" :key="spark" class="board-rank-spark" :class="'spark-' + spark"></span>
+                                </span>
+                            </span>
                             <span class="board-name type-label-lg">{{ ientry.user }}</span>
                             <span class="board-total">{{ localize(ientry.total) }}</span>
                         </button>
@@ -187,6 +192,11 @@ export default {
             };
 
             return titles[rank] ?? 'Rank';
+        },
+        sparkCount(rank) {
+            if (rank <= 3) return 3;
+            if (rank <= 5) return 2;
+            return 1;
         },
         selectPlayer(index) {
             this.closing = false;
