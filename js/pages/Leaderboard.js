@@ -12,7 +12,7 @@ export default {
         loading: true,
         selected: null,
         closing: false,
-        openFolder: 'verified',
+        openFolder: null,
         err: [],
     }),
     template: `
@@ -57,6 +57,16 @@ export default {
                             <p class="player-total-summary">{{ localize(entry.total) }} total</p>
                         </div>
 
+                        <section v-if="openFolder === null" class="player-overview">
+                            <p class="player-overview-label">Player overview</p>
+                            <div class="player-overview-stats">
+                                <span><strong>{{ entry.verified.length }}</strong> Verified</span>
+                                <span><strong>{{ entry.completed.length }}</strong> Completed</span>
+                                <span><strong>{{ entry.created.length }}</strong> Created</span>
+                                <span><strong>{{ entry.progressed.length }}</strong> Progressed</span>
+                            </div>
+                        </section>
+
                         <section class="player-folder" :class="{ 'is-open': openFolder === 'verified' }">
                             <button class="player-folder-toggle" type="button" :aria-expanded="openFolder === 'verified'" @click="toggleFolder('verified')">
                                 <span>Verified levels</span>
@@ -93,7 +103,7 @@ export default {
 
                         <section class="player-folder" :class="{ 'is-open': openFolder === 'other' }">
                             <button class="player-folder-toggle" type="button" :aria-expanded="openFolder === 'other'" @click="toggleFolder('other')">
-                                <span>Other levels</span>
+                                <span>Created levels</span>
                                 <span class="player-folder-count">{{ entry.created.length + entry.progressed.length }}</span>
                             </button>
                             <div v-show="openFolder === 'other'" class="player-folder-content">
@@ -161,7 +171,6 @@ export default {
         localize,
         selectPlayer(index) {
             this.closing = false;
-            this.openFolder = 'verified';
             this.selected = index;
         },
         toggleFolder(folder) {
