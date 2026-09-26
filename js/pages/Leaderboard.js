@@ -44,7 +44,15 @@ export default {
                             <span class="board-rank-wrap">
                                 <span class="board-rank" :class="'rank-' + (i + 1)">#{{ i + 1 }}</span>
                             </span>
-                            <span class="board-name type-label-lg">{{ ientry.user }}</span>
+                            <span class="board-identity">
+                                <span class="board-name type-label-lg">{{ ientry.user }}</span>
+                                <span v-if="selected === null" class="board-preview">
+                                    <span class="board-preview-grade">{{ rankTitle(i + 1) }}</span>
+                                    <span class="board-preview-stat"><strong>{{ ientry.completed.length }}</strong> beaten</span>
+                                    <span class="board-preview-stat"><strong>{{ ientry.created.length }}</strong> created</span>
+                                    <span class="board-preview-stat"><strong>{{ ientry.verified.length }}</strong> verified</span>
+                                </span>
+                            </span>
                             <span class="board-total">{{ localize(ientry.total) }}</span>
                         </button>
                     </div>
