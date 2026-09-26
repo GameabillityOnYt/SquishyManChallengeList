@@ -171,10 +171,20 @@ export default {
     methods: {
         localize,
         rankTitle(rank) {
-            if (rank === 1) return 'Champion';
-            if (rank === 2) return 'Elite';
-            if (rank === 3) return 'Finalist';
-            return 'Top ' + rank;
+            const titles = {
+                1: 'Celestial',
+                2: 'Starguard',
+                3: 'Boneguard',
+                4: 'Crystal',
+                5: 'Katana',
+                6: 'Verdant',
+                7: 'Grove',
+                8: 'Moss',
+                9: 'Thicket',
+                10: 'Rooted',
+            };
+
+            return titles[rank] ?? 'Rank';
         },
         selectPlayer(index) {
             this.closing = false;
