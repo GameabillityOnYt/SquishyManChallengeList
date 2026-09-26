@@ -37,7 +37,7 @@ export default {
                             v-for="(ientry, i) in visibleLeaderboard"
                             :key="ientry.user"
                             class="board-row"
-                            :class="{ active: selected === i }"
+                            :class="[{ active: selected === i }, 'rank-' + (i + 1)]"
                             type="button"
                             @click="selectPlayer(i)"
                         >
@@ -62,17 +62,7 @@ export default {
                             <p class="player-total-summary">{{ localize(entry.total) }} points</p>
                         </div>
 
-                        <section v-if="openFolder === null" class="player-overview">
-                            <p class="player-overview-label">Player overview</p>
-                            <div class="player-overview-stats">
-                                <span><small>Verified levels</small><strong>{{ entry.verified.length }}</strong></span>
-                                <span><small>Completed levels</small><strong>{{ entry.completed.length }}</strong></span>
-                                <span><small>Created levels</small><strong>{{ entry.created.length }}</strong></span>
-                                <span><small>In progress</small><strong>{{ entry.progressed.length }}</strong></span>
-                            </div>
-                        </section>
-
-                        <section class="player-folder" :class="{ 'is-open': openFolder === 'verified' }">
+                        <section class="player-folder folder-verified" :class="{ 'is-open': openFolder === 'verified' }">
                             <button class="player-folder-toggle" type="button" :aria-expanded="openFolder === 'verified'" @click="toggleFolder('verified')">
                                 <span>Verified levels</span>
                                 <span class="player-folder-count">{{ entry.verified.length }}</span>
@@ -91,7 +81,7 @@ export default {
                             </transition>
                         </section>
 
-                        <section class="player-folder" :class="{ 'is-open': openFolder === 'completed' }">
+                        <section class="player-folder folder-completed" :class="{ 'is-open': openFolder === 'completed' }">
                             <button class="player-folder-toggle" type="button" :aria-expanded="openFolder === 'completed'" @click="toggleFolder('completed')">
                                 <span>Completed levels</span>
                                 <span class="player-folder-count">{{ entry.completed.length }}</span>
@@ -110,7 +100,7 @@ export default {
                             </transition>
                         </section>
 
-                        <section class="player-folder" :class="{ 'is-open': openFolder === 'other' }">
+                        <section class="player-folder folder-created" :class="{ 'is-open': openFolder === 'other' }">
                             <button class="player-folder-toggle" type="button" :aria-expanded="openFolder === 'other'" @click="toggleFolder('other')">
                                 <span>Created levels</span>
                                 <span class="player-folder-count">{{ entry.created.length + entry.progressed.length }}</span>
