@@ -41,6 +41,16 @@
     z-index:1;
     overflow:hidden;
     max-height:calc(100vh - 6rem);
+    opacity:0;
+    max-width:0;
+    pointer-events:none;
+    transition:opacity 0.22s ease, max-width 0.28s ease, border-color 0.22s ease;
+}
+
+.page-leaderboard .player-container.is-open {
+    opacity:1;
+    max-width:100%;
+    pointer-events:auto;
 }
 
 .page-leaderboard .player-container .player {
@@ -211,12 +221,15 @@
     text-align: end;
 }
 .page-leaderboard .player .table .rank p {
-    color: var(--color-border-blue);
+    color: #b7c3ce;
     font-weight: 800;
-    text-shadow: 0 0 5px rgba(135, 206, 250, 0.45), 0 0 9px rgba(135, 206, 250, 0.25);
+    text-shadow: none;
 }
 .page-leaderboard .player .table .level {
     width: 100%;
+}
+.page-leaderboard .player .table a {
+    text-shadow: none;
 }
 .page-leaderboard .player .table a:hover {
     text-decoration: underline;
