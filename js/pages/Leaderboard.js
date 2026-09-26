@@ -24,83 +24,100 @@ export default {
                         Leaderboard may be incorrect, as the following levels could not be loaded: {{ err.join(', ') }}
                     </p>
                 </div>
+
                 <div class="board-container">
-                    <p class="top-players-label type-label-lg">Top 100 players</p>
-                    <table class="board">
-                        <tr v-for="(ientry, i) in visibleLeaderboard">
-                            <td class="rank">
-                                <p class="type-label-lg">#{{ i + 1 }}</p>
-                            </td>
-                            <td class="total">
-                                <p class="type-label-lg">{{ localize(ientry.total) }}</p>
-                            </td>
-                            <td class="user" :class="{ 'active': selected == i }">
-                                <button @click="selected = i">
-                                    <span class="type-label-lg">{{ ientry.user }}</span>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="board-header">
+                        <p class="top-players-label type-label-lg">Top 10 players</p>
+                    </div>
+
+                    <div class="board" role="list">
+                        <button
+                            v-for="(ientry, i) in visibleLeaderboard"
+                            :key="ientry.user"
+                            class="board-row"
+                            :class="{ active: selected === i }"
+                            type="button"
+                            @click="selected = i"
+                        >
+                            <span class="board-rank">#{{ i + 1 }}</span>
+                            <span class="board-name type-label-lg">{{ ientry.user }}</span>
+                            <span class="board-total">{{ localize(ientry.total) }}</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="player-container">
+
+                <div class="player-container" :class="{ 'is-open': !!entry.user }">
                     <div class="player">
-                        <h1>#{{ selected + 1 }} {{ entry.user }}</h1>
-                        <h2 v-if="entry.verified.length > 0">Verified ({{ entry.verified.length}})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.verified">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
+                        <div class="player-header">
+                            <span class="player-chip">#{{ selected + 1 }}</span>
+                            <h1>{{ entry.user }}</h1>
+                            <p class="player-total-summary">{{ localize(entry.total) }} total</p>
+                        </div>
 
-                        <h2 v-if="entry.created.length > 0">Levels Created ({{ entry.created.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.created">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                            </tr>
-                        </table>
+                        <section v-if="entry.verified.length > 0" class="player-section">
+                            <h2>Verified ({{ entry.verified.length }})</h2>
+                            <table class="table">
+                                <tr v-for="score in entry.verified">
+                                    <td class="rank">
+                                        <p>#{{ score.rank }}</p>
+                                    </td>
+                                    <td class="level">
+                                        <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
+                                    </td>
+                                    <td class="score">
+                                        <p>+{{ localize(score.score) }}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
 
-                        <h2 v-if="entry.completed.length > 0">Completed ({{ entry.completed.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.completed">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
+                        <section v-if="entry.created.length > 0" class="player-section">
+                            <h2>Levels Created ({{ entry.created.length }})</h2>
+                            <table class="table">
+                                <tr v-for="score in entry.created">
+                                    <td class="rank">
+                                        <p>#{{ score.rank }}</p>
+                                    </td>
+                                    <td class="level">
+                                        <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
 
-                        <h2 v-if="entry.progressed.length > 0">Progressed ({{ entry.progressed.length }})</h2>
-                        <table class="table">
-                            <tr v-for="score in entry.progressed">
-                                <td class="rank">
-                                    <p>#{{ score.rank }}</p>
-                                </td>
-                                <td class="level">
-                                    <a class="type-label-lg" target="_blank" :href="score.link">{{ score.percent }}% {{ score.level }}</a>
-                                </td>
-                                <td class="score">
-                                    <p>+{{ localize(score.score) }}</p>
-                                </td>
-                            </tr>
-                        </table>
+                        <section v-if="entry.completed.length > 0" class="player-section">
+                            <h2>Completed ({{ entry.completed.length }})</h2>
+                            <table class="table">
+                                <tr v-for="score in entry.completed">
+                                    <td class="rank">
+                                        <p>#{{ score.rank }}</p>
+                                    </td>
+                                    <td class="level">
+                                        <a class="type-label-lg" target="_blank" :href="score.link">{{ score.level }}</a>
+                                    </td>
+                                    <td class="score">
+                                        <p>+{{ localize(score.score) }}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
+
+                        <section v-if="entry.progressed.length > 0" class="player-section">
+                            <h2>Progressed ({{ entry.progressed.length }})</h2>
+                            <table class="table">
+                                <tr v-for="score in entry.progressed">
+                                    <td class="rank">
+                                        <p>#{{ score.rank }}</p>
+                                    </td>
+                                    <td class="level">
+                                        <a class="type-label-lg" target="_blank" :href="score.link">{{ score.percent }}% {{ score.level }}</a>
+                                    </td>
+                                    <td class="score">
+                                        <p>+{{ localize(score.score) }}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </section>
                     </div>
                 </div>
             </div>
@@ -108,7 +125,7 @@ export default {
     `,
     computed: {
         visibleLeaderboard() {
-            return this.leaderboard.slice(0, 100);
+            return this.leaderboard.slice(0, 10);
         },
         entry() {
             return this.visibleLeaderboard[this.selected] ?? {
