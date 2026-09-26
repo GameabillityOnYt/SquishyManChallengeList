@@ -47,6 +47,7 @@ export default {
                 </div>
 
                 <div class="player-container" :class="{ 'is-open': selected !== null }" v-if="selected !== null">
+                    <button class="close-player" type="button" aria-label="Close player details" @click="closePlayer">×</button>
                     <div class="player">
                         <div class="player-header">
                             <span class="player-chip">#{{ selected + 1 }}</span>
@@ -160,6 +161,9 @@ export default {
         localize,
         selectPlayer(index) {
             this.selected = index;
+        },
+        closePlayer() {
+            this.selected = null;
         },
     },
 };
