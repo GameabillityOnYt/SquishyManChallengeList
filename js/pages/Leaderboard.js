@@ -10,7 +10,7 @@ export default {
     data: () => ({
         leaderboard: [],
         loading: true,
-        selected: 0,
+        selected: null,
         err: [],
     }),
     template: `
@@ -37,7 +37,7 @@ export default {
                             class="board-row"
                             :class="{ active: selected === i }"
                             type="button"
-                            @click="selected = i"
+                            @click="selectPlayer(i)"
                         >
                             <span class="board-rank">#{{ i + 1 }}</span>
                             <span class="board-name type-label-lg">{{ ientry.user }}</span>
@@ -46,7 +46,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="player-container" :class="{ 'is-open': !!entry.user }">
+                <div class="player-container" :class="{ 'is-open': selected !== null }" v-if="selected !== null">
                     <div class="player">
                         <div class="player-header">
                             <span class="player-chip">#{{ selected + 1 }}</span>
@@ -128,6 +128,17 @@ export default {
             return this.leaderboard.slice(0, 10);
         },
         entry() {
+            if (this.selected === null || this.selected >= this.visibleLeaderboard.length) {
+                return {
+                    user: '',
+                    total: 0,
+                    verified: [],
+                    completed: [],
+                    created: [],
+                    progressed: [],
+                };
+            }
+
             return this.visibleLeaderboard[this.selected] ?? {
                 user: '',
                 total: 0,
@@ -142,12 +153,13 @@ export default {
         const [leaderboard, err] = await fetchLeaderboard();
         this.leaderboard = leaderboard;
         this.err = err;
-        if (this.selected >= this.visibleLeaderboard.length) {
-            this.selected = 0;
-        }
+        this.selected = null;
         this.loading = false;
     },
     methods: {
         localize,
+        selectPlayer(index) {
+            this.selected = index;
+        },
     },
 };
