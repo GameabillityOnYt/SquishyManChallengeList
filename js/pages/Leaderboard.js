@@ -48,7 +48,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="player-container" :class="{ 'is-open': selected !== null, 'is-closing': closing }" v-if="selected !== null || closing">
+                <div class="player-container" :class="{ 'is-open': selected !== null, 'is-closing': closing }" v-if="selected !== null || closing" @animationend="finishClosing">
                     <button class="close-player" type="button" aria-label="Close player details" @click="closePlayer">×</button>
                     <div class="player">
                         <div class="player-header">
@@ -169,10 +169,14 @@ export default {
         },
         closePlayer() {
             this.closing = true;
-            setTimeout(() => {
-                this.selected = null;
-                this.closing = false;
-            }, 360);
+        },
+        finishClosing(event) {
+            if (!this.closing || event.animationName !== 'leaderboardSlideOut') {
+                return;
+            }
+
+            this.selected = null;
+            this.closing = false;
         },
     },
 };
