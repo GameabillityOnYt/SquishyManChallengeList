@@ -41,7 +41,7 @@ export default {
                             type="button"
                             @click="selectPlayer(i)"
                         >
-                            <span class="board-rank">#{{ i + 1 }}</span>
+                            <span class="board-rank" :class="'rank-' + (i + 1)">#{{ i + 1 }}</span>
                             <span class="board-name type-label-lg">{{ ientry.user }}</span>
                             <span class="board-total">{{ localize(ientry.total) }}</span>
                         </button>
@@ -52,18 +52,23 @@ export default {
                     <button class="close-player" type="button" aria-label="Close player details" @click="closePlayer">×</button>
                     <div class="player">
                         <div class="player-header">
-                            <span class="player-chip">#{{ selected + 1 }}</span>
-                            <h1>{{ entry.user }}</h1>
-                            <p class="player-total-summary">{{ localize(entry.total) }} total</p>
+                            <div class="player-name-row">
+                                <span class="player-rank-emblem" :class="'rank-' + (selected + 1)" :aria-label="'Rank ' + (selected + 1) + ' player'">
+                                    <small>{{ rankTitle(selected + 1) }}</small>
+                                    <strong>#{{ selected + 1 }}</strong>
+                                </span>
+                                <h1>{{ entry.user }}</h1>
+                            </div>
+                            <p class="player-total-summary">{{ localize(entry.total) }} points</p>
                         </div>
 
                         <section v-if="openFolder === null" class="player-overview">
                             <p class="player-overview-label">Player overview</p>
                             <div class="player-overview-stats">
-                                <span><strong>{{ entry.verified.length }}</strong> Verified</span>
-                                <span><strong>{{ entry.completed.length }}</strong> Completed</span>
-                                <span><strong>{{ entry.created.length }}</strong> Created</span>
-                                <span><strong>{{ entry.progressed.length }}</strong> Progressed</span>
+                                <span><small>Verified levels</small><strong>{{ entry.verified.length }}</strong></span>
+                                <span><small>Completed levels</small><strong>{{ entry.completed.length }}</strong></span>
+                                <span><small>Created levels</small><strong>{{ entry.created.length }}</strong></span>
+                                <span><small>In progress</small><strong>{{ entry.progressed.length }}</strong></span>
                             </div>
                         </section>
 
@@ -72,7 +77,8 @@ export default {
                                 <span>Verified levels</span>
                                 <span class="player-folder-count">{{ entry.verified.length }}</span>
                             </button>
-                            <div v-show="openFolder === 'verified'" class="player-folder-content">
+                            <transition name="folder">
+                                <div v-show="openFolder === 'verified'" class="player-folder-content">
                                 <table v-if="entry.verified.length > 0" class="table">
                                     <tr v-for="score in entry.verified">
                                         <td class="rank"><p>#{{ score.rank }}</p></td>
@@ -81,7 +87,8 @@ export default {
                                     </tr>
                                 </table>
                                 <p v-else class="player-folder-empty">No verified levels.</p>
-                            </div>
+                                </div>
+                            </transition>
                         </section>
 
                         <section class="player-folder" :class="{ 'is-open': openFolder === 'completed' }">
@@ -89,7 +96,8 @@ export default {
                                 <span>Completed levels</span>
                                 <span class="player-folder-count">{{ entry.completed.length }}</span>
                             </button>
-                            <div v-show="openFolder === 'completed'" class="player-folder-content">
+                            <transition name="folder">
+                                <div v-show="openFolder === 'completed'" class="player-folder-content">
                                 <table v-if="entry.completed.length > 0" class="table">
                                     <tr v-for="score in entry.completed">
                                         <td class="rank"><p>#{{ score.rank }}</p></td>
@@ -98,7 +106,8 @@ export default {
                                     </tr>
                                 </table>
                                 <p v-else class="player-folder-empty">No completed levels.</p>
-                            </div>
+                                </div>
+                            </transition>
                         </section>
 
                         <section class="player-folder" :class="{ 'is-open': openFolder === 'other' }">
@@ -106,7 +115,8 @@ export default {
                                 <span>Created levels</span>
                                 <span class="player-folder-count">{{ entry.created.length + entry.progressed.length }}</span>
                             </button>
-                            <div v-show="openFolder === 'other'" class="player-folder-content">
+                            <transition name="folder">
+                                <div v-show="openFolder === 'other'" class="player-folder-content">
                                 <div v-if="entry.created.length > 0" class="player-subsection">
                                     <h2>Levels created ({{ entry.created.length }})</h2>
                                     <table class="table">
@@ -127,7 +137,8 @@ export default {
                                     </table>
                                 </div>
                                 <p v-if="entry.created.length === 0 && entry.progressed.length === 0" class="player-folder-empty">No other levels.</p>
-                            </div>
+                                </div>
+                            </transition>
                         </section>
                     </div>
                 </div>
@@ -169,6 +180,12 @@ export default {
     },
     methods: {
         localize,
+        rankTitle(rank) {
+            if (rank === 1) return 'Champion';
+            if (rank === 2) return 'Elite';
+            if (rank === 3) return 'Finalist';
+            return 'Top ' + rank;
+        },
         selectPlayer(index) {
             this.closing = false;
             this.selected = index;
